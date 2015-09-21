@@ -31,8 +31,8 @@
 4. JavaFX Scene Builder
     1. [Instalar](http://download.oracle.com/otn-pub/java/javafx_scenebuilder/2.0-b20/javafx_scenebuilder-2_0-windows.msi)
 5. MySQL
-    1. [Instalar](http://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-5.6.26.0.msi)
+    1. Instalar - [Windows](http://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-5.6.26.0.msi) | [Mac](http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26-osx10.9-x86_64.dmg)
     2. Seleccionar la versión de desarrollador y dejar que instale todo.
     3. Ponerle de password al usuario *root* ```grupo5b```
-    4. Abrir el Workbench, seleccionar la Local Instance y loguearse con las credenciales del punto 3.
+    4. Abrir el Workbench, seleccionar la Local Instance y loguearse con las credenciales.
     5. Hacer click en el cuarto icono (_Create a new schema[..]_) y crear un nuevo Schema llamado ```gestiondetorneos```
