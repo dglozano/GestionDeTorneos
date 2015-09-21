@@ -4,7 +4,7 @@
 ![Screenshot](src/main/resources/fmxl/logo.png)
 ***
 
-### Glosario ###
+#### Glosario ####
 
 - **IntelliJ IDEA**: IDE (Entorno de desarrollo) a usar
 - **Git**: Sistema de versionado para desarrollo de software.
@@ -38,5 +38,10 @@
         1. Hostname: ```localhost```
         2. Port: ```3306```
         3. Ponerle de password al usuario *root* ```grupo5b```
-    5. Abrir el Workbench, seleccionar la Local Instance y loguearse con las credenciales.
+    5. Seleccionar la Local Instance y loguearse con las credenciales.
     6. Hacer click en el cuarto icono (_Create a new schema[..]_) y crear un nuevo Schema llamado ```gestiondetorneos```
+
+#### Git desde IntelliJ Idea ####
+
+Una vez que en tu versión local tenés una nueva funcionalidad estable que *no rompe*, con ```CTRL+K``` abrís la ventana de Commit. Ahí en Commit Message hay que escribir que funcionalidad estás agregando, y tocar **Commit & Push**. Te va a abrir otra ventana donde hay que confirmar tocando en **Push**. Abajo de todo el IDE te notifica si salió bien o no.
+Es posible que te tire que el Push fue rechazado, debido a que algunos archivos en el servidor son distintos a los que tenés vos en tu versión local. Es decir, mientras vos hacías una funcionalidad, otro ya subió cambios que vos todavía no tomaste. En este caso hay que tocar el botón **Merge**; en la mayoría de los casos la integración entre las versiones es automática pero puede ser que te baje los cambios a tu versión local y te haga decidir a vos, en cuyo caso te va a mostrar los archivos afectados, y vos vas a editarlos y nuevamente hacer un nuevo Commit & Push.
