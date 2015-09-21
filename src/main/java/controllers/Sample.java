@@ -20,5 +20,4 @@ public class Sample {
         System.out.println("Agregaste la Competencia a la BD: " + nombreCompetencia.getText());
     }
 
-
 }
