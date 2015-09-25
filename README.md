@@ -30,7 +30,7 @@
     4. Seleccionar directorio local donde guardarlo y todo y darle a *Clone*
     5. Tocar *Yes* y esperar que cargue las dependencias
 4. JavaFX Scene Builder
-    1. Instalar - [Windows](http://download.oracle.com/otn-pub/java/javafx_scenebuilder/2.0-b20/javafx_scenebuilder-2_0-windows.msi) | [Mac](http://download.oracle.com/otn-pub/java/javafx_scenebuilder/2.0-b20/javafx_scenebuilder-2_0-macosx-universal.dmg)
+    1. Instalar - [Windows](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html#javafx-scenebuilder-2.0-oth-JPR) | [Mac](http://download.oracle.com/otn-pub/java/javafx_scenebuilder/2.0-b20/javafx_scenebuilder-2_0-macosx-universal.dmg)
 5. MySQL
     1. Instalar - [Windows](http://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-5.6.26.0.msi) | [Mac: MySQL Server](http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26-osx10.9-x86_64.dmg) & [Mac: MySQL Workbench](https://dev.mysql.com/downloads/file.php?id=457796)
     2. Seleccionar la versión de desarrollador y dejar que instale todo.
