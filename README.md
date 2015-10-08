@@ -1,7 +1,7 @@
 # Gestión De Torneos #
 
 ***
-![Screenshot](src/main/resources/fmxl/logo.png)
+![Screenshot](src/main/resources/image/logo.png)
 ***
 
 #### Glosario ####
