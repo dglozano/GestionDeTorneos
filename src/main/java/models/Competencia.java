@@ -8,6 +8,7 @@ public class Competencia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
+    private String reglas;
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
