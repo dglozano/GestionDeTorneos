@@ -1,18 +1,25 @@
 .menu-bar {
-    -fx-background-color: #eee;
     -fx-background-insets: 0, 0 0 1 0;
 }
 
+.menu-bar,
+.menu,
+.menu-item,
+.context-menu,
+.separator-menu-item{
+    -fx-background-color: #313233;
+}
+
 .menu .label {
-    -fx-text-fill: #313233;
+    -fx-text-fill: #fff;
 }
 
 .menu:hover,
 .menu:focused,
 .menu:showing,
 .menu-item:focused {
-     -fx-background-color: #4081be;
-     -fx-focus-color:#4081be;
+     -fx-background-color: #444;
+     -fx-focus-color:#444;
 }
 
 .menu:hover>.label,
@@ -44,12 +51,14 @@
     -fx-border-radius: 0;
     -fx-pref-width: 200px;
     -fx-pref-height: 55px;
+    -fx-border-color: #4081be;
+    -fx-border-width: 1;
 }
 .btn:hover{
     -fx-background-color: #468fd3;
 }
 .btn-alt:hover{
-    -fx-background-color: #4081be;
+    -fx-background-color: #313233;
     -fx-text-fill: #fff;
 }
 .btn .text{
@@ -60,9 +69,8 @@
 }
 .btn-alt{
     -fx-background-color: #fff;
-    -fx-border-color: #4081be;
-    -fx-border-width: 1;
-    -fx-text-fill: #4081be;
+    -fx-text-fill: #313233;
+    -fx-border-color: #313233;
 }
 .btn-small{
     -fx-pref-width: 80px;
