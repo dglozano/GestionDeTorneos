@@ -10,139 +10,221 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Sample">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Sample">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Archivo">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" text="Registrar" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="537.0" prefWidth="776.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
       <children>
-            <Text fill="#4081be" layoutX="329.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mis competencias">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-            <VBox layoutX="50.0" layoutY="72.0" prefHeight="496.0" prefWidth="800.0">
+            <HBox prefHeight="579.0" prefWidth="754.0">
                <children>
-                  <GridPane hgap="10.0" prefHeight="187.0" prefWidth="800.0" style="-fx-background-color: #f5f5f5;" vgap="15.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <VBox id="sidebar" prefHeight="579.0" prefWidth="538.0">
                      <children>
-                    <Label alignment="CENTER" style="&#10;" text="Nombre de competencia" textAlignment="CENTER" textFill="#222222" wrapText="false">
-                      <font>
-                        <Font size="13.0" />
-                      </font>
-                    </Label>
-                        <TextField fx:id="nombreCompetencia" GridPane.columnIndex="1" />
-                        <Label alignment="CENTER" style="&#10;" text="Deporte asociado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
-                        <Label alignment="CENTER" style="&#10;" text="Modalidad" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Liga" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="modalidad" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Eliminatorias Doble" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                        <Label alignment="CENTER" style="&#10;" text="Estado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="28.0" prefWidth="71.0" style="-fx-background-color: #4081be;" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Button>
+                        <ImageView fitHeight="190.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Pane>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="Inicie sesión" />
+                              <GridPane hgap="10.0" prefHeight="110.0" prefWidth="200.0" vgap="5.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="76.0" />
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="114.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="24.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextField GridPane.columnIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Correo" textAlignment="RIGHT" />
+                                    <Label text="Contraseña" textAlignment="RIGHT" GridPane.rowIndex="1" />
+                                    <Button mnemonicParsing="false" text="Iniciar" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="btn-small" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Pane>
+                        <Pane layoutX="35.0" layoutY="233.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="Regístrese" />
+                              <Label text="En caso de ser nuevo usuario" textAlignment="RIGHT">
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <GridPane hgap="10.0" prefHeight="84.0" prefWidth="200.0" vgap="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Registrar" GridPane.columnIndex="1">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="btn-small" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="106.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="84.0" />
+                                 </columnConstraints>
+                                 <padding>
+                                    <Insets top="45.0" />
+                                 </padding>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </Pane>
                      </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </GridPane>
-                  <TableView prefHeight="224.0" prefWidth="800.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Nombre" />
-                      <TableColumn prefWidth="75.0" text="Deporte" />
-                        <TableColumn prefWidth="75.0" text="Estado" />
-                        <TableColumn prefWidth="75.0" text="Modalidad" />
-                        <TableColumn prefWidth="130.0" text="Acciones" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-                  <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="82.0" prefWidth="800.0" spacing="15.0">
+                  </VBox>
+                  <VBox id="container" prefHeight="579.0" prefWidth="934.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="53.0" prefWidth="187.0" style="-fx-background-color: #4081be;" text="Crear competencia" textFill="WHITE">
+                        <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Mis competencias" textAlignment="CENTER" wrappingWidth="601.546875">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="32.0" />
                            </font>
-                        </Button>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="53.0" prefWidth="187.0" style="-fx-background-color: #fff; -fx-border-color: #4081be; -fx-border-width: 1; -fx-text-fill: #4081be;" text="Volver" textFill="WHITE">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="25.0" />
+                           </VBox.margin>
+                        </Text>
+                        <GridPane hgap="10.0" prefHeight="187.0" prefWidth="782.0" style="-fx-background-color: #f5f5f5;" vgap="15.0">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                          <Label alignment="CENTER" style="&#10;" text="Nombre de competencia" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                            <font>
+                              <Font size="13.0" />
+                            </font>
+                          </Label>
+                              <TextField fx:id="nombreCompetencia" GridPane.columnIndex="1" />
+                              <Label alignment="CENTER" style="&#10;" text="Deporte asociado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
+                              <Label alignment="CENTER" style="&#10;" text="Modalidad" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton mnemonicParsing="false" selected="true" text="Liga" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="modalidad" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Eliminatorias Doble" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                              <Label alignment="CENTER" style="&#10;" text="Estado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-small" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                           <VBox.margin>
                               <Insets />
-                           </HBox.margin>
-                        </Button>
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </GridPane>
+                        <TableView prefHeight="183.0" prefWidth="706.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Nombre" />
+                            <TableColumn prefWidth="75.0" text="Deporte" />
+                              <TableColumn prefWidth="75.0" text="Estado" />
+                              <TableColumn prefWidth="75.0" text="Modalidad" />
+                              <TableColumn prefWidth="130.0" text="Acciones" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="741.0" spacing="15.0">
+                           <children>
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Crear competencia" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-alt" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </HBox>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
       </children>
     </AnchorPane>
   </children>
