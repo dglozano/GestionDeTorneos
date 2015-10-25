@@ -91,7 +91,7 @@
     -fx-fill: #fff;
 }
 #sidebar .btn{
-    -fx-background-color: #transparent;
+    -fx-background-color: transparent;
     -fx-border-color: #fff;
     -fx-border-width: 1;
     -fx-text-fill: #fff;

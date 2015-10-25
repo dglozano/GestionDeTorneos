@@ -16,7 +16,7 @@ public class Disponibilidad {
 
     @Column(name = "disponibilidad")
     private Integer disponibilidad;
-    @ManyToOne
+    /*@ManyToOne
     @Column(name = "lugarDeRealizacion")
-    private LugarDeRealizacion lugarDeRealizacion;
+    private LugarDeRealizacion lugarDeRealizacion;*/
 }

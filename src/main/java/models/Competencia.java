@@ -38,16 +38,18 @@ public class Competencia {
     @Column (name = "sistemaPuntuacion")
     private SistemaPuntuacion sistemaPuntuacion;
 
+    /*
     @OneToMany(mappedBy = "competencia")
     private List<Participante> participantes;
+
     @ManyToOne
     @Column (name = "deporte")
     private Deporte deporte;
+
     @OneToMany(mappedBy = "competencia")
     @Column(name = "disponibilidades")
     private List<Disponibilidad> disponibilidades;
-
-
+    */
 
     @Enumerated(EnumType.STRING)
     public Modalidad getModalidad(){
