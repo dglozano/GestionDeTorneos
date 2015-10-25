@@ -38,12 +38,15 @@ public class Competencia {
     @Column (name = "sistemaPuntuacion")
     private SistemaPuntuacion sistemaPuntuacion;
 
-    @OneToMany(mappedBy = "competencia")
+    @OneToMany
+            //(mappedBy = "competencia") -> mappedBy se usa en relaciones bidireccionales
+    @Column (name = "participante")
     private List<Participante> participantes;
     @ManyToOne
-    @Column (name = "deporte")
+    //@Column (name = "deporte")  -> ManyToOne NO PERMITE COLUMN
     private Deporte deporte;
-    @OneToMany(mappedBy = "competencia")
+    @OneToMany
+            //(mappedBy = "competencia") -> mappedBy se usa en relaciones bidireccionales
     @Column(name = "disponibilidades")
     private List<Disponibilidad> disponibilidades;
 
