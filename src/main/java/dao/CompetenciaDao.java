@@ -15,5 +15,4 @@ public class CompetenciaDao {
         tx.commit();
         em.close();
     }
-
 }

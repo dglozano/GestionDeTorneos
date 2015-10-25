@@ -18,7 +18,7 @@ public class Main extends Application{
 
         primaryStage.setTitle("Gestion De Torneos");
         primaryStage.setScene(new Scene(root, 1000, 600));
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
 
         primaryStage.show();
     }
