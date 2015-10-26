@@ -3,9 +3,6 @@ package models;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Kevincho on 20/10/2015.
- */
 
 @Entity
 public class Deporte {
@@ -15,5 +12,11 @@ public class Deporte {
     private Integer id;
     @Column(name = "nom_deporte")
     private String nombre;
+    @ManyToMany
+    @JoinTable(name= "se_practica_en",
+        joinColumns = {@JoinColumn(name="id_deporte")},
+            inverseJoinColumns = {@JoinColumn(name="codigo_lugar")})
+    private List<LugarDeRealizacion> lugaresRealizacion;
+
 
 }

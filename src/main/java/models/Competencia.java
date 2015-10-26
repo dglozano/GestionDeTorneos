@@ -9,28 +9,28 @@ public class Competencia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_comp")
-    private Integer id;
+    private int id;
     @Column(name = "nom_comp")
     private String nombre;
     @Column(name = "reglas_comp")
     private String reglas;
     @Column(name = "pts_part_empatado")
-    private Integer pts_empate;
+    private int pts_empate;
     @Column(name = "acepta_empates")
     private boolean empate;
     @Column(name = "pts_por_presentarse")
-    private Integer pts_presentarse;
+    private int pts_presentarse;
     @Column(name = "tantos_a_favor_por_no_presentarse")
-    private Integer tantos_favor_no_presentarse;
+    private int tantos_favor_no_presentarse;
     @Column(name = "pts_partido_ganado")
-    private Integer pts_ganar;
+    private int pts_ganar;
     @Column(name = "eliminada")
     private boolean eliminada;
     @Column(name = "fecha_elim")
     @Temporal(TemporalType.DATE)
     private Date fecha_elim;
     @Column(name = "cant_sets")
-    private Integer cant_sets;
+    private int cant_sets;
     @Column(name = "modalidad")
     private Modalidad modalidad;
     @Column(name = "Estado")
@@ -39,18 +39,19 @@ public class Competencia {
     private SistemaPuntuacion sistemaPuntuacion;
 
     @OneToMany
-            //(mappedBy = "competencia") -> mappedBy se usa en relaciones bidireccionales
-    @Column (name = "participante")
+    @JoinColumn (name = "id_participante")
     private List<Participante> participantes;
     @ManyToOne
-    //@Column (name = "deporte")  -> ManyToOne NO PERMITE COLUMN
+    @JoinColumn (name = "id_deporte")
     private Deporte deporte;
     @OneToMany
-            //(mappedBy = "competencia") -> mappedBy se usa en relaciones bidireccionales
-    @Column(name = "disponibilidades")
+    @JoinColumn(name = "id_disponibilidad")
     private List<Disponibilidad> disponibilidades;
-
-
+    /*TODO 01: Crear clase Usuario. Relacion Bidireccional
+    @ManyToOne
+    @JoinColumn (name = "id_usuario")
+    private Usuario usuario;
+    */
 
     @Enumerated(EnumType.STRING)
     public Modalidad getModalidad(){

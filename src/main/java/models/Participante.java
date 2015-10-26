@@ -2,15 +2,12 @@ package models;
 
 import javax.persistence.*;
 
-/**
- * Created by Kevincho on 21/10/2015.
- */
 
 @Entity
 public class Participante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_partic")
+    @Column(name = "id_participante")
     private Integer id;
     @Column(name = "nom_partic")
     private String nombre;
