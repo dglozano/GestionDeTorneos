@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Sample">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+      <children>
+            <StackPane id="preloader" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox maxHeight="400.0" maxWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="244.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/logo.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="245.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/loader.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <Pane id="bottom" centerShape="false" maxHeight="350.0" maxWidth="1015.0" prefHeight="151.0" prefWidth="1000.0" StackPane.alignment="CENTER">
+                     <StackPane.margin>
+                        <Insets top="463.0" />
+                     </StackPane.margin>
+                     <children>
+                        <Text id="cargando" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargando. Espere por favor..." textAlignment="CENTER" wrappingWidth="1000.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/main.css" />
+  </stylesheets>
+</VBox>

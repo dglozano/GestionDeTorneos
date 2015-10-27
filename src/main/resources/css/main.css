@@ -87,8 +87,19 @@
     -fx-background-color: #4081be;
     -fx-spacing: 25px;
 }
-#sidebar .h3{
+#preloader{
+    -fx-background-color: #0087c6;
+}
+#bottom{
+    -fx-background-color: #fff;
+}
+#sidebar .h3,
+#preloader .h3{
     -fx-fill: #fff;
+}
+#cargando{
+    -fx-font-size: 16px;
+    -fx-text-fill: #313233;
 }
 #sidebar .btn{
     -fx-background-color: transparent;
@@ -100,8 +111,12 @@
     -fx-background-color: #fff;
     -fx-text-fill: #4081be;
 }
-#sidebar .label{
+#sidebar .label,
+#preloader .label{
     -fx-text-fill: #a1ccf5;
     -fx-size: 13px;
     -fx-text-align: right;
+}
+#preloader #gif{
+    -fx-pref-width: 25px;
 }
