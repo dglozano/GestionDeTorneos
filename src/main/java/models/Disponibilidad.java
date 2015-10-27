@@ -9,10 +9,10 @@ public class Disponibilidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_disponibilidad")
-    private Integer id;
+    private int id;
     @Column(name = "disponibilidad")
-    private Integer disponibilidad;
+    private int disponibilidad;
     @ManyToOne
-    //@Column(name = "lugarDeRealizacion")  -> ManyToOne NO PERMITE COLUMN
+    @JoinColumn(name="codigo_lugar")
     private LugarDeRealizacion lugarDeRealizacion;
 }

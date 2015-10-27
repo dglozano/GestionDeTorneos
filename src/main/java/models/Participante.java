@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -8,22 +9,30 @@ public class Participante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_participante")
-    private Integer id;
+    private int id;
     @Column(name = "nom_partic")
     private String nombre;
     @Column(name = "puntos")
-    private Integer pts;
+    private int puntos;
     @Column(name = "email_partic")
     private String email;
-    @Column(name = "ganados")
-    private Integer ganados;
-    @Column(name = "tantos_contra")
-    private Integer pts_contra;
-    @Column(name = "empatados")
-    private Integer empatados;
-    @Column(name = "tantos_favor")
-    private Integer pts_favor;
-    // TODO: IMAGEN PARTICIPANTE
+    @Column(name ="es_libre")
+    private boolean esLibre;
+
+    @OneToMany
+    @JoinColumn(name = "id_participante")
+    private List<ModificacionParticipante> modificacionesParticipante;
+    /* TODO 00: Ver relacion partido-participante. */
+    /*@OneToMany(mappedBy = "local")
+    @Column(name="partidos")
+    private List<Partido> partidosDeLocal;
+    @OneToMany(mappedBy = "visitante")
+    @Column(name="partidos")
+    private List<Partido> partidosDeVisitante;
+    @OneToMany(mappedBy = "ganador")
+    @Column(name="partidos")
+    private List<Partido> partidosGanador;*/
+    /* TODO 01: Imagen participante. Ver Blob. */
 
 
 }

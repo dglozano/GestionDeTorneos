@@ -1,5 +1,7 @@
 package models;
 
+import javax.persistence.Entity;
+
 /**
  * Created by Kevincho on 22/10/2015.
  */
