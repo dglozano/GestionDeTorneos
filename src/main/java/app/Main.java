@@ -1,5 +1,6 @@
 package app;
 
+import dao.util.MiEntityManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -28,16 +29,30 @@ public class Main extends Application{
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fmxl/preloader.fxml"));
+        primaryStage.setTitle("Gestion De Torneos");
+        primaryStage.setResizable(false);
 
         stage = primaryStage;
 
-        primaryStage.setTitle("Gestion De Torneos");
-        primaryStage.setScene(new Scene(root, 1000, 600));
-        primaryStage.setResizable(false);
+        Runnable levantarBD = () -> {
+            MiEntityManager.get();
+        };
+        new Thread(levantarBD).start();
 
+        goToLoader();
         primaryStage.show();
+    }
 
+    private void goToLoader(){
+        try {
+            replaceSceneContent("preloader.fxml");
+            goToMain();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void goToMain(){
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(3500),
                 ae -> {
