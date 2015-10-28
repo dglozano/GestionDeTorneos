@@ -11,10 +11,10 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Font.loadFont(getClass().getResource("../fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
-        Font.loadFont(getClass().getResource("../fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../fmxl/preloader.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fmxl/main.fxml"));
 
         primaryStage.setTitle("Gestion De Torneos");
         primaryStage.setScene(new Scene(root, 1000, 600));

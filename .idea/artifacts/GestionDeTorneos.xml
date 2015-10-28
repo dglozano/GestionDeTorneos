@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="javafx" name="GestionDeTorneos">
-    <output-path>$PROJECT_DIR$/out/artifacts/GestionDeTorneos</output-path>
+    <output-path>$PROJECT_DIR$/target/GestionDeTorneos</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="app.Main" />
