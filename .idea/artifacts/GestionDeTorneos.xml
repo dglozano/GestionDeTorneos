@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" build-on-make="true" name="GestionDeTorneos">
+  <artifact type="javafx" name="GestionDeTorneos">
     <output-path>$PROJECT_DIR$/target/GestionDeTorneos</output-path>
     <properties id="javafx-properties">
       <options>
