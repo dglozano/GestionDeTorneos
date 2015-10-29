@@ -22,16 +22,41 @@ public class Participante {
     @OneToMany
     @JoinColumn(name = "id_participante")
     private List<ModificacionParticipante> modificacionesParticipante;
-    /* TODO 00: Ver relacion partido-participante. */
-    /*@OneToMany(mappedBy = "local")
-    @Column(name="partidos")
-    private List<Partido> partidosDeLocal;
-    @OneToMany(mappedBy = "visitante")
-    @Column(name="partidos")
-    private List<Partido> partidosDeVisitante;
-    @OneToMany(mappedBy = "ganador")
-    @Column(name="partidos")
-    private List<Partido> partidosGanador;*/
+
+    @OneToMany
+    @JoinTable(name = "PartidosLocales",
+            joinColumns = {
+                    @JoinColumn(name="id_participante",unique=true)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_partido")
+            }
+    )
+    private List<Partido> partidosLocales;
+
+    @OneToMany
+    @JoinTable(name = "PartidosVisitantes",
+            joinColumns = {
+                    @JoinColumn(name="id_participante",unique=true)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_partido")
+            }
+    )
+    private List<Partido> partidosVisitantes;
+
+    @OneToMany
+    @JoinTable(name = "PartidosGanados",
+            joinColumns = {
+                    @JoinColumn(name="id_participante",unique=true)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_partido")
+            }
+    )
+    private List<Partido> partidosGanados;
+
+
     /* TODO 01: Imagen participante. Ver Blob. */
 
 

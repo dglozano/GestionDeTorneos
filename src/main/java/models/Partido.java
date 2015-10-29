@@ -23,16 +23,36 @@ public class Partido {
     @ManyToOne
     @JoinColumn(name="codigo_lugar")
     private LugarDeRealizacion lugar;
-    /* TODO 00: Ver relacion partido-participante. */
-   /* @ManyToOne
-    @JoinColumn(name="id_participante")
+    @ManyToOne(optional=true)
+    @JoinTable(name = "PartidosLocales",
+            joinColumns = {
+                    @JoinColumn(name="id_partido")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_participante")
+            }
+    )
     private Participante local;
-    @ManyToOne
-    @JoinColumn(name="id_participante")
+    @ManyToOne(optional=true)
+    @JoinTable(name = "PartidosVisitantes",
+            joinColumns = {
+                    @JoinColumn(name="id_partido")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_participante")
+            }
+    )
     private Participante visitante;
-    @ManyToOne
-    @JoinColumn(name="id_participante")
-    private Participante ganador;*/
+    @ManyToOne(optional=true)
+    @JoinTable(name = "PartidosGanados",
+            joinColumns = {
+                    @JoinColumn(name="id_partido")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="id_participante")
+            }
+    )
+    private Participante ganador;
     @OneToOne
     @JoinColumn(name="id_partido")
     private Partido partidoAnteriorLocal;

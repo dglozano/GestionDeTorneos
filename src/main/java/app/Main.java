@@ -37,12 +37,20 @@ public class Main extends Application{
         Runnable levantarBD = () -> {
             MiEntityManager.get();
         };
-        new Thread(levantarBD).start();
+        Thread hiloBD = new Thread(levantarBD);
+        hiloBD.start();
+        try {
+            replaceSceneContent("preloader.fxml");
+            primaryStage.show();
 
-        goToLoader();
-        primaryStage.show();
+            hiloBD.join();
+            replaceSceneContent("main.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-
+/*
     private void goToLoader(){
         try {
             replaceSceneContent("preloader.fxml");
@@ -63,7 +71,7 @@ public class Main extends Application{
                     }
                 }));
         timeline.play();
-    }
+    }*/
 
     private Parent replaceSceneContent(String fxml) throws Exception {
         Parent page = FXMLLoader.load(getClass().getClassLoader().getResource("fmxl/" + fxml));
