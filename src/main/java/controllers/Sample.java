@@ -20,7 +20,7 @@ public class Sample {
         c.setSistemaPuntuacion(SistemaPuntuacion.PUNTUACION);
         gestor.nuevaCompetencia(c);
 
-        System.out.println("Agregaste la Competencia a la BD: " + nombreCompetencia.getText());
+        //System.out.println("Agregaste la Competencia a la BD: " + nombreCompetencia.getText());
     }
 
 }

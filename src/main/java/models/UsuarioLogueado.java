@@ -11,7 +11,7 @@ public class UsuarioLogueado {
 
     private UsuarioLogueado(){}
 
-    public UsuarioLogueado getInstance(){
+    public static UsuarioLogueado getInstance(){
         return instance;
     }
 

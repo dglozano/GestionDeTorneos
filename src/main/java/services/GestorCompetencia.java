@@ -3,10 +3,12 @@ package services;
 import dao.CompetenciaDao;
 import models.Competencia;
 
+import java.util.List;
+
 public class GestorCompetencia {
-    private CompetenciaDao dao = new CompetenciaDao();
+    private CompetenciaDao competenciaDao = CompetenciaDao.getInstance();
 
     public void nuevaCompetencia(Competencia c) {
-        dao.crear(c);
+        competenciaDao.crearCompetencia(c);
     }
 }
