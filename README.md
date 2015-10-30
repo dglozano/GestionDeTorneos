@@ -20,25 +20,21 @@
 2. Maven
     1. [Instalar](http://mirrors.nxnethosting.com/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.zip) 
     2. Copiar la carpeta a C:/
-    3. Agregar ```C:\apache-maven-3.3.3\bin``` a la variable de entorno PATH
-3. Git
-    1. [Instalar](http://git-scm.com/download/win)
+    3. Agregar ```C:\apache-maven-3.3.3\bin``` a la variable de entorno PAT
 3. IntelliJ IDEA
     1. Instalar - [Windows](http://treehouse.github.io/installation-guides/windows/intellij-idea-win.html) | [Mac](http://treehouse.github.io/installation-guides/mac/intellij-idea-mac.html)
     2. Checkout from Version Control > GitHub
     3. Git Repository URL: ```https://github.com/juanferreras/GestionDeTorneos.git```
     4. Seleccionar directorio local donde guardarlo y todo y darle a *Clone*
     5. Tocar *Yes* y esperar que cargue las dependencias
-4. JavaFX Scene Builder
-    1. Instalar - [Windows](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html#javafx-scenebuilder-2.0-oth-JPR) | [Mac](http://download.oracle.com/otn-pub/java/javafx_scenebuilder/2.0-b20/javafx_scenebuilder-2_0-macosx-universal.dmg)
-5. MySQL
+4. MySQL
     1. Instalar - [Windows](http://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-5.6.26.0.msi) | [Mac: MySQL Server](http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26-osx10.9-x86_64.dmg) & [Mac: MySQL Workbench](https://dev.mysql.com/downloads/file.php?id=457796)
     2. Seleccionar la versión de desarrollador y dejar que instale todo.
-    3. Tocar el (+) y crear nueva conexión.
+    3. Dejar los siguientes valores.
         1. Hostname: ```localhost```
         2. Port: ```3306```
         3. Ponerle de password al usuario *root* ```grupo5b```
-    5. Seleccionar la Local Instance y loguearse con las credenciales.
+    5. Abrir Workbench, seleccionar la Local Instance y loguearse con las credenciales.
     6. Hacer click en el cuarto icono (_Create a new schema[..]_) y crear un nuevo Schema llamado ```gestiondetorneos```
 
 #### Git desde IntelliJ Idea ####
