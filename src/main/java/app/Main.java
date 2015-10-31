@@ -1,91 +1,47 @@
 package app;
 
-import dao.util.MiEntityManager;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import controllers.general.PrincipalController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Main extends Application{
-
-    private Stage stage;
-    private static Main instance;
-
-    public Main(){
-        instance = this;
-    }
-
-    public static Main getInstance(){
-        return instance;
-    }
+    public static String vista0ID = "preloader";
+    public static String vista0Archivo = "preloader.fxml";
+    public static String vista1ID = "misCompetencias";
+    public static String vista1Archivo = "misCompetencias.fxml";
+    public static String vista2ID = "crearCompetencia";
+    public static String vista2Archivo = "crearCompetencia.fxml";
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
+
+        // Cargamos los recursos necesarios
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
 
-        primaryStage.setTitle("Gestion De Torneos");
-        primaryStage.setResizable(false);
+        PrincipalController mainContainer = new PrincipalController();
+        mainContainer.loadScreen(Main.vista0ID, Main.vista0Archivo);
+        mainContainer.loadScreen(Main.vista1ID, Main.vista1Archivo);
+        mainContainer.loadScreen(Main.vista2ID, Main.vista2Archivo);
 
-        stage = primaryStage;
+        mainContainer.setScreen(Main.vista0ID);
 
-        Runnable levantarBD = () -> {
-            MiEntityManager.get();
-        };
-        Thread hiloBD = new Thread(levantarBD);
-        hiloBD.start();
-        try {
-            replaceSceneContent("preloader.fxml");
-            primaryStage.show();
-
-            hiloBD.join();
-            replaceSceneContent("main.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-/*
-    private void goToLoader(){
-        try {
-            replaceSceneContent("preloader.fxml");
-            goToMain();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    private void goToMain(){
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(3500),
-                ae -> {
-                    try {
-                        replaceSceneContent("main.fxml");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }));
-        timeline.play();
-    }*/
 
-    private Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = FXMLLoader.load(getClass().getClassLoader().getResource("fmxl/" + fxml));
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page, 1000, 600);
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
-    }
-
+    /**
+     * El main() es ignorado en una app JavaFX.
+     * Es un fallback en caso de que no se ejecute correctamente.
+     * @param args los argumentos de la línea de comandos
+     */
     public static void main(String[] args) {
         launch(args);
     }

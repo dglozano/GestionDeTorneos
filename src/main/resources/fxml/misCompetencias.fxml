@@ -10,33 +10,23 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Sample">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Archivo">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" text="Registrar" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="537.0" prefWidth="776.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
       <children>
-            <VBox id="container">
+            <VBox id="container" prefHeight="579.0" prefWidth="1000.0">
                <children>
-                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Mis competencias" textAlignment="CENTER" wrappingWidth="899.546875">
+                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Mis competencias" textAlignment="CENTER" wrappingWidth="897.546875">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -44,7 +34,7 @@
                         <Insets bottom="25.0" />
                      </VBox.margin>
                   </Text>
-                  <GridPane hgap="10.0" prefHeight="187.0" prefWidth="800.0" style="-fx-background-color: #f5f5f5;" vgap="15.0">
+                  <GridPane hgap="10.0" prefHeight="187.0" prefWidth="782.0" style="-fx-background-color: #f5f5f5;" vgap="15.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -116,7 +106,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                   </GridPane>
-                  <TableView prefHeight="178.0" prefWidth="900.0">
+                  <TableView prefHeight="183.0" prefWidth="706.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Nombre" />
                       <TableColumn prefWidth="75.0" text="Deporte" />
@@ -128,14 +118,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="900.0" spacing="15.0">
+                  <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="741.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Crear competencia" textFill="WHITE">
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#irCrearCompetencia" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Crear competencia" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#nuevaCompetencia" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

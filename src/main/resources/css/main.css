@@ -36,6 +36,10 @@
     -fx-font-size: 12px;
 }
 
+.disabled{
+    -fx-text-fill: #999;
+}
+
 #title{
     -fx-font-size: 32px;
 }
