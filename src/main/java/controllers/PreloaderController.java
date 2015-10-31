@@ -16,7 +16,8 @@ public class PreloaderController implements ControlledScreen {
         myController = screenParent;
         // Demorar 4 segundos y pasar a la primer pantalla mientras ya levanta el entity manager
         levantarEntityManager();
-        mostrarPrimerPantalla(4000);
+        //mostrarPrimerPantalla(4000);
+        mostrarPrimerPantalla(1000);
     }
 
     public void levantarEntityManager(){

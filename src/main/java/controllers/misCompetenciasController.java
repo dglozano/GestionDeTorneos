@@ -17,7 +17,6 @@ public class misCompetenciasController implements ControlledScreen {
         myController = screenParent;
     }
 
-    @FXML
     public void irCrearCompetencia(ActionEvent actionEvent) {
         /*GestorCompetencia gestor = new GestorCompetencia();
         Competencia c = new Competencia();

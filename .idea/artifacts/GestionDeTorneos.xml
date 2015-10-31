@@ -4,7 +4,6 @@
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="app.Main" />
-        <option name="convertCss2Bin" value="true" />
         <option name="description" value="" />
         <option name="height" value="600" />
         <option name="htmlParamFile" value="" />

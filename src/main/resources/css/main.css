@@ -39,6 +39,11 @@
 .disabled{
     -fx-text-fill: #999;
 }
+.error{
+    -fx-text-fill: #F54A4A;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+}
 
 #title{
     -fx-font-size: 32px;
@@ -123,4 +128,11 @@
 }
 #preloader #gif{
     -fx-pref-width: 25px;
+}
+
+.modalTitle.label{
+    -fx-font-size: 22px;
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+    -fx-font-weight: bold;
 }

@@ -124,7 +124,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <RadioButton mnemonicParsing="false" selected="true" text="Puntos" textFill="#222222">
+                                    <RadioButton mnemonicParsing="false" text="Puntos" textFill="#222222">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="modalidad" />
                                        </toggleGroup>
@@ -144,6 +144,14 @@
                                     </RadioButton>
                                  </children>
                               </GridPane>
+                              <Label fx:id="errorPuntuacion" minWidth="474.0" prefHeight="17.0" prefWidth="474.0" styleClass="error" text="Debe seleccionar una opción para continuar" visible="false" GridPane.halignment="LEFT">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets top="52.0" />
+                                 </GridPane.margin>
+                              </Label>
                               <ComboBox disable="true" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" />
                               <Label alignment="CENTER" style="&#10;" styleClass="disabled" text="Cantidad de Sets (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
                                  <font>
@@ -163,7 +171,7 @@
                   </GridPane>
                   <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="741.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Continuar" textFill="WHITE">
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#continuar" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Continuar" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
