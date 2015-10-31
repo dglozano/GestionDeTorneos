@@ -15,9 +15,9 @@ public class Main extends Application{
     public static String vista2ID = "crearCompetencia";
     public static String vista2Archivo = "crearCompetencia.fxml";
 
+
     @Override
     public void start(Stage primaryStage) {
-
         // Cargamos los recursos necesarios
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);

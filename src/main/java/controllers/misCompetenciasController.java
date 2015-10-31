@@ -6,6 +6,7 @@ import controllers.general.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import services.GestorCompetencia;
 
 public class misCompetenciasController implements ControlledScreen {
 
@@ -18,17 +19,10 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     public void irCrearCompetencia(ActionEvent actionEvent) {
-        /*GestorCompetencia gestor = new GestorCompetencia();
-        Competencia c = new Competencia();
-
-        c.setNombre(nombreCompetencia.getText());
-        c.setEstado(Estado.CREADA);
-        c.setModalidad(Modalidad.ELIM_DOBLE);
-        c.setSistemaPuntuacion(SistemaPuntuacion.PUNTUACION);
-        gestor.nuevaCompetencia(c);*/
-
-        myController.setScreen(Main.vista2ID);
-        //System.out.println("Agregaste la Competencia a la BD: " + nombreCompetencia.getText());
+        /* TODO 01: Como invocar metodos cuando aparece la pantalla? Descomentar siguiente linea luego*/
+        // myController.setScreen(Main.vista2ID);
+        GestorCompetencia gestorCompetencia = new GestorCompetencia();
+        gestorCompetencia.listarTodasMisCompetencias();
     }
 
 }

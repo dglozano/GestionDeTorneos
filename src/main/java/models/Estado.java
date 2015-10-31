@@ -6,5 +6,18 @@ import javax.persistence.Entity;
  * Created by Kevincho on 22/10/2015.
  */
 public enum Estado{
-    CREADA, PLANIFICADA, EN_DISPUTA, FINALIZADA, ELIMINADA
+    CREADA("Creada"), PLANIFICADA("Planificada"), EN_DISPUTA("En disputa"), FINALIZADA("Finalizada"), ELIMINADA("Eliminada");
+
+    private String estadoString;
+
+    Estado(String estadoString){
+        this.estadoString=estadoString;
+    }
+
+    public String getEstadoString(){
+        return  estadoString;
+    }
 }
+
+
+

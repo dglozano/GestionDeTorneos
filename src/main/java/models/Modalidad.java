@@ -7,5 +7,16 @@ import javax.persistence.Entity;
  */
 
 public enum Modalidad{
-    LIGA, ELIM_SIMPLE, ELIM_DOBLE
+    LIGA("Liga"), ELIM_SIMPLE("Eliminatoria Simple"), ELIM_DOBLE ("Eliminatoria Doble");
+
+
+    private String modalidadString;
+
+    Modalidad(String modalidadString){
+        this.modalidadString=modalidadString;
+    }
+
+    public String getModalidadString(){
+        return  modalidadString;
+    }
 }

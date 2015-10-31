@@ -62,4 +62,11 @@ public class CompetenciaDao {
         em.close();
         return listaCompetencias;
     }
+
+    public List<Competencia> buscarTodasCompetencias(int idUsuario) {
+        EntityManager em = MiEntityManager.get();
+        List<Competencia> listaCompetencias = em.createQuery("SELECT c FROM Competencia c WHERE id_usuario ="+idUsuario).getResultList();
+        em.close();
+        return listaCompetencias;
+    }
 }
