@@ -35,7 +35,6 @@ public class crearCompetenciasController implements ControlledScreen {
 
     @FXML private Button okButton;
 
-
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
@@ -60,7 +59,8 @@ public class crearCompetenciasController implements ControlledScreen {
             errorPuntuacion.setVisible(true);
         } else{
             errorPuntuacion.setVisible(false);
-            mostrarPopupExito();
+            myController.setScreen(Main.vista3ID);
+            //mostrarPopupExito();
         }
     }
 

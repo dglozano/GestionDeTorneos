@@ -18,6 +18,8 @@ public class Main extends Application{
     public static String vista1Archivo = "misCompetencias.fxml";
     public static String vista2ID = "crearCompetencia";
     public static String vista2Archivo = "crearCompetencia.fxml";
+    public static String vista3ID = "crearCompetencia2";
+    public static String vista3Archivo = "crearCompetencia2.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -31,6 +33,7 @@ public class Main extends Application{
         mainContainer.loadScreen(Main.vista0ID, Main.vista0Archivo);
         mainContainer.loadScreen(Main.vista1ID, Main.vista1Archivo);
         mainContainer.loadScreen(Main.vista2ID, Main.vista2Archivo);
+        mainContainer.loadScreen(Main.vista3ID, Main.vista3Archivo);
 
         mainContainer.setScreen(Main.vista0ID);
 
