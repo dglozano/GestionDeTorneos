@@ -15,7 +15,6 @@ public class Main extends Application{
     public static String vista2ID = "crearCompetencia";
     public static String vista2Archivo = "crearCompetencia.fxml";
 
-
     @Override
     public void start(Stage primaryStage) {
         // Cargamos los recursos necesarios

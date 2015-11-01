@@ -7,19 +7,18 @@ import dao.CompetenciaDao;
 import dao.DeporteDao;
 import dao.UsuarioDao;
 import dao.util.MiEntityManager;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 import models.*;
 
 public class PreloaderController implements ControlledScreen {
 
-    PrincipalController myController;
+    private PrincipalController myController;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
         levantarEntityManager();
     }
+
+    public void inicializar(){}
 
     public void levantarEntityManager(){
         Runnable levantarBD = () -> {

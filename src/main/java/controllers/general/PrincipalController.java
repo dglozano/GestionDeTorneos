@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class PrincipalController extends StackPane {
     //Contiene todas las vistas
     private HashMap<String, Node> screens = new HashMap<>();
+    private HashMap<String, ControlledScreen> screensController = new HashMap<>();
 
     public PrincipalController() {
         super();
@@ -39,6 +40,7 @@ public class PrincipalController extends StackPane {
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             myScreenControler.setScreenParent(this);
             addScreen(name, loadScreen);
+            screensController.put(name, myScreenControler);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -75,6 +77,12 @@ public class PrincipalController extends StackPane {
                         new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
                 fadeIn.play();
             }
+
+            ControlledScreen myScreenControler = screensController.get(name);
+            myScreenControler.inicializar();
+            System.out.println((myScreenControler.toString()));
+            System.out.println("DEBERIA INICIALIZAR DIEGO RE PUTO");
+
             return true;
         } else {
             System.out.println("screen hasn't been loaded!!! \n");

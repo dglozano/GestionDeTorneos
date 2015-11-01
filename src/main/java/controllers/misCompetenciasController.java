@@ -28,7 +28,7 @@ public class misCompetenciasController implements ControlledScreen {
         myController = screenParent;
     }
 
-    private void inicializarVista() {
+    public void inicializar(){
         this.gestorCompetencia = new GestorCompetencia();
         this.gestorDeporte = new GestorDeporte();
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();

@@ -10,7 +10,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class crearCompetenciasController implements ControlledScreen {
 
-    PrincipalController myController;
+    private PrincipalController myController;
 
     @FXML private Label errorPuntuacion;
     @FXML private ToggleGroup modalidad;
@@ -18,6 +18,8 @@ public class crearCompetenciasController implements ControlledScreen {
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
+
+    public void inicializar(){}
 
     public void validaciones(){
         if (modalidad.getSelectedToggle() == null){
