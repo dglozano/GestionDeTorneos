@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -34,7 +35,7 @@
                         <Insets bottom="25.0" />
                      </VBox.margin>
                   </Text>
-                  <GridPane hgap="10.0" prefHeight="187.0" prefWidth="782.0" style="-fx-background-color: #f5f5f5;" vgap="15.0">
+                  <GridPane hgap="10.0" prefHeight="187.0" prefWidth="782.0" style="-fx-background-color: #f5f5f5;" styleClass="filterPane" vgap="15.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -59,7 +60,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="deportesComboBox"  prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
+                        <ComboBox fx:id="deportesComboBox" prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
                         <Label alignment="CENTER" style="&#10;" text="Modalidad" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                            <font>
                               <Font size="13.0" />
@@ -73,10 +74,13 @@
                               <ToggleGroup fx:id="modalidadToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="13.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="modalidad" />
+                           </toggleGroup>
                         </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Eliminatorias Doble" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
@@ -89,15 +93,29 @@
                            </font>
                         </Label>
                         <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#filtrarCompetencias" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-small" />
-                           </styleClass>
-                        </Button>
+                        <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <children>
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#filtrarCompetencias" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-small" />
+                                 </styleClass>
+                              </Button>
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" text="Limpiar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-alt" />
+                                    <String fx:value="btn-small" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets />

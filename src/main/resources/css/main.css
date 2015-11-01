@@ -67,7 +67,7 @@
     -fx-background-color: #468fd3;
 }
 .btn-alt:hover{
-    -fx-background-color: #313233;
+    -fx-background-color: #313233 !important;
     -fx-text-fill: #fff;
 }
 .btn .text{
@@ -80,6 +80,10 @@
     -fx-background-color: #fff;
     -fx-text-fill: #313233;
     -fx-border-color: #313233;
+}
+.filterPane,
+.filterPane .btn-alt{
+    -fx-background-color: #f5f5f5;
 }
 .btn-small{
     -fx-pref-width: 80px;
