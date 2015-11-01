@@ -3,12 +3,16 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import controllers.general.VerCompetenciaCell;
 import dtos.CompetenciaDTO;
 import dtos.FiltrosCompetenciaDTO;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import models.Estado;
 import models.Modalidad;
 import services.GestorCompetencia;
@@ -32,6 +36,7 @@ public class misCompetenciasController implements ControlledScreen {
     @FXML private TableColumn<CompetenciaDTO, String> tDeporte;
     @FXML private TableColumn<CompetenciaDTO, String> tEstado;
     @FXML private TableColumn<CompetenciaDTO, String> tModalidad;
+    @FXML private TableColumn<CompetenciaDTO, Boolean> tAcciones;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
@@ -48,6 +53,22 @@ public class misCompetenciasController implements ControlledScreen {
         tDeporte.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("deporte"));
         tEstado.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("estado"));
         tModalidad.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("modalidad"));
+
+        // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
+        tAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CompetenciaDTO, Boolean>, ObservableValue<Boolean>>() {
+            @Override public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CompetenciaDTO, Boolean> features) {
+                return new SimpleBooleanProperty(features.getValue() != null);
+            }
+        });
+
+        // Creamos una nueva factory de cell con un botón de Ver competencia
+        tAcciones.setCellFactory(new Callback<TableColumn<CompetenciaDTO, Boolean>, TableCell<CompetenciaDTO, Boolean>>() {
+            @Override
+            public TableCell<CompetenciaDTO, Boolean> call(TableColumn<CompetenciaDTO, Boolean> personBooleanTableColumn) {
+                return new VerCompetenciaCell(tabla);
+            }
+        });
+
         setearFilas(listaCompetencias);
 
         cargarDeportes();
