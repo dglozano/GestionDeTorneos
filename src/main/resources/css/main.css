@@ -134,6 +134,10 @@
     -fx-pref-width: 25px;
 }
 
+#tabla .table-column {
+  -fx-alignment: CENTER;
+}
+
 .modalTitle.label,
 .modalTitle.font,
 .modalTitle .font,
