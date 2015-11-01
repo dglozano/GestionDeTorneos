@@ -1,17 +1,14 @@
 package controllers;
 
 import app.Main;
-import com.sun.org.apache.xml.internal.security.c14n.implementations.Canonicalizer20010315OmitComments;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import dtos.CompetenciaDTO;
 import dtos.FiltrosCompetenciaDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import dtos.CompetenciaDTO;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.Estado;
 import models.Modalidad;
 import services.GestorCompetencia;
@@ -30,6 +27,12 @@ public class misCompetenciasController implements ControlledScreen {
     @FXML private ComboBox<String> deportesComboBox;
     @FXML private ComboBox<String> estadosComboBox;
 
+    @FXML private TableView<CompetenciaDTO> tabla;
+    @FXML private TableColumn<CompetenciaDTO, String> tNombre;
+    @FXML private TableColumn<CompetenciaDTO, String> tDeporte;
+    @FXML private TableColumn<CompetenciaDTO, String> tEstado;
+    @FXML private TableColumn<CompetenciaDTO, String> tModalidad;
+
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
@@ -40,9 +43,20 @@ public class misCompetenciasController implements ControlledScreen {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
         estadosComboBox.getItems().removeAll(estadosComboBox.getItems());
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();
-        /* TODO 02: Aniadir a tabla*/
+
+        tNombre.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("nombre"));
+        tDeporte.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("deporte"));
+        tEstado.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("estado"));
+        tModalidad.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("modalidad"));
+        setearFilas(listaCompetencias);
+
         cargarDeportes();
         cargarEstados();
+    }
+
+    private void setearFilas(List<CompetenciaDTO> listaCompetencias){
+        tabla.getItems().removeAll(tabla.getItems());
+        tabla.getItems().setAll(listaCompetencias);
     }
 
     private void cargarDeportes() {
@@ -81,12 +95,12 @@ public class misCompetenciasController implements ControlledScreen {
         setearEstado(filtrosCompetencia, estado);
         setearModalidad(filtrosCompetencia, modalidad);
         List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
-         //TODO 02: Descomentar cuando pueda cargar datos en la tabla de la vista
+        setearFilas(listaCompetenciasFiltradas);
     }
 
     public void limpiarFiltros(ActionEvent actionEvent){
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();
-        /* TODO 02: Aniadir a tabla*/
+        setearFilas(listaCompetencias);
         estadosComboBox.setValue("Todos");
         deportesComboBox.setValue("Todos");
         nombreCompetenciaTextField.setText("");
