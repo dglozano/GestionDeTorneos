@@ -16,4 +16,8 @@ public class MiEntityManager {
         inicializar();
         return _entityManagerFactory.createEntityManager();
     }
+
+    public static void close(){
+        _entityManagerFactory.close();
+    }
 }

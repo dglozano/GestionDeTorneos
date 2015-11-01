@@ -2,13 +2,10 @@
 
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
@@ -66,7 +63,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Liga" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <RadioButton mnemonicParsing="false" selected="false" text="Liga" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -74,15 +71,12 @@
                               <ToggleGroup fx:id="modalidadToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <RadioButton mnemonicParsing="false" text="Eliminatoria Simple" textFill="#222222" toggleGroup="$modalidadToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="13.0" />
                            </font>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="modalidad" />
-                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Eliminatorias Doble" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <RadioButton mnemonicParsing="false" text="Eliminatoria Doble" textFill="#222222" toggleGroup="$modalidadToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -92,7 +86,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="estadosComboBox" prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
                         <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <children>
                               <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#filtrarCompetencias" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -104,7 +98,7 @@
                                     <String fx:value="btn-small" />
                                  </styleClass>
                               </Button>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" text="Limpiar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#limpiarFiltros" text="Limpiar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

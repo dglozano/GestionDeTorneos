@@ -1,6 +1,7 @@
 package app;
 
 import controllers.general.PrincipalController;
+import dao.util.MiEntityManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -40,6 +41,7 @@ public class Main extends Application{
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
+                MiEntityManager.close();
                 Platform.exit();
                 System.exit(0);
             }

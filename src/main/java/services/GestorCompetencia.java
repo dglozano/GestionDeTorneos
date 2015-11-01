@@ -1,5 +1,6 @@
 package services;
 import dao.CompetenciaDao;
+import dtos.FiltrosCompetenciaDTO;
 import models.Competencia;
 import models.UsuarioLogueado;
 import dtos.CompetenciaDTO;
@@ -28,7 +29,22 @@ public class GestorCompetencia {
             CompetenciaDTO unaCompetencia = new CompetenciaDTO(id,nombre,deporte,estado,modalidad);
             listaCompetenciasDTO.add(unaCompetencia);
         }
+        return listaCompetenciasDTO;
+    }
 
+    public List<CompetenciaDTO> filtrarMisCompetencias(FiltrosCompetenciaDTO filtros){
+        int idUsuarioLogueado = usuarioLogueado.getUsuarioLogueado().getId();
+        List<Competencia> competenciasUsuario = competenciaDao.filtrarCompetencias(idUsuarioLogueado, filtros);
+        List<CompetenciaDTO> listaCompetenciasDTO= new ArrayList<CompetenciaDTO>();
+        for(Competencia comp: competenciasUsuario){
+            int id = comp.getId();
+            String nombre = comp.getNombre();
+            String estado = comp.getEstado().getEstadoString();
+            String modalidad = comp.getModalidad().getModalidadString();
+            String deporte = comp.getDeporte().getNombre();
+            CompetenciaDTO unaCompetencia = new CompetenciaDTO(id,nombre,deporte,estado,modalidad);
+            listaCompetenciasDTO.add(unaCompetencia);
+        }
         return listaCompetenciasDTO;
     }
 }
