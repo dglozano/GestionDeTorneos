@@ -53,13 +53,13 @@
                         <Font size="13.0" />
                       </font>
                     </Label>
-                        <TextField fx:id="nombreCompetencia" GridPane.columnIndex="1" />
+                        <TextField fx:id="nombreCompetenciaTextField" GridPane.columnIndex="1" />
                         <Label alignment="CENTER" style="&#10;" text="Deporte asociado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
+                        <ComboBox fx:id="deportesComboBox"  prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" />
                         <Label alignment="CENTER" style="&#10;" text="Modalidad" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                            <font>
                               <Font size="13.0" />
@@ -70,7 +70,7 @@
                               <Font size="13.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="modalidad" />
+                              <ToggleGroup fx:id="modalidadToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Eliminatorias Simple" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -89,7 +89,7 @@
                            </font>
                         </Label>
                         <ComboBox prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#filtrarCompetencias" text="Buscar" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <font>
                               <Font size="13.0" />
                            </font>

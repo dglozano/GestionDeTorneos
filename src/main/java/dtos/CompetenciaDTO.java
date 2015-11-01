@@ -1,6 +1,4 @@
-package models.dtos;
-
-import models.Estado;
+package dtos;
 
 /**
  * Created by DIego on 31/10/2015..

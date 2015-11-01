@@ -5,6 +5,7 @@ import models.Deporte;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 /**
  * Created by DIego on 29/10/2015..
@@ -25,6 +26,13 @@ public class DeporteDao {
         em.persist(deporte);
         tx.commit();
         em.close();
+    }
+
+    public List<Deporte> buscarDeportes() {
+        EntityManager em = MiEntityManager.get();
+        List<Deporte> listaDeportes = em.createQuery("SELECT d FROM Deporte d").getResultList();
+        em.close();
+        return listaDeportes;
     }
 }
 
