@@ -14,8 +14,10 @@ import javafx.util.Duration;
 import java.util.HashMap;
 
 public class PrincipalController extends StackPane {
-    //Contiene todas las vistas
+
+    // Vincula las vistas con su Nodo
     private HashMap<String, Node> screens = new HashMap<>();
+    // Vincula las vistas con su Controlador
     private HashMap<String, ControlledScreen> screensController = new HashMap<>();
 
     public PrincipalController() {
@@ -50,28 +52,29 @@ public class PrincipalController extends StackPane {
 
     // Setea la vista, con validaciones en caso de que no esté cargado el FXML
     public boolean setScreen(final String name) {
-        if (screens.get(name) != null) {   //screen loaded
+        if (screens.get(name) != null) {   // El fxml está cargado
             final DoubleProperty opacity = opacityProperty();
 
-            if (!getChildren().isEmpty()) {    //if there is more than one screen
+            if (!getChildren().isEmpty()) {    // Si hay más de uno, animamos
                 Timeline fade = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
                         new KeyFrame(new Duration(350), new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent t) {
-                                getChildren().remove(0);                    //remove the displayed screen
-                                getChildren().add(0, screens.get(name));     //add the screen
+                                getChildren().remove(0);
+                                getChildren().add(0, screens.get(name));
                                 Timeline fadeIn = new Timeline(
                                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
                                         new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
                                 fadeIn.play();
                             }
-                        }, new KeyValue(opacity, 0.0)));
+                        }, new KeyValue(opacity, 0.0))
+                );
                 fade.play();
 
             } else {
                 setOpacity(0.0);
-                getChildren().add(screens.get(name));       //no one else been displayed, then just show
+                getChildren().add(screens.get(name));       // Si es el primero, directamente mostramos
                 Timeline fadeIn = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
                         new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
@@ -80,12 +83,10 @@ public class PrincipalController extends StackPane {
 
             ControlledScreen myScreenControler = screensController.get(name);
             myScreenControler.inicializar();
-            System.out.println((myScreenControler.toString()));
-            System.out.println("DEBERIA INICIALIZAR DIEGO RE PUTO");
 
             return true;
         } else {
-            System.out.println("screen hasn't been loaded!!! \n");
+            System.out.println("La vista nunca fue cargada. \n");
             return false;
         }
     }
@@ -93,7 +94,7 @@ public class PrincipalController extends StackPane {
     // Elimina la vista de la colección
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
-            System.out.println("Screen didn't exist");
+            System.out.println("La vista no existía. \n");
             return false;
         } else {
             return true;
