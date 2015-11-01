@@ -22,6 +22,8 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         // Cargamos los recursos necesarios
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Italic.ttf").toExternalForm(), 10);
+        Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-BoldItalic.ttf").toExternalForm(), 10);
+        Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Bold.ttf").toExternalForm(), 10);
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
 
         PrincipalController mainContainer = new PrincipalController();

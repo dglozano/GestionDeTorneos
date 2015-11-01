@@ -5,15 +5,28 @@ import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class crearCompetenciasController implements ControlledScreen {
 
     private PrincipalController myController;
+    private Stage modal;
+    private Parent parent;
 
     @FXML private Label errorPuntuacion;
     @FXML private ToggleGroup modalidad;
+
+    @FXML private Button okButton;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
@@ -27,25 +40,26 @@ public class crearCompetenciasController implements ControlledScreen {
             errorPuntuacion.setVisible(true);
         } else{
             errorPuntuacion.setVisible(false);
+            mostrarPopupExito();
         }
     }
 
-    /* todavía no anda bien
     private void mostrarPopupExito(){
         final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupCompetenciaCreada.fxml"));
-        final Parent root;
         try {
-            root = loader.load();
-            final Scene scene = new Scene(root, 250, 150);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(scene);
-            stage.show();
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.UTILITY);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void irMisCompetencias(ActionEvent actionEvent) {
         myController.setScreen(Main.vista1ID);
@@ -53,6 +67,11 @@ public class crearCompetenciasController implements ControlledScreen {
 
     public void continuar(ActionEvent actionEvent) {
         validaciones();
+    }
+
+    public void close(ActionEvent actionEvent){
+        Stage modal = (Stage)okButton.getScene().getWindow();
+        modal.close();
     }
 
 }
