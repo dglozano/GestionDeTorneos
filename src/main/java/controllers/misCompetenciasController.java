@@ -112,12 +112,15 @@ public class misCompetenciasController implements ControlledScreen {
         String nombre = nombreCompetenciaTextField.getText().toUpperCase();
         String deporte = deportesComboBox.getValue();
         String estado = estadosComboBox.getValue();
-        RadioButton modalidadRadioButton= (RadioButton) modalidadToggleGroup.getSelectedToggle();
-        String modalidad = modalidadRadioButton.getText();
+        if(modalidadToggleGroup.getSelectedToggle() != null) {
+            RadioButton modalidadRadioButton = (RadioButton) modalidadToggleGroup.getSelectedToggle();
+            String modalidad = modalidadRadioButton.getText();
+            setearModalidad(filtrosCompetencia, modalidad);
+        }
         setearNombre(filtrosCompetencia, nombre);
         setearDeporte(filtrosCompetencia, deporte);
         setearEstado(filtrosCompetencia, estado);
-        setearModalidad(filtrosCompetencia, modalidad);
+
         List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
         setearFilas(listaCompetenciasFiltradas);
     }
@@ -128,7 +131,9 @@ public class misCompetenciasController implements ControlledScreen {
         estadosComboBox.setValue("Todos");
         deportesComboBox.setValue("Todos");
         nombreCompetenciaTextField.setText("");
-        modalidadToggleGroup.getSelectedToggle().setSelected(false);
+        if(modalidadToggleGroup.getSelectedToggle() != null){
+            modalidadToggleGroup.getSelectedToggle().setSelected(false);
+        }
     }
 
     private void setearModalidad(FiltrosCompetenciaDTO filtrosCompetencia, String modalidadString) {
