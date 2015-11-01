@@ -9,6 +9,8 @@ import dao.UsuarioDao;
 import dao.util.MiEntityManager;
 import models.*;
 
+import javax.persistence.EntityManager;
+
 public class PreloaderController implements ControlledScreen {
 
     private PrincipalController myController;
@@ -22,9 +24,10 @@ public class PreloaderController implements ControlledScreen {
 
     public void levantarEntityManager(){
         Runnable levantarBD = () -> {
-            MiEntityManager.get();
+            EntityManager em = MiEntityManager.get();
             seteoDatosPrueba();
             myController.setScreen(Main.vista1ID);
+            em.close();
         };
         Thread hiloBD = new Thread(levantarBD);
         hiloBD.start();
