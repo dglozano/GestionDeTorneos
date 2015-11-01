@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -49,9 +50,10 @@ public class crearCompetenciasController implements ControlledScreen {
         try {
             parent = loader.load();
             Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.UTILITY);
+            modal.initStyle(StageStyle.TRANSPARENT);
             modal.setScene(scene);
             modal.setResizable(false);
             modal.sizeToScene();

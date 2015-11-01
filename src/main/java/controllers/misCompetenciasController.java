@@ -54,6 +54,13 @@ public class misCompetenciasController implements ControlledScreen {
         tEstado.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("estado"));
         tModalidad.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("modalidad"));
 
+        setearFilas(listaCompetencias);
+
+        cargarDeportes();
+        cargarEstados();
+    }
+
+    private void agregarBotonesEnTabla(){
         // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
         tAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CompetenciaDTO, Boolean>, ObservableValue<Boolean>>() {
             @Override public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CompetenciaDTO, Boolean> features) {
@@ -68,14 +75,10 @@ public class misCompetenciasController implements ControlledScreen {
                 return new VerCompetenciaCell(tabla);
             }
         });
-
-        setearFilas(listaCompetencias);
-
-        cargarDeportes();
-        cargarEstados();
     }
 
     private void setearFilas(List<CompetenciaDTO> listaCompetencias){
+        agregarBotonesEnTabla();
         tabla.getItems().removeAll(tabla.getItems());
         tabla.getItems().setAll(listaCompetencias);
     }
