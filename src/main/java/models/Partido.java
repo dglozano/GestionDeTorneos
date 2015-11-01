@@ -17,13 +17,13 @@ public class Partido {
     private boolean esLibre;
     @Column(name="tipo_ref_partido")
     private TipoReferenciaPartido tipoReferenciaPartido;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="id_partido")
     private List<Resultado> resultados;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="codigo_lugar")
     private LugarDeRealizacion lugar;
-    @ManyToOne(optional=true)
+    @ManyToOne(optional=true, fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosLocales",
             joinColumns = {
                     @JoinColumn(name="id_partido")
@@ -33,7 +33,7 @@ public class Partido {
             }
     )
     private Participante local;
-    @ManyToOne(optional=true)
+    @ManyToOne(optional=true, fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosVisitantes",
             joinColumns = {
                     @JoinColumn(name="id_partido")
@@ -43,7 +43,7 @@ public class Partido {
             }
     )
     private Participante visitante;
-    @ManyToOne(optional=true)
+    @ManyToOne(optional=true, fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosGanados",
             joinColumns = {
                     @JoinColumn(name="id_partido")
@@ -53,15 +53,99 @@ public class Partido {
             }
     )
     private Participante ganador;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_partido")
     private Partido partidoAnteriorLocal;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_partido")
     private Partido partidoAnteriorVisitante;
 
     @Enumerated(EnumType.STRING)
     public TipoReferenciaPartido getTipoPartido(){
         return tipoReferenciaPartido;
+    }
+
+
+    public Partido() {
+    }
+
+    public void addResultado(Resultado resultado){
+        (this.resultados).add(resultado);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isEsLibre() {
+        return esLibre;
+    }
+
+    public TipoReferenciaPartido getTipoReferenciaPartido() {
+        return tipoReferenciaPartido;
+    }
+
+    public List<Resultado> getResultados() {
+        return resultados;
+    }
+
+    public LugarDeRealizacion getLugar() {
+        return lugar;
+    }
+
+    public Participante getLocal() {
+        return local;
+    }
+
+    public Participante getVisitante() {
+        return visitante;
+    }
+
+    public Participante getGanador() {
+        return ganador;
+    }
+
+    public Partido getPartidoAnteriorLocal() {
+        return partidoAnteriorLocal;
+    }
+
+    public Partido getPartidoAnteriorVisitante() {
+        return partidoAnteriorVisitante;
+    }
+
+    public void setEsLibre(boolean esLibre) {
+        this.esLibre = esLibre;
+    }
+
+    public void setTipoReferenciaPartido(TipoReferenciaPartido tipoReferenciaPartido) {
+        this.tipoReferenciaPartido = tipoReferenciaPartido;
+    }
+
+    public void setResultados(List<Resultado> resultados) {
+        this.resultados = resultados;
+    }
+
+    public void setLugar(LugarDeRealizacion lugar) {
+        this.lugar = lugar;
+    }
+
+    public void setLocal(Participante local) {
+        this.local = local;
+    }
+
+    public void setVisitante(Participante visitante) {
+        this.visitante = visitante;
+    }
+
+    public void setGanador(Participante ganador) {
+        this.ganador = ganador;
+    }
+
+    public void setPartidoAnteriorLocal(Partido partidoAnteriorLocal) {
+        this.partidoAnteriorLocal = partidoAnteriorLocal;
+    }
+
+    public void setPartidoAnteriorVisitante(Partido partidoAnteriorVisitante) {
+        this.partidoAnteriorVisitante = partidoAnteriorVisitante;
     }
 }

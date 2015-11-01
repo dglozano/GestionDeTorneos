@@ -20,8 +20,59 @@ public class Resultado {
     private int tantosEquipoLocal;
     @Column(name="equipo_visitante")
     private int tantosEquipoVisitante;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="id_resultado")
     private List<CambioResultado> cambiosResultado;
 
+
+    public Resultado() {
+    }
+
+    public void addCambioResultado(CambioResultado cambio){
+        (this.cambiosResultado).add(cambio);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isJugoLocal() {
+        return jugoLocal;
+    }
+
+    public boolean isJugoVisitante() {
+        return jugoVisitante;
+    }
+
+    public int getTantosEquipoLocal() {
+        return tantosEquipoLocal;
+    }
+
+    public int getTantosEquipoVisitante() {
+        return tantosEquipoVisitante;
+    }
+
+    public List<CambioResultado> getCambiosResultado() {
+        return cambiosResultado;
+    }
+
+    public void setJugoLocal(boolean jugoLocal) {
+        this.jugoLocal = jugoLocal;
+    }
+
+    public void setJugoVisitante(boolean jugoVisitante) {
+        this.jugoVisitante = jugoVisitante;
+    }
+
+    public void setTantosEquipoLocal(int tantosEquipoLocal) {
+        this.tantosEquipoLocal = tantosEquipoLocal;
+    }
+
+    public void setTantosEquipoVisitante(int tantosEquipoVisitante) {
+        this.tantosEquipoVisitante = tantosEquipoVisitante;
+    }
+
+    public void setCambiosResultado(List<CambioResultado> cambiosResultado) {
+        this.cambiosResultado = cambiosResultado;
+    }
 }

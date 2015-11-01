@@ -12,7 +12,7 @@ public class Deporte {
     private int id;
     @Column(name = "nom_deporte")
     private String nombre;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name= "se_practica_en",
         joinColumns = {@JoinColumn(name="id_deporte", unique=true)},
             inverseJoinColumns = {@JoinColumn(name="codigo_lugar")})
@@ -47,5 +47,9 @@ public class Deporte {
 
     public void setLugaresRealizacion(List<LugarDeRealizacion> lugaresRealizacion) {
         this.lugaresRealizacion = lugaresRealizacion;
+    }
+
+    public void addLugarDeRealizacion(LugarDeRealizacion lugar){
+        (this.lugaresRealizacion).add(lugar);
     }
 }

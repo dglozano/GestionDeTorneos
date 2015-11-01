@@ -23,4 +23,51 @@ public class CambioResultado {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_cambio")
     private Date fechaCambio;
+
+    public CambioResultado() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isJugoLocal() {
+        return jugoLocal;
+    }
+
+    public boolean isJugoVisitante() {
+        return jugoVisitante;
+    }
+
+    public int getTantosEquipoLocal() {
+        return tantosEquipoLocal;
+    }
+
+    public int getTantosEquipoVisitante() {
+        return tantosEquipoVisitante;
+    }
+
+    public Date getFechaCambio() {
+        return fechaCambio;
+    }
+
+    public void setJugoLocal(boolean jugoLocal) {
+        this.jugoLocal = jugoLocal;
+    }
+
+    public void setJugoVisitante(boolean jugoVisitante) {
+        this.jugoVisitante = jugoVisitante;
+    }
+
+    public void setTantosEquipoLocal(int tantosEquipoLocal) {
+        this.tantosEquipoLocal = tantosEquipoLocal;
+    }
+
+    public void setTantosEquipoVisitante(int tantosEquipoVisitante) {
+        this.tantosEquipoVisitante = tantosEquipoVisitante;
+    }
+
+    public void setFechaCambio(Date fechaCambio) {
+        this.fechaCambio = fechaCambio;
+    }
 }

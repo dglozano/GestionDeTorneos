@@ -38,21 +38,24 @@ public class Competencia {
     @Column (name = "sistemaPuntuacion")
     private SistemaPuntuacion sistemaPuntuacion;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn (name = "id_competencia")
     private List<Participante> participantes;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_deporte")
     private Deporte deporte;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_competencia")
     private List<Disponibilidad> disponibilidades;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_usuario")
     private Usuario usuario;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_fixture")
     private Fixture fixture;
+
+    public Competencia() {
+    }
 
     public Fixture getFixture() {
         return fixture;

@@ -19,5 +19,46 @@ public class ModificacionParticipante {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_modificacion")
     private Date fechaModificacion;
-    /* TODO 01: Imagen participante. Ver Blob. */
+    @Lob
+    @Column(name = "Imagen")
+    private byte[] imagen;
+
+    public ModificacionParticipante() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 }

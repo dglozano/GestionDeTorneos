@@ -14,4 +14,20 @@ public class Pais {
     private int id;
     @Column(name="nombre_pais")
     private String nombre;
+
+
+    public Pais() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

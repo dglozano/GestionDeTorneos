@@ -24,19 +24,22 @@ public class Usuario {
     private String password;
     @Column(name="tipo_doc")
     private TipoDocumento tipoDocumento;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_localidad")
     private Localidad localidad;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_inicio_sesion")
     private InicioSesion inicioSesion;
-    @OneToMany(mappedBy="usuario")
+    @OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
     private List<Competencia> competencias;
-    @OneToMany(mappedBy="usuario")
+    @OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
     private List<LugarDeRealizacion> lugaresDeRealizacion;
     @Enumerated(EnumType.STRING)
     public TipoDocumento getTipoDocumento(){
         return tipoDocumento;
+    }
+
+    public Usuario() {
     }
 
     public int getId() {
@@ -121,5 +124,13 @@ public class Usuario {
 
     public void setLugaresDeRealizacion(List<LugarDeRealizacion> lugaresDeRealizacion) {
         this.lugaresDeRealizacion = lugaresDeRealizacion;
+    }
+
+    public void addCompetencia(Competencia competencia){
+        (this.competencias).add(competencia);
+    }
+
+    public void addLugarDeRealizacion(LugarDeRealizacion lugar){
+        (this.lugaresDeRealizacion).add(lugar);
     }
 }

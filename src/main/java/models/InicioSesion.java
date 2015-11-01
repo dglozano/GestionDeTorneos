@@ -20,4 +20,27 @@ public class InicioSesion {
     @Column(name="fecha_elim")
     private Date fechaEliminacion;
 
+
+    public InicioSesion() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public Date getFechaEliminacion() {
+        return fechaEliminacion;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setFechaEliminacion(Date fechaEliminacion) {
+        this.fechaEliminacion = fechaEliminacion;
+    }
 }

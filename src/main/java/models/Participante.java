@@ -19,11 +19,11 @@ public class Participante {
     @Column(name ="es_libre")
     private boolean esLibre;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_participante")
     private List<ModificacionParticipante> modificacionesParticipante;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PartidosLocales",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -34,7 +34,7 @@ public class Participante {
     )
     private List<Partido> partidosLocales;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PartidosVisitantes",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -45,7 +45,7 @@ public class Participante {
     )
     private List<Partido> partidosVisitantes;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PartidosGanados",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -56,8 +56,91 @@ public class Participante {
     )
     private List<Partido> partidosGanados;
 
+    @Lob
+    @Column(name = "Imagen")
+    private byte[] imagen;
 
-    /* TODO 01: Imagen participante. Ver Blob. */
 
+    public Participante() {
+    }
 
+    public void addModificacionParticipante(ModificacionParticipante modificacion) {
+        (this.modificacionesParticipante).add(modificacion);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isEsLibre() {
+        return esLibre;
+    }
+
+    public List<ModificacionParticipante> getModificacionesParticipante() {
+        return modificacionesParticipante;
+    }
+
+    public List<Partido> getPartidosLocales() {
+        return partidosLocales;
+    }
+
+    public List<Partido> getPartidosVisitantes() {
+        return partidosVisitantes;
+    }
+
+    public List<Partido> getPartidosGanados() {
+        return partidosGanados;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setEsLibre(boolean esLibre) {
+        this.esLibre = esLibre;
+    }
+
+    public void setModificacionesParticipante(List<ModificacionParticipante> modificacionesParticipante) {
+        this.modificacionesParticipante = modificacionesParticipante;
+    }
+
+    public void setPartidosLocales(List<Partido> partidosLocales) {
+        this.partidosLocales = partidosLocales;
+    }
+
+    public void setPartidosVisitantes(List<Partido> partidosVisitantes) {
+        this.partidosVisitantes = partidosVisitantes;
+    }
+
+    public void setPartidosGanados(List<Partido> partidosGanados) {
+        this.partidosGanados = partidosGanados;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 }
