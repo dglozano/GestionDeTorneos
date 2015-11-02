@@ -53,7 +53,7 @@ public class crearCompetenciasController implements ControlledScreen {
         gestorDeporte = new GestorDeporte();
         inicializarModalidades();
         inicializarDeportes();
-        inicializarLugares();
+        inicializarLugares(deportesComboBox.getValue().toUpperCase());
         inicializarSets();
         nombreCompetenciaTextField.requestFocus();
 
@@ -69,11 +69,12 @@ public class crearCompetenciasController implements ControlledScreen {
         setsComboBox.setValue("1");
     }
 
-    private void inicializarLugares() {
-        lugaresComboBox.getItems().removeAll(lugaresComboBox.getItems());
+    private void inicializarLugares(String deporteSeleccionado) {
+        lugaresComboBox.getCheckModel().clearChecks();
+        lugaresComboBox.getItems().clear();
         final ObservableList<String> strings = FXCollections.observableArrayList();
         for (int i = 0; i <= 4; i++) {
-            strings.add("Item " + i);
+            strings.add(deporteSeleccionado+i);
         }
         lugaresComboBox.getItems().addAll(strings);
         lugaresComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
@@ -153,6 +154,11 @@ public class crearCompetenciasController implements ControlledScreen {
             setsComboBox.setDisable(true);
             cantidadSetsLabel.setDisable(true);
         }
+    }
+
+    public void deporteSeleccionado(ActionEvent actionEvent){
+        String deporteSeleccionado = ((ComboBox<String>)actionEvent.getSource()).getValue().toString().toUpperCase();
+        inicializarLugares(deporteSeleccionado);
     }
 
 }

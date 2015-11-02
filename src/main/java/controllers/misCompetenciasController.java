@@ -122,8 +122,14 @@ public class misCompetenciasController implements ControlledScreen {
         else{
             filtrosCompetencia.setFiltroModalidadActivo(false);
         }
-        List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
-        setearFilas(listaCompetenciasFiltradas);
+        if(filtrosCompetencia.filtrosInactivos()){
+            //TODO 01:  Crear label
+            System.out.println("Debe seleccionar al menos un filtro");
+        }
+        else {
+            List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
+            setearFilas(listaCompetenciasFiltradas);
+        }
     }
 
     public void limpiarFiltros(ActionEvent actionEvent){

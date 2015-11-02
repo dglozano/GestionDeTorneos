@@ -92,13 +92,13 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <CheckComboBox fx:id="lugaresComboBox" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="2" />
-                              <Label alignment="CENTER" style="&#10;" text="Lugares/Disponibilidad (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="deportesComboBox" prefHeight="25.0" prefWidth="208.0" />
+                              <ComboBox onAction="#deporteSeleccionado" fx:id="deportesComboBox" prefHeight="25.0" prefWidth="208.0" />
+                               <CheckComboBox fx:id="lugaresComboBox" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="2" />
+                               <Label alignment="CENTER" style="&#10;" text="Lugares/Disponibilidad (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
+                                   <font>
+                                       <Font size="13.0" />
+                                   </font>
+                               </Label>
                            </children>
                         </GridPane>
                         <GridPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

@@ -80,4 +80,8 @@ public class FiltrosCompetenciaDTO {
     public void setFiltroDeporteActivo(boolean filtroDeporteActivo) {
         this.filtroDeporteActivo = filtroDeporteActivo;
     }
+
+    public boolean filtrosInactivos(){
+        return !(filtroDeporteActivo || filtroEstadoActivo || filtroModalidadActivo || filtroNombreActivo);
+    }
 }
