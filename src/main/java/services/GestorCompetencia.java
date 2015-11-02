@@ -50,6 +50,18 @@ public class GestorCompetencia {
         return listaCompetenciasDTO;
     }
 
+    public boolean existeNombre(String nombre){
+        boolean existe = false;
+        List<Competencia> listaCompetencias = competenciaDao.buscarTodasCompetencias();
+        for(Competencia comp: listaCompetencias){
+            if(comp.getNombre().equals(nombre)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
     public Modalidad asociarModalidad(String modalidadString) {
         switch(modalidadString){
             case "Liga" : return Modalidad.LIGA;

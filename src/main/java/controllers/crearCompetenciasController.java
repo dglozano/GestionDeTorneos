@@ -102,15 +102,52 @@ public class crearCompetenciasController implements ControlledScreen {
         modalidadComboBox.setValue("Liga");
     }
 
-    public void validaciones(){
+    public boolean validacionesOk(){
+        boolean nombreOk = validarNombreCompetencia();
+        boolean puntuacionOk = validarPuntuacionSeleccionada();
+
+        return nombreOk && puntuacionOk;
+    }
+
+    private boolean validarPuntuacionSeleccionada() {
         if (puntuacionToggleGroup.getSelectedToggle() == null){
             errorPuntuacion.setText("Debe completar este campo para continuar.");
             errorPuntuacion.setVisible(true);
+            return false;
         } else{
             errorPuntuacion.setVisible(false);
-            myController.setScreen(Main.vista3ID);
-            //mostrarPopupExito();
+            return true;
         }
+    }
+
+    private boolean validarNombreCompetencia() {
+        String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
+        boolean caracteresValidos = validarCaracteres(nombreCompetencia);
+        if(nombreCompetencia.isEmpty()){
+            System.out.println("Debe completar este campo");
+            return false;
+        }
+        else if(!caracteresValidos){
+            //TODO 03: Crear Labels
+            System.out.println("Se permiten solo numeros y letras");
+            return false;
+        }
+        else{
+            boolean nombreExistente = gestorCompetencia.existeNombre(nombreCompetencia);
+            if(nombreExistente){
+                System.out.println("El nombre de la competencia ya existe.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validarCaracteres(String nombre) {
+        for(char caracter: nombre.toCharArray()){
+            if(!Character.isLetterOrDigit(caracter) && !Character.isSpaceChar(caracter))
+                return false;
+        }
+        return true;
     }
 
     private void mostrarPopupExito(){
@@ -136,7 +173,10 @@ public class crearCompetenciasController implements ControlledScreen {
     }
 
     public void continuar(ActionEvent actionEvent) {
-        validaciones();
+        if(validacionesOk()){
+            myController.setScreen(Main.vista3ID);
+            //mostrarPopupExito();
+        }
     }
 
     public void close(ActionEvent actionEvent){
@@ -160,5 +200,6 @@ public class crearCompetenciasController implements ControlledScreen {
         String deporteSeleccionado = ((ComboBox<String>)actionEvent.getSource()).getValue().toString().toUpperCase();
         inicializarLugares(deporteSeleccionado);
     }
+
 
 }
