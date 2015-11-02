@@ -4,7 +4,6 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +18,7 @@ import javafx.stage.StageStyle;
 import org.controlsfx.control.CheckComboBox;
 import services.GestorCompetencia;
 import services.GestorDeporte;
+import services.GestorLugarRealizacion;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,6 +30,7 @@ public class crearCompetenciasController implements ControlledScreen {
     private Parent parent;
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
+    private GestorLugarRealizacion gestorLugarRealizacion;
     //private GestorUsuario gestorUsuario;
     //private GestorLugar
 
@@ -51,9 +52,10 @@ public class crearCompetenciasController implements ControlledScreen {
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
+        gestorLugarRealizacion = new GestorLugarRealizacion();
         inicializarModalidades();
         inicializarDeportes();
-        inicializarLugares(deportesComboBox.getValue().toUpperCase());
+       // inicializarLugares(deportesComboBox.getValue().toUpperCase());
         inicializarSets();
         nombreCompetenciaTextField.requestFocus();
 
@@ -69,20 +71,15 @@ public class crearCompetenciasController implements ControlledScreen {
         setsComboBox.setValue("1");
     }
 
-    private void inicializarLugares(String deporteSeleccionado) {
+    /*private void inicializarLugares(String deporteSeleccionado) {
         lugaresComboBox.getCheckModel().clearChecks();
         lugaresComboBox.getItems().clear();
-        final ObservableList<String> strings = FXCollections.observableArrayList();
-        for (int i = 0; i <= 4; i++) {
-            strings.add(deporteSeleccionado+i);
-        }
-        lugaresComboBox.getItems().addAll(strings);
-        lugaresComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
-            public void onChanged(ListChangeListener.Change<? extends String> c) {
-                System.out.println(lugaresComboBox.getCheckModel().getCheckedItems());
-            }
-        });
-    }
+        List<String> deportesString = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
+        final ObservableList<String> deportesObservable = FXCollections.observableArrayList();
+        for(String depString: deportesString)
+            deportesObservable.add(depString);
+        lugaresComboBox.getItems().addAll(deportesObservable);
+    }*/
 
     private void inicializarDeportes() {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
@@ -124,7 +121,7 @@ public class crearCompetenciasController implements ControlledScreen {
         String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
         boolean caracteresValidos = validarCaracteres(nombreCompetencia);
         if(nombreCompetencia.isEmpty()){
-            System.out.println("Debe completar este campo");
+            System.out.println("Este campo es obligatorio");
             return false;
         }
         else if(!caracteresValidos){
@@ -135,7 +132,7 @@ public class crearCompetenciasController implements ControlledScreen {
         else{
             boolean nombreExistente = gestorCompetencia.existeNombre(nombreCompetencia);
             if(nombreExistente){
-                System.out.println("El nombre de la competencia ya existe.");
+                System.out.println("El nombre de la competencia ya existe");
                 return false;
             }
         }
@@ -198,7 +195,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     public void deporteSeleccionado(ActionEvent actionEvent){
         String deporteSeleccionado = ((ComboBox<String>)actionEvent.getSource()).getValue().toString().toUpperCase();
-        inicializarLugares(deporteSeleccionado);
+      //  inicializarLugares(deporteSeleccionado);
     }
 
 
