@@ -11,27 +11,36 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controlsfx.control.CheckComboBox;
+import services.GestorCompetencia;
+import services.GestorDeporte;
 
 import java.io.IOException;
+import java.util.List;
 
 public class crearCompetenciasController implements ControlledScreen {
 
     private PrincipalController myController;
     private Stage modal;
     private Parent parent;
+    private GestorCompetencia gestorCompetencia;
+    private GestorDeporte gestorDeporte;
+    //private GestorUsuario gestorUsuario;
+    //private GestorLugar
 
+    @FXML private TextField nombreCompetenciaTextField;
     @FXML private Label errorPuntuacion;
-    @FXML private ToggleGroup modalidad;
-
-    @FXML private CheckComboBox<String> lugaresCombo;
+    @FXML private Label cantidadSetsLabel;
+    @FXML private ToggleGroup puntuacionToggleGroup;
+    @FXML private ComboBox<String> deportesComboBox;
+    @FXML private ComboBox<String> setsComboBox;
+    @FXML private ComboBox<String> modalidadComboBox;
+    @FXML private CheckComboBox<String> lugaresComboBox;
 
     @FXML private Button okButton;
 
@@ -40,21 +49,60 @@ public class crearCompetenciasController implements ControlledScreen {
     }
 
     public void inicializar(){
-        // TODO: Acomodar esto mejor, simplemente estaba viendo que ande.
+        gestorCompetencia = new GestorCompetencia();
+        gestorDeporte = new GestorDeporte();
+        inicializarModalidades();
+        inicializarDeportes();
+        inicializarLugares();
+        inicializarSets();
+        nombreCompetenciaTextField.requestFocus();
+
+    }
+
+    private void inicializarSets() {
+        setsComboBox.getItems().removeAll(setsComboBox.getItems());
+        setsComboBox.getItems().add("1");
+        setsComboBox.getItems().add("3");
+        setsComboBox.getItems().add("5");
+        setsComboBox.getItems().add("7");
+        setsComboBox.getItems().add("9");
+        setsComboBox.setValue("1");
+    }
+
+    private void inicializarLugares() {
+        lugaresComboBox.getItems().removeAll(lugaresComboBox.getItems());
         final ObservableList<String> strings = FXCollections.observableArrayList();
         for (int i = 0; i <= 4; i++) {
             strings.add("Item " + i);
         }
-        lugaresCombo.getItems().addAll(strings);
-        lugaresCombo.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+        lugaresComboBox.getItems().addAll(strings);
+        lugaresComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
             public void onChanged(ListChangeListener.Change<? extends String> c) {
-                System.out.println(lugaresCombo.getCheckModel().getCheckedItems());
+                System.out.println(lugaresComboBox.getCheckModel().getCheckedItems());
             }
         });
     }
 
+    private void inicializarDeportes() {
+        deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
+        List<String> listaDeportes = gestorDeporte.listarDeportes();
+        for(String deporte: listaDeportes){
+            deporte = Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
+            deportesComboBox.getItems().add(deporte);
+        }
+        deportesComboBox.setValue(deportesComboBox.getItems().get(0));
+    }
+
+    private void inicializarModalidades() {
+        modalidadComboBox.getItems().removeAll(modalidadComboBox.getItems());
+        modalidadComboBox.getItems().add("Liga");
+        modalidadComboBox.getItems().add("Eliminacion simple");
+        modalidadComboBox.getItems().add("Eliminacion doble");
+        modalidadComboBox.setValue("Liga");
+    }
+
     public void validaciones(){
-        if (modalidad.getSelectedToggle() == null){
+        if (puntuacionToggleGroup.getSelectedToggle() == null){
             errorPuntuacion.setText("Debe completar este campo para continuar.");
             errorPuntuacion.setVisible(true);
         } else{
@@ -93,6 +141,18 @@ public class crearCompetenciasController implements ControlledScreen {
     public void close(ActionEvent actionEvent){
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
+    }
+
+    public void puntuacionRadioButtonPressed(ActionEvent actionEvent){
+       String source = ((RadioButton)actionEvent.getSource()).getText();
+        if(source.equals("Sets")){
+            setsComboBox.setDisable(false);
+            cantidadSetsLabel.setDisable(false);
+        }
+        else{
+            setsComboBox.setDisable(true);
+            cantidadSetsLabel.setDisable(true);
+        }
     }
 
 }

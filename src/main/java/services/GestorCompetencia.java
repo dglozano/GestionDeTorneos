@@ -2,6 +2,8 @@ package services;
 import dao.CompetenciaDao;
 import dtos.FiltrosCompetenciaDTO;
 import models.Competencia;
+import models.Estado;
+import models.Modalidad;
 import models.UsuarioLogueado;
 import dtos.CompetenciaDTO;
 
@@ -46,5 +48,25 @@ public class GestorCompetencia {
             listaCompetenciasDTO.add(unaCompetencia);
         }
         return listaCompetenciasDTO;
+    }
+
+    public Modalidad asociarModalidad(String modalidadString) {
+        switch(modalidadString){
+            case "Liga" : return Modalidad.LIGA;
+            case "Eliminatoria Simple" : return Modalidad.ELIM_SIMPLE;
+            case "Eliminatoria Doble" : return Modalidad.ELIM_DOBLE;
+        }
+        return null;
+    }
+
+    public Estado asociarEstado(String estadoString) {
+        switch(estadoString){
+            case "Creada": return Estado.CREADA;
+            case "En disputa": return Estado.EN_DISPUTA;
+            case "Eliminada": return Estado.ELIMINADA;
+            case "Planificada": return Estado.PLANIFICADA;
+            case "Finalizada": return Estado.FINALIZADA;
+        }
+        return null;
     }
 }

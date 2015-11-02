@@ -43,21 +43,45 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     public void inicializar(){
-        this.gestorCompetencia = new GestorCompetencia();
-        this.gestorDeporte = new GestorDeporte();
-        deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
-        estadosComboBox.getItems().removeAll(estadosComboBox.getItems());
+        gestorCompetencia = new GestorCompetencia();
+        gestorDeporte = new GestorDeporte();
+        inicializarDeportes();
+        inicializarEstados();
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();
-
         tNombre.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("nombre"));
         tDeporte.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("deporte"));
         tEstado.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("estado"));
         tModalidad.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("modalidad"));
-
         setearFilas(listaCompetencias);
+        nombreCompetenciaTextField.requestFocus();
+    }
 
-        cargarDeportes();
-        cargarEstados();
+    private void inicializarDeportes() {
+        deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
+        List<String> listaDeportes = gestorDeporte.listarDeportes();
+        deportesComboBox.getItems().add("Todos");
+        for(String deporte: listaDeportes){
+            deporte = Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
+            deportesComboBox.getItems().add(deporte);
+        }
+        deportesComboBox.setValue("Todos");
+    }
+
+    private void inicializarEstados(){
+        estadosComboBox.getItems().removeAll(estadosComboBox.getItems());
+        estadosComboBox.getItems().add("Todos");
+        estadosComboBox.getItems().add("Creada");
+        estadosComboBox.getItems().add("Planificada");
+        estadosComboBox.getItems().add("En disputa");
+        estadosComboBox.getItems().add("Finalizada");
+        estadosComboBox.getItems().add("Eliminada");
+        estadosComboBox.setValue("Todos");
+    }
+
+    private void setearFilas(List<CompetenciaDTO> listaCompetencias){
+        agregarBotonesEnTabla();
+        tabla.getItems().removeAll(tabla.getItems());
+        tabla.getItems().setAll(listaCompetencias);
     }
 
     private void agregarBotonesEnTabla(){
@@ -77,32 +101,6 @@ public class misCompetenciasController implements ControlledScreen {
         });
     }
 
-    private void setearFilas(List<CompetenciaDTO> listaCompetencias){
-        agregarBotonesEnTabla();
-        tabla.getItems().removeAll(tabla.getItems());
-        tabla.getItems().setAll(listaCompetencias);
-    }
-
-    private void cargarDeportes() {
-        List<String> listaDeportes = gestorDeporte.listarDeportes();
-        deportesComboBox.getItems().add("Todos");
-        for(String deporte: listaDeportes){
-            deporte = Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
-            deportesComboBox.getItems().add(deporte);
-        }
-        deportesComboBox.setValue("Todos");
-    }
-
-    private void cargarEstados(){
-        estadosComboBox.getItems().add("Todos");
-        estadosComboBox.getItems().add("Creada");
-        estadosComboBox.getItems().add("Planificada");
-        estadosComboBox.getItems().add("En disputa");
-        estadosComboBox.getItems().add("Finalizada");
-        estadosComboBox.getItems().add("Eliminada");
-        estadosComboBox.setValue("Todos");
-    }
-
     public void irCrearCompetencia(ActionEvent actionEvent) {
         myController.setScreen(Main.vista2ID);
     }
@@ -112,15 +110,18 @@ public class misCompetenciasController implements ControlledScreen {
         String nombre = nombreCompetenciaTextField.getText().toUpperCase();
         String deporte = deportesComboBox.getValue();
         String estado = estadosComboBox.getValue();
+
+        setearNombre(filtrosCompetencia, nombre);
+        setearDeporte(filtrosCompetencia, deporte);
+        setearEstado(filtrosCompetencia, estado);
         if(modalidadToggleGroup.getSelectedToggle() != null) {
             RadioButton modalidadRadioButton = (RadioButton) modalidadToggleGroup.getSelectedToggle();
             String modalidad = modalidadRadioButton.getText();
             setearModalidad(filtrosCompetencia, modalidad);
         }
-        setearNombre(filtrosCompetencia, nombre);
-        setearDeporte(filtrosCompetencia, deporte);
-        setearEstado(filtrosCompetencia, estado);
-
+        else{
+            filtrosCompetencia.setFiltroModalidadActivo(false);
+        }
         List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
         setearFilas(listaCompetenciasFiltradas);
     }
@@ -137,15 +138,14 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     private void setearModalidad(FiltrosCompetenciaDTO filtrosCompetencia, String modalidadString) {
-        // TODO 03: Ver como hacer para que no tenga que obligarotiamente elegir alguno de este filtro
-        Modalidad modalidad = asociarModalidad(modalidadString);
+        Modalidad modalidad = gestorCompetencia.asociarModalidad(modalidadString);
         filtrosCompetencia.setModalidad(modalidad);
         filtrosCompetencia.setFiltroModalidadActivo(true);
     }
 
     private void setearEstado(FiltrosCompetenciaDTO filtrosCompetencia, String estadoString) {
         if(!estadoString.equals("Todos")){
-            Estado estado = asociarEstado(estadoString);
+            Estado estado = gestorCompetencia.asociarEstado(estadoString);
             filtrosCompetencia.setEstado(estado);
             filtrosCompetencia.setFiltroEstadoActivo(true);
         }
@@ -171,26 +171,6 @@ public class misCompetenciasController implements ControlledScreen {
         else{
             filtrosCompetencia.setFiltroNombreActivo(false);
         }
-    }
-
-    private Modalidad asociarModalidad(String modalidadString) {
-        switch(modalidadString){
-            case "Liga" : return Modalidad.LIGA;
-            case "Eliminatoria Simple" : return Modalidad.ELIM_SIMPLE;
-            case "Eliminatoria Doble" : return Modalidad.ELIM_DOBLE;
-        }
-        return null;
-    }
-
-    private Estado asociarEstado(String estadoString) {
-        switch(estadoString){
-            case "Creada": return Estado.CREADA;
-            case "En disputa": return Estado.EN_DISPUTA;
-            case "Eliminada": return Estado.ELIMINADA;
-            case "Planificada": return Estado.PLANIFICADA;
-            case "Finalizada": return Estado.FINALIZADA;
-        }
-        return null;
     }
 
 }

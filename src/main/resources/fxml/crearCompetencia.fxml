@@ -73,8 +73,8 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="nombreCompetencia" />
-                              <ComboBox prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="2" />
+                              <TextField fx:id="nombreCompetenciaTextField" />
+                              <ComboBox fx:id="modalidadComboBox" prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="2" />
                               <Label alignment="CENTER" style="&#10;" text="Modalidad de la competencia (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="13.0" />
@@ -92,13 +92,13 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <CheckComboBox fx:id="lugaresCombo" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="2" />
+                              <CheckComboBox fx:id="lugaresComboBox" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="2" />
                               <Label alignment="CENTER" style="&#10;" text="Lugares/Disponibilidad (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <ComboBox prefHeight="25.0" prefWidth="208.0" />
+                              <ComboBox fx:id="deportesComboBox" prefHeight="25.0" prefWidth="208.0" />
                            </children>
                         </GridPane>
                         <GridPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -121,20 +121,20 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Puntos" textFill="#222222">
+                                    <RadioButton onAction="#puntuacionRadioButtonPressed" mnemonicParsing="false" text="Puntos" textFill="#222222">
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="modalidad" />
+                                          <ToggleGroup fx:id="puntuacionToggleGroup" />
                                        </toggleGroup>
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="Sets" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="1">
+                                    <RadioButton onAction="#puntuacionRadioButtonPressed" mnemonicParsing="false" text="Sets" textFill="#222222" toggleGroup="$puntuacionToggleGroup" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="Resultados" textFill="#222222" toggleGroup="$modalidad" GridPane.columnIndex="2">
+                                    <RadioButton onAction="#puntuacionRadioButtonPressed" mnemonicParsing="false" text="Resultado Final" textFill="#222222" toggleGroup="$puntuacionToggleGroup" GridPane.columnIndex="2">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -149,8 +149,8 @@
                                     <Insets top="52.0" />
                                  </GridPane.margin>
                               </Label>
-                              <ComboBox disable="true" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" />
-                              <Label alignment="CENTER" style="&#10;" styleClass="disabled" text="Cantidad de Sets (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
+                              <ComboBox fx:id="setsComboBox" disable="true" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" />
+                              <Label fx:id="cantidadSetsLabel" alignment="CENTER" style="&#10;" styleClass="disabled" text="Cantidad de Sets (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
