@@ -80,7 +80,7 @@ public class CompetenciaDao {
             sentencia+= " JOIN c.deporte d";
         sentencia+= " WHERE id_usuario=:idUsuario";
         if(filtros.isFiltroNombreActivo())
-            sentencia+= " AND c.nombre = :nombreCompetencia";
+            sentencia+= " AND c.nombre LIKE :nombreCompetencia";
         if(filtros.isFiltroEstadoActivo())
             sentencia+= " AND c.estado = :estado";
         if(filtros.isFiltroModalidadActivo())
@@ -90,7 +90,7 @@ public class CompetenciaDao {
         Query query = em.createQuery(sentencia);
         query.setParameter("idUsuario",idUsuario);
         if(filtros.isFiltroNombreActivo())
-            query.setParameter("nombreCompetencia",filtros.getNombre());
+            query.setParameter("nombreCompetencia","%"+filtros.getNombre()+"%");
         if(filtros.isFiltroDeporteActivo())
             query.setParameter("nombreDeporte",filtros.getDeporte());
         if(filtros.isFiltroEstadoActivo())
