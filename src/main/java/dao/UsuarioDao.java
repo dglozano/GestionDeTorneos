@@ -26,4 +26,11 @@ public class UsuarioDao {
         tx.commit();
         em.close();
     }
+
+    public Usuario buscarUsuarioPorId(Integer id) {
+        EntityManager em = MiEntityManager.get();
+        Usuario usuario = em.find(Usuario.class, id);
+        em.close();
+        return usuario;
+    }
 }
