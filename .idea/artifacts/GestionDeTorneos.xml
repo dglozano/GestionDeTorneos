@@ -1,6 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="javafx" name="GestionDeTorneos">
     <output-path>$PROJECT_DIR$/target/GestionDeTorneos</output-path>
+    <properties id="ant-postprocessing">
+      <options enabled="true" />
+    </properties>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="app.Main" />

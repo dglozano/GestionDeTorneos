@@ -51,7 +51,7 @@
                         <Font size="13.0" />
                       </font>
                     </Label>
-                        <TextField fx:id="nombreCompetenciaTextField" GridPane.columnIndex="1" />
+                        <TextField fx:id="nombreCompetenciaTextField" onAction="#filtrarCompetencias" GridPane.columnIndex="1" />
                         <Label alignment="CENTER" style="&#10;" text="Deporte asociado" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
                            <font>
                               <Font size="13.0" />

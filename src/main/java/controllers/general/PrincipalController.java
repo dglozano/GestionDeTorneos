@@ -71,7 +71,6 @@ public class PrincipalController extends StackPane {
                         }, new KeyValue(opacity, 0.0))
                 );
                 fade.play();
-
             } else {
                 setOpacity(0.0);
                 getChildren().add(screens.get(name));       // Si es el primero, directamente mostramos

@@ -35,7 +35,6 @@ public class Main extends Application{
         mainContainer.loadScreen(Main.vista2ID, Main.vista2Archivo);
         mainContainer.loadScreen(Main.vista3ID, Main.vista3Archivo);
 
-
         mainContainer.setScreen(Main.vista0ID);
 
         Group root = new Group();
