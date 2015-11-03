@@ -3,6 +3,7 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import dtos.LugarYCodigoDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import services.GestorDeporte;
 import services.GestorLugarRealizacion;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class crearCompetenciasController implements ControlledScreen {
@@ -31,8 +33,7 @@ public class crearCompetenciasController implements ControlledScreen {
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
     private GestorLugarRealizacion gestorLugarRealizacion;
-    //private GestorUsuario gestorUsuario;
-    //private GestorLugar
+    private HashMap<String,String> hashCodigoLugarRealizacion;
 
     @FXML private TextField nombreCompetenciaTextField;
     @FXML private Label errorPuntuacion;
@@ -53,9 +54,10 @@ public class crearCompetenciasController implements ControlledScreen {
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
+        hashCodigoLugarRealizacion = new HashMap<String,String>();
         inicializarModalidades();
         inicializarDeportes();
-       // inicializarLugares(deportesComboBox.getValue().toUpperCase());
+        inicializarLugares(deportesComboBox.getValue().toUpperCase());
         inicializarSets();
         nombreCompetenciaTextField.requestFocus();
 
@@ -71,15 +73,19 @@ public class crearCompetenciasController implements ControlledScreen {
         setsComboBox.setValue("1");
     }
 
-    /*private void inicializarLugares(String deporteSeleccionado) {
+    private void inicializarLugares(String deporteSeleccionado) {
         lugaresComboBox.getCheckModel().clearChecks();
         lugaresComboBox.getItems().clear();
-        List<String> deportesString = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
+        hashCodigoLugarRealizacion.clear();
+        List<LugarYCodigoDTO> lugaresDto = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
         final ObservableList<String> deportesObservable = FXCollections.observableArrayList();
-        for(String depString: deportesString)
-            deportesObservable.add(depString);
+        for(LugarYCodigoDTO lugarDto: lugaresDto){
+            deportesObservable.add(lugarDto.getNombreLugar());
+            hashCodigoLugarRealizacion.put(lugarDto.getIdLugar()+"",lugarDto.getNombreLugar());
+        }
+        /*TODO 00: Label si la lista de lugares es vacia para ese deporte*/
         lugaresComboBox.getItems().addAll(deportesObservable);
-    }*/
+    }
 
     private void inicializarDeportes() {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
@@ -195,7 +201,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     public void deporteSeleccionado(ActionEvent actionEvent){
         String deporteSeleccionado = ((ComboBox<String>)actionEvent.getSource()).getValue().toString().toUpperCase();
-      //  inicializarLugares(deporteSeleccionado);
+        inicializarLugares(deporteSeleccionado);
     }
 
 

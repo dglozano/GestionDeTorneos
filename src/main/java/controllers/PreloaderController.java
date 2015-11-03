@@ -5,6 +5,7 @@ import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dao.CompetenciaDao;
 import dao.DeporteDao;
+import dao.LugarDeRealizacionDao;
 import dao.UsuarioDao;
 import dao.util.MiEntityManager;
 import models.*;
@@ -41,9 +42,35 @@ public class PreloaderController implements ControlledScreen {
         CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
         DeporteDao deporteDao = DeporteDao.getInstance();
         UsuarioDao usuarioDao = UsuarioDao.getInstance();
+        LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
         usuarioDao.crearUsuario(usuario1);
+
         Deporte rugby = new Deporte("RUGBY");
         Deporte futbol = new Deporte ("FUTBOL");
+
+        LugarDeRealizacion lugar1= new LugarDeRealizacion() ;
+        lugar1.setUsuario(usuario1);
+        lugar1.setNombre("Campo de Deportes");
+
+        LugarDeRealizacion lugar2= new LugarDeRealizacion() ;
+        lugar2.setUsuario(usuario1);
+        lugar2.setNombre("CRAI");
+
+        LugarDeRealizacion lugar3= new LugarDeRealizacion() ;
+        lugar3.setUsuario(usuario1);
+        lugar3.setNombre("Cantona");
+
+        rugby.addLugarDeRealizacion(lugar1);
+        rugby.addLugarDeRealizacion(lugar2);
+        futbol.addLugarDeRealizacion(lugar1);
+        futbol.addLugarDeRealizacion(lugar3);
+        lugar1.addDeporte(rugby);
+        lugar1.addDeporte(futbol);
+        lugar3.addDeporte(futbol);
+        lugar2.addDeporte(rugby);
+        lugarDeRealizacionDao.crearLugar(lugar1);
+        lugarDeRealizacionDao.crearLugar(lugar2);
+        lugarDeRealizacionDao.crearLugar(lugar3);
         deporteDao.crearDeporte(rugby);
         deporteDao.crearDeporte(futbol);
 
