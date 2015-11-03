@@ -21,7 +21,10 @@ public class PreloaderController implements ControlledScreen {
         levantarEntityManager();
     }
 
-    public void inicializar(){}
+    public void inicializar(){};
+    public Object mensajeControladorAnterior(){
+        return null;
+    };
 
     public void levantarEntityManager(){
         Runnable levantarBD = () -> {

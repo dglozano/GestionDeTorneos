@@ -6,4 +6,6 @@ public interface ControlledScreen {
 
     // Inicializa cada interfaz
     public void inicializar();
+
+    public Object mensajeControladorAnterior();
 }

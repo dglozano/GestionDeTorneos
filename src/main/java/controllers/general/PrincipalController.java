@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import java.util.HashMap;
 
 public class PrincipalController extends StackPane {
+    private ControlledScreen controladorAnterior;
 
     // Vincula las vistas con su Nodo
     private HashMap<String, Node> screens = new HashMap<>();
@@ -90,6 +91,11 @@ public class PrincipalController extends StackPane {
         }
     }
 
+    public boolean setScreen(final String name, ControlledScreen controladorAnterior){
+        this.controladorAnterior = controladorAnterior;
+        return this.setScreen(name);
+    }
+
     // Elimina la vista de la colección
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
@@ -98,6 +104,10 @@ public class PrincipalController extends StackPane {
         } else {
             return true;
         }
+    }
+
+    public ControlledScreen getControladorAnterior(){
+        return controladorAnterior;
     }
 }
 

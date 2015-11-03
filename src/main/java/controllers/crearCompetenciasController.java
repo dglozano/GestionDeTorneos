@@ -203,7 +203,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     public void continuar(ActionEvent actionEvent) {
         if(validacionesOk()){
-            myController.setScreen(Main.vista3ID);
+            myController.setScreen(Main.vista3ID, this);
             //mostrarPopupExito();
         }
     }
@@ -228,6 +228,10 @@ public class crearCompetenciasController implements ControlledScreen {
     public void deporteSeleccionado(ActionEvent actionEvent){
         String deporteSeleccionado = ((ComboBox<String>)actionEvent.getSource()).getValue().toString().toUpperCase();
         inicializarLugares(deporteSeleccionado);
+    }
+
+    public Object mensajeControladorAnterior(){
+        return nombreCompetenciaTextField.getText();
     }
 
 

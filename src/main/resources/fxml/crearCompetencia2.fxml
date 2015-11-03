@@ -9,7 +9,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.crearCompetenciasController">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.crearCompetencias2Controller">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
