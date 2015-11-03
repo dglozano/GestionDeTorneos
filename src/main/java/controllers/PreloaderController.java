@@ -47,6 +47,7 @@ public class PreloaderController implements ControlledScreen {
 
         Deporte rugby = new Deporte("RUGBY");
         Deporte futbol = new Deporte ("FUTBOL");
+        Deporte tenis = new Deporte("TENIS");
 
         LugarDeRealizacion lugar1= new LugarDeRealizacion() ;
         lugar1.setUsuario(usuario1);
@@ -73,6 +74,7 @@ public class PreloaderController implements ControlledScreen {
         lugarDeRealizacionDao.crearLugar(lugar3);
         deporteDao.crearDeporte(rugby);
         deporteDao.crearDeporte(futbol);
+        deporteDao.crearDeporte(tenis);
 
         Competencia competencia1= new Competencia();
         competencia1.setUsuario(usuario1);
