@@ -106,7 +106,7 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     public void irCrearCompetencia(ActionEvent actionEvent) {
-        myController.setScreen(Main.vista2ID);
+        myController.setScreen(Main.vista2ID,this);
     }
 
     public void filtrarCompetencias(ActionEvent actionEvent){

@@ -1,10 +1,8 @@
 package services;
 import dao.CompetenciaDao;
+import dtos.DatosCrearCompetenciaDTO;
 import dtos.FiltrosCompetenciaDTO;
-import models.Competencia;
-import models.Estado;
-import models.Modalidad;
-import models.UsuarioLogueado;
+import models.*;
 import dtos.CompetenciaDTO;
 
 import java.util.ArrayList;
@@ -78,6 +76,15 @@ public class GestorCompetencia {
             case "Eliminada": return Estado.ELIMINADA;
             case "Planificada": return Estado.PLANIFICADA;
             case "Finalizada": return Estado.FINALIZADA;
+        }
+        return null;
+    }
+
+    public SistemaPuntuacion asociarSistemaPuntuacion(String puntuacionString) {
+        switch(puntuacionString){
+            case "Puntos": return SistemaPuntuacion.PUNTUACION;
+            case "Resultado Final": return SistemaPuntuacion.RESULTADO_FINAL;
+            case "Sets": return SistemaPuntuacion.SET;
         }
         return null;
     }
