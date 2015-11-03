@@ -138,6 +138,13 @@
   -fx-alignment: CENTER;
 }
 
+#lugaresComboBox,
+#lugaresComboBox .combo-box{
+    -fx-pref-width: 208px;
+    -fx-min-width: 208px;
+    -fx-max-width: 208px;
+}
+
 .modalTitle{
     -fx-font-size: 22px;
     -fx-scale-x: 1.75;
