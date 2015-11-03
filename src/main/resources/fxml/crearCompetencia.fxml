@@ -82,7 +82,7 @@
                                                 <Font size="13.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="errorPuntuacion1" minWidth="474.0" prefHeight="17.0" prefWidth="474.0" styleClass="error" text="El nombre de la competencia ya existe." visible="false">
+                                        <Label fx:id="errorNombreLabel" minWidth="474.0" prefHeight="17.0" prefWidth="474.0" styleClass="error" text="El nombre de la competencia ya existe." visible="false">
                                             <opaqueInsets>
                                                 <Insets />
                                             </opaqueInsets>
@@ -107,7 +107,7 @@
                                                 <Font size="13.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="errorPuntuacion11" minWidth="195.0" prefHeight="17.0" prefWidth="218.0" styleClass="error" text="Debe seleccionar al menos un lugar." visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                        <Label fx:id="errorLugaresLabel" minWidth="195.0" prefHeight="17.0" prefWidth="218.0" styleClass="error" text="Debe seleccionar al menos un lugar." visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                                             <opaqueInsets>
                                                 <Insets />
                                             </opaqueInsets>
@@ -159,7 +159,7 @@
                                                 </RadioButton>
                                             </children>
                                         </GridPane>
-                                        <Label fx:id="errorPuntuacion" minWidth="474.0" prefHeight="17.0" prefWidth="474.0" styleClass="error" text="Debe seleccionar una opción para continuar" visible="false" GridPane.halignment="LEFT">
+                                        <Label fx:id="errorPuntuacionLabel" minWidth="474.0" prefHeight="17.0" prefWidth="474.0" styleClass="error" text="Debe seleccionar una opción para continuar" visible="false" GridPane.halignment="LEFT">
                                             <opaqueInsets>
                                                 <Insets />
                                             </opaqueInsets>

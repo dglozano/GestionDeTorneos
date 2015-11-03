@@ -33,7 +33,11 @@ public class crearCompetenciasController implements ControlledScreen {
     //private GestorLugar
 
     @FXML private TextField nombreCompetenciaTextField;
-    @FXML private Label errorPuntuacion;
+
+    @FXML private Label errorPuntuacionLabel;
+    @FXML private Label errorNombreLabel;
+    @FXML private Label errorLugaresLabel;
+
     @FXML private Label cantidadSetsLabel;
     @FXML private ToggleGroup puntuacionToggleGroup;
     @FXML private ComboBox<String> deportesComboBox;
@@ -106,11 +110,13 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private boolean validarPuntuacionSeleccionada() {
         if (puntuacionToggleGroup.getSelectedToggle() == null){
-            errorPuntuacion.setText("Debe completar este campo para continuar.");
-            errorPuntuacion.setVisible(true);
+            errorPuntuacionLabel.setText("Debe completar este campo para continuar.");
+            errorPuntuacionLabel.setVisible(true);
+            //errorLugaresLabel.setVisible(true);
+            //errorNombreLabel.setVisible(true);
             return false;
         } else{
-            errorPuntuacion.setVisible(false);
+            errorPuntuacionLabel.setVisible(false);
             return true;
         }
     }
