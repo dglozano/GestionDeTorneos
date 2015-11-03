@@ -28,11 +28,28 @@ public class DeporteDao {
         em.close();
     }
 
+    public void actualizarDeporte(Deporte deporte) {
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(deporte);
+        tx.commit();
+        em.close();
+    }
+
     public List<Deporte> buscarDeportes() {
         EntityManager em = MiEntityManager.get();
         List<Deporte> listaDeportes = em.createQuery("SELECT d FROM Deporte d").getResultList();
         em.close();
         return listaDeportes;
+    }
+
+    public Deporte buscarDeporte(String nombreDeporte){
+        EntityManager em = MiEntityManager.get();
+        System.out.println(nombreDeporte);
+        Deporte deporte = (Deporte) em.createQuery("SELECT d FROM Deporte d WHERE nom_deporte = '"+nombreDeporte+"'").getSingleResult();
+        em.close();
+        return deporte;
     }
 }
 

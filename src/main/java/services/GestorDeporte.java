@@ -22,4 +22,8 @@ public class GestorDeporte {
         }
         return listaNombresDeportes;
     }
+
+    public Deporte buscarDeporte(String deporte){
+        return deporteDao.buscarDeporte(deporte);
+    }
 }

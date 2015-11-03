@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +10,10 @@ import java.util.List;
 public class LugarDeRealizacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo_lugar")
+    @Column(name = "id_lugar")
     private int id;
+    @Column(name = "codigo_lugar")
+    private String codigo;
     @Column(name = "nom_lugar")
     private String nombre;
     @Column(name = "descripcion_lugar")
@@ -20,7 +23,7 @@ public class LugarDeRealizacion {
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_elim")
     private Date fecha_elim;
-    @ManyToMany(mappedBy="lugaresRealizacion",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy="lugaresRealizacion",fetch = FetchType.EAGER)
     private List<Deporte> deportes;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_usuario")
@@ -28,10 +31,23 @@ public class LugarDeRealizacion {
 
 
     public LugarDeRealizacion() {
+        deportes = new ArrayList<Deporte>();
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public String getNombre() {
@@ -80,5 +96,9 @@ public class LugarDeRealizacion {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void addDeporte(Deporte deporte){
+        deportes.add(deporte);
     }
 }

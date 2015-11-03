@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,16 +13,19 @@ public class Deporte {
     private int id;
     @Column(name = "nom_deporte")
     private String nombre;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name= "se_practica_en",
-        joinColumns = {@JoinColumn(name="id_deporte", unique=true)},
-            inverseJoinColumns = {@JoinColumn(name="codigo_lugar")})
+        joinColumns = {@JoinColumn(name="id_deporte")},
+            inverseJoinColumns = {@JoinColumn(name="id_lugar")})
     private List<LugarDeRealizacion> lugaresRealizacion;
 
     public Deporte(){
         super();
+        lugaresRealizacion = new ArrayList<LugarDeRealizacion>();
+
     }
     public Deporte(String nombre){
+        lugaresRealizacion = new ArrayList<LugarDeRealizacion>();
         this.nombre= nombre;
     }
 
