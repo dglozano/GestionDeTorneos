@@ -27,7 +27,19 @@ public class Competencia {
     private int puntosPartidoGanado;
     @Column(name = "eliminada")
     private boolean eliminada;
+    @Column(name = "otorga_tantos")
+    private boolean otorgaTantosNoPresentarse;
+
+    public boolean isOtorgaTantosNoPresentarse() {
+        return otorgaTantosNoPresentarse;
+    }
+
+    public void setOtorgaTantosNoPresentarse(boolean otorgaTantosNoPresentarse) {
+        this.otorgaTantosNoPresentarse = otorgaTantosNoPresentarse;
+    }
+
     @Column(name = "fecha_elim")
+
     @Temporal(TemporalType.DATE)
     private Date fechaEliminada;
     @Column(name = "cant_sets")
@@ -45,7 +57,7 @@ public class Competencia {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_deporte")
     private Deporte deporte;
-    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "id_competencia")
     private List<Disponibilidad> disponibilidades = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)

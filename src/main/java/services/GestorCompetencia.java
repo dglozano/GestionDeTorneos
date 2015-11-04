@@ -1,6 +1,7 @@
 package services;
 import dao.CompetenciaDao;
 import dtos.DatosCrearCompetenciaDTO;
+import dtos.DatosCrearCompetenciaPaso2DTO;
 import dtos.FiltrosCompetenciaDTO;
 import models.*;
 import dtos.CompetenciaDTO;
@@ -60,9 +61,12 @@ public class GestorCompetencia {
         return existe;
     }
     //TODO 05: metodo crear competencia
-    /*public void crearCompetencia(DatosCrearCompetenciaDTO datosCompDto, DatosCrearCompetenciaPaso2DTO datosCompDtoPaso2){
+    public void crearCompetencia(DatosCrearCompetenciaDTO datosCompDto, DatosCrearCompetenciaPaso2DTO datosCompDtoPaso2){
+        /*for(Disponibilidad disp: datosCompDtoPaso2.getDisponibilidades()){
+            System.out.println("Lugar: "+disp.getLugarDeRealizacion().getNombre()+ " disp "+disp.getDisponibilidad());
+        }*/
         Competencia competencia = new Competencia();
-        competencia.setNombre(datosCompDto.getCompetencia());
+        competencia.setNombre(datosCompDto.getCompetencia().toUpperCase());
         competencia.setUsuario(usuarioLogueado.getUsuarioLogueado());
         competencia.setDeporte(datosCompDto.getDeporte());
         competencia.setEstado(Estado.CREADA);
@@ -75,14 +79,30 @@ public class GestorCompetencia {
         for(Disponibilidad disponibilidad: datosCompDtoPaso2.getDisponibilidades()){
             competencia.addDisponibilidad(disponibilidad);
         }
-        if(competencia.getModalidad().equals(Modalidad.LIGA)){
-            competencia.setPuntosPartidoGanado(datosCompDtoPaso2.getPuntosPartidoGanado());
+        if(datosCompDtoPaso2.isEsLiga()){
+            competencia.setPuntosPartidoGanado(datosCompDtoPaso2.getPuntosPorPartidoGanado());
             competencia.setPuntosPorPresentarse(datosCompDtoPaso2.getPuntosPorPresentarse());
-            competencia.setP....
-            competencia.setAceptaEmpate();
+            if(datosCompDtoPaso2.isAceptaEmpates()){
+                competencia.setAceptaEmpate(true);
+                competencia.setPuntosPartidoEmpatado(datosCompDtoPaso2.getPuntosPorPartidoEmpatado());
+            }
+            else{
+                competencia.setAceptaEmpate(false);
+            }
+            if(datosCompDtoPaso2.isOtorgaTantosPorNoPresentarse()){
+                competencia.setTantosFavorNoPresentarse(datosCompDtoPaso2.getTantosEnCasoDeNoPresentarseOponente());
+                competencia.setOtorgaTantosNoPresentarse(true);
+            }
+            else{
+                competencia.setOtorgaTantosNoPresentarse(false);
+            }
+        }
+        else{
+            competencia.setAceptaEmpate(false);
+            competencia.setOtorgaTantosNoPresentarse(false);
         }
         competenciaDao.crearCompetencia(competencia);
-    }*/
+    }
 
     public Modalidad asociarModalidad(String modalidadString) {
         switch(modalidadString){

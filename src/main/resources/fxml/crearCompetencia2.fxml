@@ -113,7 +113,7 @@
                   </HBox>
                   <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="741.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Crear" textFill="WHITE">
+                        <Button onAction="#crearCompetencia" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Crear" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

@@ -1,5 +1,7 @@
 package dtos;
 
+import javafx.beans.property.IntegerProperty;
+
 /**
  * Created by DIego on 3/11/2015..
  */

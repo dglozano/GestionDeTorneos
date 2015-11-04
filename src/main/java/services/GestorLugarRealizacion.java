@@ -26,4 +26,10 @@ public class GestorLugarRealizacion {
         }
         return listaLugaresString;
     }
+
+    public LugarDeRealizacion buscarLugarPorNombre(String nombreLugar){
+        int idUsuario = usuarioLogueado.getUsuarioLogueado().getId();
+        LugarDeRealizacion lugar = lugarDeRealizacionDao.buscarLugarPorNombre(idUsuario,nombreLugar);
+        return lugar;
+    }
 }

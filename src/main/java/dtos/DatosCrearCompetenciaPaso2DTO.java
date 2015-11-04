@@ -12,10 +12,28 @@ public class DatosCrearCompetenciaPaso2DTO {
 
     private List<Disponibilidad> disponibilidades = new ArrayList<>();
     private int puntosPorPartidoGanado;
-    private int getPuntosPorPresentarse;
+    private int puntosPorPresentarse;
     private boolean aceptaEmpates;
     private int puntosPorPartidoEmpatado;
     private int tantosEnCasoDeNoPresentarseOponente;
+    private boolean otorgaTantosPorNoPresentarse;
+    private boolean esLiga;
+
+    public boolean isOtorgaTantosPorNoPresentarse() {
+        return otorgaTantosPorNoPresentarse;
+    }
+
+    public void setOtorgaTantosPorNoPresentarse(boolean otorgaTantosPorNoPresentarse) {
+        this.otorgaTantosPorNoPresentarse = otorgaTantosPorNoPresentarse;
+    }
+
+    public boolean isEsLiga() {
+        return esLiga;
+    }
+
+    public void setEsLiga(boolean esLiga) {
+        this.esLiga = esLiga;
+    }
 
     public List<Disponibilidad> getDisponibilidades() {
         return disponibilidades;
@@ -33,12 +51,12 @@ public class DatosCrearCompetenciaPaso2DTO {
         this.puntosPorPartidoGanado = puntosPorPartidoGanado;
     }
 
-    public int getGetPuntosPorPresentarse() {
-        return getPuntosPorPresentarse;
+    public int getPuntosPorPresentarse() {
+        return puntosPorPresentarse;
     }
 
-    public void setGetPuntosPorPresentarse(int getPuntosPorPresentarse) {
-        this.getPuntosPorPresentarse = getPuntosPorPresentarse;
+    public void setPuntosPorPresentarse(int getPuntosPorPresentarse) {
+        this.puntosPorPresentarse = getPuntosPorPresentarse;
     }
 
     public boolean isAceptaEmpates() {
