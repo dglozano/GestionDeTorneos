@@ -15,7 +15,7 @@
 <?import java.lang.*?>
 <?import java.net.URL?>
 
-<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.crearCompetenciasController">
+<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.crearCompetencias2Controller">
   <children>
     <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefWidth="400.0" spacing="7.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
       <children>

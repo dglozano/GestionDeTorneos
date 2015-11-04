@@ -58,6 +58,9 @@ public class crearCompetencias2Controller implements ControlledScreen {
     @FXML private RadioButton siRadioButton;
     @FXML private RadioButton noRadioButton;
 
+    @FXML private Label detailsLabel;
+    @FXML private Button okButton;
+
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
@@ -130,7 +133,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
             filas.add(disponibilidadLugar);
         }
 
-        columnaLugar.setCellValueFactory(new PropertyValueFactory<DisponibilidadLugar,String>("nombreLugar"));
+        columnaLugar.setCellValueFactory(new PropertyValueFactory<DisponibilidadLugar, String>("nombreLugar"));
 
         Callback<TableColumn<DisponibilidadLugar, Integer>, TableCell<DisponibilidadLugar, Integer>> spinnerCellFactory =
                 new Callback<TableColumn<DisponibilidadLugar, Integer>, TableCell<DisponibilidadLugar, Integer>>() {
@@ -152,6 +155,8 @@ public class crearCompetencias2Controller implements ControlledScreen {
             parent = loader.load();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.initStyle(StageStyle.TRANSPARENT);
@@ -187,10 +192,15 @@ public class crearCompetencias2Controller implements ControlledScreen {
     public void crearCompetencia(ActionEvent actionEvent){
         if(validarDatos()){
             DatosCrearCompetenciaPaso2DTO datosPaso2= crearDtoPaso2();
-            gestorCompetencia.crearCompetencia(datosCrearCompetenciaDtoAnterior,datosPaso2);
-            //TODO 06: Mostrar pop up exito mostrando el nombre de la competencia
-            myController.setScreen(Main.vista1ID);
+            gestorCompetencia.crearCompetencia(datosCrearCompetenciaDtoAnterior, datosPaso2);
+            mostrarPopupExito();
         }
+    }
+
+    public void close(ActionEvent actionEvent){
+        Stage modal = (Stage)okButton.getScene().getWindow();
+        modal.close();
+        myController.setScreen(Main.vista1ID);
     }
 
     private boolean validarDatos() {

@@ -85,7 +85,7 @@
                                     <RadioButton onAction="#aceptaEmpateSelected" fx:id="noRadioButton" mnemonicParsing="false" selected="true" text="No" toggleGroup="$permiteEmpateToggleGroup" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
-                              <Label fx:id="ptsEmpateLabel" alignment="CENTER" style="&#10;" styleClass="disabled" text="Puntos por empate (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Label fx:id="ptsEmpateLabel" alignment="CENTER" style="&#10;" text="Puntos por empate (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
