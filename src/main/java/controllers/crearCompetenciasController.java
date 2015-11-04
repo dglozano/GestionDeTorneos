@@ -93,7 +93,7 @@ public class crearCompetenciasController implements ControlledScreen {
             reglamentoTextArea.setText(datosCrearCompetenciaDto.getReglamento());
         }
 
-        String deporte = datosCrearCompetenciaDto.getDeporte().getNombre();
+        String deporte = datosCrearCompetenciaDto.getDeporte();
         String deporteParseado= Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
         deportesComboBox.setValue(deporteParseado);
         inicializarLugares(deportesComboBox.getValue().toUpperCase());
@@ -238,7 +238,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private void crearDto() {
         String nombre = nombreCompetenciaTextField.getText();
-        Deporte deporte = gestorDeporte.buscarDeporte(deportesComboBox.getValue().toString().toUpperCase());
+        String deporte = deportesComboBox.getValue().toString().toUpperCase();
         RadioButton puntuacionRadioButton = (RadioButton) puntuacionToggleGroup.getSelectedToggle();
         String puntuacionString = puntuacionRadioButton.getText();
         SistemaPuntuacion puntuacion = gestorCompetencia.asociarSistemaPuntuacion(puntuacionString);

@@ -38,8 +38,6 @@ public class crearCompetencias2Controller implements ControlledScreen {
     private Stage modal;
     private Parent parent;
     private GestorCompetencia gestorCompetencia;
-    private GestorDeporte gestorDeporte;
-    private GestorLugarRealizacion gestorLugarRealizacion;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDtoAnterior;
 
     @FXML private TableView<DisponibilidadLugar> tablaDisponibilidad;
@@ -67,8 +65,6 @@ public class crearCompetencias2Controller implements ControlledScreen {
 
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
-        gestorDeporte = new GestorDeporte();
-        gestorLugarRealizacion = new GestorLugarRealizacion();
         datosCrearCompetenciaDtoAnterior = (DatosCrearCompetenciaDTO) myController.getControladorAnterior().mensajeControladorAnterior();
         cargarLugares();
         cargarSpinners();
@@ -257,21 +253,9 @@ public class crearCompetencias2Controller implements ControlledScreen {
             datosCompPaso2.setAceptaEmpates(false);
             datosCompPaso2.setOtorgaTantosPorNoPresentarse(false);
         }
-        cargarDisponibilidades(datosCompPaso2);
+        datosCompPaso2.setDisponibilidades(tablaDisponibilidad.getItems());
 
         return datosCompPaso2;
-    }
-
-    private void cargarDisponibilidades(DatosCrearCompetenciaPaso2DTO datosCompPaso2) {
-        for(DisponibilidadLugar dispLug: tablaDisponibilidad.getItems()){
-            String nombreLugar = dispLug.getNombreLugar();
-            int disponiblidadInt = dispLug.getDisponibilidad();
-            LugarDeRealizacion lugar = gestorLugarRealizacion.buscarLugarPorNombre(nombreLugar);
-            Disponibilidad unaDisponibilidad = new Disponibilidad();
-            unaDisponibilidad.setDisponibilidad(disponiblidadInt);
-            unaDisponibilidad.setLugarDeRealizacion(lugar);
-            datosCompPaso2.addDisponibilidad(unaDisponibilidad);
-        }
     }
 
 }

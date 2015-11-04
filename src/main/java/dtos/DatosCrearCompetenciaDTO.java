@@ -12,7 +12,7 @@ import java.util.List;
 public class DatosCrearCompetenciaDTO {
 
     private String competencia;
-    private Deporte deporte;
+    private String deporte;
     private Modalidad modalidad;
     private SistemaPuntuacion puntuacion;
     private List<String> listaLugaresNombres;
@@ -46,7 +46,7 @@ public class DatosCrearCompetenciaDTO {
     private boolean tieneReglamento;
     private boolean tieneSets;
 
-    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres, String reglamento) {
+    public DatosCrearCompetenciaDTO(String competencia, String deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres, String reglamento) {
         this.competencia = competencia;
         this.deporte = deporte;
         this.modalidad = modalidad;
@@ -55,7 +55,7 @@ public class DatosCrearCompetenciaDTO {
         this.reglamento = reglamento;
     }
 
-    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres) {
+    public DatosCrearCompetenciaDTO(String competencia, String deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres) {
         this.competencia = competencia;
         this.deporte = deporte;
         this.modalidad = modalidad;
@@ -71,11 +71,11 @@ public class DatosCrearCompetenciaDTO {
         this.competencia = competencia;
     }
 
-    public Deporte getDeporte() {
+    public String getDeporte() {
         return deporte;
     }
 
-    public void setDeporte(Deporte deporte) {
+    public void setDeporte(String deporte) {
         this.deporte = deporte;
     }
 

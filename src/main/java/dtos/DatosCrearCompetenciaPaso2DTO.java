@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DatosCrearCompetenciaPaso2DTO {
 
-    private List<Disponibilidad> disponibilidades = new ArrayList<>();
+    private List<DisponibilidadLugar> lugaresDisponibilidad = new ArrayList<>();
     private int puntosPorPartidoGanado;
     private int puntosPorPresentarse;
     private boolean aceptaEmpates;
@@ -35,12 +35,12 @@ public class DatosCrearCompetenciaPaso2DTO {
         this.esLiga = esLiga;
     }
 
-    public List<Disponibilidad> getDisponibilidades() {
-        return disponibilidades;
+    public List<DisponibilidadLugar> getDisponibilidades() {
+        return lugaresDisponibilidad;
     }
 
-    public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
-        this.disponibilidades = disponibilidades;
+    public void setDisponibilidades(List<DisponibilidadLugar> lugaresDisponibilidades) {
+        this.lugaresDisponibilidad = lugaresDisponibilidades;
     }
 
     public int getPuntosPorPartidoGanado() {
@@ -83,7 +83,7 @@ public class DatosCrearCompetenciaPaso2DTO {
         this.tantosEnCasoDeNoPresentarseOponente = tantosEnCasoDeNoPresentarseOponente;
     }
 
-    public void addDisponibilidad(Disponibilidad disponibilidad){
-        disponibilidades.add(disponibilidad);
+    public void addDisponibilidad(DisponibilidadLugar lugarDisponibilidad){
+        lugaresDisponibilidad.add(lugarDisponibilidad);
     }
 }

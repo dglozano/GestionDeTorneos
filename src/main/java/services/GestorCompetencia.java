@@ -1,10 +1,7 @@
 package services;
 import dao.CompetenciaDao;
-import dtos.DatosCrearCompetenciaDTO;
-import dtos.DatosCrearCompetenciaPaso2DTO;
-import dtos.FiltrosCompetenciaDTO;
+import dtos.*;
 import models.*;
-import dtos.CompetenciaDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +9,8 @@ import java.util.List;
 public class GestorCompetencia {
     private CompetenciaDao competenciaDao = CompetenciaDao.getInstance();
     private UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
+    private GestorLugarRealizacion gestorLugarRealizacion = new GestorLugarRealizacion();
+    private GestorDeporte gestorDeporte = new GestorDeporte();
 
     public void nuevaCompetencia(Competencia c) {
         competenciaDao.crearCompetencia(c);
@@ -65,7 +64,8 @@ public class GestorCompetencia {
         Competencia competencia = new Competencia();
         competencia.setNombre(datosCompDto.getCompetencia().toUpperCase());
         competencia.setUsuario(usuarioLogueado.getUsuarioLogueado());
-        competencia.setDeporte(datosCompDto.getDeporte());
+        Deporte deporte = gestorDeporte.buscarDeporte(datosCompDto.getDeporte());
+        competencia.setDeporte(deporte);
         competencia.setEstado(Estado.CREADA);
         competencia.setModalidad(datosCompDto.getModalidad());
         competencia.setSistemaPuntuacion(datosCompDto.getPuntuacion());
@@ -73,9 +73,7 @@ public class GestorCompetencia {
             competencia.setCantidadDeSets(datosCompDto.getSets());
         if(datosCompDto.isTieneReglamento())
             competencia.setReglas(datosCompDto.getReglamento());
-        for(Disponibilidad disponibilidad: datosCompDtoPaso2.getDisponibilidades()){
-            competencia.addDisponibilidad(disponibilidad);
-        }
+        cargarDisponibilidades(datosCompDtoPaso2,competencia);
         if(datosCompDtoPaso2.isEsLiga()){
             competencia.setPuntosPartidoGanado(datosCompDtoPaso2.getPuntosPorPartidoGanado());
             competencia.setPuntosPorPresentarse(datosCompDtoPaso2.getPuntosPorPresentarse());
@@ -99,6 +97,18 @@ public class GestorCompetencia {
             competencia.setOtorgaTantosNoPresentarse(false);
         }
         competenciaDao.crearCompetencia(competencia);
+    }
+
+    private void cargarDisponibilidades(DatosCrearCompetenciaPaso2DTO datosCompPaso2,Competencia competencia) {
+        for(DisponibilidadLugar dispLug: datosCompPaso2.getDisponibilidades()){
+            String nombreLugar = dispLug.getNombreLugar();
+            int disponiblidadInt = dispLug.getDisponibilidad();
+            LugarDeRealizacion lugar = gestorLugarRealizacion.buscarLugarPorNombre(nombreLugar);
+            Disponibilidad unaDisponibilidad = new Disponibilidad();
+            unaDisponibilidad.setDisponibilidad(disponiblidadInt);
+            unaDisponibilidad.setLugarDeRealizacion(lugar);
+            competencia.addDisponibilidad(unaDisponibilidad);
+        }
     }
 
     public Modalidad asociarModalidad(String modalidadString) {
