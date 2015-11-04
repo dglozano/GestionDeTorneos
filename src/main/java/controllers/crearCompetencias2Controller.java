@@ -92,12 +92,19 @@ public class crearCompetencias2Controller implements ControlledScreen {
         }
         else{
             SistemaPuntuacion puntuacion = datosCrearCompetenciaDtoAnterior.getPuntuacion();
+            if(puntuacion.equals(SistemaPuntuacion.PUNTUACION)){
+                disableAll(false);
+                ptsEmpateLabel.setDisable(true);
+                ptsEmpateSpinner.setDisable(true);
+                noRadioButton.setSelected(true);
+            }
             if(puntuacion.equals(SistemaPuntuacion.RESULTADO_FINAL)){
                 disableAll(false);
                 tantosOtorgadosSpinner.setDisable(true);
                 tantosOtorgadosLabel.setDisable(true);
                 ptsEmpateLabel.setDisable(true);
                 ptsEmpateSpinner.setDisable(true);
+                noRadioButton.setSelected(true);
             }
             if(puntuacion.equals(SistemaPuntuacion.SET)){
                 disableAll(true);
@@ -106,6 +113,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
                 ptsPorPresentarseSpinner.setDisable(false);
                 ptsPorPresentarseLabel.setDisable(false);
             }
+
         }
     }
 
