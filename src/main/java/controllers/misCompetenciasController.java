@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.Estado;
 import models.Modalidad;
@@ -37,6 +38,8 @@ public class misCompetenciasController implements ControlledScreen {
     @FXML private TableColumn<CompetenciaDTO, String> tEstado;
     @FXML private TableColumn<CompetenciaDTO, String> tModalidad;
     @FXML private TableColumn<CompetenciaDTO, Boolean> tAcciones;
+
+    @FXML private Button okButton;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
@@ -91,7 +94,8 @@ public class misCompetenciasController implements ControlledScreen {
     private void agregarBotonesEnTabla(){
         // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
         tAcciones.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CompetenciaDTO, Boolean>, ObservableValue<Boolean>>() {
-            @Override public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CompetenciaDTO, Boolean> features) {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CompetenciaDTO, Boolean> features) {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
@@ -106,7 +110,7 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     public void irCrearCompetencia(ActionEvent actionEvent) {
-        myController.setScreen(Main.vista2ID,this);
+        myController.setScreen(Main.vista2ID, this);
     }
 
     public void filtrarCompetencias(ActionEvent actionEvent){
@@ -181,6 +185,11 @@ public class misCompetenciasController implements ControlledScreen {
         else{
             filtrosCompetencia.setFiltroNombreActivo(false);
         }
+    }
+
+    public void close(ActionEvent actionEvent){
+        Stage modal = (Stage)okButton.getScene().getWindow();
+        modal.close();
     }
 
 }

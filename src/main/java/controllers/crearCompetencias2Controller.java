@@ -17,8 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import models.Disponibilidad;
-import models.LugarDeRealizacion;
 import services.GestorCompetencia;
 import services.GestorDeporte;
 import services.GestorLugarRealizacion;
@@ -50,16 +48,15 @@ public class crearCompetencias2Controller implements ControlledScreen {
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
         datosCrearCompetenciaDtoAnterior = (DatosCrearCompetenciaDTO) myController.getControladorAnterior().mensajeControladorAnterior();
-
         cargarLugares();
-
     }
 
     private void cargarLugares() {
         List<DisponibilidadLugar> filas = new ArrayList<>();
+        int i = 0;
         for(String nombreLugar: datosCrearCompetenciaDtoAnterior.getListaLugaresNombres()){
             DisponibilidadLugar disponibilidadLugar= new DisponibilidadLugar();
-            disponibilidadLugar.setDisponibilidad("51566516+ssadklfjslfj0");
+            disponibilidadLugar.setDisponibilidad(Integer.toString(i++));
             disponibilidadLugar.setNombreLugar(nombreLugar);
             filas.add(disponibilidadLugar);
         }

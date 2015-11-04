@@ -25,7 +25,7 @@ public class PrincipalController extends StackPane {
         super();
     }
 
-    // Agregar la vista a la colección
+    // Agregar la vista a la colecciï¿½n
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }
@@ -35,10 +35,9 @@ public class PrincipalController extends StackPane {
         return screens.get(name);
     }
 
-    // Carga el FXML, agrega la vista a la colección y injecta el Pane en el controlador
+    // Carga el FXML, agrega la vista a la colecciï¿½n y injecta el Pane en el controlador
     public boolean loadScreen(String name, String resource) {
         try {
-            System.out.println(getClass().getClassLoader().getResource("fxml/"+resource));
             FXMLLoader myLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/"+resource));
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
@@ -52,12 +51,12 @@ public class PrincipalController extends StackPane {
         }
     }
 
-    // Setea la vista, con validaciones en caso de que no esté cargado el FXML
+    // Setea la vista, con validaciones en caso de que no estï¿½ cargado el FXML
     public boolean setScreen(final String name) {
-        if (screens.get(name) != null) {   // El fxml está cargado
+        if (screens.get(name) != null) {   // El fxml estï¿½ cargado
             final DoubleProperty opacity = opacityProperty();
 
-            if (!getChildren().isEmpty()) {    // Si hay más de uno, animamos
+            if (!getChildren().isEmpty()) {    // Si hay mï¿½s de uno, animamos
                 Timeline fade = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1.0)),
                         new KeyFrame(new Duration(350), new EventHandler<ActionEvent>() {
@@ -97,10 +96,10 @@ public class PrincipalController extends StackPane {
         return this.setScreen(name);
     }
 
-    // Elimina la vista de la colección
+    // Elimina la vista de la colecciï¿½n
     public boolean unloadScreen(String name) {
         if (screens.remove(name) == null) {
-            System.out.println("La vista no existía. \n");
+            System.out.println("La vista no existï¿½a. \n");
             return false;
         } else {
             return true;

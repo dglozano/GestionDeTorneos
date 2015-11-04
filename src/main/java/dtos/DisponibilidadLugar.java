@@ -20,6 +20,6 @@ public class DisponibilidadLugar{
     }
 
     public void setDisponibilidad(String disponibilidad) {
-        disponibilidad = disponibilidad;
+        this.disponibilidad = disponibilidad;
     }
 }
