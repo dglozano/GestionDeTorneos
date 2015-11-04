@@ -143,7 +143,6 @@ public class crearCompetencias2Controller implements ControlledScreen {
         columnaDisponibilidad.setCellValueFactory(new PropertyValueFactory<DisponibilidadLugar, Integer>("disponibilidad"));
 
         tablaDisponibilidad.setEditable(true);
-        //TODO 05: que vuelva a cero el spinner
         tablaDisponibilidad.getItems().setAll(filas);
     }
 
@@ -189,7 +188,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
         if(validarDatos()){
             DatosCrearCompetenciaPaso2DTO datosPaso2= crearDtoPaso2();
             gestorCompetencia.crearCompetencia(datosCrearCompetenciaDtoAnterior,datosPaso2);
-            //TODO 06: Mostrar pop up exito
+            //TODO 06: Mostrar pop up exito mostrando el nombre de la competencia
             myController.setScreen(Main.vista1ID);
         }
     }

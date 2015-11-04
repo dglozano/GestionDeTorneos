@@ -60,11 +60,8 @@ public class GestorCompetencia {
         }
         return existe;
     }
-    //TODO 05: metodo crear competencia
+
     public void crearCompetencia(DatosCrearCompetenciaDTO datosCompDto, DatosCrearCompetenciaPaso2DTO datosCompDtoPaso2){
-        /*for(Disponibilidad disp: datosCompDtoPaso2.getDisponibilidades()){
-            System.out.println("Lugar: "+disp.getLugarDeRealizacion().getNombre()+ " disp "+disp.getDisponibilidad());
-        }*/
         Competencia competencia = new Competencia();
         competencia.setNombre(datosCompDto.getCompetencia().toUpperCase());
         competencia.setUsuario(usuarioLogueado.getUsuarioLogueado());

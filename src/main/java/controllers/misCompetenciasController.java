@@ -115,6 +115,7 @@ public class misCompetenciasController implements ControlledScreen {
 
     public void filtrarCompetencias(ActionEvent actionEvent){
         FiltrosCompetenciaDTO filtrosCompetencia= new FiltrosCompetenciaDTO();
+
         String nombre = nombreCompetenciaTextField.getText().toUpperCase();
         String deporte = deportesComboBox.getValue();
         String estado = estadosComboBox.getValue();
@@ -130,11 +131,7 @@ public class misCompetenciasController implements ControlledScreen {
         else{
             filtrosCompetencia.setFiltroModalidadActivo(false);
         }
-        if(filtrosCompetencia.filtrosInactivos()){
-            //TODO 01:  Crear label
-            System.out.println("Debe seleccionar al menos un filtro");
-        }
-        else {
+        if(!filtrosCompetencia.filtrosInactivos()){
             List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
             setearFilas(listaCompetenciasFiltradas);
         }
