@@ -49,25 +49,25 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                          <Label alignment="CENTER" style="&#10;" text="Puntos por partido ganado (*)" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                          <Label fx:id="ptsGanadosLabel" alignment="CENTER" style="&#10;" text="Puntos por partido ganado (*)" textAlignment="CENTER" textFill="#222222" wrapText="false">
                             <font>
                               <Font size="13.0" />
                             </font>
                           </Label>
-                              <Spinner prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="1" />
-                              <Spinner prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" />
-                              <Label alignment="CENTER" style="&#10;" text="Puntos por presentarse (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
+                              <Spinner fx:id="ptsGanadosSpinner" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="1" />
+                              <Spinner fx:id="ptsPorPresentarseSpinner" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" />
+                              <Label fx:id="ptsPorPresentarseLabel" alignment="CENTER" style="&#10;" text="Puntos por presentarse (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Spinner prefHeight="25.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" prefHeight="41.0" prefWidth="203.0" style="&#10;" text="Tantos otorgados al equipo ganador en caso de abandono (*)" textAlignment="CENTER" textFill="#222222" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                              <Spinner fx:id="tantosOtorgadosSpinner" prefHeight="25.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="tantosOtorgadosLabel" alignment="CENTER" prefHeight="41.0" prefWidth="203.0" style="&#10;" text="Tantos otorgados al equipo ganador en caso de abandono (*)" textAlignment="CENTER" textFill="#222222" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Spinner disable="true" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Spinner fx:id="ptsEmpateSpinner" disable="true" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -77,16 +77,20 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Si" />
-                                    <RadioButton mnemonicParsing="false" selected="true" text="No" GridPane.columnIndex="1" />
+                                    <RadioButton onAction="#aceptaEmpateSelected" fx:id="siRadioButton" mnemonicParsing="false" text="Si" >
+                                        <toggleGroup>
+                                         <ToggleGroup fx:id="permiteEmpateToggleGroup" />
+                                        </toggleGroup>
+                                     </RadioButton>
+                                    <RadioButton onAction="#aceptaEmpateSelected" fx:id="noRadioButton" mnemonicParsing="false" selected="true" text="No" toggleGroup="$permiteEmpateToggleGroup" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
-                              <Label alignment="CENTER" style="&#10;" styleClass="disabled" text="Puntos por empate (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Label fx:id="ptsEmpateLabel" alignment="CENTER" style="&#10;" styleClass="disabled" text="Puntos por empate (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" style="&#10;" text="¿Se puede empatar? (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
+                              <Label fx:id="permiteEmpateLabel" alignment="CENTER" style="&#10;" text="¿Se puede empatar? (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

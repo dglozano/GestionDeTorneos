@@ -38,6 +38,7 @@ public class PrincipalController extends StackPane {
     // Carga el FXML, agrega la vista a la colecci�n y injecta el Pane en el controlador
     public boolean loadScreen(String name, String resource) {
         try {
+            System.out.println(getClass().getClassLoader().getResource("fxml/"+resource));
             FXMLLoader myLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/"+resource));
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());

@@ -5,7 +5,7 @@ package dtos;
  */
 public class DisponibilidadLugar{
     private String nombreLugar;
-    private String disponibilidad;
+    private Integer disponibilidad;
 
     public String getNombreLugar() {
         return nombreLugar;
@@ -15,11 +15,11 @@ public class DisponibilidadLugar{
         this.nombreLugar = nombreLugar;
     }
 
-    public String getDisponibilidad() {
+    public Integer getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(String disponibilidad) {
+    public void setDisponibilidad(Integer disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 }
