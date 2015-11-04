@@ -59,6 +59,30 @@ public class GestorCompetencia {
         }
         return existe;
     }
+    //TODO 05: metodo crear competencia
+    /*public void crearCompetencia(DatosCrearCompetenciaDTO datosCompDto, DatosCrearCompetenciaPaso2DTO datosCompDtoPaso2){
+        Competencia competencia = new Competencia();
+        competencia.setNombre(datosCompDto.getCompetencia());
+        competencia.setUsuario(usuarioLogueado.getUsuarioLogueado());
+        competencia.setDeporte(datosCompDto.getDeporte());
+        competencia.setEstado(Estado.CREADA);
+        competencia.setModalidad(datosCompDto.getModalidad());
+        competencia.setSistemaPuntuacion(datosCompDto.getPuntuacion());
+        if(datosCompDto.getPuntuacion().equals(SistemaPuntuacion.SET))
+            competencia.setCantidadDeSets(datosCompDto.getSets());
+        if(datosCompDto.isTieneReglamento())
+            competencia.setReglas(datosCompDto.getReglamento());
+        for(Disponibilidad disponibilidad: datosCompDtoPaso2.getDisponibilidades()){
+            competencia.addDisponibilidad(disponibilidad);
+        }
+        if(competencia.getModalidad().equals(Modalidad.LIGA)){
+            competencia.setPuntosPartidoGanado(datosCompDtoPaso2.getPuntosPartidoGanado());
+            competencia.setPuntosPorPresentarse(datosCompDtoPaso2.getPuntosPorPresentarse());
+            competencia.setP....
+            competencia.setAceptaEmpate();
+        }
+        competenciaDao.crearCompetencia(competencia);
+    }*/
 
     public Modalidad asociarModalidad(String modalidadString) {
         switch(modalidadString){

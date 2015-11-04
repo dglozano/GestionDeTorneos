@@ -98,8 +98,8 @@
                         </GridPane>
                         <TableView fx:id="tablaDisponibilidad" prefHeight="366.0" prefWidth="506.0">
                           <columns>
-                            <TableColumn prefWidth="121.0" text="Lugar" />
-                            <TableColumn minWidth="0.0" prefWidth="131.0" text="Disponibilidad" />
+                            <TableColumn fx:id="columnaLugar" prefWidth="121.0" text="Lugar" />
+                            <TableColumn fx:id="columnaDisponibilidad" minWidth="0.0" prefWidth="131.0" text="Disponibilidad" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

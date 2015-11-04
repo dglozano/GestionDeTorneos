@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,9 +45,9 @@ public class Competencia {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_deporte")
     private Deporte deporte;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinColumn(name = "id_competencia")
-    private List<Disponibilidad> disponibilidades;
+    private List<Disponibilidad> disponibilidades = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_usuario")
     private Usuario usuario;

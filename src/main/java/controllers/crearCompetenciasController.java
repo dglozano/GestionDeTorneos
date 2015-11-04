@@ -4,14 +4,11 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.DatosCrearCompetenciaDTO;
-import dtos.LugarYCodigoDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import models.Deporte;
 import models.Modalidad;
 import models.SistemaPuntuacion;
@@ -21,7 +18,6 @@ import services.GestorDeporte;
 import services.GestorLugarRealizacion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class crearCompetenciasController implements ControlledScreen {
@@ -30,7 +26,6 @@ public class crearCompetenciasController implements ControlledScreen {
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
     private GestorLugarRealizacion gestorLugarRealizacion;
-    private HashMap<String,String> hashCodigoLugarRealizacion;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDto;
 
     @FXML private TextField nombreCompetenciaTextField;
@@ -56,13 +51,16 @@ public class crearCompetenciasController implements ControlledScreen {
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
-        hashCodigoLugarRealizacion = new HashMap<String,String>();
         reglamentoTextArea.clear();
         nombreCompetenciaTextField.clear();
         inicializarModalidades();
         inicializarDeportes();
         inicializarSets();
-        if(puntuacionToggleGroup.getSelectedToggle() != null) puntuacionToggleGroup.getSelectedToggle().setSelected(false);
+        if(puntuacionToggleGroup.getSelectedToggle() != null){
+            puntuacionToggleGroup.getSelectedToggle().setSelected(false);
+            cantidadSetsLabel.setDisable(true);
+            setsComboBox.setDisable(true);
+        }
         String nombreControladorAnterior = myController.getControladorAnterior().getClass().getSimpleName();
         boolean volvioDelPaso2 = nombreControladorAnterior.equals("crearCompetencias2Controller");
         if(volvioDelPaso2){
@@ -88,6 +86,8 @@ public class crearCompetenciasController implements ControlledScreen {
         puntuacionToggleGroup.selectToggle(puntuacion);
         if(datosCrearCompetenciaDto.isTieneSets()){
             setsComboBox.setValue(datosCrearCompetenciaDto.getSets()+"");
+            cantidadSetsLabel.setDisable(false);
+            setsComboBox.setDisable(false);
         }
         if(datosCrearCompetenciaDto.isTieneReglamento()){
             reglamentoTextArea.setText(datosCrearCompetenciaDto.getReglamento());
@@ -97,10 +97,10 @@ public class crearCompetenciasController implements ControlledScreen {
         String deporteParseado= Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
         deportesComboBox.setValue(deporteParseado);
         inicializarLugares(deportesComboBox.getValue().toUpperCase());
-        for(String lugarId: datosCrearCompetenciaDto.getListaLugaresId()){
+        for(String lugarNombre: datosCrearCompetenciaDto.getListaLugaresNombres()){
             for(int i=0; i<lugaresComboBox.getItems().size(); i++){
                 String nombreLugar = lugaresComboBox.getItems().get(i);
-                if(hashCodigoLugarRealizacion.get(nombreLugar).equals(lugarId))
+                if(nombreLugar.equals(lugarNombre))
                     lugaresComboBox.getCheckModel().check(i);
             }
         }
@@ -119,14 +119,12 @@ public class crearCompetenciasController implements ControlledScreen {
     private void inicializarLugares(String deporteSeleccionado) {
         lugaresComboBox.getCheckModel().clearChecks();
         lugaresComboBox.getItems().clear();
-        hashCodigoLugarRealizacion.clear();
-        List<LugarYCodigoDTO> lugaresDto = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
+        List<String> lugaresNombres = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
         final ObservableList<String> deportesObservable = FXCollections.observableArrayList();
-        for(LugarYCodigoDTO lugarDto: lugaresDto){
-            deportesObservable.add(lugarDto.getNombreLugar());
-            hashCodigoLugarRealizacion.put(lugarDto.getNombreLugar(), lugarDto.getIdLugar() + "");
+        for(String lugarNombre: lugaresNombres){
+            deportesObservable.add(lugarNombre);
         }
-        if(lugaresDto.isEmpty()){
+        if(lugaresNombres.isEmpty()){
             errorLugaresLabel.setText("No existen lugares para el deporte seleccionado");
             errorLugaresLabel.setVisible(true);
             lugaresComboBox.setDisable(true);
@@ -245,11 +243,11 @@ public class crearCompetenciasController implements ControlledScreen {
         String puntuacionString = puntuacionRadioButton.getText();
         SistemaPuntuacion puntuacion = gestorCompetencia.asociarSistemaPuntuacion(puntuacionString);
         Modalidad modalidad = gestorCompetencia.asociarModalidad(modalidadComboBox.getValue().toString());
-        List<String> listaIdLugares = new ArrayList<>();
+        List<String> listaLugaresNombres = new ArrayList<>();
         for(String nombreLugar: lugaresComboBox.getCheckModel().getCheckedItems()){
-            listaIdLugares.add(hashCodigoLugarRealizacion.get(nombreLugar));
+            listaLugaresNombres.add(nombreLugar);
         }
-        this.datosCrearCompetenciaDto = new DatosCrearCompetenciaDTO(nombre,deporte,modalidad,puntuacion,listaIdLugares);
+        this.datosCrearCompetenciaDto = new DatosCrearCompetenciaDTO(nombre,deporte,modalidad,puntuacion,listaLugaresNombres);
         if(!reglamentoTextArea.getText().isEmpty()){
             this.datosCrearCompetenciaDto.setReglamento(reglamentoTextArea.getText());
             this.datosCrearCompetenciaDto.setTieneReglamento(true);

@@ -1,7 +1,6 @@
 package services;
 
 import dao.LugarDeRealizacionDao;
-import dtos.LugarYCodigoDTO;
 import models.Deporte;
 import models.LugarDeRealizacion;
 import models.UsuarioLogueado;
@@ -16,18 +15,15 @@ public class GestorLugarRealizacion {
     private LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
     private UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
 
-    public List<LugarYCodigoDTO> buscarLugaresDelUsuario(String deporteString){
+    public List<String> buscarLugaresDelUsuario(String deporteString){
         int idUsuario = usuarioLogueado.getUsuarioLogueado().getId();
         GestorDeporte gestorDeporte = new GestorDeporte();
         Deporte deporte = gestorDeporte.buscarDeporte(deporteString);
         List<LugarDeRealizacion> lugaresUsuario = lugarDeRealizacionDao.buscarLugaresDelUsuario(idUsuario, deporte.getId());
-        List<LugarYCodigoDTO> listaLugaresCodigosDto = new ArrayList<LugarYCodigoDTO>();
+        List<String> listaLugaresString = new ArrayList<String>();
         for(LugarDeRealizacion lugar: lugaresUsuario){
-            int id = lugar.getId();
-            String nombre = lugar.getNombre();
-            LugarYCodigoDTO unLugarCodigoDto = new LugarYCodigoDTO(nombre,id);
-            listaLugaresCodigosDto.add(unLugarCodigoDto);
+            listaLugaresString.add(lugar.getNombre());
         }
-        return listaLugaresCodigosDto;
+        return listaLugaresString;
     }
 }

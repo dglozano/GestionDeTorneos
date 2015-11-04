@@ -15,7 +15,7 @@ public class DatosCrearCompetenciaDTO {
     private Deporte deporte;
     private Modalidad modalidad;
     private SistemaPuntuacion puntuacion;
-    private List<String> listaLugaresId;
+    private List<String> listaLugaresNombres;
     private String reglamento;
     private int sets;
 
@@ -46,21 +46,21 @@ public class DatosCrearCompetenciaDTO {
     private boolean tieneReglamento;
     private boolean tieneSets;
 
-    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresId, String reglamento) {
+    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres, String reglamento) {
         this.competencia = competencia;
         this.deporte = deporte;
         this.modalidad = modalidad;
         this.puntuacion = puntuacion;
-        this.listaLugaresId = listaLugaresId;
+        this.listaLugaresNombres = listaLugaresNombres;
         this.reglamento = reglamento;
     }
 
-    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresId) {
+    public DatosCrearCompetenciaDTO(String competencia, Deporte deporte, Modalidad modalidad, SistemaPuntuacion puntuacion, List<String> listaLugaresNombres) {
         this.competencia = competencia;
         this.deporte = deporte;
         this.modalidad = modalidad;
         this.puntuacion = puntuacion;
-        this.listaLugaresId = listaLugaresId;
+        this.listaLugaresNombres = listaLugaresNombres;
     }
 
     public String getCompetencia() {
@@ -95,12 +95,12 @@ public class DatosCrearCompetenciaDTO {
         this.puntuacion = puntuacion;
     }
 
-    public List<String> getListaLugaresId() {
-        return listaLugaresId;
+    public List<String> getListaLugaresNombres() {
+        return listaLugaresNombres;
     }
 
-    public void setListaLugaresId(List<String> listaLugaresId) {
-        this.listaLugaresId = listaLugaresId;
+    public void setListaLugaresNombres(List<String> listaLugaresId) {
+        this.listaLugaresNombres = listaLugaresId;
     }
 
     public String getReglamento() {

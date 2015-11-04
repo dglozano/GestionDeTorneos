@@ -4,19 +4,28 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.DatosCrearCompetenciaDTO;
+import dtos.DisponibilidadLugar;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Disponibilidad;
+import models.LugarDeRealizacion;
 import services.GestorCompetencia;
 import services.GestorDeporte;
 import services.GestorLugarRealizacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class crearCompetencias2Controller implements ControlledScreen {
 
@@ -28,6 +37,10 @@ public class crearCompetencias2Controller implements ControlledScreen {
     private GestorLugarRealizacion gestorLugarRealizacion;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDtoAnterior;
 
+    @FXML private TableView<DisponibilidadLugar> tablaDisponibilidad;
+    @FXML private TableColumn<DisponibilidadLugar,String> columnaLugar;
+    @FXML private TableColumn<DisponibilidadLugar,String> columnaDisponibilidad;
+
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
@@ -36,21 +49,23 @@ public class crearCompetencias2Controller implements ControlledScreen {
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
-
         datosCrearCompetenciaDtoAnterior = (DatosCrearCompetenciaDTO) myController.getControladorAnterior().mensajeControladorAnterior();
-        System.out.println("nombre " + datosCrearCompetenciaDtoAnterior.getCompetencia());
-        System.out.println("deporte " + datosCrearCompetenciaDtoAnterior.getDeporte().getNombre());
-        System.out.println("modalidad " + datosCrearCompetenciaDtoAnterior.getModalidad().getModalidadString());
-        System.out.println("puntuacion " + datosCrearCompetenciaDtoAnterior.getPuntuacion().getPuntuacionString());
-        for(String id: datosCrearCompetenciaDtoAnterior.getListaLugaresId()){
-            System.out.println("lugar "+ id);
+
+        cargarLugares();
+
+    }
+
+    private void cargarLugares() {
+        List<DisponibilidadLugar> filas = new ArrayList<>();
+        for(String nombreLugar: datosCrearCompetenciaDtoAnterior.getListaLugaresNombres()){
+            DisponibilidadLugar disponibilidadLugar= new DisponibilidadLugar();
+            disponibilidadLugar.setDisponibilidad("51566516+ssadklfjslfj0");
+            disponibilidadLugar.setNombreLugar(nombreLugar);
+            filas.add(disponibilidadLugar);
         }
-        if(datosCrearCompetenciaDtoAnterior.isTieneReglamento()){
-            System.out.println("reglamento "+datosCrearCompetenciaDtoAnterior.getReglamento());
-        }
-        if(datosCrearCompetenciaDtoAnterior.isTieneSets()){
-            System.out.println("sets " + datosCrearCompetenciaDtoAnterior.getSets());
-        }
+        columnaLugar.setCellValueFactory(new PropertyValueFactory<DisponibilidadLugar,String>("nombreLugar"));
+        columnaDisponibilidad.setCellValueFactory(new PropertyValueFactory<DisponibilidadLugar,String>("disponibilidad"));
+        tablaDisponibilidad.getItems().setAll(filas);
     }
 
     private void mostrarPopupExito(){
