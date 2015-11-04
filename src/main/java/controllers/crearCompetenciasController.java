@@ -190,6 +190,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private boolean validarNombreCompetencia() {
         String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
+        // TODO 8 validar que no tenga un length que rompa la base
         boolean caracteresValidos = validarCaracteres(nombreCompetencia);
         if(nombreCompetencia.isEmpty()){
             errorNombreLabel.setText("Este campo es obligatorio");
