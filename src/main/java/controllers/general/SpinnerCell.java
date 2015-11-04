@@ -11,29 +11,27 @@ import javafx.scene.control.TableCell;
 /**
  * Created by DIego on 4/11/2015..
  */
-public class SpinnerCell<DisponibilidadLugar, Integer> extends TableCell<DisponibilidadLugar, Integer> {
+public class SpinnerCell<DisponibilidadLugar, T> extends TableCell<DisponibilidadLugar, T> {
 
-    private Spinner<Integer> spinner;
+    private Spinner<T> spinner;
 
     public SpinnerCell() {
         this(1);
     }
 
     public SpinnerCell(int step) {
-        this.spinner = new Spinner<>(1, 100, step);
-        spinner.valueProperty().addListener(new ChangeListener<Integer>() {
-            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                commitEdit(newValue);
-                updateItem(newValue,false);
+        this.spinner = new Spinner<T>(1, 100, step);
+        spinner.valueProperty().addListener(new ChangeListener<T>() {
+            public void changed(ObservableValue<? extends T> observable, T oldValue, T newValue) {
+                ((dtos.DisponibilidadLugar)getTableView().getItems().get(getIndex())).setDisponibilidad((Integer)newValue);
             }
         });
         setAlignment(Pos.CENTER);
     }
 
     @Override
-    protected void updateItem(Integer item, boolean empty) {
+    protected void updateItem(T item, boolean empty) {
         super.updateItem(item, empty);
-
         if (empty || item == null) {
             setText(null);
             setGraphic(null);
