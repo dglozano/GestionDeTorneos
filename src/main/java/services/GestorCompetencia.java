@@ -101,7 +101,7 @@ public class GestorCompetencia {
 
     private void cargarDisponibilidades(DatosCrearCompetenciaPaso2DTO datosCompPaso2,Competencia competencia) {
         for(DisponibilidadLugar dispLug: datosCompPaso2.getDisponibilidades()){
-            String nombreLugar = dispLug.getNombreLugar();
+            String nombreLugar = dispLug.getNombreLugar().toUpperCase();
             int disponiblidadInt = dispLug.getDisponibilidad();
             LugarDeRealizacion lugar = gestorLugarRealizacion.buscarLugarPorNombre(nombreLugar);
             Disponibilidad unaDisponibilidad = new Disponibilidad();

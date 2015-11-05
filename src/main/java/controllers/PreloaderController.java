@@ -54,7 +54,7 @@ public class PreloaderController implements ControlledScreen {
 
         LugarDeRealizacion lugar1= new LugarDeRealizacion() ;
         lugar1.setUsuario(usuario1);
-        lugar1.setNombre("Campo de Deportes");
+        lugar1.setNombre("CAMPO DE DEPORTES");
 
         LugarDeRealizacion lugar2= new LugarDeRealizacion() ;
         lugar2.setUsuario(usuario1);
@@ -62,27 +62,27 @@ public class PreloaderController implements ControlledScreen {
 
         LugarDeRealizacion lugar3= new LugarDeRealizacion() ;
         lugar3.setUsuario(usuario1);
-        lugar3.setNombre("Cantona");
+        lugar3.setNombre("CANTONA");
 
         LugarDeRealizacion lugar4= new LugarDeRealizacion() ;
         lugar4.setUsuario(usuario1);
-        lugar4.setNombre("Marado");
+        lugar4.setNombre("MARADO");
 
         LugarDeRealizacion lugar5= new LugarDeRealizacion() ;
         lugar5.setUsuario(usuario1);
-        lugar5.setNombre("Porto F5");
+        lugar5.setNombre("SEVEN");
 
         LugarDeRealizacion lugar6= new LugarDeRealizacion() ;
         lugar6.setUsuario(usuario1);
-        lugar6.setNombre("Il Calcio");
+        lugar6.setNombre("IL CALCIO");
 
         LugarDeRealizacion lugar7= new LugarDeRealizacion() ;
         lugar7.setUsuario(usuario1);
-        lugar7.setNombre("El Uniazo");
+        lugar7.setNombre("EL UNIAZO");
 
         LugarDeRealizacion lugar8= new LugarDeRealizacion() ;
         lugar8.setUsuario(usuario1);
-        lugar8.setNombre("Marangoni");
+        lugar8.setNombre("MARANGONI");
 
         rugby.addLugarDeRealizacion(lugar1);
         rugby.addLugarDeRealizacion(lugar2);

@@ -144,9 +144,12 @@ public class crearCompetenciasController implements ControlledScreen {
         lugaresComboBox.getCheckModel().clearChecks();
         lugaresComboBox.getItems().clear();
         List<String> lugaresNombres = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
-        final ObservableList<String> deportesObservable = FXCollections.observableArrayList();
+        final ObservableList<String> lugaresObservable = FXCollections.observableArrayList();
         for(String lugarNombre: lugaresNombres){
-            deportesObservable.add(lugarNombre);
+            lugarNombre = (Character.isLetter(lugarNombre.charAt(0))) ?
+                    Character.toUpperCase(lugarNombre.charAt(0)) + lugarNombre.substring(1).toLowerCase()
+                    : lugarNombre.toLowerCase();
+            lugaresObservable.add(lugarNombre);
         }
         if(lugaresNombres.isEmpty()){
             errorLugaresLabel.setText("No existen lugares para el deporte seleccionado.");
@@ -158,7 +161,7 @@ public class crearCompetenciasController implements ControlledScreen {
             errorLugaresLabel.setVisible(false);
             lugaresComboBox.setDisable(false);
             lugaresLabel.setDisable(false);
-            lugaresComboBox.getItems().addAll(deportesObservable);
+            lugaresComboBox.getItems().addAll(lugaresObservable);
         }
     }
 
@@ -167,7 +170,9 @@ public class crearCompetenciasController implements ControlledScreen {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
         List<String> listaDeportes = gestorDeporte.listarDeportes();
         for(String deporte: listaDeportes){
-            deporte = Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
+            deporte = (Character.isLetter(deporte.charAt(0))) ?
+                    Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase()
+                    : deporte.toLowerCase();
             deportesComboBox.getItems().add(deporte);
         }
         deportesComboBox.setValue(deportesComboBox.getItems().get(0));
