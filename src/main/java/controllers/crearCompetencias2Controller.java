@@ -8,7 +8,6 @@ import dtos.DatosCrearCompetenciaDTO;
 import dtos.DatosCrearCompetenciaPaso2DTO;
 import dtos.DisponibilidadLugar;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,13 +19,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import models.Disponibilidad;
-import models.LugarDeRealizacion;
 import models.Modalidad;
 import models.SistemaPuntuacion;
 import services.GestorCompetencia;
-import services.GestorDeporte;
-import services.GestorLugarRealizacion;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +47,8 @@ public class crearCompetencias2Controller implements ControlledScreen {
     @FXML private Label ptsPorPresentarseLabel;
     @FXML private Label tantosOtorgadosLabel;
     @FXML private Label permiteEmpateLabel;
+    @FXML private Label errorPuntuacion1;
+    @FXML private Label errorPuntuacion2;
     @FXML private ToggleGroup permiteEmpateToggleGroup;
     @FXML private RadioButton siRadioButton;
     @FXML private RadioButton noRadioButton;
@@ -214,18 +211,22 @@ public class crearCompetencias2Controller implements ControlledScreen {
             int ptsPartidoEmpatado = (Integer) ptsEmpateSpinner.getValue();
             int ptsPorPresentarse = (Integer) ptsPorPresentarseSpinner.getValue();
             if(ptsPartidoGanado < ptsPartidoEmpatado){
-                //TODO 7: label
-                System.out.println("Puntos por empate deben ser menor igual que puntos por victoria");
+                errorPuntuacion2.setText("Puntos por empate deben ser menor igual que puntos por victoria.");
+                errorPuntuacion2.setVisible(true);
                 error=false;
+            } else{
+                errorPuntuacion2.setVisible(false);
             }
         }
         if(!ptsGanadosSpinner.isDisabled() && !ptsPorPresentarseSpinner.isDisabled()){
             int ptsPartidoGanado = (Integer) ptsGanadosSpinner.getValue();
             int ptsPorPresentarse = (Integer) ptsPorPresentarseSpinner.getValue();
             if(ptsPorPresentarse >= ptsPartidoGanado){
-                //TODO 7: label
-                System.out.println("Puntos por presentarse deben ser menor que puntos por victoria");
-                error= false;
+                errorPuntuacion1.setText("Puntos por presentarse deben ser menor que puntos por victoria.");
+                errorPuntuacion1.setVisible(true);
+                error=false;
+            } else{
+                errorPuntuacion1.setVisible(false);
             }
         }
         return error;

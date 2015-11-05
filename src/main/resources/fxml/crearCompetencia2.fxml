@@ -54,6 +54,14 @@
                               <Font size="13.0" />
                             </font>
                           </Label>
+                           <Label fx:id="errorPuntuacion1" alignment="CENTER" minWidth="650.0" prefHeight="17.0" prefWidth="650.0" styleClass="error" text="Puntos por presentarse deben ser menor que puntos por victoria." visible="false" GridPane.columnIndex="0" GridPane.halignment="LEFT">
+                               <opaqueInsets>
+                                   <Insets />
+                               </opaqueInsets>
+                               <GridPane.margin>
+                                   <Insets top="52.0" />
+                               </GridPane.margin>
+                           </Label>
                               <Spinner fx:id="ptsGanadosSpinner" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="1" />
                               <Spinner fx:id="ptsPorPresentarseSpinner" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" />
                               <Label fx:id="ptsPorPresentarseLabel" alignment="CENTER" style="&#10;" text="Puntos por presentarse (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.columnIndex="2">
@@ -67,6 +75,14 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
+                               <Label fx:id="errorPuntuacion2" alignment="CENTER" minWidth="650.0" prefHeight="17.0" prefWidth="650.0" styleClass="error" text="Puntos por empate deben ser menor igual que puntos por victoria." visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="LEFT">
+                                   <opaqueInsets>
+                                       <Insets />
+                                   </opaqueInsets>
+                                   <GridPane.margin>
+                                       <Insets top="52.0" />
+                                   </GridPane.margin>
+                               </Label>
                               <Spinner fx:id="ptsEmpateSpinner" disable="true" prefHeight="25.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                 <columnConstraints>

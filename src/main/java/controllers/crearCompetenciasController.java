@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import models.Deporte;
 import models.Modalidad;
 import models.SistemaPuntuacion;
 import org.controlsfx.control.CheckComboBox;
@@ -125,7 +124,7 @@ public class crearCompetenciasController implements ControlledScreen {
             deportesObservable.add(lugarNombre);
         }
         if(lugaresNombres.isEmpty()){
-            errorLugaresLabel.setText("No existen lugares para el deporte seleccionado");
+            errorLugaresLabel.setText("No existen lugares para el deporte seleccionado.");
             errorLugaresLabel.setVisible(true);
             lugaresComboBox.setDisable(true);
             lugaresLabel.setDisable(true);
@@ -167,7 +166,7 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private boolean validarLugares() {
         if(lugaresComboBox.getCheckModel().getCheckedItems().isEmpty()){
-            errorLugaresLabel.setText("Debe elegir al menos un lugar");
+            errorLugaresLabel.setText("Debe elegir al menos un lugar.");
             errorLugaresLabel.setVisible(true);
             return false;
         }
@@ -190,16 +189,22 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private boolean validarNombreCompetencia() {
         String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
-        // TODO 8 validar que no tenga un length que rompa la base
+        System.out.println("NOMBRE " + nombreCompetencia + " " + nombreCompetencia.length());
         boolean caracteresValidos = validarCaracteres(nombreCompetencia);
         if(nombreCompetencia.isEmpty()){
-            errorNombreLabel.setText("Este campo es obligatorio");
+            errorNombreLabel.setText("Este campo es obligatorio.");
             errorNombreLabel.setVisible(true);
             nombreCompetenciaTextField.requestFocus();
             return false;
         }
         else if(!caracteresValidos){
-            errorNombreLabel.setText("Solo se permiten letras y numeros");
+            errorNombreLabel.setText("Solo se permiten letras y numeros.");
+            errorNombreLabel.setVisible(true);
+            nombreCompetenciaTextField.requestFocus();
+            return false;
+        }
+        else if(nombreCompetencia.length()>254){
+            errorNombreLabel.setText("El nombre no puede tener más de 254 caracteres.");
             errorNombreLabel.setVisible(true);
             nombreCompetenciaTextField.requestFocus();
             return false;
@@ -207,10 +212,9 @@ public class crearCompetenciasController implements ControlledScreen {
         else{
             boolean nombreExistente = gestorCompetencia.existeNombre(nombreCompetencia);
             if(nombreExistente){
-                errorNombreLabel.setText("El nombre de la competencia ya existe");
+                errorNombreLabel.setText("El nombre de la competencia ya existe.");
                 errorNombreLabel.setVisible(true);
                 nombreCompetenciaTextField.requestFocus();
-
                 return false;
             }
         }

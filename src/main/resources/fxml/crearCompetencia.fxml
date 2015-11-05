@@ -108,7 +108,7 @@
                                                 <Font size="13.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="errorLugaresLabel" minWidth="280.0" prefHeight="17.0" prefWidth="280.0" styleClass="error" text="Debe seleccionar al menos un lugar." visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                        <Label fx:id="errorLugaresLabel" alignment="CENTER_RIGHT" minWidth="280.0" prefHeight="17.0" prefWidth="280.0" styleClass="error" text="Debe seleccionar al menos un lugar." visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                                             <opaqueInsets>
                                                 <Insets />
                                             </opaqueInsets>
