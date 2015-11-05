@@ -64,17 +64,53 @@ public class PreloaderController implements ControlledScreen {
         lugar3.setUsuario(usuario1);
         lugar3.setNombre("Cantona");
 
+        LugarDeRealizacion lugar4= new LugarDeRealizacion() ;
+        lugar4.setUsuario(usuario1);
+        lugar4.setNombre("Marado");
+
+        LugarDeRealizacion lugar5= new LugarDeRealizacion() ;
+        lugar5.setUsuario(usuario1);
+        lugar5.setNombre("Porto F5");
+
+        LugarDeRealizacion lugar6= new LugarDeRealizacion() ;
+        lugar6.setUsuario(usuario1);
+        lugar6.setNombre("Il Calcio");
+
+        LugarDeRealizacion lugar7= new LugarDeRealizacion() ;
+        lugar7.setUsuario(usuario1);
+        lugar7.setNombre("El Uniazo");
+
+        LugarDeRealizacion lugar8= new LugarDeRealizacion() ;
+        lugar8.setUsuario(usuario1);
+        lugar8.setNombre("Marangoni");
+
         rugby.addLugarDeRealizacion(lugar1);
         rugby.addLugarDeRealizacion(lugar2);
         futbol.addLugarDeRealizacion(lugar1);
         futbol.addLugarDeRealizacion(lugar3);
+        futbol.addLugarDeRealizacion(lugar4);
+        futbol.addLugarDeRealizacion(lugar5);
+        futbol.addLugarDeRealizacion(lugar6);
+        futbol.addLugarDeRealizacion(lugar7);
+        futbol.addLugarDeRealizacion(lugar8);
         lugar1.addDeporte(rugby);
+        lugar2.addDeporte(rugby);
         lugar1.addDeporte(futbol);
         lugar3.addDeporte(futbol);
-        lugar2.addDeporte(rugby);
+        lugar4.addDeporte(futbol);
+        lugar5.addDeporte(futbol);
+        lugar6.addDeporte(futbol);
+        lugar7.addDeporte(futbol);
+        lugar8.addDeporte(futbol);
+
         lugarDeRealizacionDao.crearLugar(lugar1);
         lugarDeRealizacionDao.crearLugar(lugar2);
         lugarDeRealizacionDao.crearLugar(lugar3);
+        lugarDeRealizacionDao.crearLugar(lugar4);
+        lugarDeRealizacionDao.crearLugar(lugar5);
+        lugarDeRealizacionDao.crearLugar(lugar6);
+        lugarDeRealizacionDao.crearLugar(lugar7);
+        lugarDeRealizacionDao.crearLugar(lugar8);
         deporteDao.crearDeporte(rugby);
         deporteDao.crearDeporte(futbol);
         deporteDao.crearDeporte(tenis);

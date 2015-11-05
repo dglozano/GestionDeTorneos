@@ -4,6 +4,8 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.DatosCrearCompetenciaDTO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +29,9 @@ public class crearCompetenciasController implements ControlledScreen {
     private GestorLugarRealizacion gestorLugarRealizacion;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDto;
 
+    private static final int MAX_TEXT_FIELD = 254;
+    private static final int MAX_TEXT_AREA = 65000;
+
     @FXML private TextField nombreCompetenciaTextField;
 
     @FXML private Label errorPuntuacionLabel;
@@ -42,6 +47,7 @@ public class crearCompetenciasController implements ControlledScreen {
     @FXML private CheckComboBox<String> lugaresComboBox;
     @FXML private TextArea reglamentoTextArea;
 
+
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
@@ -50,8 +56,27 @@ public class crearCompetenciasController implements ControlledScreen {
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
+        errorLugaresLabel.setVisible(false);
+        errorNombreLabel.setVisible(false);
+        errorPuntuacionLabel.setVisible(false);
         reglamentoTextArea.clear();
         nombreCompetenciaTextField.clear();
+        nombreCompetenciaTextField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    if (nombreCompetenciaTextField.getText().length() >= MAX_TEXT_FIELD) {
+                        nombreCompetenciaTextField.setText(nombreCompetenciaTextField.getText().substring(0, MAX_TEXT_FIELD));
+                    }
+                }
+        });
+        reglamentoTextArea.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    if (reglamentoTextArea.getText().length() >= MAX_TEXT_AREA) {
+                        reglamentoTextArea.setText(reglamentoTextArea.getText().substring(0, MAX_TEXT_AREA));
+                    }
+                }
+        });
         inicializarModalidades();
         inicializarDeportes();
         inicializarSets();
@@ -203,12 +228,6 @@ public class crearCompetenciasController implements ControlledScreen {
             nombreCompetenciaTextField.requestFocus();
             return false;
         }
-        else if(nombreCompetencia.length()>254){
-            errorNombreLabel.setText("El nombre no puede tener más de 254 caracteres.");
-            errorNombreLabel.setVisible(true);
-            nombreCompetenciaTextField.requestFocus();
-            return false;
-        }
         else{
             boolean nombreExistente = gestorCompetencia.existeNombre(nombreCompetencia);
             if(nombreExistente){
@@ -293,6 +312,4 @@ public class crearCompetenciasController implements ControlledScreen {
     public Object mensajeControladorAnterior(){
         return this.datosCrearCompetenciaDto;
     }
-
-
 }

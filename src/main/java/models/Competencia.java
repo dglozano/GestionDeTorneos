@@ -13,7 +13,7 @@ public class Competencia {
     private int id;
     @Column(name = "nom_comp")
     private String nombre;
-    @Column(name = "reglas_comp")
+    @Column(name = "reglas_comp",columnDefinition="TEXT")
     private String reglas;
     @Column(name = "pts_part_empatado")
     private int puntosPartidoEmpatado;
@@ -29,17 +29,7 @@ public class Competencia {
     private boolean eliminada;
     @Column(name = "otorga_tantos")
     private boolean otorgaTantosNoPresentarse;
-
-    public boolean isOtorgaTantosNoPresentarse() {
-        return otorgaTantosNoPresentarse;
-    }
-
-    public void setOtorgaTantosNoPresentarse(boolean otorgaTantosNoPresentarse) {
-        this.otorgaTantosNoPresentarse = otorgaTantosNoPresentarse;
-    }
-
     @Column(name = "fecha_elim")
-
     @Temporal(TemporalType.DATE)
     private Date fechaEliminada;
     @Column(name = "cant_sets")
@@ -231,6 +221,14 @@ public class Competencia {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isOtorgaTantosNoPresentarse() {
+        return otorgaTantosNoPresentarse;
+    }
+
+    public void setOtorgaTantosNoPresentarse(boolean otorgaTantosNoPresentarse) {
+        this.otorgaTantosNoPresentarse = otorgaTantosNoPresentarse;
     }
 
 

@@ -7,6 +7,7 @@ import controllers.general.VerCompetenciaCell;
 import dtos.CompetenciaDTO;
 import dtos.FiltrosCompetenciaDTO;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class misCompetenciasController implements ControlledScreen {
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
+
+    private static final int MAX_TEXT_FIELD = 254;
 
     @FXML private TextField nombreCompetenciaTextField;
     @FXML private ToggleGroup modalidadToggleGroup;
@@ -48,6 +51,14 @@ public class misCompetenciasController implements ControlledScreen {
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
+        nombreCompetenciaTextField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                        if (nombreCompetenciaTextField.getText().length() >= MAX_TEXT_FIELD) {
+                            nombreCompetenciaTextField.setText(nombreCompetenciaTextField.getText().substring(0, MAX_TEXT_FIELD));
+                        }
+                    }
+        });
         inicializarDeportes();
         inicializarEstados();
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();

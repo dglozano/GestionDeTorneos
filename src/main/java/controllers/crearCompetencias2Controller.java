@@ -10,6 +10,7 @@ import dtos.DisponibilidadLugar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -63,6 +64,8 @@ public class crearCompetencias2Controller implements ControlledScreen {
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         datosCrearCompetenciaDtoAnterior = (DatosCrearCompetenciaDTO) myController.getControladorAnterior().mensajeControladorAnterior();
+        errorPuntuacion1.setVisible(false);
+        errorPuntuacion2.setVisible(false);
         cargarLugares();
         cargarSpinners();
     }
