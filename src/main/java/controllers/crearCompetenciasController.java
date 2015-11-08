@@ -19,6 +19,7 @@ import services.GestorDeporte;
 import services.GestorLugarRealizacion;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class crearCompetenciasController implements ControlledScreen {
@@ -53,6 +54,7 @@ public class crearCompetenciasController implements ControlledScreen {
     }
 
     public void inicializar(){
+        System.out.println("Id comp clickeada "+myController.getControladorAnterior().mensajeControladorAnterior());
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
@@ -144,6 +146,7 @@ public class crearCompetenciasController implements ControlledScreen {
         lugaresComboBox.getCheckModel().clearChecks();
         lugaresComboBox.getItems().clear();
         List<String> lugaresNombres = gestorLugarRealizacion.buscarLugaresDelUsuario(deporteSeleccionado);
+        Collections.sort(lugaresNombres);
         final ObservableList<String> lugaresObservable = FXCollections.observableArrayList();
         for(String lugarNombre: lugaresNombres){
             lugarNombre = (Character.isLetter(lugarNombre.charAt(0))) ?
@@ -169,6 +172,7 @@ public class crearCompetenciasController implements ControlledScreen {
         deportesComboBox.setValue(null);
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
         List<String> listaDeportes = gestorDeporte.listarDeportes();
+        Collections.sort(listaDeportes);
         for(String deporte: listaDeportes){
             deporte = (Character.isLetter(deporte.charAt(0))) ?
                     Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase()

@@ -20,6 +20,9 @@ import models.Modalidad;
 import services.GestorCompetencia;
 import services.GestorDeporte;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class misCompetenciasController implements ControlledScreen {
@@ -29,6 +32,7 @@ public class misCompetenciasController implements ControlledScreen {
     private GestorDeporte gestorDeporte;
 
     private static final int MAX_TEXT_FIELD = 254;
+    private int idCompetenciaClickeada;
 
     @FXML private TextField nombreCompetenciaTextField;
     @FXML private ToggleGroup modalidadToggleGroup;
@@ -51,6 +55,8 @@ public class misCompetenciasController implements ControlledScreen {
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
+        nombreCompetenciaTextField.clear();
+        if (modalidadToggleGroup.getSelectedToggle() != null) modalidadToggleGroup.getSelectedToggle().setSelected(false);
         nombreCompetenciaTextField.lengthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -66,17 +72,15 @@ public class misCompetenciasController implements ControlledScreen {
         tDeporte.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("deporte"));
         tEstado.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("estado"));
         tModalidad.setCellValueFactory(new PropertyValueFactory<CompetenciaDTO, String>("modalidad"));
+        Collections.sort(listaCompetencias, new CompetenciaDTOComparator<CompetenciaDTO>());
         setearFilas(listaCompetencias);
         nombreCompetenciaTextField.requestFocus();
     }
 
-    public Object mensajeControladorAnterior(){
-        return null;
-    };
-
     private void inicializarDeportes() {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
         List<String> listaDeportes = gestorDeporte.listarDeportes();
+        Collections.sort(listaDeportes);
         deportesComboBox.getItems().add("Todos");
         for(String deporte: listaDeportes){
             deporte = Character.toUpperCase(deporte.charAt(0)) + deporte.substring(1).toLowerCase();
@@ -112,10 +116,11 @@ public class misCompetenciasController implements ControlledScreen {
         });
 
         // Creamos una nueva factory de cell con un botón de Ver competencia
+        misCompetenciasController controller = this;
         tAcciones.setCellFactory(new Callback<TableColumn<CompetenciaDTO, Boolean>, TableCell<CompetenciaDTO, Boolean>>() {
             @Override
             public TableCell<CompetenciaDTO, Boolean> call(TableColumn<CompetenciaDTO, Boolean> personBooleanTableColumn) {
-                return new VerCompetenciaCell(tabla);
+                return new VerCompetenciaCell(controller);
             }
         });
     }
@@ -200,4 +205,22 @@ public class misCompetenciasController implements ControlledScreen {
         modal.close();
     }
 
+    public void setIdCompetenciaClickeada(int id){
+        this.idCompetenciaClickeada = id;
+    }
+
+    public Object mensajeControladorAnterior(){
+        return idCompetenciaClickeada;
+    }
+
+    public PrincipalController getMyController(){
+        return myController;
+    }
+
+    class CompetenciaDTOComparator<T> implements  Comparator<T> {
+        @Override
+        public int compare(T a, T b) {
+            return ((CompetenciaDTO)a).getNombre().compareTo(((CompetenciaDTO)b).getNombre());
+        }
+    }
 }

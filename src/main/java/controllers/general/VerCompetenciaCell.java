@@ -1,5 +1,7 @@
 package controllers.general;
 
+import app.Main;
+import controllers.misCompetenciasController;
 import dtos.CompetenciaDTO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -26,7 +25,7 @@ public class VerCompetenciaCell extends TableCell<CompetenciaDTO, Boolean> {
     private Stage modal;
     private Parent parent;
 
-    public VerCompetenciaCell(final TableView table) {
+    public VerCompetenciaCell(misCompetenciasController controlador) {
         paddedButton.setPadding(new Insets(3));
         paddedButton.getChildren().add(verButton);
 
@@ -36,7 +35,11 @@ public class VerCompetenciaCell extends TableCell<CompetenciaDTO, Boolean> {
 
         verButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent actionEvent) {
-                mostrarComingSoon();
+                int idCompetenciaClickeada =((CompetenciaDTO)getTableView().getItems().get(getIndex())).getId();
+                controlador.setIdCompetenciaClickeada(idCompetenciaClickeada);
+                /*TODO 00: Hacer que vaya a CU20 ver competencia*/
+                controlador.getMyController().setScreen(Main.vista2ID,controlador);
+                //mostrarComingSoon();
             }
         });
     }
