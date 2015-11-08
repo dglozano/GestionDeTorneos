@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
+  <children>
+    <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Archivo">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Registrar" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+      <children>
+            <VBox id="container" alignment="TOP_CENTER" prefHeight="579.0" prefWidth="1000.0">
+               <children>
+                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subline" text="Tabla de posiciones" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="35.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TableView fx:id="tabla" prefHeight="315.0" prefWidth="779.0">
+                     <columns>
+                        <TableColumn fx:id="tNombre" prefWidth="247.0" text="Equipo" />
+                        <TableColumn fx:id="tDeporte" prefWidth="52.0" text="Pts" />
+                        <TableColumn fx:id="tEstado" prefWidth="52.0" text="J" />
+                        <TableColumn fx:id="tModalidad" prefWidth="48.0" text="G" />
+                        <TableColumn prefWidth="51.0" text="E" />
+                        <TableColumn prefWidth="48.0" text="P" />
+                        <TableColumn prefWidth="76.0" text="A favor" />
+                        <TableColumn prefWidth="92.0" text="En contra" />
+                        <TableColumn prefWidth="89.0" text="Diferencia" />
+                        <TableColumn prefWidth="142.0" text="Pts por presentarse" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
+                     <children>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Exportar a planilla" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Imprimir" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-alt" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/main.css" />
+  </stylesheets>
+</VBox>
