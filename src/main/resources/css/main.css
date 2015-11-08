@@ -81,6 +81,13 @@
     -fx-text-fill: #313233;
     -fx-border-color: #313233;
 }
+.btn-error{
+    -fx-background-color: #F54A4A;
+    -fx-border-color: #F54A4A;
+}
+.btn-error:hover{
+    -fx-background-color: #FF6363;
+}
 .filterPane,
 .filterPane .btn-alt{
     -fx-background-color: #f5f5f5;
@@ -90,7 +97,11 @@
     -fx-pref-height: 30px;
     -fx-font-size: 13px;
 }
-
+.file-chooser{
+    -fx-min-width: 213px;
+    -fx-pref-width: 213px;
+    -fx-pref-height: 30px;
+}
 .h3{
     -fx-font-size: 16px;
 }
@@ -151,4 +162,9 @@
     -fx-scale-y: 1.75;
     -fx-font-weight: bold;
     -fx-font-style: none;
+}
+
+.subline{
+    -fx-fill: #999;
+    -fx-font-size: 16px;
 }

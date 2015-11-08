@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
+  <children>
+    <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Archivo">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Registrar" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+      <children>
+            <VBox id="container" prefHeight="579.0" prefWidth="1000.0">
+               <children>
+                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subline" text="Alta participante" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="35.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox prefHeight="322.0" prefWidth="898.0" styleClass="filterPane">
+                     <children>
+                        <GridPane hgap="10.0" prefHeight="264.0" prefWidth="468.0" styleClass="filterPane" vgap="15.0">
+                           <children>
+                              <Label alignment="CENTER" style="&#10;" text="Nombre (*)" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField text="Augusto Tibalt" GridPane.columnIndex="1" />
+                              <TextField prefHeight="25.0" prefWidth="208.0" text="aug@hotmail.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label alignment="CENTER" style="&#10;" text="Correo electrónico (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" style="&#10;" text="Imagen" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="243.0" text="Cargar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-alt" />
+                                    <String fx:value="btn-small" />
+                                    <String fx:value="file-chooser" />
+                                 </styleClass>
+                              </Button>
+                              <Label fx:id="errorNombre" alignment="CENTER_RIGHT" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="542.0" styleClass="error" text="Ya existe un usuario con ese nombre." textAlignment="RIGHT" visible="false" GridPane.columnIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets top="52.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="errorEmail" alignment="CENTER_RIGHT" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="542.0" styleClass="error" text="Ya existe un usuario con el mismo correo electrónico." textAlignment="RIGHT" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets top="52.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </GridPane>
+                        <ImageView fitHeight="242.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" styleClass="profile">
+                           <image>
+                              <Image url="@../image/profile.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="16.0" top="23.0" />
+                           </HBox.margin></ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
+                     <children>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Dar de alta" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Cancelar" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-alt" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/main.css" />
+  </stylesheets>
+</VBox>
