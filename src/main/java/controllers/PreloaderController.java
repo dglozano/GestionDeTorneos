@@ -30,7 +30,7 @@ public class PreloaderController implements ControlledScreen {
         Runnable levantarBD = () -> {
             EntityManager em = MiEntityManager.get();
             seteoDatosPrueba();
-            myController.setScreen(Main.vista1ID);
+            myController.setScreen(Main.vistaMisCompetenciasId);
             em.close();
         };
         Thread hiloBD = new Thread(levantarBD);
@@ -118,15 +118,20 @@ public class PreloaderController implements ControlledScreen {
         Competencia competencia1= new Competencia();
         competencia1.setUsuario(usuario1);
         competencia1.setNombre("TORNEO DOS ORILLAS");
-        competencia1.setModalidad(Modalidad.ELIM_SIMPLE);
+        competencia1.setModalidad(Modalidad.LIGA);
         competencia1.setEstado(Estado.CREADA);
+        competencia1.setSistemaPuntuacion(SistemaPuntuacion.SET);
+        competencia1.setAceptaEmpate(false);
         competencia1.setDeporte(rugby);
         competenciaDAO.crearCompetencia(competencia1);
+
         Competencia competencia2= new Competencia();
         competencia2.setUsuario(usuario1);
         competencia2.setNombre("LIGA SANTAFESINA");
-        competencia2.setModalidad(Modalidad.ELIM_DOBLE);
+        competencia2.setModalidad(Modalidad.LIGA);
         competencia2.setEstado(Estado.EN_DISPUTA);
+        competencia2.setSistemaPuntuacion(SistemaPuntuacion.RESULTADO_FINAL);
+        competencia2.setAceptaEmpate(true);
         competencia2.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia2);
 
@@ -136,6 +141,8 @@ public class PreloaderController implements ControlledScreen {
         competencia3.setUsuario(usuario1);
         competencia3.setNombre("TORNEO AFA");
         competencia3.setModalidad(Modalidad.LIGA);
+        competencia3.setSistemaPuntuacion(SistemaPuntuacion.PUNTUACION);
+        competencia3.setAceptaEmpate(true);
         competencia3.setEstado(Estado.FINALIZADA);
         competencia3.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia3);

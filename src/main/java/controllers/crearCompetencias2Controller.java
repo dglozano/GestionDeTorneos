@@ -177,7 +177,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
     };
 
     public void irAlPasoUno(ActionEvent actionEvent){
-        myController.setScreen(Main.vista2ID,this);
+        myController.setScreen(Main.vistaCrearCompetenciaPasoUnoId,this);
     }
 
     public void aceptaEmpateSelected(ActionEvent actionEvent){
@@ -203,7 +203,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
     public void close(ActionEvent actionEvent){
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
-        myController.setScreen(Main.vista1ID);
+        myController.setScreen(Main.vistaMisCompetenciasId);
     }
 
     private boolean validarDatos() {

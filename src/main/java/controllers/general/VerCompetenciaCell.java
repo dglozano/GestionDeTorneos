@@ -38,7 +38,7 @@ public class VerCompetenciaCell extends TableCell<CompetenciaDTO, Boolean> {
                 int idCompetenciaClickeada =((CompetenciaDTO)getTableView().getItems().get(getIndex())).getId();
                 controlador.setIdCompetenciaClickeada(idCompetenciaClickeada);
                 /*TODO 00: Hacer que vaya a CU20 ver competencia*/
-                controlador.getMyController().setScreen(Main.vista2ID,controlador);
+                controlador.getMyController().setScreen(Main.vistaVerCompetenciaId,controlador);
                 //mostrarComingSoon();
             }
         });

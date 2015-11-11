@@ -16,6 +16,10 @@ public class GestorCompetencia {
         competenciaDao.crearCompetencia(c);
     }
 
+    public Competencia buscarCompetenciaPorId(int idCompetencia){
+        return competenciaDao.buscarCompetenciaPorId(idCompetencia);
+    }
+
     public List<CompetenciaDTO> listarTodasMisCompetencias(){
         int idUsuarioLogueado = usuarioLogueado.getUsuarioLogueado().getId();
         List<Competencia> competenciasUsuario = competenciaDao.buscarTodasCompetencias(idUsuarioLogueado);

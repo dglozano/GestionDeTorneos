@@ -20,7 +20,6 @@ import models.Modalidad;
 import services.GestorCompetencia;
 import services.GestorDeporte;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -126,7 +125,7 @@ public class misCompetenciasController implements ControlledScreen {
     }
 
     public void irCrearCompetencia(ActionEvent actionEvent) {
-        myController.setScreen(Main.vista2ID, this);
+        myController.setScreen(Main.vistaCrearCompetenciaPasoUnoId, this);
     }
 
     public void filtrarCompetencias(ActionEvent actionEvent){

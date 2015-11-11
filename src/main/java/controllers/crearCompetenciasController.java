@@ -259,13 +259,13 @@ public class crearCompetenciasController implements ControlledScreen {
     }
 
     public void irMisCompetencias(ActionEvent actionEvent) {
-        myController.setScreen(Main.vista1ID);
+        myController.setScreen(Main.vistaMisCompetenciasId);
     }
 
     public void continuar(ActionEvent actionEvent) {
         if(validacionesOk()){
             crearDto();
-            myController.setScreen(Main.vista3ID, this);
+            myController.setScreen(Main.vistaCrearCompetenciaPasoDosId, this);
         }
     }
 

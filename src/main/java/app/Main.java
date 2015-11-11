@@ -12,14 +12,18 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application{
-    public static String vista0ID = "preloader";
-    public static String vista0Archivo = "preloader.fxml";
-    public static String vista1ID = "misCompetencias";
-    public static String vista1Archivo = "misCompetencias.fxml";
-    public static String vista2ID = "crearCompetencia";
-    public static String vista2Archivo = "crearCompetencia.fxml";
-    public static String vista3ID = "crearCompetencia2";
-    public static String vista3Archivo = "crearCompetencia2.fxml";
+    public static String vistaPreloaderId = "preloader";
+    public static String vistaPreloaderArchivo = "preloader.fxml";
+    public static String vistaMisCompetenciasId = "misCompetencias";
+    public static String vistaMisCompetenciasArchivo = "misCompetencias.fxml";
+    public static String vistaCrearCompetenciaPasoUnoId = "crearCompetencia";
+    public static String vistaCrearCompetenciaPasoUnoArchivo = "crearCompetencia.fxml";
+    public static String vistaCrearCompetenciaPasoDosId = "crearCompetencia2";
+    public static String vistaCrearCompetenciaPasoDosArchivo = "crearCompetencia2.fxml";
+    public static String vistaTablaPosicionesId = "tablaPosiciones";
+    public static String vistaTablaPosicionesArchivo = "tablaPosiciones.fxml";
+    public static String vistaVerCompetenciaId="verCompetencia";
+    public static String getVistaVerCompetenciaArchivo = "verCompetencia.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -30,12 +34,14 @@ public class Main extends Application{
         Font.loadFont(getClass().getClassLoader().getResource("fonts/OpenSans-Regular.ttf").toExternalForm(), 10);
 
         PrincipalController mainContainer = new PrincipalController();
-        mainContainer.loadScreen(Main.vista0ID, Main.vista0Archivo);
-        mainContainer.loadScreen(Main.vista1ID, Main.vista1Archivo);
-        mainContainer.loadScreen(Main.vista2ID, Main.vista2Archivo);
-        mainContainer.loadScreen(Main.vista3ID, Main.vista3Archivo);
+        mainContainer.loadScreen(Main.vistaPreloaderId, Main.vistaPreloaderArchivo);
+        mainContainer.loadScreen(Main.vistaMisCompetenciasId, Main.vistaMisCompetenciasArchivo);
+        mainContainer.loadScreen(Main.vistaCrearCompetenciaPasoUnoId, Main.vistaCrearCompetenciaPasoUnoArchivo);
+        mainContainer.loadScreen(Main.vistaCrearCompetenciaPasoDosId, Main.vistaCrearCompetenciaPasoDosArchivo);
+        mainContainer.loadScreen(Main.vistaTablaPosicionesId, Main.vistaTablaPosicionesArchivo);
+        mainContainer.loadScreen(Main.vistaVerCompetenciaId,Main.getVistaVerCompetenciaArchivo);
 
-        mainContainer.setScreen(Main.vista0ID);
+        mainContainer.setScreen(Main.vistaPreloaderId);
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);

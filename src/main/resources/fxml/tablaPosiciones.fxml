@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tablaPosicionesController">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
@@ -40,18 +40,17 @@
                         <Insets bottom="35.0" />
                      </VBox.margin>
                   </Text>
-                  <TableView fx:id="tabla" prefHeight="315.0" prefWidth="779.0">
+                  <TableView fx:id="posicionesTableView" prefHeight="315.0" prefWidth="779.0">
                      <columns>
-                        <TableColumn fx:id="tNombre" prefWidth="247.0" text="Equipo" />
-                        <TableColumn fx:id="tDeporte" prefWidth="52.0" text="Pts" />
-                        <TableColumn fx:id="tEstado" prefWidth="52.0" text="J" />
-                        <TableColumn fx:id="tModalidad" prefWidth="48.0" text="G" />
-                        <TableColumn prefWidth="51.0" text="E" />
-                        <TableColumn prefWidth="48.0" text="P" />
-                        <TableColumn prefWidth="76.0" text="A favor" />
-                        <TableColumn prefWidth="92.0" text="En contra" />
-                        <TableColumn prefWidth="89.0" text="Diferencia" />
-                        <TableColumn prefWidth="142.0" text="Pts por presentarse" />
+                        <TableColumn fx:id="nombreColumna" prefWidth="271.0" text="Equipo" />
+                        <TableColumn fx:id="puntosColumna" prefWidth="52.0" text="Pts" />
+                        <TableColumn fx:id="jugadosColumna" prefWidth="52.0" text="J" />
+                        <TableColumn fx:id="ganadosColumna" prefWidth="48.0" text="G" />
+                        <TableColumn fx:id="empatadosColumna" prefWidth="51.0" text="E" />
+                        <TableColumn fx:id="perdidosColumna" prefWidth="48.0" text="P" />
+                        <TableColumn fx:id="favorColumna" prefWidth="76.0" text="A favor" />
+                        <TableColumn fx:id="contraColumna" prefWidth="92.0" text="En contra" />
+                        <TableColumn fx:id="diferenciaColumna" prefWidth="89.0" text="Diferencia" />
                      </columns>
                   </TableView>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
@@ -66,7 +65,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                        <Button onAction="#volver" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

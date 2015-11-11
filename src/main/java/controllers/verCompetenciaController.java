@@ -1,14 +1,16 @@
 package controllers;
 
+import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import models.Modalidad;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import services.GestorCompetencia;
 
-import javax.xml.soap.Text;
-import java.awt.*;
+
 
 /**
  * Created by Kevin on 09/11/2015.
@@ -17,6 +19,7 @@ public class verCompetenciaController implements ControlledScreen{
 
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
+    private int idCompetencia;
 
     @FXML private TextField modalidadTextField;
     @FXML private TextField deporteTextField;
@@ -31,10 +34,10 @@ public class verCompetenciaController implements ControlledScreen{
 
 
    public void inicializar() {
-        int compId = (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
+        idCompetencia= (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
         gestorCompetencia = new GestorCompetencia();
-        CompetenciaDTO competencia = gestorCompetencia.getCompetencia(compId);
-        title.setValue(competencia.getNombre());
+        CompetenciaDTO competencia = gestorCompetencia.getCompetencia(idCompetencia);
+        title.setText(competencia.getNombre());
         deporteTextField.setText(competencia.getDeporte());
         modalidadTextField.setText(competencia.getModalidad());
         estadoTextField.setText(competencia.getEstado());
@@ -43,6 +46,16 @@ public class verCompetenciaController implements ControlledScreen{
 
 
     public Object mensajeControladorAnterior(){
-        return null;
+        return idCompetencia;
     }
+
+    public void volver(ActionEvent actionEvent){
+        myController.setScreen(Main.vistaMisCompetenciasId);
+    }
+
+    public void verTablaPosiciones(ActionEvent actionEvent){
+        myController.setScreen(Main.vistaTablaPosicionesId);
+    }
+
+
 }
