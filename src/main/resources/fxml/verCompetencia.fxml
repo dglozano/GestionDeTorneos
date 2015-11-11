@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.verCompetenciaController">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
@@ -24,7 +24,7 @@
       <children>
             <VBox id="container" prefHeight="579.0" prefWidth="1000.0">
                <children>
-                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                  <Text id="title" fx:id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -59,8 +59,8 @@
                               <Font size="13.0" />
                             </font>
                           </Label>
-                              <TextField disable="true" text="Eliminatoria Simple" GridPane.columnIndex="1" />
-                              <TextField disable="true" text="Futbol" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField disable="true" fx:id="modalidadTextField" GridPane.columnIndex="1" />
+                              <TextField disable="true" fx:id="deporteTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" style="&#10;" text="Deporte" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />
@@ -71,13 +71,13 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField disable="true" text="En disputa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField disable="true" fx:id="estadoTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label alignment="CENTER" style="&#10;" text="Próximo encuentro" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField disable="true" text="CRAI vs Panda Team" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField disable="true" fx:id="proximoEncuentroTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                            <VBox.margin>
                               <Insets />

@@ -48,6 +48,17 @@ public class GestorCompetencia {
         return listaCompetenciasDTO;
     }
 
+    public CompetenciaDTO getCompetencia(int idComp){
+        Competencia comp = competenciaDao.buscarCompetenciaPorId(idComp);
+        String nombre = comp.getNombre();
+        String modalidad = comp.getModalidad().getModalidadString();
+        String deporte = comp.getDeporte().getNombre();
+        String estado = comp.getEstado().getEstadoString();
+        CompetenciaDTO competencia = new CompetenciaDTO(idComp,nombre,deporte,estado,modalidad);
+        /*TODO 01: Agregar proximos encuentros cuando el fixture este funcionando*/
+        return competencia;
+    }
+
     public boolean existeNombre(String nombre){
         boolean existe = false;
         List<Competencia> listaCompetencias = competenciaDao.buscarTodasCompetencias();
@@ -139,4 +150,8 @@ public class GestorCompetencia {
         }
         return null;
     }
+
+
 }
+
+

@@ -7,6 +7,7 @@ package models;
 public class UsuarioLogueado {
 
     private static UsuarioLogueado instance = new UsuarioLogueado();
+
     private Usuario usuarioLogueado;
 
     private UsuarioLogueado(){}
