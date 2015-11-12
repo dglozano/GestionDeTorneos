@@ -79,43 +79,7 @@ public class verCompetenciaController implements ControlledScreen{
             myController.setScreen(Main.vistaTablaPosicionesId);
         }
         else{
-                mostrarPopUpErrorTablaPosiciones();
-        }
-    }
-
-    private void mostrarPopUpErrorTablaPosiciones(){
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupErrorTablaPosiciones.fxml"));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void mostrarPopUpEnDesarrollo(){
-       final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupEnDesarrollo.fxml"));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
+                mostrarPopUp("fxml/popupErrorTablaPosiciones.fxml");
         }
     }
 
@@ -128,12 +92,42 @@ public class verCompetenciaController implements ControlledScreen{
         myController.setScreen(Main.vistaListarParticipantesId);
     }
 
-    public void irDarDeBaja(ActionEvent actionEvent){
-        mostrarPopUpEnDesarrollo();
+    public void irDarDeBaja(ActionEvent actionEvent) {
+        mostrarPopUp("fxml/popupEnDesarrollo.fxml");
     }
 
-    public void irModificarCompetencia(ActionEvent actionEvent){
-        mostrarPopUpEnDesarrollo();
+    public void irModificarCompetencia(ActionEvent actionEvent) {
+        mostrarPopUp("fxml/popupEnDesarrollo.fxml");
+    }
+
+    public void irGenerarFixture(ActionEvent actionEvent){
+        boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
+        boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
+        if(estaEnDisputa || estaFinalizada){
+            mostrarPopUp("fxml/popupErrorFixture.fxml");
+        }
+        else{
+            //TODO 01: gestor de competencia - generar fixture
+            //TODO 02: mostrar pop up fixture generado con exito
+        }
+    }
+
+    private void mostrarPopUp(String archivoFXML){
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(archivoFXML));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -102,7 +102,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Generar Fixture" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button onAction="#irGenerarFixture" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Generar Fixture" textFill="WHITE" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
