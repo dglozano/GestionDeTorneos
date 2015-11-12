@@ -23,7 +23,11 @@ public class Main extends Application{
     public static String vistaTablaPosicionesId = "tablaPosiciones";
     public static String vistaTablaPosicionesArchivo = "tablaPosiciones.fxml";
     public static String vistaVerCompetenciaId="verCompetencia";
-    public static String getVistaVerCompetenciaArchivo = "verCompetencia.fxml";
+    public static String vistaVerCompetenciaArchivo = "verCompetencia.fxml";
+    public static String vistaListarParticipantesId="listarParticipantes";
+    public static String vistaListarParticipantesArchivo = "listarParticipantes.fxml";
+    public static String vistaAltaParticipanteId="altaParticipante";
+    public static String vistaAltaParticipanteArchivo = "altaParticipante.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,7 +43,9 @@ public class Main extends Application{
         mainContainer.loadScreen(Main.vistaCrearCompetenciaPasoUnoId, Main.vistaCrearCompetenciaPasoUnoArchivo);
         mainContainer.loadScreen(Main.vistaCrearCompetenciaPasoDosId, Main.vistaCrearCompetenciaPasoDosArchivo);
         mainContainer.loadScreen(Main.vistaTablaPosicionesId, Main.vistaTablaPosicionesArchivo);
-        mainContainer.loadScreen(Main.vistaVerCompetenciaId,Main.getVistaVerCompetenciaArchivo);
+        mainContainer.loadScreen(Main.vistaVerCompetenciaId,Main.vistaVerCompetenciaArchivo);
+        mainContainer.loadScreen(Main.vistaListarParticipantesId,Main.vistaListarParticipantesArchivo);
+        mainContainer.loadScreen(Main.vistaAltaParticipanteId,Main.vistaAltaParticipanteArchivo);
 
         mainContainer.setScreen(Main.vistaPreloaderId);
 

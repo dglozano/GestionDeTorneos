@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.misCompetenciasController">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.listarParticipantesController">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
@@ -53,12 +53,12 @@
                   </TableView>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Agregar participante" textFill="WHITE">
+                        <Button onAction="#irAltaParticipante" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Agregar participante" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                        <Button onAction="#volver" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

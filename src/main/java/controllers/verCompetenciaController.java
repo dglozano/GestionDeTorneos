@@ -6,10 +6,23 @@ import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import models.Estado;
+import models.Modalidad;
 import services.GestorCompetencia;
 
+import javax.swing.*;
+import java.io.IOException;
 
 
 /**
@@ -20,12 +33,17 @@ public class verCompetenciaController implements ControlledScreen{
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
     private int idCompetencia;
+    private CompetenciaDTO competenciaDTO;
+    private Stage modal;
+    private Parent parent;
 
     @FXML private TextField modalidadTextField;
     @FXML private TextField deporteTextField;
     @FXML private TextField estadoTextField;
     @FXML private TextField proximoEncuentroTextField;
     @FXML private Text title;
+    @FXML private Button okButton;
+    @FXML private Label detailsLabel;
 
 
     public void setScreenParent(PrincipalController screenParent){
@@ -36,11 +54,11 @@ public class verCompetenciaController implements ControlledScreen{
    public void inicializar() {
         idCompetencia= (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
         gestorCompetencia = new GestorCompetencia();
-        CompetenciaDTO competencia = gestorCompetencia.getCompetencia(idCompetencia);
-        title.setText(competencia.getNombre());
-        deporteTextField.setText(competencia.getDeporte());
-        modalidadTextField.setText(competencia.getModalidad());
-        estadoTextField.setText(competencia.getEstado());
+        competenciaDTO = gestorCompetencia.getCompetencia(idCompetencia);
+        title.setText(competenciaDTO.getNombre());
+        deporteTextField.setText(competenciaDTO.getDeporte());
+        modalidadTextField.setText(competenciaDTO.getModalidad());
+        estadoTextField.setText(competenciaDTO.getEstado());
         /* TODO 02: setear proximo encuentro cuando funcione fixture */
     }
 
@@ -54,8 +72,68 @@ public class verCompetenciaController implements ControlledScreen{
     }
 
     public void verTablaPosiciones(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaTablaPosicionesId);
+        boolean esLiga = competenciaDTO.getModalidad().equals(Modalidad.LIGA.getModalidadString());
+        boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
+        boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
+        if(esLiga && (estaEnDisputa || estaFinalizada )){
+            myController.setScreen(Main.vistaTablaPosicionesId);
+        }
+        else{
+                mostrarPopUpErrorTablaPosiciones();
+        }
     }
 
+    private void mostrarPopUpErrorTablaPosiciones(){
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupErrorTablaPosiciones.fxml"));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarPopUpEnDesarrollo(){
+       final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupEnDesarrollo.fxml"));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void close(ActionEvent actionEvent){
+        Stage modal = (Stage)okButton.getScene().getWindow();
+        modal.close();
+    }
+
+    public void irListarParticipantes(ActionEvent actionEvent){
+        myController.setScreen(Main.vistaListarParticipantesId);
+    }
+
+    public void irDarDeBaja(ActionEvent actionEvent){
+        mostrarPopUpEnDesarrollo();
+    }
+
+    public void irModificarCompetencia(ActionEvent actionEvent){
+        mostrarPopUpEnDesarrollo();
+    }
 
 }

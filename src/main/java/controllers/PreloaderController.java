@@ -118,8 +118,8 @@ public class PreloaderController implements ControlledScreen {
         Competencia competencia1= new Competencia();
         competencia1.setUsuario(usuario1);
         competencia1.setNombre("TORNEO DOS ORILLAS");
-        competencia1.setModalidad(Modalidad.LIGA);
-        competencia1.setEstado(Estado.CREADA);
+        competencia1.setModalidad(Modalidad.ELIM_DOBLE);
+        competencia1.setEstado(Estado.EN_DISPUTA);
         competencia1.setSistemaPuntuacion(SistemaPuntuacion.SET);
         competencia1.setAceptaEmpate(false);
         competencia1.setDeporte(rugby);

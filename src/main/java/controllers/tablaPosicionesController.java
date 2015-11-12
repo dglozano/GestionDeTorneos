@@ -63,11 +63,12 @@ public class tablaPosicionesController implements ControlledScreen {
         posicionesTableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         /*TODO 00: No se por que la primera vez el ancho de la tabla es cero. Puse que te tome el prefWidth si es 0, pero queda apenas mal"*/
         double prefWidth= posicionesTableView.getWidth();
-        if(prefWidth == 0.0) prefWidth=posicionesTableView.getPrefWidth();
+        if(prefWidth == 0.0) prefWidth=898.0;
         for(TableColumn columna: (List<TableColumn>)posicionesTableView.getColumns()){
             if(!columna.getId().equals("nombreColumna"))
                 prefWidth-=columna.getWidth();
         }
+
         nombreColumna.setResizable(true);
         nombreColumna.setPrefWidth(prefWidth);
     }

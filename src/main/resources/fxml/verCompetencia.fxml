@@ -112,17 +112,17 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Participantes" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button onAction="#irListarParticipantes" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Participantes" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Modificar" textFill="WHITE" GridPane.rowIndex="2">
+                              <Button onAction="#irModificarCompetencia" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Modificar" textFill="WHITE" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Dar de baja" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button onAction="#irDarDeBaja" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" text="Dar de baja" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
