@@ -4,6 +4,8 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
+import exceptions.FixtureException.EstadoErrorFixtureException;
+import exceptions.FixtureException.PocosParticipantesFixtureException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,6 @@ import models.Estado;
 import models.Modalidad;
 import services.GestorCompetencia;
 
-import javax.swing.*;
 import java.io.IOException;
 
 
@@ -101,14 +102,15 @@ public class verCompetenciaController implements ControlledScreen{
     }
 
     public void irGenerarFixture(ActionEvent actionEvent){
-        boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
-        boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
-        if(estaEnDisputa || estaFinalizada){
-            mostrarPopUp("fxml/popupErrorFixture.fxml");
+        try{
+            gestorCompetencia.generarFixture(idCompetencia);
+            mostrarPopUp("fxml/popupFixtureCreado.fxml");
         }
-        else{
-            //TODO 01: gestor de competencia - generar fixture
-            //TODO 02: mostrar pop up fixture generado con exito
+        catch(EstadoErrorFixtureException e){
+            mostrarPopUp("fxml/popupErrorFixtureEstado.fxml");
+        }
+        catch(PocosParticipantesFixtureException e){
+            mostrarPopUp("fxml/popupErrorFixtureParticipantes.fxml");
         }
     }
 

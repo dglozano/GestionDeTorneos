@@ -129,7 +129,7 @@ public class PreloaderController implements ControlledScreen {
         competencia2.setUsuario(usuario1);
         competencia2.setNombre("LIGA SANTAFESINA");
         competencia2.setModalidad(Modalidad.LIGA);
-        competencia2.setEstado(Estado.EN_DISPUTA);
+        competencia2.setEstado(Estado.CREADA);
         competencia2.setSistemaPuntuacion(SistemaPuntuacion.RESULTADO_FINAL);
         competencia2.setAceptaEmpate(true);
         competencia2.setDeporte(futbol);

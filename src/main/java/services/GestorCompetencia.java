@@ -1,9 +1,12 @@
 package services;
 import dao.CompetenciaDao;
 import dtos.*;
+import exceptions.FixtureException.EstadoErrorFixtureException;
+import exceptions.FixtureException.PocosParticipantesFixtureException;
 import models.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorCompetencia {
@@ -124,6 +127,46 @@ public class GestorCompetencia {
             unaDisponibilidad.setLugarDeRealizacion(lugar);
             competencia.addDisponibilidad(unaDisponibilidad);
         }
+    }
+
+    public void generarFixture(int idCompetencia) throws PocosParticipantesFixtureException,EstadoErrorFixtureException{
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        boolean estaEnDisputa = competencia.getEstado().equals(Estado.EN_DISPUTA);
+        boolean estaFinalizada = competencia.getEstado().equals(Estado.FINALIZADA);
+        if(estaEnDisputa || estaFinalizada){
+            throw new EstadoErrorFixtureException("La competencia esta en Disputa o Finalizada");
+        }
+        else {
+            switch (competencia.getModalidad()) {
+                case LIGA:
+                    generarFixtureLiga(competencia);
+                    break;
+                case ELIM_DOBLE:
+                    //NO IMPLEMENTADO
+                    System.out.println("Funcionalidad en desarrollo");
+                    break;
+                case ELIM_SIMPLE:
+                    //NO IMPLEMENTADO
+                    System.out.println("Funcionalidad en desarrollo");
+                    break;
+            }
+        }
+    }
+
+    private void generarFixtureLiga(Competencia competencia) throws PocosParticipantesFixtureException{
+        List<Participante> listaParticipantes = competencia.getParticipantes();
+        List<Disponibilidad> listaDisponibilidades = competencia.getDisponibilidades();
+        int totalParticipantes = listaParticipantes.size();
+        if(totalParticipantes < 2)
+            throw new PocosParticipantesFixtureException("La competencia debe tener por lo menos dos participantes");
+        if(totalParticipantes % 2 == 1){
+            totalParticipantes++;
+            Participante participanteLibre = new Participante(Participante.LIBRE);
+            listaParticipantes.add(participanteLibre);
+        }
+        Collections.shuffle(listaParticipantes);
+
+
     }
 
     public Modalidad asociarModalidad(String modalidadString) {

@@ -6,6 +6,9 @@ import java.util.List;
 
 @Entity
 public class Participante {
+
+    public static final String LIBRE = "LIBRE";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_participante")
@@ -16,7 +19,7 @@ public class Participante {
     private int puntos;
     @Column(name = "email_partic")
     private String email;
-    @Column(name ="es_libre")
+
     private boolean esLibre;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -62,6 +65,14 @@ public class Participante {
 
 
     public Participante() {
+        super();
+    }
+
+    public Participante(String esLibre){
+        super();
+        if(esLibre.equals(Participante.LIBRE)){
+            setEsLibre(true);
+        }
     }
 
     public void addModificacionParticipante(ModificacionParticipante modificacion) {

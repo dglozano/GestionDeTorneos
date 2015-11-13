@@ -41,9 +41,9 @@ public class Competencia {
     @Column (name = "sistemaPuntuacion")
     private SistemaPuntuacion sistemaPuntuacion;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_competencia")
-    private List<Participante> participantes;
+    private List<Participante> participantes = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_deporte")
     private Deporte deporte;
