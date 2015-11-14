@@ -145,7 +145,7 @@
     -fx-pref-width: 25px;
 }
 
-#tabla .table-column {
+.table-column {
   -fx-alignment: CENTER;
 }
 
