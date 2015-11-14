@@ -26,6 +26,7 @@ public class listarParticipantesController implements ControlledScreen {
         competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
         title.setText(competencia.getNombre());
     }
+    public void inicializar(String mensaje) {inicializar();};
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;

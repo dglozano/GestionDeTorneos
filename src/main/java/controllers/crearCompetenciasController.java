@@ -99,6 +99,8 @@ public class crearCompetenciasController implements ControlledScreen {
         nombreCompetenciaTextField.requestFocus();
 
     }
+    public void inicializar(String mensaje) {inicializar();};
+
 
     private void rellenarConDatosCargados() {
         nombreCompetenciaTextField.setText(datosCrearCompetenciaDto.getCompetencia());

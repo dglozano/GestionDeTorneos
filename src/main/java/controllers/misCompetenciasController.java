@@ -75,6 +75,8 @@ public class misCompetenciasController implements ControlledScreen {
         setearFilas(listaCompetencias);
         nombreCompetenciaTextField.requestFocus();
     }
+    public void inicializar(String mensaje) {inicializar();};
+
 
     private void inicializarDeportes() {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());

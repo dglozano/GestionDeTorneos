@@ -41,6 +41,7 @@ public class tablaPosicionesController implements ControlledScreen {
         title.setText(competencia.getNombre());
         setearColumnas();
     }
+    public void inicializar(String mensaje) {inicializar();};
 
     private void buscarCompetencia() {
         gestorCompetencia = new GestorCompetencia();

@@ -68,6 +68,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
         cargarLugares();
         cargarSpinners();
     }
+    public void inicializar(String mensaje) {inicializar();};
 
     private void cargarSpinners() {
         ptsGanadosSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
@@ -152,14 +153,31 @@ public class crearCompetencias2Controller implements ControlledScreen {
         tablaDisponibilidad.getItems().setAll(filas);
     }
 
-    private void mostrarPopupExito(){
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/popupCompetenciaCreada.fxml"));
+    private void mostrarPopUp(){
+        mostrarPopUp("", "");
+    }
+
+    private void mostrarPopUp(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
         try {
             parent = loader.load();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
             ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
             myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.initStyle(StageStyle.TRANSPARENT);
@@ -196,14 +214,14 @@ public class crearCompetencias2Controller implements ControlledScreen {
         if(validarDatos()){
             DatosCrearCompetenciaPaso2DTO datosPaso2= crearDtoPaso2();
             gestorCompetencia.crearCompetencia(datosCrearCompetenciaDtoAnterior, datosPaso2);
-            mostrarPopupExito();
+            mostrarPopUp("La competencia ha sido creada exitosamente.", "exito");
+            myController.setScreen(Main.vistaMisCompetenciasId);
         }
     }
 
     public void close(ActionEvent actionEvent){
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
-        myController.setScreen(Main.vistaMisCompetenciasId);
     }
 
     private boolean validarDatos() {

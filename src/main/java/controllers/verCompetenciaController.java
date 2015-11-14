@@ -52,7 +52,6 @@ public class verCompetenciaController implements ControlledScreen{
         myController = screenParent;
     }
 
-
    public void inicializar() {
         idCompetencia= (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
         gestorCompetencia = new GestorCompetencia();
@@ -63,7 +62,7 @@ public class verCompetenciaController implements ControlledScreen{
         estadoTextField.setText(competenciaDTO.getEstado());
         /* TODO 02: setear proximo encuentro cuando funcione fixture */
     }
-
+    public void inicializar(String mensaje) {inicializar();};
 
     public Object mensajeControladorAnterior(){
         return idCompetencia;
@@ -81,7 +80,7 @@ public class verCompetenciaController implements ControlledScreen{
             myController.setScreen(Main.vistaTablaPosicionesId);
         }
         else{
-                mostrarPopUp("fxml/popupErrorTablaPosiciones.fxml");
+                mostrarPopUp("La competencia no es de la modalidad Liga, no esta \n en Disputa o Finalizada.", "error");
         }
     }
 
@@ -95,36 +94,55 @@ public class verCompetenciaController implements ControlledScreen{
     }
 
     public void irDarDeBaja(ActionEvent actionEvent) {
-        mostrarPopUp("fxml/popupEnDesarrollo.fxml");
+        mostrarPopUp();
     }
 
     public void irModificarCompetencia(ActionEvent actionEvent) {
-        mostrarPopUp("fxml/popupEnDesarrollo.fxml");
+        mostrarPopUp();
     }
 
     public void irGenerarFixture(ActionEvent actionEvent){
         try{
             gestorCompetencia.generarFixture(idCompetencia);
-            mostrarPopUp("fxml/popupFixtureCreado.fxml");
+            mostrarPopUp("El fixture se ha generado exitosamente.", "exito");
             estadoTextField.setText(Estado.PLANIFICADA.getEstadoString());
         }
         catch(EstadoErrorFixtureException e){
-            mostrarPopUp("fxml/popupErrorFixtureEstado.fxml");
+            mostrarPopUp("La competencia ya esta en Disputa o Finalizada.", "error");
         }
         catch(PocosParticipantesFixtureException e){
-            mostrarPopUp("fxml/popupErrorFixtureParticipantes.fxml");
+            mostrarPopUp("La competencia debe tener por lo menos dos participantes.", "error");
         }
         catch (DisponibilidadesInsuficientesFixtureException e){
-            mostrarPopUp("fxml/popupErrorFixtureDisponibilidades.fxml");
+            mostrarPopUp("La competencia no tiene suficientes Disponibilidades asignadas.", "error");
         }
     }
 
-    private void mostrarPopUp(String archivoFXML){
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(archivoFXML));
+    private void mostrarPopUp(){
+        mostrarPopUp("","");
+    }
+
+    private void mostrarPopUp(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
         try {
             parent = loader.load();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.initStyle(StageStyle.TRANSPARENT);

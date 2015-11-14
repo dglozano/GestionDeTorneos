@@ -22,6 +22,7 @@ public class PreloaderController implements ControlledScreen {
     }
 
     public void inicializar(){};
+    public void inicializar(String mensaje) {inicializar();};
     public Object mensajeControladorAnterior(){
         return null;
     };

@@ -20,7 +20,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Competencia;
-import models.Estado;
 import services.GestorCompetencia;
 
 import java.io.IOException;
@@ -59,6 +58,8 @@ public class altaParticipanteController implements ControlledScreen {
         limpiarCampos();
         //TODO 03: FOTO
     }
+    public void inicializar(String mensaje) {inicializar();};
+
 
     private void limpiarCampos() {
         nombreParticipanteTextField.clear();
@@ -80,10 +81,10 @@ public class altaParticipanteController implements ControlledScreen {
             boolean teniaFixture = competencia.getFixture()!=null;
             crearParticipante();
             if(teniaFixture){
-                mostrarPopUp("fxml/popupNuevoParticipanteElimFixtureExito.fxml");
+                mostrarPopUp("El participante se ha agregado exitosamente. \nSe ha eliminado el Fixture.","exito");
             }
             else{
-                mostrarPopUp("fxml/popupNuevoParticipanteExito.fxml");
+                mostrarPopUp("El participante se ha agregado exitosamente.","exito");
             }
             myController.setScreen(Main.vistaListarParticipantesId);
         }
@@ -147,7 +148,7 @@ public class altaParticipanteController implements ControlledScreen {
             return false;
         }
         else{
-            boolean emailExistente = gestorCompetencia.existeEmailParticipante(idCompetencia,emailParticipante);
+            boolean emailExistente = gestorCompetencia.existeEmailParticipante(idCompetencia, emailParticipante);
             if(emailExistente){
                 errorEmail.setText("El email ingresado ya existe");
                 errorEmail.setVisible(true);
@@ -172,12 +173,31 @@ public class altaParticipanteController implements ControlledScreen {
         return idCompetencia;
     }
 
-    private void mostrarPopUp(String archivoFXML){
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(archivoFXML));
+    private void mostrarPopUp(){
+        mostrarPopUp("","");
+    }
+
+    private void mostrarPopUp(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
         try {
             parent = loader.load();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.initStyle(StageStyle.TRANSPARENT);
@@ -189,6 +209,7 @@ public class altaParticipanteController implements ControlledScreen {
             e.printStackTrace();
         }
     }
+
 
     public void close(ActionEvent actionEvent){
         Stage modal = (Stage)okButton.getScene().getWindow();

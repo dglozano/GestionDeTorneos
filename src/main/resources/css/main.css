@@ -180,7 +180,7 @@
 
 .table-view .column-header-background,
 .table-view .nexted-column-header{
-    -fx-background-color: #313232;
+    -fx-background-color: #eee;
 }
 .table-view .table-column{
     -fx-background-color: transparent;
@@ -219,7 +219,7 @@
 
 /* Row hovered */
 .table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: #e5e5e5;
+    -fx-background-color: transparent;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-text-fill: #333;
 }
@@ -233,8 +233,8 @@
 }
 
 .table-view .nested-column-header .text{
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #333;
+    -fx-fill: #333;
 }
 
 .tab-pane .text{
@@ -246,16 +246,16 @@
     -fx-background-insets: 0 1 0 1,0,0;
 }
 .tab-pane .tab{
-    -fx-background-color: #f1f1f1;
+    -fx-background-color: #fff;
 }
 
 .tab-pane .tab:selected{
-    -fx-background-color: #313232;
+    -fx-background-color: #eee;
 }
 
 .tab .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #222;
+    -fx-text-fill: #333;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
@@ -267,10 +267,10 @@
 
 .tab:selected .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #333;
+    -fx-fill: #333;
 }
 
 .tab:selected .tab-label .text{
-    -fx-fill: #fff;
+    -fx-fill: #333;
 }
