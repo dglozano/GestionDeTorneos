@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ public class Fixture {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_fixture")
     private int id;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fixture")
-    private List<Fecha> fechas;
+    private List<Fecha> fechas = new ArrayList<>();
 
     public Fixture() {
     }

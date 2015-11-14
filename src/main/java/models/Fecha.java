@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,11 +13,15 @@ public class Fecha {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_fecha")
     private int id;
+    @Column (name = "numero_fecha")
+    private int numeroFecha;
+
+
     @Column(name = "ronda")
     private Ronda ronda;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fecha")
-    private List<Partido> partidos;
+    private List<Partido> partidos = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     public Ronda getRonda(){
@@ -25,6 +30,12 @@ public class Fecha {
 
 
     public Fecha() {
+        super();
+    }
+
+    public Fecha(int numFecha){
+        super();
+        this.numeroFecha = numFecha;
     }
 
     public void addPartido(Partido partido){
@@ -45,5 +56,17 @@ public class Fecha {
 
     public void setPartidos(List<Partido> partidos) {
         this.partidos = partidos;
+    }
+
+    public int getNumeroFecha() {
+        return numeroFecha;
+    }
+
+    public void setNumeroFecha(int numeroFecha) {
+        this.numeroFecha = numeroFecha;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

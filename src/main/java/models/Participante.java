@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +25,9 @@ public class Participante {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_participante")
-    private List<ModificacionParticipante> modificacionesParticipante;
+    private List<ModificacionParticipante> modificacionesParticipante = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosLocales",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -35,9 +36,9 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
-    private List<Partido> partidosLocales;
+    private List<Partido> partidosLocales = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosVisitantes",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -46,9 +47,9 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
-    private List<Partido> partidosVisitantes;
+    private List<Partido> partidosVisitantes=new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosGanados",
             joinColumns = {
                     @JoinColumn(name="id_participante",unique=true)
@@ -57,7 +58,7 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
-    private List<Partido> partidosGanados;
+    private List<Partido> partidosGanados = new ArrayList<>();
 
     @Lob
     @Column(name = "Imagen")
@@ -79,6 +80,15 @@ public class Participante {
         (this.modificacionesParticipante).add(modificacion);
     }
 
+    public void addPartidoLocal(Partido p){
+        this.partidosLocales.add(p);
+    }
+    public void addPartidoVisitante(Partido p){
+        this.partidosVisitantes.add(p);
+    }
+    public void addPartidoGanador(Partido p){
+        this.partidosGanados.add(p);
+    }
     public int getId() {
         return id;
     }

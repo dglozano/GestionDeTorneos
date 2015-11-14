@@ -4,6 +4,7 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
+import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
 import exceptions.FixtureException.PocosParticipantesFixtureException;
 import javafx.event.ActionEvent;
@@ -111,6 +112,9 @@ public class verCompetenciaController implements ControlledScreen{
         }
         catch(PocosParticipantesFixtureException e){
             mostrarPopUp("fxml/popupErrorFixtureParticipantes.fxml");
+        }
+        catch (DisponibilidadesInsuficientesFixtureException e){
+            mostrarPopUp("fxml/popupErrorFixtureDisponibilidades.fxml");
         }
     }
 

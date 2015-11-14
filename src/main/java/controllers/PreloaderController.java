@@ -48,6 +48,27 @@ public class PreloaderController implements ControlledScreen {
         LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
         usuarioDao.crearUsuario(usuario1);
 
+        Participante p1 = new Participante();
+        Participante p2 = new Participante();
+        Participante p3 = new Participante();
+        Participante p4 = new Participante();
+        Participante p5 = new Participante();
+
+        p1.setNombre("Diegol");
+        p1.setEmail("dglozano95@live.com");
+
+        p2.setNombre("Juanchera");
+        p2.setEmail("juan@flioh.com");
+
+        p3.setNombre("Kevinchera");
+        p3.setEmail("kevin@panda.com");
+
+        p4.setNombre("Augusto");
+        p4.setEmail("augusto@yuyo.com");
+
+        p5.setNombre("Camila");
+        p5.setEmail("cami@tibalt.com");
+
         Deporte rugby = new Deporte("RUGBY");
         Deporte futbol = new Deporte ("FUTBOL");
         Deporte tenis = new Deporte("TENIS");
@@ -103,6 +124,18 @@ public class PreloaderController implements ControlledScreen {
         lugar7.addDeporte(futbol);
         lugar8.addDeporte(futbol);
 
+        Disponibilidad d1= new Disponibilidad();
+        Disponibilidad d2= new Disponibilidad();
+        Disponibilidad d3= new Disponibilidad();
+        d1.setLugarDeRealizacion(lugar1);
+        d1.setDisponibilidad(2);
+        d2.setDisponibilidad(1);
+        d3.setDisponibilidad(4);
+        d1.setLugarDeRealizacion(lugar1);
+        d2.setLugarDeRealizacion(lugar3);
+        d3.setLugarDeRealizacion(lugar4);
+
+
         lugarDeRealizacionDao.crearLugar(lugar1);
         lugarDeRealizacionDao.crearLugar(lugar2);
         lugarDeRealizacionDao.crearLugar(lugar3);
@@ -126,6 +159,14 @@ public class PreloaderController implements ControlledScreen {
         competenciaDAO.crearCompetencia(competencia1);
 
         Competencia competencia2= new Competencia();
+        competencia2.addParticipante(p1);
+        competencia2.addParticipante(p2);
+        competencia2.addParticipante(p3);
+        competencia2.addParticipante(p4);
+        competencia2.addParticipante(p5);
+        competencia2.addDisponibilidad(d1);
+        competencia2.addDisponibilidad(d2);
+        competencia2.addDisponibilidad(d3);
         competencia2.setUsuario(usuario1);
         competencia2.setNombre("LIGA SANTAFESINA");
         competencia2.setModalidad(Modalidad.LIGA);

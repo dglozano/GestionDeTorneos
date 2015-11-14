@@ -3,6 +3,7 @@ package dao;
 import dao.util.MiEntityManager;
 import dtos.FiltrosCompetenciaDTO;
 import models.Competencia;
+import models.Fixture;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -100,5 +101,15 @@ public class CompetenciaDao {
         List<Competencia> listaCompetencias = query.getResultList();
         em.close();
         return listaCompetencias;
+    }
+
+    public void eliminarFixture(Fixture fixture){
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        Fixture f=em.find(Fixture.class,fixture.getId());
+        em.remove(f);
+        tx.commit();
+        em.close();
     }
 }

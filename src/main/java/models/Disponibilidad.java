@@ -39,4 +39,8 @@ public class Disponibilidad {
     public void setLugarDeRealizacion(LugarDeRealizacion lugarDeRealizacion) {
         this.lugarDeRealizacion = lugarDeRealizacion;
     }
+
+    public void decrementarDisponibilidad(int dec){
+        this.disponibilidad-=dec;
+    }
 }

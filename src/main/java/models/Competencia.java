@@ -1,9 +1,14 @@
 package models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 public class Competencia {
@@ -41,19 +46,21 @@ public class Competencia {
     @Column (name = "sistemaPuntuacion")
     private SistemaPuntuacion sistemaPuntuacion;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinColumn (name = "id_competencia")
+    @Fetch(FetchMode.SELECT)
     private List<Participante> participantes = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_deporte")
     private Deporte deporte;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinColumn(name = "id_competencia")
+    @Fetch(FetchMode.SELECT)
     private List<Disponibilidad> disponibilidades = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "id_usuario")
     private Usuario usuario;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fixture")
     private Fixture fixture;
 
