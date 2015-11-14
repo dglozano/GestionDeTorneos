@@ -63,7 +63,7 @@
             <children>
                 <ImageView fitHeight="80.0" fitWidth="200.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../image/coming.jpg" />
+                        <Image url="@../image/error.jpg" />
                     </image>
                 </ImageView>
             </children>

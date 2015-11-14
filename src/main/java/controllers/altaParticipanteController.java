@@ -3,7 +3,9 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
-import dtos.CrearParticipanteDTO;
+import dtos.ParticipanteDTO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,7 @@ public class altaParticipanteController implements ControlledScreen {
     private PrincipalController myController;
     private Stage modal;
     private Parent parent;
-
+    private static final int MAX_TEXT_FIELD = 255;
 
     private final String regexEmail = "^[-a-z0-9~!$%^&*_=+}{\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@" +
             "([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|" +
@@ -50,16 +52,15 @@ public class altaParticipanteController implements ControlledScreen {
     @FXML private Text title;
     @FXML private Label errorNombre;
     @FXML private Label errorEmail;
-    @FXML private Button okButton;
-
 
     public void inicializar(){
         buscarCompetencia();
         limpiarCampos();
+        agregarLengthListener();
         //TODO 03: FOTO
     }
-    public void inicializar(String mensaje) {inicializar();};
 
+    public void inicializar(String mensaje) {inicializar();};
 
     private void limpiarCampos() {
         nombreParticipanteTextField.clear();
@@ -74,6 +75,25 @@ public class altaParticipanteController implements ControlledScreen {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
         competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
         title.setText(competencia.getNombre());
+    }
+
+    private void agregarLengthListener() {
+        nombreParticipanteTextField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (nombreParticipanteTextField.getText().length() >= MAX_TEXT_FIELD) {
+                    nombreParticipanteTextField.setText(nombreParticipanteTextField.getText().substring(0, MAX_TEXT_FIELD));
+                }
+            }
+        });
+        emailParticipanteTextField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (emailParticipanteTextField.getText().length() >= MAX_TEXT_FIELD) {
+                    emailParticipanteTextField.setText(emailParticipanteTextField.getText().substring(0, MAX_TEXT_FIELD));
+                }
+            }
+        });
     }
 
     public void darDeAlta(ActionEvent action){
@@ -93,7 +113,7 @@ public class altaParticipanteController implements ControlledScreen {
     private void crearParticipante() {
         String nombreParticipante = nombreParticipanteTextField.getText();
         String emailParticipante = emailParticipanteTextField.getText();
-        CrearParticipanteDTO participanteDTO = new CrearParticipanteDTO(nombreParticipante,emailParticipante);
+        ParticipanteDTO participanteDTO = new ParticipanteDTO(nombreParticipante,emailParticipante);
         // TODO 03: si tiene foto setearsela
         participanteDTO.setTieneImagen(false);
         gestorCompetencia.agregarParticipante(participanteDTO,idCompetencia);
@@ -208,11 +228,5 @@ public class altaParticipanteController implements ControlledScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public void close(ActionEvent actionEvent){
-        Stage modal = (Stage)okButton.getScene().getWindow();
-        modal.close();
     }
 }

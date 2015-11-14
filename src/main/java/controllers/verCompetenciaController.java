@@ -44,8 +44,6 @@ public class verCompetenciaController implements ControlledScreen{
     @FXML private TextField estadoTextField;
     @FXML private TextField proximoEncuentroTextField;
     @FXML private Text title;
-    @FXML private Button okButton;
-    @FXML private Label detailsLabel;
 
 
     public void setScreenParent(PrincipalController screenParent){
@@ -84,21 +82,16 @@ public class verCompetenciaController implements ControlledScreen{
         }
     }
 
-    public void close(ActionEvent actionEvent){
-        Stage modal = (Stage)okButton.getScene().getWindow();
-        modal.close();
-    }
-
     public void irListarParticipantes(ActionEvent actionEvent){
         myController.setScreen(Main.vistaListarParticipantesId);
     }
 
     public void irDarDeBaja(ActionEvent actionEvent) {
-        mostrarPopUp();
+        mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
     }
 
     public void irModificarCompetencia(ActionEvent actionEvent) {
-        mostrarPopUp();
+        mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
     }
 
     public void irGenerarFixture(ActionEvent actionEvent){

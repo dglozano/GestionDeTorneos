@@ -269,7 +269,7 @@ public class GestorCompetencia {
         return null;
     }
 
-    public void agregarParticipante(CrearParticipanteDTO participanteDTO,int idCompetencia){
+    public void agregarParticipante(ParticipanteDTO participanteDTO,int idCompetencia){
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
         Participante nuevoParticipante = new Participante();
         nuevoParticipante.setNombre(participanteDTO.getNombreParticipante());
@@ -298,9 +298,18 @@ public class GestorCompetencia {
         competenciaDao.eliminarFixture(fixtureBorrar);
     }
 
-
-
-
+    public List<ParticipanteDTO> listarParticipantesDtos(int idCompetencia){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        List<ParticipanteDTO> listaParticipantesDtos = new ArrayList<>();
+        for(Participante p: competencia.getParticipantes()){
+            if(!p.isEsLibre()){
+                ParticipanteDTO participanteDTO = new ParticipanteDTO(p.getNombre(),p.getEmail());
+                participanteDTO.setTieneImagen(false);
+                listaParticipantesDtos.add(participanteDTO);
+            }
+        }
+        return listaParticipantesDtos;
+    }
 }
 
 

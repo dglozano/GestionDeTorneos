@@ -40,15 +40,15 @@
                         <Insets bottom="35.0" />
                      </VBox.margin>
                   </Text>
-                  <TableView fx:id="tabla" prefHeight="316.0" prefWidth="898.0">
+                  <TableView fx:id="participantesTableView" prefHeight="316.0" prefWidth="898.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                      <columns>
-                        <TableColumn fx:id="tNombre" prefWidth="75.0" text="Participante" />
-                        <TableColumn fx:id="tDeporte" prefWidth="75.0" text="Correo de contacto" />
-                        <TableColumn fx:id="tEstado" prefWidth="75.0" text="Editar" />
-                        <TableColumn fx:id="tModalidad" prefWidth="75.0" text="Eliminar" />
+                        <TableColumn fx:id="nombreParticipanteColumn" prefWidth="350.0" text="Participante" />
+                        <TableColumn fx:id="emailParticipanteColumn" prefWidth="350.0" text="Correo de contacto" />
+                        <TableColumn fx:id="editarColumn" prefWidth="49.0" text="Editar" />
+                        <TableColumn fx:id="eliminarColumn" prefWidth="49.0" text="Eliminar" />
                      </columns>
                   </TableView>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">

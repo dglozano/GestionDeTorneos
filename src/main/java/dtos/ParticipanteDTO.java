@@ -5,17 +5,17 @@ import javafx.scene.image.Image;
 /**
  * Created by DIego on 14/11/2015..
  */
-public class CrearParticipanteDTO {
+public class ParticipanteDTO {
 
     private String nombreParticipante;
     private String emailParticipante;
     private Image imagenParticipante;
     private boolean tieneImagen;
 
-    public CrearParticipanteDTO(){
+    public ParticipanteDTO(){
         super();
     }
-    public CrearParticipanteDTO(String nombreParticipante, String emailParticipante) {
+    public ParticipanteDTO(String nombreParticipante, String emailParticipante) {
         super();
         this.nombreParticipante = nombreParticipante;
         this.emailParticipante = emailParticipante;

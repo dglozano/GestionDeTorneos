@@ -11,15 +11,21 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import models.Estado;
 import models.Modalidad;
 import services.GestorCompetencia;
 import services.GestorDeporte;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -44,8 +50,6 @@ public class misCompetenciasController implements ControlledScreen {
     @FXML private TableColumn<CompetenciaDTO, String> tEstado;
     @FXML private TableColumn<CompetenciaDTO, String> tModalidad;
     @FXML private TableColumn<CompetenciaDTO, Boolean> tAcciones;
-
-    @FXML private Button okButton;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
@@ -156,6 +160,7 @@ public class misCompetenciasController implements ControlledScreen {
 
     public void limpiarFiltros(ActionEvent actionEvent){
         List<CompetenciaDTO> listaCompetencias = gestorCompetencia.listarTodasMisCompetencias();
+        Collections.sort(listaCompetencias, new CompetenciaDTOComparator<CompetenciaDTO>());
         setearFilas(listaCompetencias);
         estadosComboBox.setValue("Todos");
         deportesComboBox.setValue("Todos");
@@ -199,11 +204,6 @@ public class misCompetenciasController implements ControlledScreen {
         else{
             filtrosCompetencia.setFiltroNombreActivo(false);
         }
-    }
-
-    public void close(ActionEvent actionEvent){
-        Stage modal = (Stage)okButton.getScene().getWindow();
-        modal.close();
     }
 
     public void setIdCompetenciaClickeada(int id){

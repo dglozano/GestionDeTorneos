@@ -54,7 +54,6 @@ public class crearCompetencias2Controller implements ControlledScreen {
     @FXML private RadioButton noRadioButton;
 
     @FXML private Label detailsLabel;
-    @FXML private Button okButton;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
@@ -217,11 +216,6 @@ public class crearCompetencias2Controller implements ControlledScreen {
             mostrarPopUp("La competencia ha sido creada exitosamente.", "exito");
             myController.setScreen(Main.vistaMisCompetenciasId);
         }
-    }
-
-    public void close(ActionEvent actionEvent){
-        Stage modal = (Stage)okButton.getScene().getWindow();
-        modal.close();
     }
 
     private boolean validarDatos() {
