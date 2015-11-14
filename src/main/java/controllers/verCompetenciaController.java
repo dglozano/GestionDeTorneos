@@ -106,6 +106,7 @@ public class verCompetenciaController implements ControlledScreen{
         try{
             gestorCompetencia.generarFixture(idCompetencia);
             mostrarPopUp("fxml/popupFixtureCreado.fxml");
+            estadoTextField.setText(Estado.PLANIFICADA.getEstadoString());
         }
         catch(EstadoErrorFixtureException e){
             mostrarPopUp("fxml/popupErrorFixtureEstado.fxml");

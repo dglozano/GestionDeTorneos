@@ -25,7 +25,7 @@
       <children>
             <VBox id="container" prefHeight="579.0" prefWidth="1000.0">
                <children>
-                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                  <Text fx:id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -50,8 +50,8 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField text="Augusto Tibalt" GridPane.columnIndex="1" />
-                              <TextField prefHeight="25.0" prefWidth="208.0" text="aug@hotmail.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="nombreParticipanteTextField" text="" GridPane.columnIndex="1" />
+                              <TextField fx:id="emailParticipanteTextField" prefHeight="25.0" prefWidth="208.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" style="&#10;" text="Correo electrónico (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />
@@ -62,7 +62,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="243.0" text="Cargar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button fx:id="cargarButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="243.0" text="Cargar" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <styleClass>
                                     <String fx:value="btn" />
                                     <String fx:value="btn-alt" />
@@ -105,7 +105,7 @@
                               <Insets />
                            </VBox.margin>
                         </GridPane>
-                        <ImageView fitHeight="242.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" styleClass="profile">
+                        <ImageView fx:id="fotoImageView" fitHeight="242.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" styleClass="profile">
                            <image>
                               <Image url="@../image/profile.jpg" />
                            </image>
@@ -119,7 +119,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Dar de alta" textFill="WHITE">
+                        <Button onAction="#darDeAlta" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Dar de alta" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

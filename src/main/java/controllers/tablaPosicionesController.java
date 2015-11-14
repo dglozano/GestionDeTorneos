@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 import models.Competencia;
 import models.SistemaPuntuacion;
 import services.GestorCompetencia;
@@ -23,6 +24,7 @@ public class tablaPosicionesController implements ControlledScreen {
     private PrincipalController myController;
     private Competencia competencia;
 
+    @FXML private Text title;
     @FXML private TableView posicionesTableView;
     @FXML private TableColumn nombreColumna;
     @FXML private TableColumn puntosColumna;
@@ -36,6 +38,7 @@ public class tablaPosicionesController implements ControlledScreen {
 
     public void inicializar(){
         buscarCompetencia();
+        title.setText(competencia.getNombre());
         setearColumnas();
     }
 

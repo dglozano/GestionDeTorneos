@@ -160,10 +160,7 @@ public class GestorCompetencia {
     private void generarFixtureLiga(Competencia competencia)
             throws PocosParticipantesFixtureException,DisponibilidadesInsuficientesFixtureException{
         if(competencia.getFixture()!=null){
-            Fixture fixtureBorrar = competencia.getFixture();
-            competencia.setFixture(null);
-            competenciaDao.actualizarCompetencia(competencia);
-            competenciaDao.eliminarFixture(fixtureBorrar);
+            eliminarFixture(competencia);
         }
         List<Participante> listaParticipantes = competencia.getParticipantes();
         List<Disponibilidad> listaDisponibilidades = competencia.getDisponibilidades();
@@ -175,7 +172,7 @@ public class GestorCompetencia {
             totalParticipantes++;
             Participante participanteLibre = new Participante(Participante.LIBRE);
             listaParticipantes.add(participanteLibre);
-            crearParticipante(participanteLibre);
+            participanteDao.crearParticipante(participanteLibre);
         }
         Collections.shuffle(listaParticipantes);
         Fixture fixture = new Fixture();
@@ -212,6 +209,7 @@ public class GestorCompetencia {
         competencia.setEstado(Estado.PLANIFICADA);
         competencia.setFixture(fixture);
         competenciaDao.actualizarCompetencia(competencia);
+        participanteDao.eliminarParticipantesSinCompetencia();
     }
 
     private int calcularTotalDisponibilidades(List<Disponibilidad> listaDisponibilidades) {
@@ -220,6 +218,26 @@ public class GestorCompetencia {
             total+=disp.getDisponibilidad();
         }
         return total;
+    }
+
+    public boolean existeNombreParticipante(int idCompetencia, String nombreParticipante){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        for(Participante p: competencia.getParticipantes()){
+            if(!p.isEsLibre() && p.getNombre().toUpperCase().equals(nombreParticipante.toUpperCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeEmailParticipante(int idCompetencia, String emailParticipante){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        for(Participante p: competencia.getParticipantes()){
+            if(!p.isEsLibre() && p.getEmail().equals(emailParticipante)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Modalidad asociarModalidad(String modalidadString) {
@@ -251,9 +269,36 @@ public class GestorCompetencia {
         return null;
     }
 
-    public void crearParticipante(Participante p){
-        participanteDao.crearParticipante(p);
+    public void agregarParticipante(CrearParticipanteDTO participanteDTO,int idCompetencia){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        Participante nuevoParticipante = new Participante();
+        nuevoParticipante.setNombre(participanteDTO.getNombreParticipante());
+        nuevoParticipante.setEmail(participanteDTO.getEmailParticipante());
+        nuevoParticipante.setEsLibre(false);
+        if(competencia.getFixture()!=null){
+            eliminarFixture(competencia);
+        }
+        participanteDao.crearParticipante(nuevoParticipante);
+        competencia.addParticipante(nuevoParticipante);
+        competencia.setEstado(Estado.CREADA);
+        competenciaDao.actualizarCompetencia(competencia);
+        participanteDao.eliminarParticipantesSinCompetencia();
     }
+
+    public void eliminarFixture(Competencia competencia){
+        Fixture fixtureBorrar = competencia.getFixture();
+        competencia.setFixture(null);
+        for(Participante part: competencia.getParticipantes()){
+            if(part.isEsLibre()){
+                competencia.getParticipantes().remove(part);
+                break;
+            }
+        }
+        competenciaDao.actualizarCompetencia(competencia);
+        competenciaDao.eliminarFixture(fixtureBorrar);
+    }
+
+
 
 
 }
