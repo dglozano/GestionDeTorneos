@@ -62,7 +62,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="cargarButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="243.0" text="Cargar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button fx:id="cargarButton" onAction="#subirImagen" mnemonicParsing="false" prefHeight="25.0" prefWidth="243.0" text="Cargar" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <styleClass>
                                     <String fx:value="btn" />
                                     <String fx:value="btn-alt" />

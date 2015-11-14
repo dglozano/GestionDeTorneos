@@ -20,6 +20,12 @@ public class ParticipanteDTO {
         this.nombreParticipante = nombreParticipante;
         this.emailParticipante = emailParticipante;
     }
+    public ParticipanteDTO(String nombreParticipante, String emailParticipante, Image imagenParticipante) {
+        super();
+        this.nombreParticipante = nombreParticipante;
+        this.emailParticipante = emailParticipante;
+        this.imagenParticipante = imagenParticipante;
+    }
 
     public String getNombreParticipante() {
         return nombreParticipante;

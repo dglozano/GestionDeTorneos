@@ -6,6 +6,7 @@ import controllers.general.PrincipalController;
 import dtos.ParticipanteDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +19,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Competencia;
 import services.GestorCompetencia;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -52,6 +57,24 @@ public class altaParticipanteController implements ControlledScreen {
     @FXML private Text title;
     @FXML private Label errorNombre;
     @FXML private Label errorEmail;
+
+    public void subirImagen(ActionEvent actionEvent){
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+        File file = fileChooser.showOpenDialog(null);
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            fotoImageView.setImage(image);
+        } catch (IOException ex) {
+            // TODO: hacer algo
+        }
+    }
 
     public void inicializar(){
         buscarCompetencia();
@@ -113,9 +136,10 @@ public class altaParticipanteController implements ControlledScreen {
     private void crearParticipante() {
         String nombreParticipante = nombreParticipanteTextField.getText();
         String emailParticipante = emailParticipanteTextField.getText();
-        ParticipanteDTO participanteDTO = new ParticipanteDTO(nombreParticipante,emailParticipante);
+        Image imagenParticipante = fotoImageView.getImage();
+        ParticipanteDTO participanteDTO = new ParticipanteDTO(nombreParticipante,emailParticipante,imagenParticipante);
         // TODO 03: si tiene foto setearsela
-        participanteDTO.setTieneImagen(false);
+        participanteDTO.setTieneImagen(true);
         gestorCompetencia.agregarParticipante(participanteDTO,idCompetencia);
     }
 

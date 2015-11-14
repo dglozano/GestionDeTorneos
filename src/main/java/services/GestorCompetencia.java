@@ -274,6 +274,7 @@ public class GestorCompetencia {
         Participante nuevoParticipante = new Participante();
         nuevoParticipante.setNombre(participanteDTO.getNombreParticipante());
         nuevoParticipante.setEmail(participanteDTO.getEmailParticipante());
+        //nuevoParticipante.setImagen(participanteDTO.getImagenParticipante());
         nuevoParticipante.setEsLibre(false);
         if(competencia.getFixture()!=null){
             eliminarFixture(competencia);
