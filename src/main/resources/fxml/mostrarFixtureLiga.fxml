@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tablaPosicionesController">
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.mostrarFixtureController">
   <children>
     <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
       <menus>
@@ -24,7 +24,7 @@
       <children>
             <VBox id="container" alignment="TOP_CENTER" prefHeight="579.0" prefWidth="1000.0">
                <children>
-                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                  <Text fx:id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
                      <font>
                         <Font size="32.0" />
                      </font>

@@ -28,6 +28,8 @@ public class Main extends Application{
     public static String vistaListarParticipantesArchivo = "listarParticipantes.fxml";
     public static String vistaAltaParticipanteId="altaParticipante";
     public static String vistaAltaParticipanteArchivo = "altaParticipante.fxml";
+    public static String vistaMostrarFixtureId="mostrarFixture";
+    public static String vistaMostrarFixtureArchivo = "mostrarFixtureLiga.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,6 +48,7 @@ public class Main extends Application{
         mainContainer.loadScreen(Main.vistaVerCompetenciaId,Main.vistaVerCompetenciaArchivo);
         mainContainer.loadScreen(Main.vistaListarParticipantesId,Main.vistaListarParticipantesArchivo);
         mainContainer.loadScreen(Main.vistaAltaParticipanteId,Main.vistaAltaParticipanteArchivo);
+        mainContainer.loadScreen(Main.vistaMostrarFixtureId,Main.vistaMostrarFixtureArchivo);
 
         mainContainer.setScreen(Main.vistaPreloaderId);
 

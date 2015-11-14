@@ -90,6 +90,14 @@ public class verCompetenciaController implements ControlledScreen{
         myController.setScreen(Main.vistaListarParticipantesId);
     }
 
+    public void irMostrarFixture(ActionEvent actionEvent){
+        if(!competenciaDTO.getEstado().equals(Estado.CREADA.getEstadoString()))
+            myController.setScreen(Main.vistaMostrarFixtureId);
+        else{
+            mostrarPopUp("El fixture aun no ha sido generado","error");
+        }
+    }
+
     public void irDarDeBaja(ActionEvent actionEvent) {
         mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
     }

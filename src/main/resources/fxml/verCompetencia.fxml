@@ -97,7 +97,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Mostrar Fixture" textFill="WHITE">
+                              <Button onAction="#irMostrarFixture" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Mostrar Fixture" textFill="WHITE">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
