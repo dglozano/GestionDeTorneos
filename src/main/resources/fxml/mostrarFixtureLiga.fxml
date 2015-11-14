@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tablaPosicionesController">
+  <children>
+    <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Archivo">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Registrar" />
+            <MenuItem mnemonicParsing="false" text="Salir" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="579.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+      <children>
+            <VBox id="container" alignment="TOP_CENTER" prefHeight="579.0" prefWidth="1000.0">
+               <children>
+                  <Text id="title" fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de competencia" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fill="#4081be" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subline" text="Fixture" textAlignment="CENTER" wrappingWidth="897.546875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="35.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TabPane prefHeight="318.0" prefWidth="898.0">
+                     <tabs>
+                        <Tab fx:id="fecha1" text="Fecha 1">
+                           <content>
+                              <TableView fx:id="fixtureTableView" prefHeight="315.0" prefWidth="779.0">
+                                 <columns>
+                                    <TableColumn fx:id="localColumn" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha11" text="Fecha 2">
+                           <content>
+                              <TableView fx:id="fixtureTableView1" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn1" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn1" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn1" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn1" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha12" text="Fecha 3">
+                           <content>
+                              <TableView fx:id="fixtureTableView2" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn2" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn2" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn2" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn2" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha111" text="Fecha 4">
+                           <content>
+                              <TableView fx:id="fixtureTableView11" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn11" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn11" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn11" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn11" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha121" text="Fecha 5">
+                           <content>
+                              <TableView fx:id="fixtureTableView21" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn21" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn21" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn21" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn21" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha13" text="Fecha 6">
+                           <content>
+                              <TableView fx:id="fixtureTableView3" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn3" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn3" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn3" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn3" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha1111" text="Fecha 7">
+                           <content>
+                              <TableView fx:id="fixtureTableView111" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn111" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn111" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn111" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn111" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha112" text="Fecha 8">
+                           <content>
+                              <TableView fx:id="fixtureTableView12" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn12" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn12" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn12" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn12" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha122" text="Fecha 9">
+                           <content>
+                              <TableView fx:id="fixtureTableView22" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn22" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn22" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn22" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn22" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha14" text="Fecha 10">
+                           <content>
+                              <TableView fx:id="fixtureTableView4" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn4" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn4" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn4" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn4" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha1121" text="Fecha 11">
+                           <content>
+                              <TableView fx:id="fixtureTableView121" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn121" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn121" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn121" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn121" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha11111" text="Fecha 12">
+                           <content>
+                              <TableView fx:id="fixtureTableView1111" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn1111" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn1111" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn1111" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn1111" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha131" text="Fecha 13">
+                           <content>
+                              <TableView fx:id="fixtureTableView31" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn31" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn31" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn31" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn31" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha1211" text="Fecha 14">
+                           <content>
+                              <TableView fx:id="fixtureTableView211" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn211" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn211" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn211" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn211" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha1112" text="Fecha 15">
+                           <content>
+                              <TableView fx:id="fixtureTableView112" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn112" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn112" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn112" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn112" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha113" text="Fecha 16">
+                           <content>
+                              <TableView fx:id="fixtureTableView13" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn13" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn13" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn13" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn13" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha11121" text="Fecha 17">
+                           <content>
+                              <TableView fx:id="fixtureTableView1121" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn1121" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn1121" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn1121" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn1121" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha12111" text="Fecha 18">
+                           <content>
+                              <TableView fx:id="fixtureTableView2111" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn2111" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn2111" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn2111" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn2111" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="fecha1131" text="Fecha 19">
+                           <content>
+                              <TableView fx:id="fixtureTableView131" prefHeight="315.0" prefWidth="779.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <columns>
+                                    <TableColumn fx:id="localColumn131" prefWidth="271.0" text="Participante" />
+                                    <TableColumn fx:id="resultadoColumn131" prefWidth="52.0" text="Resultado" />
+                                    <TableColumn fx:id="visitanteColumn131" prefWidth="52.0" text="Participante" />
+                                    <TableColumn fx:id="accionesColumn131" prefWidth="48.0" text="Acciones" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
+                     <children>
+                        <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#volver" prefHeight="53.0" prefWidth="187.0" text="Volver" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-alt" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/main.css" />
+  </stylesheets>
+</VBox>
