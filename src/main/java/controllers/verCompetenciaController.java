@@ -74,11 +74,15 @@ public class verCompetenciaController implements ControlledScreen{
         boolean esLiga = competenciaDTO.getModalidad().equals(Modalidad.LIGA.getModalidadString());
         boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
         boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
-        if(esLiga && (estaEnDisputa || estaFinalizada )){
-            myController.setScreen(Main.vistaTablaPosicionesId);
+        if(esLiga){
+            if(estaEnDisputa || estaFinalizada)
+                myController.setScreen(Main.vistaTablaPosicionesId);
+            else
+                mostrarPopUp("La competencia no esta en Disputa o Finalizada.", "error");
+
         }
         else{
-                mostrarPopUp("La competencia no es de la modalidad Liga, no esta \n en Disputa o Finalizada.", "error");
+                mostrarPopUp("La competencia no es de la modalidad Liga", "error");
         }
     }
 

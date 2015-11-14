@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import models.Competencia;
+import models.Estado;
 import services.GestorCompetencia;
 
 import java.io.IOException;
@@ -107,7 +108,13 @@ public class listarParticipantesController implements ControlledScreen {
     }
 
     public void irAltaParticipante(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaAltaParticipanteId);
+        Estado estadoCompetencia = competencia.getEstado();
+        if(estadoCompetencia.equals(Estado.CREADA) || estadoCompetencia.equals(Estado.PLANIFICADA) ){
+            myController.setScreen(Main.vistaAltaParticipanteId);
+        }
+        else{
+            mostrarPopUp("La competencia ya esta en Disputa o Finalizada","error");
+        }
     }
 
     public Object mensajeControladorAnterior(){
