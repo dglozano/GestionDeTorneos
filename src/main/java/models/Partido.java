@@ -17,7 +17,7 @@ public class Partido {
     private boolean esLibre;
     @Column(name="tipo_ref_partido")
     private TipoReferenciaPartido tipoReferenciaPartido;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="id_partido")
     private List<Resultado> resultados;
     @ManyToOne(fetch = FetchType.EAGER)
