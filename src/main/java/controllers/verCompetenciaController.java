@@ -60,7 +60,7 @@ public class verCompetenciaController implements ControlledScreen{
         estadoTextField.setText(competenciaDTO.getEstado());
         /* TODO 02: setear proximo encuentro cuando funcione fixture */
     }
-    public void inicializar(String mensaje) {inicializar();};
+    public void inicializar(String mensaje) {inicializar();}
 
     public Object mensajeControladorAnterior(){
         return idCompetencia;
@@ -91,8 +91,10 @@ public class verCompetenciaController implements ControlledScreen{
     }
 
     public void irMostrarFixture(ActionEvent actionEvent){
-        if(!competenciaDTO.getEstado().equals(Estado.CREADA.getEstadoString()))
+        competenciaDTO = gestorCompetencia.getCompetencia(idCompetencia);
+        if(!competenciaDTO.getEstado().equals(Estado.CREADA.getEstadoString())) {
             myController.setScreen(Main.vistaMostrarFixtureId);
+        }
         else{
             mostrarPopUp("El fixture aun no ha sido generado","error");
         }
