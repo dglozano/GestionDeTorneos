@@ -245,6 +245,7 @@
     -fx-fill: #fff;
 }
 
+
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
 }
@@ -276,4 +277,65 @@
 
 .tab:selected .tab-label .text{
     -fx-fill: #333;
+}
+
+
+#fechas .table-view .table-cell .text{
+    -fx-fill: #333;
+}
+
+/* Selected row */
+#fechas .table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #4081be;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: #fff;
+}
+
+/* Selected row when table not focused */
+#fechas .table-row-cell:filled:focused:selected {
+    -fx-background-color: #4081be;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: #fff;
+}
+
+#fechas .table-view:focused .table-row-cell:filled:focused:selected .text,
+#fechas .table-row-cell:filled:focused:selected .text,
+#fechas .table-view:focused .table-row-cell:filled:focused:selected:hover .text{
+    -fx-fill: #fff;
+}
+
+#fechas .table-view:row-selection .table-row-cell:filled:hover .text {
+    -fx-fill: #333;
+}
+
+/* Row hovered */
+#fechas .table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill: #333;
+}
+
+/* Selected row hovered */
+#fechas .table-view:focused .table-row-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: #468fd3;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: #fff;
+}
+
+#fechas .table-view:focused .table-row-cell:filled:focused:selected .btn .text,
+#fechas .table-view:focused .table-row-cell:filled:focused:selected:hover .btn .text{
+    -fx-fill: #222;
+}
+
+#fechas .table-view .btn:hover .text{
+    -fx-fill: #fff !important;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator,
+.tab:selected,
+.tab:focused{
+    -fx-focus-color: transparent;
 }

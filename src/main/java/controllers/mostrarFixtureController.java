@@ -3,7 +3,6 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
-import dtos.ParticipanteDTO;
 import dtos.PartidoDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,11 +14,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import models.*;
+import models.Competencia;
+import models.Fecha;
+import models.Fixture;
+import models.Partido;
 import services.GestorCompetencia;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -51,8 +52,8 @@ public class mostrarFixtureController implements ControlledScreen {
         title.setText(competencia.getNombre());
 
         fixture = competencia.getFixture();
-        List<Fecha> fechas = fixture.getFechas();
-        generarTabs(fechas);
+        List<Fecha> listaFechas = fixture.getFechas();
+        generarTabs(listaFechas);
     }
 
     @Override
@@ -81,10 +82,10 @@ public class mostrarFixtureController implements ControlledScreen {
             tabla.setPrefWidth(779.0);
             tabla.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-            TableColumn localColumn = new TableColumn("Participante"+i);
-            TableColumn resultadoColumn = new TableColumn("Resultado"+i);
-            TableColumn visitanteColumn = new TableColumn("Participante"+i);
-            TableColumn accionesColumn = new TableColumn("Acciones"+i);
+            TableColumn localColumn = new TableColumn("Participante");
+            TableColumn resultadoColumn = new TableColumn("Resultado");
+            TableColumn visitanteColumn = new TableColumn("Participante");
+            TableColumn accionesColumn = new TableColumn("Acciones");
             tabla.getColumns().addAll(localColumn, resultadoColumn, visitanteColumn, accionesColumn);
             ((TableColumn)tabla.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("partiLocal"));
             ((TableColumn)tabla.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("result"));
@@ -98,12 +99,12 @@ public class mostrarFixtureController implements ControlledScreen {
                 partDTO.setPartiLocal(part.getLocal().getNombre());
                 partDTO.setPartiVisit(part.getVisitante().getNombre());
                 // TODO: configurar para sets.
-                if (part.getResultados() == null){
+                if (part.getResultados().isEmpty()){
                     partDTO.setResult(" - ");
                 }
                 else{
-                    int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
-                    int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
+                    int ptsLocal = 1;//part.getResultados().get(0).getTantosEquipoLocal();
+                    int ptsVisit = 2;//part.getResultados().get(0).getTantosEquipoVisitante();
                     partDTO.setResult(ptsLocal + " - " + ptsVisit);
                 }
                 partidoDTOs.add(partDTO);
