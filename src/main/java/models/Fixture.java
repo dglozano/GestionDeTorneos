@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,7 @@ public class Fixture {
     private int id;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fixture")
+    @Fetch(FetchMode.SELECT)
     private List<Fecha> fechas = new ArrayList<>();
 
     public Fixture() {

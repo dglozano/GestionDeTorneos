@@ -2,7 +2,6 @@ package models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ public class Competencia {
     private Usuario usuario;
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fixture")
+    @Fetch(FetchMode.SELECT)
     private Fixture fixture;
 
     public Competencia() {
