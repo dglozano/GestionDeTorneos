@@ -40,7 +40,7 @@
                         <Insets bottom="35.0" />
                      </VBox.margin>
                   </Text>
-                  <TabPane prefHeight="318.0" prefWidth="898.0">
+                  <TabPane prefHeight="318.0" prefWidth="898.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab fx:id="fecha1" text="Fecha 1">
                            <content>
