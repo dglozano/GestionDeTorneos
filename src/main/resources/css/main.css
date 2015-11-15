@@ -53,6 +53,9 @@
     -fx-pref-width: 100%;
 }
 
+.profile{
+    -fx-effect: dropshadow(three-pass-box, #afafaf, 60, 0, 0, 0);
+}
 
 .btn{
     -fx-background-color: #4081be;
