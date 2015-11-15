@@ -1,7 +1,5 @@
 package dtos;
 
-import javafx.scene.image.Image;
-
 /**
  * Created by DIego on 14/11/2015..
  */
@@ -9,7 +7,7 @@ public class ParticipanteDTO {
 
     private String nombreParticipante;
     private String emailParticipante;
-    private Image imagenParticipante;
+    private byte[] imagenParticipante;
     private boolean tieneImagen;
 
     public ParticipanteDTO(){
@@ -20,7 +18,7 @@ public class ParticipanteDTO {
         this.nombreParticipante = nombreParticipante;
         this.emailParticipante = emailParticipante;
     }
-    public ParticipanteDTO(String nombreParticipante, String emailParticipante, Image imagenParticipante) {
+    public ParticipanteDTO(String nombreParticipante, String emailParticipante, byte[] imagenParticipante) {
         super();
         this.nombreParticipante = nombreParticipante;
         this.emailParticipante = emailParticipante;
@@ -43,11 +41,11 @@ public class ParticipanteDTO {
         this.emailParticipante = emailParticipante;
     }
 
-    public Image getImagenParticipante() {
+    public byte[] getImagenParticipante() {
         return imagenParticipante;
     }
 
-    public void setImagenParticipante(Image imagenParticipante) {
+    public void setImagenParticipante(byte[] imagenParticipante) {
         this.imagenParticipante = imagenParticipante;
     }
 

@@ -28,8 +28,7 @@ import services.GestorCompetencia;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by DIego on 11/11/2015..
@@ -61,19 +60,32 @@ public class altaParticipanteController implements ControlledScreen {
     public void subirImagen(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
 
-        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG);
 
         File file = fileChooser.showOpenDialog(null);
+        byte[] imagenBytes = new byte[(int) file.length()];
 
         try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(imagenBytes);
+            fileInputStream.close();
+
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imagenBytes);
+            BufferedImage bufferedImagen = ImageIO.read(inputStream);
+            Image imagen = SwingFXUtils.toFXImage(bufferedImagen, null);
+            fotoImageView.setImage(imagen);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*try {
             BufferedImage bufferedImage = ImageIO.read(file);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             fotoImageView.setImage(image);
         } catch (IOException ex) {
             // TODO: hacer algo
-        }
+        }*/
     }
 
     public void inicializar(){
@@ -136,10 +148,21 @@ public class altaParticipanteController implements ControlledScreen {
     private void crearParticipante() {
         String nombreParticipante = nombreParticipanteTextField.getText();
         String emailParticipante = emailParticipanteTextField.getText();
-        Image imagenParticipante = fotoImageView.getImage();
-        ParticipanteDTO participanteDTO = new ParticipanteDTO(nombreParticipante,emailParticipante,imagenParticipante);
-        // TODO 03: si tiene foto setearsela
-        participanteDTO.setTieneImagen(true);
+
+        ParticipanteDTO participanteDTO = new ParticipanteDTO(nombreParticipante,emailParticipante);
+        participanteDTO.setTieneImagen(false);
+
+        try {
+            BufferedImage bImage = SwingFXUtils.fromFXImage(fotoImageView.getImage(), null);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "png", outputStream);
+            byte[] imagenParticipante = outputStream.toByteArray();
+            participanteDTO.setImagenParticipante(imagenParticipante);
+            participanteDTO.setTieneImagen(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         gestorCompetencia.agregarParticipante(participanteDTO,idCompetencia);
     }
 
