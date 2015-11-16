@@ -3,17 +3,18 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import controllers.general.ResultadoCell;
 import dtos.PartidoDTO;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import models.Competencia;
 import models.Fecha;
 import models.Fixture;
@@ -73,6 +74,8 @@ public class mostrarFixtureController implements ControlledScreen {
     public void generarTabs(List<Fecha> fechasComp){
 
         int cantFechas = fechasComp.size();
+        fechas.getTabs().clear();
+
         for(int i = 0; i<cantFechas-1; i++){
             Tab tab = new Tab();
             tab.setText("Fecha " + i);
@@ -91,6 +94,8 @@ public class mostrarFixtureController implements ControlledScreen {
             ((TableColumn)tabla.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("result"));
             ((TableColumn)tabla.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("partiVisit"));
 
+            agregarBotonesEnTabla(accionesColumn);
+
             tabla.getItems().clear();
             List<Partido> partidos = fechasComp.get(i).getPartidos();
             List<PartidoDTO> partidoDTOs = new ArrayList<PartidoDTO>();
@@ -103,8 +108,8 @@ public class mostrarFixtureController implements ControlledScreen {
                     partDTO.setResult(" - ");
                 }
                 else{
-                    int ptsLocal = 1;//part.getResultados().get(0).getTantosEquipoLocal();
-                    int ptsVisit = 2;//part.getResultados().get(0).getTantosEquipoVisitante();
+                    int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
+                    int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
                     partDTO.setResult(ptsLocal + " - " + ptsVisit);
                 }
                 partidoDTOs.add(partDTO);
@@ -114,5 +119,24 @@ public class mostrarFixtureController implements ControlledScreen {
             tab.setContent(tabla);
             fechas.getTabs().add(tab);
         }
+    }
+
+    private void agregarBotonesEnTabla(TableColumn accionesColumn){
+        // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
+        accionesColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PartidoDTO, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<PartidoDTO, Boolean> features) {
+                return new SimpleBooleanProperty(features.getValue() != null);
+            }
+        });
+
+        // Creamos una nueva factory de cell con un botón de Ver competencia
+        mostrarFixtureController controller = this;
+        accionesColumn.setCellFactory(new Callback<TableColumn<PartidoDTO, Boolean>, TableCell<PartidoDTO, Boolean>>() {
+            @Override
+            public TableCell<PartidoDTO, Boolean> call(TableColumn<PartidoDTO, Boolean> personBooleanTableColumn) {
+                return new ResultadoCell(controller);
+            }
+        });
     }
 }

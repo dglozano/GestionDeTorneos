@@ -4,6 +4,7 @@ package dtos;
  * Created by Kevin on 15/11/2015.
  */
 public class PartidoDTO {
+    private int id;
     private String partiLocal;
     private String partiVisit;
     private String result;
@@ -34,5 +35,13 @@ public class PartidoDTO {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
