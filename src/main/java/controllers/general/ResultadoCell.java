@@ -25,7 +25,13 @@ public class ResultadoCell extends TableCell<PartidoDTO, Boolean> {
         verButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent actionEvent) {
                 int idPartidoClickeado =((PartidoDTO)getTableView().getItems().get(getIndex())).getId();
-                System.out.println(idPartidoClickeado);
+                String sistemaPuntuacion = controlador.getSistemaCompetencia();
+                System.out.println(":::::::::::::::::::::::");
+                System.out.println("-> ID PARTIDO: " + idPartidoClickeado);
+                System.out.println("-> Sistema: " + sistemaPuntuacion);
+                System.out.println(":::::::::::::::::::::::");
+                controlador.setIdPartidoClickeado(idPartidoClickeado);
+                controlador.mostrarPopUpResultado("", sistemaPuntuacion);
             }
         });
     }

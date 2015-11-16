@@ -9,11 +9,16 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import models.Competencia;
 import models.Fecha;
@@ -21,6 +26,7 @@ import models.Fixture;
 import models.Partido;
 import services.GestorCompetencia;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +36,7 @@ import java.util.List;
 public class mostrarFixtureController implements ControlledScreen {
 
     private int idCompetencia;
+    private int idPartidoClickeado;
     private Competencia competencia;
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
     private PrincipalController myController;
@@ -101,6 +108,7 @@ public class mostrarFixtureController implements ControlledScreen {
             List<PartidoDTO> partidoDTOs = new ArrayList<PartidoDTO>();
             for(Partido part : partidos){
                 PartidoDTO partDTO = new PartidoDTO();
+                partDTO.setId(part.getId());
                 partDTO.setPartiLocal(part.getLocal().getNombre());
                 partDTO.setPartiVisit(part.getVisitante().getNombre());
                 // TODO: configurar para sets.
@@ -121,6 +129,19 @@ public class mostrarFixtureController implements ControlledScreen {
         }
     }
 
+    public void setIdPartidoClickeado(int id){
+        this.idPartidoClickeado = id;
+    }
+
+    public String getSistemaCompetencia(){
+        System.out.println(this.competencia.getSistemaPuntuacion().getPuntuacionString());
+        return this.competencia.getSistemaPuntuacion().getPuntuacionString();
+    }
+
+    public PrincipalController getMyController(){
+        return myController;
+    }
+
     private void agregarBotonesEnTabla(TableColumn accionesColumn){
         // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
         accionesColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PartidoDTO, Boolean>, ObservableValue<Boolean>>() {
@@ -138,5 +159,110 @@ public class mostrarFixtureController implements ControlledScreen {
                 return new ResultadoCell(controller);
             }
         });
+    }
+
+    private void mostrarPopUp(){
+        mostrarPopUp("", "");
+    }
+
+    private void mostrarPopUp(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrarPopUpResultado(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "Sets":
+                recurso = "fxml/popupGestionarResultadoS.fxml";
+                break;
+            case "Puntos":
+                recurso = "fxml/popupGestionarResultadoP.fxml";
+                break;
+            case "Resultado Final":
+                recurso = "fxml/popupGestionarResultadoR.fxml";
+                break;
+            default:
+                recurso = "fxml/popupError.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void modalResultado(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

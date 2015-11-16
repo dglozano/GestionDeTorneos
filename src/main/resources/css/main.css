@@ -220,12 +220,12 @@
     -fx-text-fill: #fff;
 }
 
-/* Row hovered */
+/* Row hovered
 .table-view:row-selection .table-row-cell:filled:hover {
     -fx-background-color: transparent;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-text-fill: #333;
-}
+}*/
 
 /* Selected row hovered */
 .table-view:focused .table-row-cell:filled:focused:selected:hover {
@@ -310,12 +310,12 @@
     -fx-fill: #333;
 }
 
-/* Row hovered */
+/* Row hovered
 #fechas .table-view:row-selection .table-row-cell:filled:hover {
     -fx-background-color: transparent;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-text-fill: #333;
-}
+}*/
 
 /* Selected row hovered */
 #fechas .table-view:focused .table-row-cell:filled:focused:selected:hover {
