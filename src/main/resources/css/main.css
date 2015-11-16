@@ -63,7 +63,7 @@
     -fx-border-radius: 0;
     -fx-pref-width: 200px;
     -fx-pref-height: 55px;
-    -fx-border-color: #4081be;
+    -fx-tab-color: #4081be;
     -fx-border-width: 1;
 }
 .btn:hover{
@@ -251,6 +251,11 @@
 }
 .tab-pane .tab{
     -fx-background-color: #fff;
+}
+
+.tab-pane .table-view{
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
 }
 
 .tab-pane .tab:selected{
