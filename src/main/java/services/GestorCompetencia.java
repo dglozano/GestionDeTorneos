@@ -204,7 +204,7 @@ public class GestorCompetencia {
             }
             listaDisponibilidades.add(listaDisponibilidades.remove(0));
             fixture.addFecha(fecha);
-            listaParticipantes.add(0, listaParticipantes.remove(totalParticipantes - 1));
+            listaParticipantes.add(listaParticipantes.remove(1));
         }
         competencia.setEstado(Estado.PLANIFICADA);
         competencia.setFixture(fixture);

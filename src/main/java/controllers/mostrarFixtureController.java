@@ -76,9 +76,9 @@ public class mostrarFixtureController implements ControlledScreen {
         int cantFechas = fechasComp.size();
         fechas.getTabs().clear();
 
-        for(int i = 0; i<cantFechas-1; i++){
+        for(int i = 0; i<cantFechas; i++){
             Tab tab = new Tab();
-            tab.setText("Fecha " + i);
+            tab.setText("Fecha " + fechasComp.get(i).getNumeroFecha());
 
             TableView tabla = new TableView();
             tabla.setPrefHeight(315.0);
