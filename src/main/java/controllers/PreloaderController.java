@@ -3,12 +3,9 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
-import dao.CompetenciaDao;
-import dao.DeporteDao;
-import dao.LugarDeRealizacionDao;
 import dao.UsuarioDao;
 import dao.util.MiEntityManager;
-import models.*;
+import models.UsuarioLogueado;
 
 import javax.persistence.EntityManager;
 
@@ -40,9 +37,11 @@ public class PreloaderController implements ControlledScreen {
 
     private void seteoDatosPrueba(){
         // No respeta el modelo de capas. Es solo para probar, despues lo cambiamos
+        UsuarioDao usuarioDao = UsuarioDao.getInstance();
         UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
-        Usuario usuario1 = new Usuario();
-        usuarioLogueado.setUsuarioLogueado(usuario1);
+        usuarioLogueado.setUsuarioLogueado(usuarioDao.buscarUsuarioPorId(1));
+
+        /*
         CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
         DeporteDao deporteDao = DeporteDao.getInstance();
         UsuarioDao usuarioDao = UsuarioDao.getInstance();
@@ -188,6 +187,6 @@ public class PreloaderController implements ControlledScreen {
         competencia3.setEstado(Estado.FINALIZADA);
         competencia3.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia3);
-
+        */
     }
 }
