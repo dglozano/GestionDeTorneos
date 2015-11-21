@@ -15,16 +15,16 @@
 <?import java.lang.*?>
 <?import java.net.URL?>
 
-<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="558.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popupGestionarResultadoController">
+<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="842.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popupGestionarResultadoSetsController">
   <children>
     <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefHeight="41.0" prefWidth="400.0" spacing="7.0" GridPane.halignment="CENTER">
       <children>
-        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="513.0" styleClass="modalTitle" text="Gestionar Resultado" textAlignment="CENTER">
+        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="848.0" styleClass="modalTitle" text="Gestionar Resultado" textAlignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-        <Label fx:id="detailsLabel" alignment="CENTER" prefHeight="17.0" prefWidth="538.0" text="Liga por Resultado Final" textAlignment="CENTER" wrapText="true">
+        <Label fx:id="detailsLabel" alignment="CENTER" prefHeight="17.0" prefWidth="1061.0" text="Liga por Resultado Final" textAlignment="CENTER" wrapText="true">
           <font>
             <Font size="12.0" />
           </font>
