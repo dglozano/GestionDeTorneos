@@ -54,7 +54,6 @@ public class crearCompetenciasController implements ControlledScreen {
     }
 
     public void inicializar(){
-        System.out.println("Id comp clickeada "+myController.getControladorAnterior().mensajeControladorAnterior());
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
         gestorLugarRealizacion = new GestorLugarRealizacion();
@@ -225,7 +224,6 @@ public class crearCompetenciasController implements ControlledScreen {
 
     private boolean validarNombreCompetencia() {
         String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
-        System.out.println("NOMBRE " + nombreCompetencia + " " + nombreCompetencia.length());
         boolean caracteresValidos = validarCaracteres(nombreCompetencia);
         if(nombreCompetencia.isEmpty()){
             errorNombreLabel.setText("Este campo es obligatorio.");

@@ -15,7 +15,7 @@
 <?import java.lang.*?>
 <?import java.net.URL?>
 
-<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popupGestionarResultadoController">
+<GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 50, 0, 0, 0); -fx-background-insets: 45; -fx-padding: 75px;" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popupGestionarResultadoPuntuacionController">
   <children>
     <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefHeight="41.0" prefWidth="400.0" spacing="7.0" GridPane.halignment="CENTER">
       <children>
@@ -33,24 +33,15 @@
     </VBox>
     <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" spacing="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
       <children>
-            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" text="Cancelar" textAlignment="CENTER">
+            <Button fx:id="cancelarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-alt" />
                   <String fx:value="btn-small" />
                </styleClass>
             </Button>
-        <!--<Button fx:id="cancelButton" cancelButton="true" minWidth="80.0" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER">
-          <HBox.margin>
-                        <Insets />
-                      </HBox.margin>
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-small" />
-                              <String fx:value="btn-alt" />
-                           </styleClass>
-                    </Button>-->
-      <Button fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" text="Aceptar" textAlignment="CENTER" HBox.hgrow="NEVER">
+
+      <Button fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" textAlignment="CENTER" HBox.hgrow="NEVER">
         <HBox.margin>
           <Insets />
         </HBox.margin>

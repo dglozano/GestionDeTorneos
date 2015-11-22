@@ -9,29 +9,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class popupErrorController implements ControlledScreen {
-
+public class popupGestionarResultadoPuntuacionController implements ControlledScreen {
     private PrincipalController myController;
     private Stage modal;
+    private int idCompetencia;
     private Parent parent;
 
     @FXML private Button okButton;
+    @FXML private Button cancelarButton;
     @FXML private Label detailsLabel;
 
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
     }
 
-    public void inicializar(String error) {
-        detailsLabel.setText(error);
-    }
     public void inicializar() {
+        idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
+    }
+    public void inicializar(String mensaje){ inicializar(); }
 
+    public Object mensajeControladorAnterior(){ return idCompetencia; }
+
+    public void cancelar(ActionEvent actionEvent){
+        myController.setControladorAnterior(this);
+        Stage modal = (Stage)cancelarButton.getScene().getWindow();
+        modal.close();
     }
 
-    public Object mensajeControladorAnterior(){ return null; }
-
-    public void close(ActionEvent actionEvent){
+    public void aceptar(ActionEvent actionEvent){
+        myController.setControladorAnterior(this);
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
     }

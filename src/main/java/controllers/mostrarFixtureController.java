@@ -20,10 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import models.Competencia;
-import models.Fecha;
-import models.Fixture;
-import models.Partido;
+import models.*;
 import services.GestorCompetencia;
 
 import java.io.IOException;
@@ -75,7 +72,7 @@ public class mostrarFixtureController implements ControlledScreen {
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaVerCompetenciaId);
+        myController.setScreen(Main.vistaVerCompetenciaId,this);
     }
 
     public void generarTabs(List<Fecha> fechasComp){
@@ -92,14 +89,15 @@ public class mostrarFixtureController implements ControlledScreen {
             tabla.setPrefWidth(779.0);
             tabla.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-            TableColumn localColumn = new TableColumn("Participante");
+            TableColumn localColumn = new TableColumn("Local");
             TableColumn resultadoColumn = new TableColumn("Resultado");
-            TableColumn visitanteColumn = new TableColumn("Participante");
+            TableColumn visitanteColumn = new TableColumn("Visitante");
             TableColumn accionesColumn = new TableColumn("Acciones");
+            localColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("participanteLocal"));
+            resultadoColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("resultado"));
+            visitanteColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("participanteVisitante"));
+            tabla.getColumns().clear();
             tabla.getColumns().addAll(localColumn, resultadoColumn, visitanteColumn, accionesColumn);
-            ((TableColumn)tabla.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("partiLocal"));
-            ((TableColumn)tabla.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("result"));
-            ((TableColumn)tabla.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("partiVisit"));
 
             agregarBotonesEnTabla(accionesColumn);
 
@@ -109,16 +107,27 @@ public class mostrarFixtureController implements ControlledScreen {
             for(Partido part : partidos){
                 PartidoDTO partDTO = new PartidoDTO();
                 partDTO.setId(part.getId());
-                partDTO.setPartiLocal(part.getLocal().getNombre());
-                partDTO.setPartiVisit(part.getVisitante().getNombre());
+                partDTO.setParticipanteLocal(part.getLocal().getNombre());
+                partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
                 // TODO: configurar para sets.
                 if (part.getResultados().isEmpty()){
-                    partDTO.setResult(" - ");
+                    partDTO.setResultado(" - ");
                 }
                 else{
-                    int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
-                    int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
-                    partDTO.setResult(ptsLocal + " - " + ptsVisit);
+                    switch (competencia.getSistemaPuntuacion()){
+                        case RESULTADO_FINAL:
+                            cargarResultadoCellFinal(part, partDTO);
+                            break;
+                        case SET:
+                            partDTO.setResultado("-");
+                          //  cargarResultadoCellSets(partDTO, part.getResultados());
+                            break;
+                        case PUNTUACION:
+                            partDTO.setResultado("-");
+                          //  cargarResultadoCellPuntuacion(partDTO,part.getResultados().get(0));
+                            break;
+                    }
+
                 }
                 partidoDTOs.add(partDTO);
             }
@@ -129,12 +138,22 @@ public class mostrarFixtureController implements ControlledScreen {
         }
     }
 
+    private void cargarResultadoCellFinal(Partido part, PartidoDTO partDTO) {
+        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
+        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
+        if(ptsLocal > ptsVisit)
+            partDTO.setResultado(part.getLocal().getNombre());
+        else if (ptsVisit > ptsLocal)
+            partDTO.setResultado(part.getVisitante().getNombre());
+        else
+            partDTO.setResultado("Empate");
+    }
+
     public void setIdPartidoClickeado(int id){
         this.idPartidoClickeado = id;
     }
 
     public String getSistemaCompetencia(){
-        System.out.println(this.competencia.getSistemaPuntuacion().getPuntuacionString());
         return this.competencia.getSistemaPuntuacion().getPuntuacionString();
     }
 
@@ -150,8 +169,6 @@ public class mostrarFixtureController implements ControlledScreen {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
-
-        // Creamos una nueva factory de cell con un botón de Ver competencia
         mostrarFixtureController controller = this;
         accionesColumn.setCellFactory(new Callback<TableColumn<PartidoDTO, Boolean>, TableCell<PartidoDTO, Boolean>>() {
             @Override
@@ -198,7 +215,7 @@ public class mostrarFixtureController implements ControlledScreen {
         }
     }
 
-    public void mostrarPopUpResultado(String mensaje, String tipo){
+    public void mostrarPopUpResultado(String tipo){
         String recurso;
         switch(tipo){
             case "Sets":
@@ -219,41 +236,10 @@ public class mostrarFixtureController implements ControlledScreen {
             parent = loader.load();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void modalResultado(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
+            ControlledScreen myScreenController = ((ControlledScreen) loader.getController());
+            myController.setControladorAnterior(this);
+            myScreenController.setScreenParent(myController);
+            myScreenController.inicializar(idPartidoClickeado+"");
             modal = new Stage();
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.initStyle(StageStyle.TRANSPARENT);

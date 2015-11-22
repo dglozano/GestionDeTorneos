@@ -46,7 +46,6 @@ public class DeporteDao {
 
     public Deporte buscarDeporte(String nombreDeporte){
         EntityManager em = MiEntityManager.get();
-        System.out.println(nombreDeporte);
         Deporte deporte = (Deporte) em.createQuery("SELECT d FROM Deporte d WHERE nom_deporte = '"+nombreDeporte+"'").getSingleResult();
         em.close();
         return deporte;

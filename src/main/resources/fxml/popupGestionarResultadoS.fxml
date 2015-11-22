@@ -33,24 +33,14 @@
     </VBox>
     <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" spacing="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
       <children>
-            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" text="Cancelar" textAlignment="CENTER">
+            <Button fx:id="cancelarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-alt" />
                   <String fx:value="btn-small" />
                </styleClass>
             </Button>
-        <!--<Button fx:id="cancelButton" cancelButton="true" minWidth="80.0" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER">
-          <HBox.margin>
-                        <Insets />
-                      </HBox.margin>
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-small" />
-                              <String fx:value="btn-alt" />
-                           </styleClass>
-                    </Button>-->
-      <Button fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" text="Aceptar" textAlignment="CENTER" HBox.hgrow="NEVER">
+      <Button fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" textAlignment="CENTER" HBox.hgrow="NEVER">
         <HBox.margin>
           <Insets />
         </HBox.margin>

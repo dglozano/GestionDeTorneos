@@ -6,14 +6,13 @@ import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
 import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
+import exceptions.FuncionalidadEnDesarrolloException;
 import exceptions.FixtureException.PocosParticipantesFixtureException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -120,8 +119,11 @@ public class verCompetenciaController implements ControlledScreen{
         catch(PocosParticipantesFixtureException e){
             mostrarPopUp("La competencia debe tener por lo menos dos participantes.", "error");
         }
-        catch (DisponibilidadesInsuficientesFixtureException e){
+        catch(DisponibilidadesInsuficientesFixtureException e){
             mostrarPopUp("La competencia no tiene suficientes Disponibilidades asignadas.", "error");
+        }
+        catch(FuncionalidadEnDesarrolloException e){
+            mostrarPopUp("Esta funcionalidad esta en desarrollo.", "desarrollo");
         }
     }
 

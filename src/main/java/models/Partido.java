@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ public class Partido {
     private boolean esLibre;
     @Column(name="tipo_ref_partido")
     private TipoReferenciaPartido tipoReferenciaPartido;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="id_partido")
-    private List<Resultado> resultados;
+    private List<Resultado> resultados = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="codigo_lugar")
     private LugarDeRealizacion lugar;

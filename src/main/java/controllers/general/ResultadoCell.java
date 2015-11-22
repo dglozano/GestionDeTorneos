@@ -26,12 +26,8 @@ public class ResultadoCell extends TableCell<PartidoDTO, Boolean> {
             @Override public void handle(ActionEvent actionEvent) {
                 int idPartidoClickeado =((PartidoDTO)getTableView().getItems().get(getIndex())).getId();
                 String sistemaPuntuacion = controlador.getSistemaCompetencia();
-                System.out.println(":::::::::::::::::::::::");
-                System.out.println("-> ID PARTIDO: " + idPartidoClickeado);
-                System.out.println("-> Sistema: " + sistemaPuntuacion);
-                System.out.println(":::::::::::::::::::::::");
                 controlador.setIdPartidoClickeado(idPartidoClickeado);
-                controlador.mostrarPopUpResultado("", sistemaPuntuacion);
+                controlador.mostrarPopUpResultado(sistemaPuntuacion);
             }
         });
     }

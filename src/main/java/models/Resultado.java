@@ -20,7 +20,7 @@ public class Resultado {
     private int tantosEquipoLocal;
     @Column(name="equipo_visitante")
     private int tantosEquipoVisitante;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="id_resultado")
     private List<CambioResultado> cambiosResultado;
 
@@ -74,5 +74,9 @@ public class Resultado {
 
     public void setCambiosResultado(List<CambioResultado> cambiosResultado) {
         this.cambiosResultado = cambiosResultado;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

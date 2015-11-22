@@ -1,9 +1,11 @@
 package services;
 import dao.CompetenciaDao;
 import dao.ParticipanteDao;
+import dao.PartidoDao;
 import dtos.*;
 import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
+import exceptions.FuncionalidadEnDesarrolloException;
 import exceptions.FixtureException.PocosParticipantesFixtureException;
 import models.*;
 
@@ -17,6 +19,8 @@ public class GestorCompetencia {
     private GestorLugarRealizacion gestorLugarRealizacion = new GestorLugarRealizacion();
     private GestorDeporte gestorDeporte = new GestorDeporte();
     private ParticipanteDao participanteDao = ParticipanteDao.getInstance();
+    private PartidoDao partidoDao = PartidoDao.getInstance();
+    private GestorResultado gestorResultado = new GestorResultado();
 
     public void nuevaCompetencia(Competencia c) {
         competenciaDao.crearCompetencia(c);
@@ -133,7 +137,7 @@ public class GestorCompetencia {
     }
 
     public void generarFixture(int idCompetencia) throws PocosParticipantesFixtureException,
-            EstadoErrorFixtureException,DisponibilidadesInsuficientesFixtureException{
+            EstadoErrorFixtureException,DisponibilidadesInsuficientesFixtureException,FuncionalidadEnDesarrolloException{
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
         boolean estaEnDisputa = competencia.getEstado().equals(Estado.EN_DISPUTA);
         boolean estaFinalizada = competencia.getEstado().equals(Estado.FINALIZADA);
@@ -146,13 +150,9 @@ public class GestorCompetencia {
                     generarFixtureLiga(competencia);
                     break;
                 case ELIM_DOBLE:
-                    //NO IMPLEMENTADO
-                    System.out.println("Funcionalidad en desarrollo");
-                    break;
+                    throw new FuncionalidadEnDesarrolloException();
                 case ELIM_SIMPLE:
-                    //NO IMPLEMENTADO
-                    System.out.println("Funcionalidad en desarrollo");
-                    break;
+                    throw new FuncionalidadEnDesarrolloException();
             }
         }
     }
@@ -275,7 +275,6 @@ public class GestorCompetencia {
         nuevoParticipante.setNombre(participanteDTO.getNombreParticipante());
         nuevoParticipante.setEmail(participanteDTO.getEmailParticipante());
         if (participanteDTO.isTieneImagen()){
-            System.out.println("ACA ESTA 2");
             nuevoParticipante.setImagen(participanteDTO.getImagenParticipante());
         }
         nuevoParticipante.setEsLibre(false);
@@ -313,6 +312,15 @@ public class GestorCompetencia {
             }
         }
         return listaParticipantesDtos;
+    }
+
+    public void cargarResultadoFinal(ResultadoFinalDTO resultadoFinalDTO){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoFinalDTO.getIdCompetencia());
+        Partido partido = partidoDao.buscarPartidoPorId(resultadoFinalDTO.getIdPartido());
+        gestorResultado.cargarResultadoFinal(resultadoFinalDTO,partido);
+        if(!competencia.getEstado().equals(Estado.EN_DISPUTA)) competencia.setEstado(Estado.EN_DISPUTA);
+        competenciaDao.actualizarCompetencia(competencia);
+        //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
     }
 }
 

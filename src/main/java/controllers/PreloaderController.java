@@ -3,9 +3,12 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import dao.CompetenciaDao;
+import dao.DeporteDao;
+import dao.LugarDeRealizacionDao;
 import dao.UsuarioDao;
 import dao.util.MiEntityManager;
-import models.UsuarioLogueado;
+import models.*;
 
 import javax.persistence.EntityManager;
 
@@ -41,8 +44,8 @@ public class PreloaderController implements ControlledScreen {
         UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
         usuarioLogueado.setUsuarioLogueado(usuarioDao.buscarUsuarioPorId(1));
 
-        /*
-        CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
+
+        /*CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
         DeporteDao deporteDao = DeporteDao.getInstance();
         UsuarioDao usuarioDao = UsuarioDao.getInstance();
         LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
@@ -187,6 +190,6 @@ public class PreloaderController implements ControlledScreen {
         competencia3.setEstado(Estado.FINALIZADA);
         competencia3.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia3);
-        */
+*/
     }
 }

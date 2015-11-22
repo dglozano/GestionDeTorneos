@@ -5,36 +5,36 @@ package dtos;
  */
 public class PartidoDTO {
     private int id;
-    private String partiLocal;
-    private String partiVisit;
-    private String result;
+    private String participanteLocal;
+    private String participanteVisitante;
+    private String resultado;
 
     public PartidoDTO(){
 
     }
 
-    public String getPartiLocal() {
-        return partiLocal;
+    public String getParticipanteLocal() {
+        return participanteLocal;
     }
 
-    public String getPartiVisit() {
-        return partiVisit;
+    public String getParticipanteVisitante() {
+        return participanteVisitante;
     }
 
-    public String getResult() {
-        return result;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setPartiLocal(String partiLocal) {
-        this.partiLocal = partiLocal;
+    public void setParticipanteLocal(String participanteLocal) {
+        this.participanteLocal = participanteLocal;
     }
 
-    public void setPartiVisit(String partiVisit) {
-        this.partiVisit = partiVisit;
+    public void setParticipanteVisitante(String participanteVisitante) {
+        this.participanteVisitante = participanteVisitante;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public int getId() {

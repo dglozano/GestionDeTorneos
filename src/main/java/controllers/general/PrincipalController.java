@@ -109,5 +109,9 @@ public class PrincipalController extends StackPane {
     public ControlledScreen getControladorAnterior(){
         return controladorAnterior;
     }
+
+    public void setControladorAnterior(ControlledScreen controladorAnterior){
+        this.controladorAnterior = controladorAnterior;
+    }
 }
 
