@@ -14,12 +14,13 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.password" value="grupo5b"/>
 
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <!-- Hibernate persista haciendo DDL -->
+            <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
 
             <!-- Hibernate persista sin hacer DDL -->
-            <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
 
-            <!-- Generación de DDL -->
+            <!-- Generación de DDL en target/sql -->
             <!--
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
             <property name="javax.persistence.schema-generation.create-script-source" value="src/main/resources/META-INF/sql/create.sql" />
