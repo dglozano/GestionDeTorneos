@@ -40,12 +40,13 @@ public class PreloaderController implements ControlledScreen {
 
     private void seteoDatosPrueba(){
         // No respeta el modelo de capas. Es solo para probar, despues lo cambiamos
-        UsuarioDao usuarioDao = UsuarioDao.getInstance();
         UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
-        usuarioLogueado.setUsuarioLogueado(usuarioDao.buscarUsuarioPorId(1));
+        Usuario usuario1 = new Usuario();
+        usuarioLogueado.setUsuarioLogueado(usuario1);
 
+        //usuarioLogueado.setUsuarioLogueado(usuarioDao.buscarUsuarioPorId(1));
 
-        /*CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
+        CompetenciaDao competenciaDAO = CompetenciaDao.getInstance();
         DeporteDao deporteDao = DeporteDao.getInstance();
         UsuarioDao usuarioDao = UsuarioDao.getInstance();
         LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
@@ -190,6 +191,6 @@ public class PreloaderController implements ControlledScreen {
         competencia3.setEstado(Estado.FINALIZADA);
         competencia3.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia3);
-*/
+
     }
 }
