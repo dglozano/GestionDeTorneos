@@ -23,6 +23,20 @@ public class CambioResultado {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_cambio")
     private Date fechaCambio;
+    @Column(name="gano_local_desempate")
+    private boolean ganoLocalDesempate;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isGanoLocalDesempate() {
+        return ganoLocalDesempate;
+    }
+
+    public void setGanoLocalDesempate(boolean ganoLocalDesempate) {
+        this.ganoLocalDesempate = ganoLocalDesempate;
+    }
 
     public CambioResultado() {
     }

@@ -320,7 +320,92 @@ public class GestorCompetencia {
         gestorResultado.cargarResultadoFinal(resultadoFinalDTO,partido);
         if(!competencia.getEstado().equals(Estado.EN_DISPUTA)) competencia.setEstado(Estado.EN_DISPUTA);
         competenciaDao.actualizarCompetencia(competencia);
+        gestorResultado.eliminarResultadosVacios();
         //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
+    }
+
+   public void cargarResultadoPuntuacion(ResultadoPuntuacionDTO resultadoPuntuacionDTO){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoPuntuacionDTO.getIdCompetencia());
+        Partido partido = partidoDao.buscarPartidoPorId(resultadoPuntuacionDTO.getIdPartido());
+        gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO,partido,competencia.getTantosFavorNoPresentarse());
+        if(!competencia.getEstado().equals(Estado.EN_DISPUTA)) competencia.setEstado(Estado.EN_DISPUTA);
+        competenciaDao.actualizarCompetencia(competencia);
+        gestorResultado.eliminarResultadosVacios();
+        //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
+    }
+
+    public ArrayList<FilaPosicionDTO> tablaPosiciones(int idCompetencia){
+        ArrayList<FilaPosicionDTO> filasPosicionesDto = new ArrayList<>();
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        Modalidad modalidad = competencia.getModalidad();
+        SistemaPuntuacion sistemaPuntuacion = competencia.getSistemaPuntuacion();
+        int ptsGanado = competencia.getPuntosPartidoGanado();
+        int ptsPresentarse = competencia.getPuntosPorPresentarse();
+        int ptsEmpate=0,tantosFavorNoPresentarse=0;
+        boolean aceptaEmpates = competencia.isAceptaEmpate();
+        boolean otorgaTantos = competencia.isOtorgaTantosNoPresentarse();
+        if(aceptaEmpates) ptsEmpate=competencia.getPuntosPartidoEmpatado();
+        if(otorgaTantos) tantosFavorNoPresentarse = competencia.getTantosFavorNoPresentarse();
+        List<Participante> participantes = competencia.getParticipantes();
+        for(Participante participante: participantes){
+            if(!participante.isEsLibre()){
+                List<Partido> partidos = participante.getPartidosLocales();
+                partidos.addAll(participante.getPartidosVisitantes());
+                int puntos=0,ganados=0,empatados=0,perdidos=0,tantosFavor=0,tantosContra=0;
+                FilaPosicionDTO unaFila = new FilaPosicionDTO();
+                unaFila.setNombreParticipante(participante.getNombre());
+                for(Partido partido: partidos){
+                    //TODO 01: sets
+                    if(!partido.getResultados().isEmpty()){
+                        Resultado resultado = partido.getResultados().get(0);
+                        boolean esGanador= (partido.getGanador() != null) ? partido.getGanador().equals(participante) : false;
+                        boolean esLocal = partido.getLocal().equals(participante);
+                        boolean sePresento = ((esLocal && resultado.isJugoLocal()) || (!esLocal && resultado.isJugoVisitante()));
+                        if(sePresento){
+                            puntos+=ptsPresentarse;
+                            if(esGanador){
+                                puntos+=ptsGanado;
+                                ganados++;
+                            }
+                            else if (aceptaEmpates && (resultado.getTantosEquipoLocal() == resultado.getTantosEquipoVisitante())){
+                                puntos+=ptsEmpate;
+                                empatados++;
+                            }
+                            else{
+                                perdidos++;
+                            }
+                        }
+                        else{
+                            perdidos++;
+                        }
+                        if(sistemaPuntuacion.equals(SistemaPuntuacion.PUNTUACION)){
+                            if(esLocal){
+                                tantosFavor+=resultado.getTantosEquipoLocal();
+                                tantosContra+=resultado.getTantosEquipoVisitante();
+                            }
+                            else{
+                                tantosFavor+=resultado.getTantosEquipoVisitante();
+                                tantosContra+=resultado.getTantosEquipoLocal();
+                            }
+                        }
+                    }
+                }
+                unaFila.setPuntos(puntos);
+                unaFila.setGanados(ganados);
+                unaFila.setPerdidos(perdidos);
+                unaFila.setEmpatados(empatados);
+                unaFila.setFavor(tantosFavor);
+                unaFila.setContra(tantosContra);
+                unaFila.setDiferencia(tantosFavor-tantosContra);
+                unaFila.setJugados(ganados+perdidos+empatados);
+                filasPosicionesDto.add(unaFila);
+            }
+        }
+        return filasPosicionesDto;
+    }
+
+    public Partido buscarPartidoPorId(int id){
+        return partidoDao.buscarPartidoPorId(id);
     }
 }
 

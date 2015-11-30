@@ -78,8 +78,8 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" text="Equipo1" GridPane.columnIndex="1" />
-            <CheckBox mnemonicParsing="false" text="Equipo2" GridPane.columnIndex="2" />
+            <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" />
+            <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 2" GridPane.columnIndex="2" />
             <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
                <font>
                   <Font size="13.0" />
@@ -90,13 +90,13 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <RadioButton mnemonicParsing="false" text="Equipo1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <RadioButton fx:id="ganoLocalRadioButton" mnemonicParsing="false" text="Equipo1" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <toggleGroup>
-                  <ToggleGroup fx:id="ganador" />
+                  <ToggleGroup fx:id="desempateToggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Equipo2" toggleGroup="$ganador" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Label fx:id="error" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="318.0" styleClass="error" text="No acepta empates. Elija el ganador." textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+            <RadioButton fx:id="ganoVisitanteRadioButton" mnemonicParsing="false" text="Equipo2" toggleGroup="$desempateToggleGroup" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="mensajeEmpate" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="318.0" text="No acepta empates. Elija el ganador." textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -104,9 +104,9 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="error1" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Spinner fx:id="puntajeLocalSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Spinner fx:id="puntajeVisitanteSpinner" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            <Label fx:id="mensajeError" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

@@ -105,36 +105,50 @@ public class mostrarFixtureController implements ControlledScreen {
             List<Partido> partidos = fechasComp.get(i).getPartidos();
             List<PartidoDTO> partidoDTOs = new ArrayList<PartidoDTO>();
             for(Partido part : partidos){
-                PartidoDTO partDTO = new PartidoDTO();
-                partDTO.setId(part.getId());
-                partDTO.setParticipanteLocal(part.getLocal().getNombre());
-                partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
-                // TODO: configurar para sets.
-                if (part.getResultados().isEmpty()){
-                    partDTO.setResultado(" - ");
-                }
-                else{
-                    switch (competencia.getSistemaPuntuacion()){
-                        case RESULTADO_FINAL:
-                            cargarResultadoCellFinal(part, partDTO);
-                            break;
-                        case SET:
-                            partDTO.setResultado("-");
-                          //  cargarResultadoCellSets(partDTO, part.getResultados());
-                            break;
-                        case PUNTUACION:
-                            partDTO.setResultado("-");
-                          //  cargarResultadoCellPuntuacion(partDTO,part.getResultados().get(0));
-                            break;
+                if(!part.isEsLibre()){
+                    PartidoDTO partDTO = new PartidoDTO();
+                    partDTO.setId(part.getId());
+                    partDTO.setParticipanteLocal(part.getLocal().getNombre());
+                    partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
+                    // TODO: configurar para sets.
+                    if (part.getResultados().isEmpty()){
+                        partDTO.setResultado(" - ");
                     }
-
+                    else{
+                        switch (competencia.getSistemaPuntuacion()){
+                            case RESULTADO_FINAL:
+                                cargarResultadoCellFinal(part, partDTO);
+                                break;
+                            case SET:
+                                partDTO.setResultado("-");
+                                //  cargarResultadoCellSets(partDTO, part.getResultados());
+                                break;
+                            case PUNTUACION:
+                                cargarResultadoPuntuacion(part, partDTO);
+                                break;
+                        }
+                    }
+                    partidoDTOs.add(partDTO);
                 }
-                partidoDTOs.add(partDTO);
             }
             tabla.getItems().setAll(partidoDTOs);
 
             tab.setContent(tabla);
             fechas.getTabs().add(tab);
+        }
+    }
+
+    private void cargarResultadoPuntuacion(Partido part, PartidoDTO partDTO) {
+        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
+        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
+        if(!competencia.isAceptaEmpate() && ptsLocal == ptsVisit){
+            if( part.getResultados().get(0).isGanoLocalDesempate())
+                partDTO.setResultado("*"+ptsLocal+" - "+ptsVisit);
+            else
+                partDTO.setResultado(ptsLocal+" - "+ptsVisit+"*");
+        }
+        else{
+            partDTO.setResultado(ptsLocal+" - "+ptsVisit);
         }
     }
 

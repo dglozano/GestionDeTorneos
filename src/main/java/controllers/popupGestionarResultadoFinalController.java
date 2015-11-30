@@ -5,9 +5,9 @@ import controllers.general.PrincipalController;
 import dtos.ResultadoFinalDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import models.Partido;
 import services.GestorCompetencia;
 import services.GestorResultado;
 
@@ -21,16 +21,17 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     private boolean aceptaEmpates;
     private GestorResultado gestorResultado = new GestorResultado();
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
+    private Partido partido;
 
     @FXML private Button okButton;
     @FXML private Button cancelarButton;
     @FXML private Label detailsLabel;
     @FXML private ToggleGroup ganadorToggleGroup;
-    @FXML private RadioButton ganoEquipo1RadioButton;
-    @FXML private RadioButton ganoEquipo2RadioButton;
+    @FXML private RadioButton ganoLocalRadioButton;
+    @FXML private RadioButton ganoVisitanteRadioButton;
     @FXML private RadioButton empateRadioButton;
-    @FXML private CheckBox sePresentoEquipo1CheckBox;
-    @FXML private CheckBox sePresentoEquipo2CheckBox;
+    @FXML private CheckBox sePresentoLocalCheckBox;
+    @FXML private CheckBox sePresentoVisitanteCheckBox;
     @FXML private Label errorLabel;
 
     public void setScreenParent(PrincipalController screenParent){
@@ -39,12 +40,17 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
 
     public void inicializar() {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
+        partido = gestorCompetencia.buscarPartidoPorId(idPartidoClickeado);
         aceptaEmpates = gestorCompetencia.buscarCompetenciaPorId(idCompetencia).isAceptaEmpate();
-        sePresentoEquipo1CheckBox.setSelected(false);
-        sePresentoEquipo2CheckBox.setSelected(false);
+        sePresentoLocalCheckBox.setSelected(false);
+        sePresentoVisitanteCheckBox.setSelected(false);
+        sePresentoLocalCheckBox.setText(partido.getLocal().getNombre());
+        sePresentoVisitanteCheckBox.setText(partido.getVisitante().getNombre());
+        ganoLocalRadioButton.setText(partido.getLocal().getNombre());
+        ganoVisitanteRadioButton.setText(partido.getVisitante().getNombre());
         if(ganadorToggleGroup.getSelectedToggle() != null) ganadorToggleGroup.getSelectedToggle().setSelected(false);
-        ganoEquipo1RadioButton.setDisable(true);
-        ganoEquipo2RadioButton.setDisable(true);
+        ganoLocalRadioButton.setDisable(true);
+        ganoVisitanteRadioButton.setDisable(true);
         empateRadioButton.setDisable(true);
         if(aceptaEmpates) empateRadioButton.setVisible(true);
         else empateRadioButton.setVisible(false);
@@ -79,16 +85,16 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     private void cargarResultadoDto(ResultadoFinalDTO resultadoDTO) {
         resultadoDTO.setIdCompetencia(idCompetencia);
         resultadoDTO.setIdPartido(idPartidoClickeado);
-        resultadoDTO.setSePresentoLocal(sePresentoEquipo1CheckBox.isSelected());
-        resultadoDTO.setSePresentoVisitante(sePresentoEquipo2CheckBox.isSelected());
-        resultadoDTO.setGanoLocal(ganoEquipo1RadioButton.isSelected());
-        resultadoDTO.setGanoVisitante(ganoEquipo2RadioButton.isSelected());
+        resultadoDTO.setSePresentoLocal(sePresentoLocalCheckBox.isSelected());
+        resultadoDTO.setSePresentoVisitante(sePresentoVisitanteCheckBox.isSelected());
+        resultadoDTO.setGanoLocal(ganoLocalRadioButton.isSelected());
+        resultadoDTO.setGanoVisitante(ganoVisitanteRadioButton.isSelected());
         if(empateRadioButton.isVisible())
             resultadoDTO.setEmpate(empateRadioButton.isSelected());
     }
 
     private boolean validar() {
-        if(!sePresentoEquipo1CheckBox.isSelected() && !sePresentoEquipo2CheckBox.isSelected()){
+        if(!sePresentoLocalCheckBox.isSelected() && !sePresentoVisitanteCheckBox.isSelected()){
             errorLabel.setText("Al menos un participante debe haberse presentado");
             errorLabel.setVisible(true);
             return false;
@@ -105,13 +111,13 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     }
 
     public void checkBoxClicked(ActionEvent actionEvent){
-        if(((CheckBox)actionEvent.getSource()).getText().equals("Equipo 1")){
-            ganoEquipo1RadioButton.setDisable(!sePresentoEquipo1CheckBox.isSelected());
+        if(((CheckBox)actionEvent.getSource()).equals(sePresentoLocalCheckBox)){
+            ganoLocalRadioButton.setDisable(!sePresentoLocalCheckBox.isSelected());
         }
         else{
-            ganoEquipo2RadioButton.setDisable(!sePresentoEquipo2CheckBox.isSelected());
+            ganoVisitanteRadioButton.setDisable(!sePresentoVisitanteCheckBox.isSelected());
         }
-        if(aceptaEmpates && sePresentoEquipo1CheckBox.isSelected() && sePresentoEquipo2CheckBox.isSelected()){
+        if(aceptaEmpates && sePresentoLocalCheckBox.isSelected() && sePresentoVisitanteCheckBox.isSelected()){
             empateRadioButton.setDisable(false);
         }
         else{

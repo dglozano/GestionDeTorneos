@@ -2,9 +2,11 @@ package dao;
 
 import dao.util.MiEntityManager;
 import models.Partido;
+import models.Resultado;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 /**
  * Created by DIego on 29/10/2015..
@@ -32,6 +34,28 @@ public class PartidoDao {
         tx.begin();
         em.merge(partido);
         tx.commit();
+        em.close();
+    }
+
+    public void actualizarResultado(Resultado resultado) {
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(resultado);
+        tx.commit();
+        em.close();
+    }
+
+    public void eliminarResultadosVacios(){
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        List<Resultado> resultadosVacios = em.createQuery("SELECT r FROM Resultado r WHERE id_partido=null").getResultList();
+        for(Resultado r: resultadosVacios){
+            tx.begin();
+            Resultado rborrar=em.find(Resultado.class,r.getId());
+            em.remove(rborrar);
+            tx.commit();
+        }
         em.close();
     }
 }

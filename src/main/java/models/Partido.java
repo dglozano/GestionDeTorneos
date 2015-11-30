@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Partido {
     private TipoReferenciaPartido tipoReferenciaPartido;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="id_partido")
+    @Fetch(FetchMode.SELECT)
     private List<Resultado> resultados = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="codigo_lugar")

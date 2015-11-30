@@ -77,8 +77,8 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <CheckBox fx:id="sePresentoEquipo1CheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" />
-            <CheckBox fx:id="sePresentoEquipo2CheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 2" GridPane.columnIndex="2" />
+            <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" />
+            <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 2" GridPane.columnIndex="2" />
             <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
                <font>
                   <Font size="13.0" />
@@ -89,12 +89,12 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <RadioButton fx:id="ganoEquipo1RadioButton" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <RadioButton fx:id="ganoLocalRadioButton" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <toggleGroup>
                   <ToggleGroup fx:id="ganadorToggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="ganoEquipo2RadioButton" mnemonicParsing="false" text="Equipo 2" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <RadioButton fx:id="ganoVisitanteRadioButton" mnemonicParsing="false" text="Equipo 2" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label fx:id="errorLabel" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <opaqueInsets>
                   <Insets />

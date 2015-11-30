@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,7 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
+    @Fetch(FetchMode.SELECT)
     private List<Partido> partidosLocales = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -47,6 +51,7 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
+    @Fetch(FetchMode.SELECT)
     private List<Partido> partidosVisitantes=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -58,6 +63,7 @@ public class Participante {
                     @JoinColumn(name="id_partido")
             }
     )
+    @Fetch(FetchMode.SELECT)
     private List<Partido> partidosGanados = new ArrayList<>();
 
     @Lob

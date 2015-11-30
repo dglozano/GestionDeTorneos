@@ -73,7 +73,7 @@ public class crearCompetencias2Controller implements ControlledScreen {
         ptsGanadosSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
         ptsEmpateSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
         ptsPorPresentarseSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
-        tantosOtorgadosSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
+        tantosOtorgadosSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
         setearDisables();
     }
 

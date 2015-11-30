@@ -43,7 +43,7 @@
                   <TableView fx:id="posicionesTableView" prefHeight="315.0" prefWidth="779.0">
                      <columns>
                         <TableColumn fx:id="nombreColumna" prefWidth="271.0" text="Equipo" />
-                        <TableColumn fx:id="puntosColumna" prefWidth="52.0" text="Pts" />
+                        <TableColumn fx:id="puntosColumna" prefWidth="52.0" text="Puntos" />
                         <TableColumn fx:id="jugadosColumna" prefWidth="52.0" text="J" />
                         <TableColumn fx:id="ganadosColumna" prefWidth="48.0" text="G" />
                         <TableColumn fx:id="empatadosColumna" prefWidth="51.0" text="E" />

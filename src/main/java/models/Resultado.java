@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,14 +25,24 @@ public class Resultado {
     private int tantosEquipoVisitante;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="id_resultado")
+    @Fetch(FetchMode.SELECT)
     private List<CambioResultado> cambiosResultado;
+    @Column(name="gano_local_desempate")
+    private boolean ganoLocalDesempate;
 
+    public boolean isGanoLocalDesempate() {
+        return ganoLocalDesempate;
+    }
+
+    public void setGanoLocalDesempate(boolean ganoLocalDesempate) {
+        this.ganoLocalDesempate = ganoLocalDesempate;
+    }
 
     public Resultado() {
     }
 
     public void addCambioResultado(CambioResultado cambio){
-        (this.cambiosResultado).add(cambio);
+        (this.cambiosResultado).add(0,cambio);
     }
 
     public int getId() {
