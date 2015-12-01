@@ -6,8 +6,8 @@ import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
 import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
-import exceptions.FuncionalidadEnDesarrolloException;
 import exceptions.FixtureException.PocosParticipantesFixtureException;
+import exceptions.FuncionalidadEnDesarrolloException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Competencia;
 import models.Estado;
 import models.Modalidad;
+import models.Partido;
 import services.GestorCompetencia;
 
 import java.io.IOException;
@@ -57,7 +59,18 @@ public class verCompetenciaController implements ControlledScreen{
         deporteTextField.setText(competenciaDTO.getDeporte());
         modalidadTextField.setText(competenciaDTO.getModalidad());
         estadoTextField.setText(competenciaDTO.getEstado());
-        /* TODO 02: setear proximo encuentro cuando funcione fixture */
+
+       boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
+       boolean estaPlanificada = competenciaDTO.getEstado().equals(Estado.PLANIFICADA.getEstadoString());
+       if (estaEnDisputa || estaPlanificada) {
+           Competencia competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
+           int fechaActual = gestorCompetencia.buscarFechaActual(competencia);
+           Partido proximoEncuentro = gestorCompetencia.getProxEncuentro(competencia, fechaActual);
+           String proximoEncuentroMensaje = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
+           proximoEncuentroTextField.setText(proximoEncuentroMensaje);
+       } else {
+           proximoEncuentroTextField.setText(" - ");
+       }
     }
     public void inicializar(String mensaje) {inicializar();}
 

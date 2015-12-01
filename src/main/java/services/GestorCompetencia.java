@@ -331,7 +331,7 @@ public class GestorCompetencia {
            competencia.setEstado(Estado.EN_DISPUTA);
            competenciaDao.actualizarCompetencia(competencia);
        }
-        gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO,partido,competencia.getTantosFavorNoPresentarse());
+        gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO, partido, competencia.getTantosFavorNoPresentarse());
         gestorResultado.eliminarResultadosVacios();
         //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
     }
@@ -410,6 +410,54 @@ public class GestorCompetencia {
     }
     public Partido buscarPartidoPorId(int id){
         return partidoDao.buscarPartidoPorId(id);
+    }
+
+    public int buscarFechaActual(Competencia competencia){
+        int nroFecha = 0;
+        for (Fecha fecha: competencia.getFixture().getFechas()){
+            for (Partido partido: fecha.getPartidos()){
+                if (partido.getResultados().isEmpty() && !partido.isEsLibre()){
+                    return nroFecha;
+                }
+            }
+            nroFecha++;
+        }
+        return nroFecha;
+    }
+
+    public Partido getProxEncuentro(Competencia competencia, int fechaActual){
+        Fecha actual = competencia.getFixture().getFechas().get(fechaActual);
+        for (Partido partido: actual.getPartidos()){
+            if (partido.getResultados().isEmpty() && !partido.isEsLibre()){
+                return partido;
+            }
+        }
+        return null;
+    }
+
+    public int buscarFechaPartido(Competencia competencia, int idPartido){
+        int nroFecha = 0;
+        for (Fecha fecha: competencia.getFixture().getFechas()){
+            for (Partido partido: fecha.getPartidos()){
+                if (partido.getId() == idPartido){
+                    return nroFecha;
+                }
+            }
+            nroFecha++;
+        }
+        nroFecha = -1;
+        return nroFecha;
+    }
+
+    public boolean partidoHabilitado(Competencia competencia, int idPartido){
+        int nroFechaPartido = buscarFechaPartido(competencia, idPartido);
+        if (nroFechaPartido==-1)
+            return false;
+        int nroFechaActual = buscarFechaActual(competencia);
+        if (nroFechaPartido>=0 && nroFechaPartido<=nroFechaActual){
+            return true;
+        }
+        return false;
     }
 }
 
