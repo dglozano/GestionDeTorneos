@@ -405,7 +405,9 @@ public class GestorCompetencia {
         }
         return filasPosicionesDto;
     }
-
+    public void actualizarCompetencia(Competencia competencia){
+        competenciaDao.actualizarCompetencia(competencia);
+    }
     public Partido buscarPartidoPorId(int id){
         return partidoDao.buscarPartidoPorId(id);
     }
