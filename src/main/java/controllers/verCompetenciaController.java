@@ -60,17 +60,11 @@ public class verCompetenciaController implements ControlledScreen{
         modalidadTextField.setText(competenciaDTO.getModalidad());
         estadoTextField.setText(competenciaDTO.getEstado());
 
-       boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
-       boolean estaPlanificada = competenciaDTO.getEstado().equals(Estado.PLANIFICADA.getEstadoString());
-       if (estaEnDisputa || estaPlanificada) {
-           Competencia competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
-           int fechaActual = gestorCompetencia.buscarFechaActual(competencia);
-           Partido proximoEncuentro = gestorCompetencia.getProxEncuentro(competencia, fechaActual);
-           String proximoEncuentroMensaje = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
-           proximoEncuentroTextField.setText(proximoEncuentroMensaje);
-       } else {
-           proximoEncuentroTextField.setText(" - ");
-       }
+        boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
+        boolean estaPlanificada = competenciaDTO.getEstado().equals(Estado.PLANIFICADA.getEstadoString());
+        boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
+        boolean habilitado = (estaEnDisputa || estaPlanificada && !estaFinalizada) ? true : false;
+        setProximoEncuentro(habilitado);
     }
     public void inicializar(String mensaje) {inicializar();}
 
@@ -124,6 +118,7 @@ public class verCompetenciaController implements ControlledScreen{
         try{
             gestorCompetencia.generarFixture(idCompetencia);
             mostrarPopUp("El fixture se ha generado exitosamente.", "exito");
+            setProximoEncuentro(true);
             estadoTextField.setText(Estado.PLANIFICADA.getEstadoString());
         }
         catch(EstadoErrorFixtureException e){
@@ -137,6 +132,18 @@ public class verCompetenciaController implements ControlledScreen{
         }
         catch(FuncionalidadEnDesarrolloException e){
             mostrarPopUp("Esta funcionalidad esta en desarrollo.", "desarrollo");
+        }
+    }
+
+    public void setProximoEncuentro(boolean habilitado){
+        if (habilitado) {
+            Competencia competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
+            int fechaActual = gestorCompetencia.buscarFechaActual(competencia);
+            Partido proximoEncuentro = gestorCompetencia.getProxEncuentro(competencia, fechaActual);
+            String proximoEncuentroMensaje = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
+            proximoEncuentroTextField.setText(proximoEncuentroMensaje);
+        } else {
+            proximoEncuentroTextField.setText(" - ");
         }
     }
 
