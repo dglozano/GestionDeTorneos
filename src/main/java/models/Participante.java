@@ -1,5 +1,6 @@
 package models;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -30,41 +31,13 @@ public class Participante {
     @JoinColumn(name = "id_participante")
     private List<ModificacionParticipante> modificacionesParticipante = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "PartidosLocales",
-            joinColumns = {
-                    @JoinColumn(name="id_participante",unique=true)
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name="id_partido")
-            }
-    )
+    @OneToMany(mappedBy = "local",fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private List<Partido> partidosLocales = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "PartidosVisitantes",
-            joinColumns = {
-                    @JoinColumn(name="id_participante",unique=true)
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name="id_partido")
-            }
-    )
+    @OneToMany(mappedBy = "visitante",fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private List<Partido> partidosVisitantes=new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "PartidosGanados",
-            joinColumns = {
-                    @JoinColumn(name="id_participante",unique=true)
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name="id_partido")
-            }
-    )
-    @Fetch(FetchMode.SELECT)
-    private List<Partido> partidosGanados = new ArrayList<>();
 
     @Lob
     @Column(name = "Imagen")
@@ -91,9 +64,6 @@ public class Participante {
     }
     public void addPartidoVisitante(Partido p){
         this.partidosVisitantes.add(p);
-    }
-    public void addPartidoGanador(Partido p){
-        this.partidosGanados.add(p);
     }
     public int getId() {
         return id;
@@ -127,10 +97,6 @@ public class Participante {
         return partidosVisitantes;
     }
 
-    public List<Partido> getPartidosGanados() {
-        return partidosGanados;
-    }
-
     public byte[] getImagen() {
         return imagen;
     }
@@ -162,11 +128,6 @@ public class Participante {
     public void setPartidosVisitantes(List<Partido> partidosVisitantes) {
         this.partidosVisitantes = partidosVisitantes;
     }
-
-    public void setPartidosGanados(List<Partido> partidosGanados) {
-        this.partidosGanados = partidosGanados;
-    }
-
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }

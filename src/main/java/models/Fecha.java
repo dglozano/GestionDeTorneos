@@ -19,7 +19,7 @@ public class Fecha {
 
     @Column(name = "ronda")
     private Ronda ronda;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade =CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="id_fecha")
     private List<Partido> partidos = new ArrayList<>();
 

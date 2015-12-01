@@ -6,6 +6,7 @@ import models.Resultado;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class PartidoDao {
         em.close();
         return partido;
     }
-
+    @Transactional
     public void actualizarPartido(Partido partido) {
         EntityManager em = MiEntityManager.get();
         EntityTransaction tx = em.getTransaction();

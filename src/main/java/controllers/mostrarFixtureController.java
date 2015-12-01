@@ -91,6 +91,7 @@ public class mostrarFixtureController implements ControlledScreen {
 
             TableColumn localColumn = new TableColumn("Local");
             TableColumn resultadoColumn = new TableColumn("Resultado");
+            if(competencia.getSistemaPuntuacion().equals(SistemaPuntuacion.RESULTADO_FINAL)) resultadoColumn.setText("Ganador");
             TableColumn visitanteColumn = new TableColumn("Visitante");
             TableColumn accionesColumn = new TableColumn("Acciones");
             localColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("participanteLocal"));

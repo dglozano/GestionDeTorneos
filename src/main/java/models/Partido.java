@@ -28,7 +28,7 @@ public class Partido {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="codigo_lugar")
     private LugarDeRealizacion lugar;
-    @ManyToOne(optional=true, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosLocales",
             joinColumns = {
                     @JoinColumn(name="id_partido")
@@ -38,7 +38,7 @@ public class Partido {
             }
     )
     private Participante local;
-    @ManyToOne(optional=true, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosVisitantes",
             joinColumns = {
                     @JoinColumn(name="id_partido")
@@ -48,16 +48,11 @@ public class Partido {
             }
     )
     private Participante visitante;
-    @ManyToOne(optional=true, fetch = FetchType.EAGER)
-    @JoinTable(name = "PartidosGanados",
-            joinColumns = {
-                    @JoinColumn(name="id_partido")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name="id_participante")
-            }
-    )
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_participante")
     private Participante ganador;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_partido")
     private Partido partidoAnteriorLocal;

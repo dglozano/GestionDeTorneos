@@ -327,9 +327,11 @@ public class GestorCompetencia {
    public void cargarResultadoPuntuacion(ResultadoPuntuacionDTO resultadoPuntuacionDTO){
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoPuntuacionDTO.getIdCompetencia());
         Partido partido = partidoDao.buscarPartidoPorId(resultadoPuntuacionDTO.getIdPartido());
+       if(!competencia.getEstado().equals(Estado.EN_DISPUTA)){
+           competencia.setEstado(Estado.EN_DISPUTA);
+           competenciaDao.actualizarCompetencia(competencia);
+       }
         gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO,partido,competencia.getTantosFavorNoPresentarse());
-        if(!competencia.getEstado().equals(Estado.EN_DISPUTA)) competencia.setEstado(Estado.EN_DISPUTA);
-        competenciaDao.actualizarCompetencia(competencia);
         gestorResultado.eliminarResultadosVacios();
         //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
     }
