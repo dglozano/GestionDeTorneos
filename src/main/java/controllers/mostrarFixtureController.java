@@ -122,8 +122,7 @@ public class mostrarFixtureController implements ControlledScreen {
                                 cargarResultadoCellFinal(part, partDTO);
                                 break;
                             case SET:
-                                partDTO.setResultado("-");
-                                //  cargarResultadoCellSets(partDTO, part.getResultados());
+                                cargarResultadoCellSets(part, partDTO);
                                 break;
                             case PUNTUACION:
                                 cargarResultadoPuntuacion(part, partDTO);
@@ -139,6 +138,24 @@ public class mostrarFixtureController implements ControlledScreen {
             fechas.getTabs().add(tab);
         }
         fechas.getSelectionModel().select(fechaActual);
+    }
+
+    private void cargarResultadoCellSets(Partido part, PartidoDTO partDTO) {
+        String resultado="";
+        for(int i=0; i<part.getResultados().size();i++){
+            int ptsLocal= part.getResultados().get(i).getTantosEquipoLocal();
+            int ptsVisitante = part.getResultados().get(i).getTantosEquipoVisitante();
+
+            if(ptsLocal != 0 || ptsVisitante !=0){
+                if(i==0){
+                    resultado+=ptsLocal+"-"+ptsVisitante;
+                }
+                else{
+                    resultado+=" | "+ptsLocal+"-"+ptsVisitante;
+                }
+            }
+        }
+        partDTO.setResultado(resultado);
     }
 
     private void cargarResultadoPuntuacion(Partido part, PartidoDTO partDTO) {

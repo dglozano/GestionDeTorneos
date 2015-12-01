@@ -342,6 +342,20 @@ public class GestorCompetencia {
         gestorResultado.eliminarResultadosVacios();
     }
 
+    public void cargarResultadoSet(ResultadoSetDTO resultadoSetDTO){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoSetDTO.getIdCompetencia());
+        Partido partido = partidoDao.buscarPartidoPorId(resultadoSetDTO.getIdPartido());
+        if(esPrimerResultado(competencia, partido)) {
+            competencia.setEstado(Estado.EN_DISPUTA);
+        }
+        if(esUltimoResultado(competencia, partido)) {
+            competencia.setEstado(Estado.FINALIZADA);
+        }
+        competenciaDao.actualizarCompetencia(competencia);
+        gestorResultado.cargarResultadoSet(resultadoSetDTO, partido, competencia.getCantidadDeSets());
+        gestorResultado.eliminarResultadosVacios();
+    }
+
     private boolean esPrimerResultado(Competencia competencia, Partido partido){
         List<Fecha> fechas = competencia.getFixture().getFechas();
         List<Partido> partidos = fechas.get(0).getPartidos();

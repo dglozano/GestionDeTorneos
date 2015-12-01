@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
+import dtos.ResultadoSetDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -86,7 +87,8 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
                 setsVisitante.get(i).setVisible(false);
             }
             else{
-                setsLocal.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));setsVisitante.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
+                setsLocal.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
+                setsVisitante.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
                 setsLocal.get(i).valueProperty().removeListener(listenerSpinner);
                 setsVisitante.get(i).valueProperty().removeListener(listenerSpinner);
                 setsLocal.get(i).valueProperty().addListener(listenerSpinner);
@@ -134,19 +136,40 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
     }
 
     public void aceptar(ActionEvent actionEvent){
-       /* if(validar()){
-            ResultadoPuntuacionDTO resultadoPuntuacionDTO = new ResultadoPuntuacionDTO();
-            cargarResultadoDto(resultadoPuntuacionDTO);
-            gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
+        if(!sePresentoLocalCheckBox.isSelected() && !sePresentoVisitanteCheckBox.isSelected()){
+            error1.setText("Alguno de los participantes tiene que haberse presentado");
+            error1.setVisible(true);
+        }
+        else if(!error1.isVisible()){
+            ResultadoSetDTO resultadoSetDTO = new ResultadoSetDTO();
+            cargarResultadoDTO(resultadoSetDTO);
+            gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
             myController.getControladorAnterior().inicializar();
             myController.setControladorAnterior(this);
             Stage modal = (Stage)okButton.getScene().getWindow();
             modal.close();
-        }*/
-        myController.getControladorAnterior().inicializar();
-        myController.setControladorAnterior(this);
-        Stage modal = (Stage)okButton.getScene().getWindow();
-        modal.close();
+        }
+    }
+
+    private void cargarResultadoDTO(ResultadoSetDTO resultadoSetDTO) {
+        resultadoSetDTO.setSePresentoLocal(sePresentoLocalCheckBox.isSelected());
+        resultadoSetDTO.setSePresentoVisitante(sePresentoVisitanteCheckBox.isSelected());
+        resultadoSetDTO.setIdCompetencia(idCompetencia);
+        resultadoSetDTO.setIdPartido(idPartidoClickeado);
+        int[] tantosLocal = new int[9];
+        int[] tantosVisitante = new int[9];
+        for(int i=0;i<9;i++){
+            if(setsLocal.get(i).isDisabled() && setsVisitante.get(i).isDisabled()){
+                tantosLocal[i]=0;
+                tantosVisitante[i]=0;
+            }
+            else{
+                tantosLocal[i]=(Integer)setsLocal.get(i).getValue();
+                tantosVisitante[i]=(Integer)setsVisitante.get(i).getValue();
+            }
+        }
+        resultadoSetDTO.setTantosLocal(tantosLocal);
+        resultadoSetDTO.setTantosVisitante(tantosVisitante);
     }
 
     public void spinnerChange(){
@@ -168,13 +191,14 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
         if(sePresentoLocalCheckBox.isSelected() && sePresentoVisitanteCheckBox.isSelected()){
             setsLocal.get(0).setDisable(false);
             setsVisitante.get(0).setDisable(false);
-            habilitarSpinnersCorrespondientes();
+            spinnerChange();
         }
         else{
             for(int i=0;i<cantSets;i++){
                 setsLocal.get(i).setDisable(true);
                 setsVisitante.get(i).setDisable(true);
             }
+            error1.setVisible(false);
         }
     }
 

@@ -59,7 +59,6 @@ public class verCompetenciaController implements ControlledScreen{
         deporteTextField.setText(competenciaDTO.getDeporte());
         modalidadTextField.setText(competenciaDTO.getModalidad());
         estadoTextField.setText(competenciaDTO.getEstado());
-
         boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
         boolean estaPlanificada = competenciaDTO.getEstado().equals(Estado.PLANIFICADA.getEstadoString());
         boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());

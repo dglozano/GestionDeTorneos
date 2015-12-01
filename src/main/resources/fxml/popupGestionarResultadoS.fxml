@@ -24,7 +24,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-        <Label fx:id="detailsLabel" alignment="CENTER" prefHeight="17.0" prefWidth="1061.0" text="Liga por Resultado Final" textAlignment="CENTER" wrapText="true">
+        <Label fx:id="detailsLabel" alignment="CENTER" prefHeight="17.0" prefWidth="1061.0" text="Liga por Sets" textAlignment="CENTER" wrapText="true">
           <font>
             <Font size="12.0" />
           </font>
@@ -112,9 +112,9 @@
             <Spinner fx:id="visitanteSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <Spinner fx:id="visitanteSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="2" />
             <Spinner fx:id="visitanteSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Spinner fx:id="visitanteSpinner7" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Spinner fx:id="visitanteSpinner8" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-            <Spinner fx:id="visitanteSpinner9" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="2" />
          </children>
       </GridPane>
   </children>

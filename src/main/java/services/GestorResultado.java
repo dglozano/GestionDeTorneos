@@ -3,12 +3,15 @@ package services;
 import dao.PartidoDao;
 import dtos.ResultadoFinalDTO;
 import dtos.ResultadoPuntuacionDTO;
+import dtos.ResultadoSetDTO;
 import models.CambioResultado;
 import models.Partido;
 import models.Resultado;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by DIego on 21/11/2015..
@@ -87,6 +90,72 @@ public class GestorResultado {
             }
         }
         partido.addResultado(resultado);
+        partidoDao.actualizarPartido(partido);
+    }
+
+    public void cargarResultadoSet(ResultadoSetDTO resultadoSetDTO,Partido partido,int cantSets){
+        List<Resultado> resultadosNuevos = new ArrayList<Resultado>();
+        for(int i=0;i<cantSets;i++){
+            resultadosNuevos.add(new Resultado());
+        }
+        boolean esPrimerResultado = partido.getResultados().isEmpty();
+        if(!esPrimerResultado){
+            List<Resultado> resultadosViejos = partido.getResultados();
+            for(int i=0;i<cantSets;i++){
+                resultadosNuevos.get(i).setCambiosResultado(resultadosViejos.get(i).getCambiosResultado());
+                agregarCambioResultado(resultadosNuevos.get(i),resultadosViejos.get(i));
+            }
+            partido.getResultados().clear();
+        }
+        int setsGanadosLocal=0;
+        int setsGanadosVisitante=0;
+        if(resultadoSetDTO.isSePresentoLocal() && resultadoSetDTO.isSePresentoVisitante()) {
+            for (int i = 0; i < cantSets; i++) {
+                int tantosLocal = resultadoSetDTO.getTantosLocal()[i];
+                int tantosVisitante = resultadoSetDTO.getTantosVisitante()[i];
+                if (tantosLocal == 0 && tantosVisitante == 0) {
+                    cargarResultado(resultadosNuevos.get(i), true, true, 0, 0);
+                }
+                else {
+                    cargarResultado(resultadosNuevos.get(i), true, true, tantosLocal, tantosVisitante);
+                    if (tantosLocal > tantosVisitante) {
+                        setsGanadosLocal++;
+                    }
+                    else {
+                        setsGanadosVisitante++;
+                    }
+                }
+            }
+            if(setsGanadosLocal > setsGanadosVisitante){
+                partido.setGanador(partido.getLocal());
+            }
+            else{
+                partido.setGanador(partido.getVisitante());
+
+            }
+        }
+        else{
+            if(resultadoSetDTO.isSePresentoLocal()){
+                partido.setGanador(partido.getLocal());
+                for(int i=0; i<cantSets;i++){
+                    if(i<cantSets/2+1)
+                        cargarResultado(resultadosNuevos.get(i), true, false, 1, 0);
+                    else
+                        cargarResultado(resultadosNuevos.get(i), true, false, 0, 0);
+
+                }
+            }
+            else{
+                partido.setGanador(partido.getVisitante());
+                for(int i=0; i<cantSets;i++){
+                    if(i<cantSets/2+1)
+                        cargarResultado(resultadosNuevos.get(i), false, true, 0, 1);
+                    else
+                        cargarResultado(resultadosNuevos.get(i), false, true, 0, 0);
+                }
+            }
+        }
+        partido.setResultados(resultadosNuevos);
         partidoDao.actualizarPartido(partido);
     }
 

@@ -176,7 +176,7 @@ public class PreloaderController implements ControlledScreen {
         competencia2.setModalidad(Modalidad.LIGA);
         competencia2.setEstado(Estado.CREADA);
         competencia2.setSistemaPuntuacion(SistemaPuntuacion.SET);
-        competencia2.setCantidadDeSets(5);
+        competencia2.setCantidadDeSets(9);
         competencia2.setAceptaEmpate(false);
         competencia2.setTantosFavorNoPresentarse(3);
         competencia2.setPuntosPartidoGanado(4);
