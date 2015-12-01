@@ -317,23 +317,49 @@ public class GestorCompetencia {
     public void cargarResultadoFinal(ResultadoFinalDTO resultadoFinalDTO){
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoFinalDTO.getIdCompetencia());
         Partido partido = partidoDao.buscarPartidoPorId(resultadoFinalDTO.getIdPartido());
-        gestorResultado.cargarResultadoFinal(resultadoFinalDTO,partido);
-        if(!competencia.getEstado().equals(Estado.EN_DISPUTA)) competencia.setEstado(Estado.EN_DISPUTA);
+        gestorResultado.cargarResultadoFinal(resultadoFinalDTO, partido);
+        if(esPrimerResultado(competencia, partido)) {
+            competencia.setEstado(Estado.EN_DISPUTA);
+        }
+        if(esUltimoResultado(competencia, partido)) {
+            competencia.setEstado(Estado.FINALIZADA);
+        }
         competenciaDao.actualizarCompetencia(competencia);
         gestorResultado.eliminarResultadosVacios();
-        //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
     }
 
    public void cargarResultadoPuntuacion(ResultadoPuntuacionDTO resultadoPuntuacionDTO){
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoPuntuacionDTO.getIdCompetencia());
         Partido partido = partidoDao.buscarPartidoPorId(resultadoPuntuacionDTO.getIdPartido());
-       if(!competencia.getEstado().equals(Estado.EN_DISPUTA)){
+        if(esPrimerResultado(competencia, partido)) {
            competencia.setEstado(Estado.EN_DISPUTA);
-           competenciaDao.actualizarCompetencia(competencia);
-       }
+        }
+        if(esUltimoResultado(competencia, partido)) {
+           competencia.setEstado(Estado.FINALIZADA);
+        }
+        competenciaDao.actualizarCompetencia(competencia);
         gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO, partido, competencia.getTantosFavorNoPresentarse());
         gestorResultado.eliminarResultadosVacios();
-        //TODO 00: VER SI ES PRIMER O ULTIMO PARTIDO
+    }
+
+    private boolean esPrimerResultado(Competencia competencia, Partido partido){
+        List<Fecha> fechas = competencia.getFixture().getFechas();
+        List<Partido> partidos = fechas.get(0).getPartidos();
+        int i = 0;
+        while (partidos.get(i).isEsLibre()){
+            i++;
+        }
+        return partidos.get(i).getId() == partido.getId();
+    }
+
+    private boolean esUltimoResultado(Competencia competencia, Partido partido){
+        List<Fecha> fechas = competencia.getFixture().getFechas();
+        List<Partido> partidos = fechas.get(fechas.size()-1).getPartidos();
+        int i = partidos.size()-1;
+        while (partidos.get(i).isEsLibre()){
+            i--;
+        }
+        return partidos.get(i).getId() == partido.getId();
     }
 
     public ArrayList<FilaPosicionDTO> tablaPosiciones(int idCompetencia){
@@ -424,10 +450,13 @@ public class GestorCompetencia {
     }
 
     public Partido getProxEncuentro(Competencia competencia, int fechaActual){
-        Fecha actual = competencia.getFixture().getFechas().get(fechaActual);
-        for (Partido partido: actual.getPartidos()){
-            if (partido.getResultados().isEmpty() && !partido.isEsLibre()){
-                return partido;
+        boolean estaFinalizada = competencia.getEstado().equals(Estado.FINALIZADA.getEstadoString());
+        if (!estaFinalizada) {
+            Fecha actual = competencia.getFixture().getFechas().get(fechaActual);
+            for (Partido partido : actual.getPartidos()) {
+                if (partido.getResultados().isEmpty() && !partido.isEsLibre()) {
+                    return partido;
+                }
             }
         }
         return null;
