@@ -4,17 +4,24 @@ import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import dtos.FilaPosicionDTO;
-import dtos.ParticipanteDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import models.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import models.Competencia;
+import models.SistemaPuntuacion;
 import services.GestorCompetencia;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +35,9 @@ public class tablaPosicionesController implements ControlledScreen {
     private GestorCompetencia gestorCompetencia;
     private PrincipalController myController;
     private Competencia competencia;
+
+    private Stage modal;
+    private Parent parent;
 
     @FXML private Text title;
     @FXML private TableView posicionesTableView;
@@ -136,6 +146,52 @@ public class tablaPosicionesController implements ControlledScreen {
             else{
                 return nombreA.compareTo(nombreB)*(-1);
             }
+        }
+    }
+
+    public void irImprimir(ActionEvent actionEvent) {
+        mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
+    }
+
+    public void irExportar(ActionEvent actionEvent) {
+        mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
+    }
+
+
+    private void mostrarPopUp(){
+        mostrarPopUp("","");
+    }
+
+    private void mostrarPopUp(String mensaje, String tipo){
+        String recurso;
+        switch(tipo){
+            case "error":
+                recurso = "fxml/popupError.fxml";
+                break;
+            case "exito":
+                recurso = "fxml/popupExito.fxml";
+                break;
+            default:
+                recurso = "fxml/popupEnDesarrollo.fxml";
+                break;
+        }
+        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
+        try {
+            parent = loader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
+            myScreenControler.setScreenParent(myController);
+            myScreenControler.inicializar(mensaje);
+            modal = new Stage();
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.initStyle(StageStyle.TRANSPARENT);
+            modal.setScene(scene);
+            modal.setResizable(false);
+            modal.sizeToScene();
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

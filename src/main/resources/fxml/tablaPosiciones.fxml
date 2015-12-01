@@ -55,12 +55,12 @@
                   </TableView>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
                      <children>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Exportar a planilla" textFill="WHITE">
+                        <Button graphicTextGap="5.0" onAction="#irExportar" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Exportar a planilla" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button graphicTextGap="5.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Imprimir" textFill="WHITE">
+                        <Button graphicTextGap="5.0" onAction="#irImprimir" mnemonicParsing="false" prefHeight="53.0" prefWidth="187.0" styleClass="btn" text="Imprimir" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

@@ -137,7 +137,8 @@ public class mostrarFixtureController implements ControlledScreen {
             tab.setContent(tabla);
             fechas.getTabs().add(tab);
         }
-        fechas.getSelectionModel().select(fechaActual);
+        int fechaMostrada = gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado) == -1 ? fechaActual : gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado);
+        fechas.getSelectionModel().select(fechaMostrada);
     }
 
     private void cargarResultadoCellSets(Partido part, PartidoDTO partDTO) {
