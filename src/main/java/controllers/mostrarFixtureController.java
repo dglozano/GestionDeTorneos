@@ -34,13 +34,13 @@ public class mostrarFixtureController implements ControlledScreen {
 
     private int idCompetencia;
     private int idPartidoClickeado;
+    private int fechaActual;
     private Competencia competencia;
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
     private PrincipalController myController;
     private Stage modal;
     private Parent parent;
     private Fixture fixture;
-
 
     @FXML private Text title;
     @FXML private TabPane fechas;
@@ -56,6 +56,7 @@ public class mostrarFixtureController implements ControlledScreen {
         competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
         title.setText(competencia.getNombre());
 
+        fechaActual = gestorCompetencia.buscarFechaActual(competencia);
         fixture = competencia.getFixture();
         List<Fecha> listaFechas = fixture.getFechas();
         generarTabs(listaFechas);
@@ -137,6 +138,7 @@ public class mostrarFixtureController implements ControlledScreen {
             tab.setContent(tabla);
             fechas.getTabs().add(tab);
         }
+        fechas.getSelectionModel().select(fechaActual);
     }
 
     private void cargarResultadoPuntuacion(Partido part, PartidoDTO partDTO) {
@@ -231,6 +233,15 @@ public class mostrarFixtureController implements ControlledScreen {
     }
 
     public void mostrarPopUpResultado(String tipo){
+        boolean habilitado = gestorCompetencia.partidoHabilitado(competencia, idPartidoClickeado);
+        if (habilitado){
+            mostrarPopUpResultadoValido(tipo);
+        } else{
+            mostrarPopUp("Debe terminar de cargar los resultados de las fechas anteriores.", "error");
+        }
+    }
+
+    private void mostrarPopUpResultadoValido(String tipo){
         String recurso;
         switch(tipo){
             case "Sets":
