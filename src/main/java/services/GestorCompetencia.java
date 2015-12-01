@@ -359,21 +359,31 @@ public class GestorCompetencia {
     private boolean esPrimerResultado(Competencia competencia, Partido partido){
         List<Fecha> fechas = competencia.getFixture().getFechas();
         List<Partido> partidos = fechas.get(0).getPartidos();
-        int i = 0;
-        while (partidos.get(i).isEsLibre()){
-            i++;
+        for (Partido p: partidos){
+            if (!p.getResultados().isEmpty() && !p.isEsLibre()){
+                return false;
+            }
         }
-        return partidos.get(i).getId() == partido.getId();
+        return true;
     }
 
     private boolean esUltimoResultado(Competencia competencia, Partido partido){
         List<Fecha> fechas = competencia.getFixture().getFechas();
         List<Partido> partidos = fechas.get(fechas.size()-1).getPartidos();
-        int i = partidos.size()-1;
-        while (partidos.get(i).isEsLibre()){
-            i--;
+        for (Partido p: partidos){
+            if (!p.isEsLibre()) {
+                if (p.getId() != partido.getId()) {
+                    if (p.getResultados().isEmpty()) {
+                        return false;
+                    }
+                } else {
+                    if (!p.getResultados().isEmpty()) {
+                        return false;
+                    }
+                }
+            }
         }
-        return partidos.get(i).getId() == partido.getId();
+        return true;
     }
 
     public ArrayList<FilaPosicionDTO> tablaPosiciones(int idCompetencia){
