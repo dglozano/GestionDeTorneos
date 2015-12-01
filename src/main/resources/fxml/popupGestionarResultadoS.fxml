@@ -82,8 +82,8 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" text="Equipo1" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" text="Equipo2" GridPane.rowIndex="2" />
+            <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo2" GridPane.rowIndex="2" />
             <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
                <font>
                   <Font size="13.0" />
@@ -97,24 +97,24 @@
                   <Insets top="52.0" />
                </GridPane.margin>
             </Label>
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="9" GridPane.rowIndex="1" />
-            <Spinner GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="9" GridPane.rowIndex="2" />
-            <Spinner GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Spinner fx:id="localSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <Spinner fx:id="localSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <Spinner fx:id="visitanteSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner7" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner8" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+            <Spinner fx:id="visitanteSpinner9" GridPane.columnIndex="7" GridPane.rowIndex="2" />
          </children>
       </GridPane>
   </children>

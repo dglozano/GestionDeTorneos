@@ -26,7 +26,6 @@ public class popupErrorController implements ControlledScreen {
         detailsLabel.setText(error);
     }
     public void inicializar() {
-
     }
 
     public Object mensajeControladorAnterior(){ return null; }

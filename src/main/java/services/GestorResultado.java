@@ -88,7 +88,6 @@ public class GestorResultado {
         }
         partido.addResultado(resultado);
         partidoDao.actualizarPartido(partido);
-        System.out.println("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     private void cargarResultado(Resultado resultado,boolean sePresentoLocal, boolean sePresentoVisitante,

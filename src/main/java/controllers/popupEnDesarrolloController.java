@@ -3,11 +3,16 @@ package controllers;
 import controllers.general.ControlledScreen;
 import controllers.general.PrincipalController;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import java.awt.event.KeyEvent;
 
 public class popupEnDesarrolloController implements ControlledScreen {
     private PrincipalController myController;
@@ -21,8 +26,10 @@ public class popupEnDesarrolloController implements ControlledScreen {
         myController = screenParent;
     }
 
-    public void inicializar() {};
-    public void inicializar(String mensaje){ inicializar(); };
+    public void inicializar() {
+    }
+    public void inicializar(String mensaje){
+        inicializar(); }
 
     public Object mensajeControladorAnterior(){ return null; }
 
@@ -30,5 +37,4 @@ public class popupEnDesarrolloController implements ControlledScreen {
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
     }
-
 }

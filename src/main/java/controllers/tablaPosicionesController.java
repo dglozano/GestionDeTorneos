@@ -43,8 +43,6 @@ public class tablaPosicionesController implements ControlledScreen {
 
     public void inicializar(){
         buscarCompetencia();
-        competencia.setEstado(Estado.FINALIZADA);
-        gestorCompetencia.actualizarCompetencia(competencia);
         title.setText(competencia.getNombre());
         setearColumnas();
         cargarFilas();

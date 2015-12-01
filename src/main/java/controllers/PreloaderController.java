@@ -175,14 +175,15 @@ public class PreloaderController implements ControlledScreen {
         competencia2.setNombre("LIGA SANTAFESINA");
         competencia2.setModalidad(Modalidad.LIGA);
         competencia2.setEstado(Estado.CREADA);
-        competencia2.setSistemaPuntuacion(SistemaPuntuacion.PUNTUACION);
-        competencia2.setAceptaEmpate(true);
+        competencia2.setSistemaPuntuacion(SistemaPuntuacion.SET);
+        competencia2.setCantidadDeSets(5);
+        competencia2.setAceptaEmpate(false);
         competencia2.setTantosFavorNoPresentarse(3);
         competencia2.setPuntosPartidoGanado(4);
         competencia2.setPuntosPorPresentarse(1);
         competencia2.setPuntosPartidoEmpatado(2);
         competencia2.setDeporte(futbol);
-        competencia2.setOtorgaTantosNoPresentarse(true);
+        competencia2.setOtorgaTantosNoPresentarse(false);
         competenciaDAO.crearCompetencia(competencia2);
 
         Usuario usuario2 = new Usuario();

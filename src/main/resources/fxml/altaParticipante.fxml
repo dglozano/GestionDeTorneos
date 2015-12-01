@@ -50,8 +50,8 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nombreParticipanteTextField" text="" GridPane.columnIndex="1" />
-                              <TextField fx:id="emailParticipanteTextField" prefHeight="25.0" prefWidth="208.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="nombreParticipanteTextField" onAction="#darDeAlta" text="" GridPane.columnIndex="1" />
+                              <TextField fx:id="emailParticipanteTextField" onAction="#darDeAlta" prefHeight="25.0" prefWidth="208.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" style="&#10;" text="Correo electrónico (*)" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="13.0" />

@@ -14,6 +14,7 @@ import models.Partido;
 import services.GestorCompetencia;
 
 public class popupGestionarResultadoPuntuacionController implements ControlledScreen {
+
     private PrincipalController myController;
     private Stage modal;
     private int idCompetencia;

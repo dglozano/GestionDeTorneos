@@ -317,7 +317,6 @@ public class GestorCompetencia {
     public void cargarResultadoFinal(ResultadoFinalDTO resultadoFinalDTO){
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoFinalDTO.getIdCompetencia());
         Partido partido = partidoDao.buscarPartidoPorId(resultadoFinalDTO.getIdPartido());
-        gestorResultado.cargarResultadoFinal(resultadoFinalDTO, partido);
         if(esPrimerResultado(competencia, partido)) {
             competencia.setEstado(Estado.EN_DISPUTA);
         }
@@ -325,6 +324,7 @@ public class GestorCompetencia {
             competencia.setEstado(Estado.FINALIZADA);
         }
         competenciaDao.actualizarCompetencia(competencia);
+        gestorResultado.cargarResultadoFinal(resultadoFinalDTO, partido);
         gestorResultado.eliminarResultadosVacios();
     }
 
@@ -451,7 +451,7 @@ public class GestorCompetencia {
         return nroFecha;
     }
 
-    public Partido getProxEncuentro(Competencia competencia, int fechaActual){
+    public Partido getProxEncuentro(Competencia competencia, int fechaActual) {
         boolean estaFinalizada = competencia.getEstado().equals(Estado.FINALIZADA.getEstadoString());
         if (!estaFinalizada) {
             Fecha actual = competencia.getFixture().getFechas().get(fechaActual);
