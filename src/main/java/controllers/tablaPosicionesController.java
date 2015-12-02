@@ -90,7 +90,7 @@ public class tablaPosicionesController implements ControlledScreen {
         diferenciaColumna.setCellValueFactory(new PropertyValueFactory<FilaPosicionDTO,Integer>("diferencia"));
         SistemaPuntuacion sistemaPuntuacion = competencia.getSistemaPuntuacion();
         if(!sistemaPuntuacion.equals(SistemaPuntuacion.PUNTUACION)){
-            posicionesTableView.getColumns().remove(6,8);
+            posicionesTableView.getColumns().remove(6,9);
         }
         if(sistemaPuntuacion.equals(SistemaPuntuacion.SET) || !competencia.isAceptaEmpate()){
             posicionesTableView.getColumns().remove(4);
@@ -100,8 +100,7 @@ public class tablaPosicionesController implements ControlledScreen {
 
     private void calcularAnchoColumnaNombre() {
         posicionesTableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        double prefWidth= posicionesTableView.getWidth();
-        if(prefWidth == 0.0) prefWidth=898.0;
+        double prefWidth= 896.0;
         for(TableColumn columna: (List<TableColumn>)posicionesTableView.getColumns()){
             if(!columna.getId().equals("nombreColumna"))
                 prefWidth-=columna.getWidth();

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Partido;
+import models.Resultado;
 import services.GestorCompetencia;
 import services.GestorResultado;
 
@@ -39,22 +40,53 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     }
 
     public void inicializar() {
+        inicializacionBasica();
+        if(partido.getResultados().isEmpty()){
+            inicializacionPrimeraVez();
+        }
+        else{
+            cargarResultadoAnterior();
+        }
+    }
+
+    private void inicializacionBasica() {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
         partido = gestorCompetencia.buscarPartidoPorId(idPartidoClickeado);
         aceptaEmpates = gestorCompetencia.buscarCompetenciaPorId(idCompetencia).isAceptaEmpate();
-        sePresentoLocalCheckBox.setSelected(false);
-        sePresentoVisitanteCheckBox.setSelected(false);
         sePresentoLocalCheckBox.setText(partido.getLocal().getNombre());
         sePresentoVisitanteCheckBox.setText(partido.getVisitante().getNombre());
         ganoLocalRadioButton.setText(partido.getLocal().getNombre());
         ganoVisitanteRadioButton.setText(partido.getVisitante().getNombre());
+        errorLabel.setVisible(false);
+    }
+
+    private void cargarResultadoAnterior() {
+        Resultado resultadoAnterior = partido.getResultados().get(0);
+        sePresentoLocalCheckBox.setSelected(resultadoAnterior.isJugoLocal());
+        sePresentoVisitanteCheckBox.setSelected(resultadoAnterior.isJugoVisitante());
+        int tantosLocal = resultadoAnterior.getTantosEquipoLocal();
+        int tantosVisitante = resultadoAnterior.getTantosEquipoVisitante();
+        habilitarRadiosCorrespondientes();
+        if (tantosLocal>tantosVisitante){
+            ganoLocalRadioButton.setSelected(true);
+        }
+        else if(tantosVisitante>tantosLocal){
+            ganoVisitanteRadioButton.setSelected(true);
+        }
+        else{
+            empateRadioButton.setSelected(true);
+        }
+    }
+
+    private void inicializacionPrimeraVez() {
+        sePresentoLocalCheckBox.setSelected(false);
+        sePresentoVisitanteCheckBox.setSelected(false);
         if(ganadorToggleGroup.getSelectedToggle() != null) ganadorToggleGroup.getSelectedToggle().setSelected(false);
         ganoLocalRadioButton.setDisable(true);
         ganoVisitanteRadioButton.setDisable(true);
         empateRadioButton.setDisable(true);
         if(aceptaEmpates) empateRadioButton.setVisible(true);
         else empateRadioButton.setVisible(false);
-        errorLabel.setVisible(false);
     }
 
     public void inicializar(String mensaje){
@@ -64,7 +96,10 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
-        myController.getControladorAnterior().inicializar();
+        volver();
+    }
+
+    private void volver() {
         myController.setControladorAnterior(this);
         Stage modal = (Stage)cancelarButton.getScene().getWindow();
         modal.close();
@@ -76,9 +111,7 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
             cargarResultadoDto(resultadoDTO);
             gestorCompetencia.cargarResultadoFinal(resultadoDTO);
             myController.getControladorAnterior().inicializar();
-            myController.setControladorAnterior(this);
-            Stage modal = (Stage)okButton.getScene().getWindow();
-            modal.close();
+            volver();
         }
     }
 
@@ -111,19 +144,19 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     }
 
     public void checkBoxClicked(ActionEvent actionEvent){
-        if(((CheckBox)actionEvent.getSource()).equals(sePresentoLocalCheckBox)){
-            ganoLocalRadioButton.setDisable(!sePresentoLocalCheckBox.isSelected());
-        }
-        else{
-            ganoVisitanteRadioButton.setDisable(!sePresentoVisitanteCheckBox.isSelected());
-        }
+        habilitarRadiosCorrespondientes();
+        if(ganadorToggleGroup.getSelectedToggle() != null) ganadorToggleGroup.getSelectedToggle().setSelected(false);
+    }
+
+    private void habilitarRadiosCorrespondientes() {
+        ganoLocalRadioButton.setDisable(!sePresentoLocalCheckBox.isSelected());
+        ganoVisitanteRadioButton.setDisable(!sePresentoVisitanteCheckBox.isSelected());
         if(aceptaEmpates && sePresentoLocalCheckBox.isSelected() && sePresentoVisitanteCheckBox.isSelected()){
             empateRadioButton.setDisable(false);
         }
         else{
             empateRadioButton.setDisable(true);
         }
-        if(ganadorToggleGroup.getSelectedToggle() != null) ganadorToggleGroup.getSelectedToggle().setSelected(false);
     }
 
 }
