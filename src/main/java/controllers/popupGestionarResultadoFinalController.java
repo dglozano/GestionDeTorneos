@@ -64,8 +64,9 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
-        myController.getControladorAnterior().inicializar();
+        ControlledScreen anterior = myController.getControladorAnterior();
         myController.setControladorAnterior(this);
+        anterior.inicializar();
         Stage modal = (Stage)cancelarButton.getScene().getWindow();
         modal.close();
     }

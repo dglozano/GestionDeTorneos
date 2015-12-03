@@ -144,8 +144,9 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
             ResultadoSetDTO resultadoSetDTO = new ResultadoSetDTO();
             cargarResultadoDTO(resultadoSetDTO);
             gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
-            myController.getControladorAnterior().inicializar();
+            ControlledScreen anterior = myController.getControladorAnterior();
             myController.setControladorAnterior(this);
+            anterior.inicializar();
             Stage modal = (Stage)okButton.getScene().getWindow();
             modal.close();
         }

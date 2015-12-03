@@ -73,7 +73,7 @@ public class mostrarFixtureController implements ControlledScreen {
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaVerCompetenciaId,this);
+        myController.setScreen(Main.vistaVerCompetenciaId, this);
     }
 
     public void generarTabs(List<Fecha> fechasComp){
@@ -137,7 +137,12 @@ public class mostrarFixtureController implements ControlledScreen {
             tab.setContent(tabla);
             fechas.getTabs().add(tab);
         }
-        int fechaMostrada = gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado) == -1 ? fechaActual : gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado);
+        int fechaMostrada = 0;
+        if (myController.getControladorAnterior().getClass().toString().contains("popup")){
+            fechaMostrada = gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado) == -1 ? fechaActual : gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado);
+        } else{
+            fechaMostrada = fechaActual;
+        }
         fechas.getSelectionModel().select(fechaMostrada);
     }
 

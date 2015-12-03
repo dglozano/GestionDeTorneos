@@ -86,8 +86,9 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
             ResultadoPuntuacionDTO resultadoPuntuacionDTO = new ResultadoPuntuacionDTO();
             cargarResultadoDto(resultadoPuntuacionDTO);
             gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
-            myController.getControladorAnterior().inicializar();
+            ControlledScreen anterior = myController.getControladorAnterior();
             myController.setControladorAnterior(this);
+            anterior.inicializar();
             Stage modal = (Stage)okButton.getScene().getWindow();
             modal.close();
         }
