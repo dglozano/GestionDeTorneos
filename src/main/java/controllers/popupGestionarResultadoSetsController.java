@@ -17,10 +17,7 @@ import services.GestorCompetencia;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DIego on 21/11/2015..
- */
-public class popupGestionarResultadoSetsController implements ControlledScreen {
+public class popupGestionarResultadoSetsController extends ControlledScreen {
 
     private PrincipalController myController;
     private Stage modal;

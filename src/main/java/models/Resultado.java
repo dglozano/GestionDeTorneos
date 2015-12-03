@@ -6,9 +6,6 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by DIego on 26/10/2015.
- */
 @Entity
 public class Resultado {
     @Id

@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by DIego on 29/11/2015..
- */
 public class FilaPosicionDTO {
 
     private String nombreParticipante;

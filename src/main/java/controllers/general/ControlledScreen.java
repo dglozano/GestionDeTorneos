@@ -1,12 +1,21 @@
 package controllers.general;
 
-public interface ControlledScreen {
+import dao.util.MiEntityManager;
+import javafx.application.Platform;
+
+abstract public class ControlledScreen {
     // Permite la injección del Screen Pane
-    public void setScreenParent(PrincipalController screenPage);
+    abstract public void setScreenParent(PrincipalController screenPage);
 
     // Inicializa cada interfaz
-    public void inicializar();
-    public void inicializar(String mensaje);
+    abstract public void inicializar();
+    abstract public void inicializar(String mensaje);
 
-    public Object mensajeControladorAnterior();
+    abstract public Object mensajeControladorAnterior();
+
+    public void cerrarPrograma(){
+        MiEntityManager.close();
+        Platform.exit();
+        System.exit(0);
+    }
 }

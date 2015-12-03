@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class crearCompetencias2Controller implements ControlledScreen {
+public class crearCompetencias2Controller extends ControlledScreen {
 
     private PrincipalController myController;
     private Stage modal;

@@ -3,9 +3,6 @@ package models;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by DIego on 26/10/2015.
- */
 @Entity
 public class CambioResultado {
     @Id

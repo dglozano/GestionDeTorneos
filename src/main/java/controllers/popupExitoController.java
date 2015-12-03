@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class popupExitoController implements ControlledScreen {
+public class popupExitoController extends ControlledScreen {
     private PrincipalController myController;
     private Stage modal;
     private Parent parent;

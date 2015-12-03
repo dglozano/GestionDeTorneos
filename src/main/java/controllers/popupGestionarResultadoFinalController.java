@@ -12,10 +12,7 @@ import models.Resultado;
 import services.GestorCompetencia;
 import services.GestorResultado;
 
-/**
- * Created by DIego on 21/11/2015..
- */
-public class popupGestionarResultadoFinalController implements ControlledScreen {
+public class popupGestionarResultadoFinalController extends ControlledScreen {
     private PrincipalController myController;
     private int idCompetencia;
     private int idPartidoClickeado;

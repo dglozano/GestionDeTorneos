@@ -9,9 +9,6 @@ import javax.persistence.EntityTransaction;
 import javax.transaction.Transactional;
 import java.util.List;
 
-/**
- * Created by DIego on 29/10/2015..
- */
 public class PartidoDao {
 
     private static PartidoDao  instance = new PartidoDao ();

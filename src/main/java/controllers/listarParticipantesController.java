@@ -31,10 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by DIego on 11/11/2015..
- */
-public class listarParticipantesController implements ControlledScreen {
+public class listarParticipantesController extends ControlledScreen {
 
     private int idCompetencia;
     private Competencia competencia;

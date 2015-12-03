@@ -1,9 +1,5 @@
 package models;
 
-/**
- * Created by DIego on 26/10/2015.
- */
-
 public class UsuarioLogueado {
 
     private static UsuarioLogueado instance = new UsuarioLogueado();

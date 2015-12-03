@@ -1,13 +1,8 @@
 package dtos;
 
-import models.Disponibilidad;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DIego on 3/11/2015..
- */
 public class DatosCrearCompetenciaPaso2DTO {
 
     private List<DisponibilidadLugar> lugaresDisponibilidad = new ArrayList<>();

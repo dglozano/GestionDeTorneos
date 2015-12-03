@@ -8,9 +8,6 @@ import models.UsuarioLogueado;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DIego on 2/11/2015..
- */
 public class GestorLugarRealizacion {
     private LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
     private UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();

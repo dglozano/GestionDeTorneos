@@ -2,9 +2,6 @@ package models;
 
 import javax.persistence.*;
 
-/**
- * Created by DIego on 26/10/2015.
- */
 @Entity
 public class Localidad {
 

@@ -27,10 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DIego on 14/11/2015..
- */
-public class mostrarFixtureController implements ControlledScreen {
+public class mostrarFixtureController extends ControlledScreen {
 
     private int idCompetencia;
     private int idPartidoClickeado;

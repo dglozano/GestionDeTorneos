@@ -30,10 +30,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-/**
- * Created by DIego on 11/11/2015..
- */
-public class altaParticipanteController implements ControlledScreen {
+public class altaParticipanteController extends ControlledScreen {
 
     private int idCompetencia;
     private Competencia competencia;

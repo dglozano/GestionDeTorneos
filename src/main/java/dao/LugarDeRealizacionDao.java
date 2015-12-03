@@ -8,9 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
-/**
- * Created by DIego on 29/10/2015..
- */
 public class LugarDeRealizacionDao {
 
     private static LugarDeRealizacionDao  instance = new LugarDeRealizacionDao ();

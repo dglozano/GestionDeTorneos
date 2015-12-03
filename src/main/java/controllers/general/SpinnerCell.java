@@ -1,16 +1,11 @@
 package controllers.general;
 
-import dtos.DisponibilidadLugar;
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableCell;
 
-/**
- * Created by DIego on 4/11/2015..
- */
 public class SpinnerCell<DisponibilidadLugar, T> extends TableCell<DisponibilidadLugar, T> {
 
     private Spinner<T> spinner;

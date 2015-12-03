@@ -1,10 +1,5 @@
 package dtos;
 
-import javafx.beans.property.IntegerProperty;
-
-/**
- * Created by DIego on 3/11/2015..
- */
 public class DisponibilidadLugar{
     private String nombreLugar;
     private Integer disponibilidad;

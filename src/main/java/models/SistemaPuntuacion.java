@@ -1,10 +1,5 @@
 package models;
 
-import javax.persistence.Entity;
-
-/**
- * Created by Kevincho on 22/10/2015.
- */
 public enum SistemaPuntuacion{
     SET("Sets"), PUNTUACION("Puntos"), RESULTADO_FINAL("Resultado Final");
 

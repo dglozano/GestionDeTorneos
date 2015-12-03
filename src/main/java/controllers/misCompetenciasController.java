@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class misCompetenciasController implements ControlledScreen {
+public class misCompetenciasController extends ControlledScreen {
 
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;

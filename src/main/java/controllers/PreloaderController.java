@@ -12,7 +12,7 @@ import models.*;
 
 import javax.persistence.EntityManager;
 
-public class PreloaderController implements ControlledScreen {
+public class PreloaderController extends ControlledScreen {
 
     private PrincipalController myController;
 

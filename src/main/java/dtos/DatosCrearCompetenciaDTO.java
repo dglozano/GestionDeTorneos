@@ -1,14 +1,10 @@
 package dtos;
 
-import models.Deporte;
 import models.Modalidad;
 import models.SistemaPuntuacion;
 
 import java.util.List;
 
-/**
- * Created by DIego on 2/11/2015..
- */
 public class DatosCrearCompetenciaDTO {
 
     private String competencia;

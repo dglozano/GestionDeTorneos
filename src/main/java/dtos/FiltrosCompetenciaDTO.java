@@ -3,9 +3,6 @@ package dtos;
 import models.Estado;
 import models.Modalidad;
 
-/**
- * Created by DIego on 1/11/2015..
- */
 public class FiltrosCompetenciaDTO {
     private String nombre;
     private Estado estado;

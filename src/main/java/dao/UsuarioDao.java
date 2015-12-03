@@ -6,9 +6,6 @@ import models.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-/**
- * Created by DIego on 29/10/2015..
- */
 public class UsuarioDao {
     private static UsuarioDao instance = new UsuarioDao();
 

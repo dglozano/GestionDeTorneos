@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class crearCompetenciasController implements ControlledScreen {
+public class crearCompetenciasController extends ControlledScreen {
 
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;

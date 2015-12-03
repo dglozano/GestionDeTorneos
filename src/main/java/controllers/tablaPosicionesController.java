@@ -26,11 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
-/**
- * Created by DIego on 10/11/2015..
- */
-public class tablaPosicionesController implements ControlledScreen {
+public class tablaPosicionesController extends ControlledScreen {
 
     private GestorCompetencia gestorCompetencia;
     private PrincipalController myController;

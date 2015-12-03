@@ -27,11 +27,7 @@ import services.GestorCompetencia;
 
 import java.io.IOException;
 
-
-/**
- * Created by Kevin on 09/11/2015.
- */
-public class verCompetenciaController implements ControlledScreen{
+public class verCompetenciaController extends ControlledScreen{
 
     private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;

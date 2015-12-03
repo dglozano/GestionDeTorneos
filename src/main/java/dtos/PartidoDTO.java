@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by Kevin on 15/11/2015.
- */
 public class PartidoDTO {
     private int id;
     private String participanteLocal;

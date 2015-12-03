@@ -7,9 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
-/**
- * Created by DIego on 29/10/2015..
- */
 public class ParticipanteDao {
     private static ParticipanteDao instance = new ParticipanteDao();
 

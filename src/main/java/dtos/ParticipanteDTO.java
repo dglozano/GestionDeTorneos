@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by DIego on 14/11/2015..
- */
 public class ParticipanteDTO {
 
     private String nombreParticipante;

@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by DIego on 21/11/2015..
- */
 public class ResultadoFinalDTO {
 
     private int idCompetencia;

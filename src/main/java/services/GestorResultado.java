@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by DIego on 21/11/2015..
- */
 public class GestorResultado {
 
     private PartidoDao partidoDao = PartidoDao.getInstance();

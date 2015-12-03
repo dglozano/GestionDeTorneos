@@ -7,9 +7,6 @@ import models.Deporte;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by DIego on 31/10/2015..
- */
 public class GestorDeporte {
 
     private DeporteDao deporteDao = DeporteDao.getInstance();
