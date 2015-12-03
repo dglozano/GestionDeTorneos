@@ -110,8 +110,9 @@ public class popupGestionarResultadoFinalController implements ControlledScreen 
             ResultadoFinalDTO resultadoDTO = new ResultadoFinalDTO();
             cargarResultadoDto(resultadoDTO);
             gestorCompetencia.cargarResultadoFinal(resultadoDTO);
-            myController.getControladorAnterior().inicializar();
+            ControlledScreen anterior = myController.getControladorAnterior();
             volver();
+            anterior.inicializar();
         }
     }
 
