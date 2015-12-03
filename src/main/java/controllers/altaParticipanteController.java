@@ -61,7 +61,6 @@ public class altaParticipanteController implements ControlledScreen {
         buscarCompetencia();
         limpiarCampos();
         agregarLengthListener();
-        //TODO 03: FOTO
     }
 
     public void inicializar(String mensaje) {inicializar();};

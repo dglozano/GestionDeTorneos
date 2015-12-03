@@ -41,25 +41,6 @@
                      </VBox.margin>
                   </Text>
                   <TabPane fx:id="fechas" prefHeight="318.0" prefWidth="898.0" tabClosingPolicy="UNAVAILABLE">
-                     <tabs>
-                        <!--
-                        <Tab fx:id="fecha1" text="Fecha 1">
-                           <content>
-                              <TableView fx:id="fixtureTableView" prefHeight="315.0" prefWidth="779.0">
-                                 <columns>
-                                    <TableColumn fx:id="localColumn" prefWidth="271.0" text="Participante" />
-                                    <TableColumn fx:id="resultadoColumn" prefWidth="52.0" text="Resultado" />
-                                    <TableColumn fx:id="visitanteColumn" prefWidth="52.0" text="Participante" />
-                                    <TableColumn fx:id="accionesColumn" prefWidth="48.0" text="Acciones" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
-                           </content>
-                        </Tab>
-                        -->
-                     </tabs>
                   </TabPane>
                   <HBox alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="59.0" prefWidth="898.0" spacing="15.0">
                      <children>

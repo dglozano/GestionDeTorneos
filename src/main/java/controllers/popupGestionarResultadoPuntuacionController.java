@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Partido;
+import models.Resultado;
 import services.GestorCompetencia;
 
 public class popupGestionarResultadoPuntuacionController implements ControlledScreen {
@@ -49,6 +50,44 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
     }
 
     public void inicializar() {
+        inicializacionBasica();
+        if(partido.getResultados().isEmpty()){
+            inicializacionPrimeraVez();
+        }
+        else{
+            cargarResultadoAnterior();
+        }
+    }
+
+    private void cargarResultadoAnterior() {
+        Resultado resultadoAnterior = partido.getResultados().get(0);
+        sePresentoLocalCheckBox.setSelected(resultadoAnterior.isJugoLocal());
+        sePresentoVisitanteCheckBox.setSelected(resultadoAnterior.isJugoVisitante());
+        int tantosLocal = resultadoAnterior.getTantosEquipoLocal();
+        int tantosVisitante = resultadoAnterior.getTantosEquipoVisitante();
+        boolean desempateGanoLocal = resultadoAnterior.isGanoLocalDesempate();
+        puntajeLocalSpinner.getValueFactory().setValue(tantosLocal);
+        puntajeVisitanteSpinner.getValueFactory().setValue(tantosVisitante);
+        if(desempateGanoLocal){
+            ganoLocalRadioButton.setSelected(true);
+        }
+        else{
+            ganoVisitanteRadioButton.setSelected(true);
+        }
+        habilitarComponentesCorrespondientes();
+    }
+
+    private void inicializacionPrimeraVez() {
+        puntajeVisitanteSpinner.setDisable(true);
+        puntajeLocalSpinner.setDisable(true);
+        mensajeEmpate.setVisible(false);
+        ganoLocalRadioButton.setVisible(false);
+        ganoVisitanteRadioButton.setVisible(false);
+        sePresentoLocalCheckBox.setSelected(false);
+        sePresentoVisitanteCheckBox.setSelected(false);
+    }
+
+    private void inicializacionBasica() {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
         partido = gestorCompetencia.buscarPartidoPorId(idPartidoClickeado);
         aceptaEmpates = gestorCompetencia.buscarCompetenciaPorId(idCompetencia).isAceptaEmpate();
@@ -62,12 +101,8 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
         puntajeLocalSpinner.valueProperty().removeListener(listenerSpinner);
         puntajeLocalSpinner.valueProperty().addListener(listenerSpinner);
         puntajeVisitanteSpinner.valueProperty().addListener(listenerSpinner);
-        puntajeVisitanteSpinner.setDisable(true);
-        puntajeLocalSpinner.setDisable(true);
-        mensajeEmpate.setVisible(false);
-        ganoLocalRadioButton.setVisible(false);
-        ganoVisitanteRadioButton.setVisible(false);
     }
+
     public void inicializar(String mensaje){
         idPartidoClickeado = Integer.parseInt(mensaje);
         inicializar();
@@ -76,6 +111,10 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
+        volver();
+    }
+
+    private void volver() {
         myController.setControladorAnterior(this);
         Stage modal = (Stage)cancelarButton.getScene().getWindow();
         modal.close();
@@ -86,11 +125,8 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
             ResultadoPuntuacionDTO resultadoPuntuacionDTO = new ResultadoPuntuacionDTO();
             cargarResultadoDto(resultadoPuntuacionDTO);
             gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
-            ControlledScreen anterior = myController.getControladorAnterior();
-            myController.setControladorAnterior(this);
-            anterior.inicializar();
-            Stage modal = (Stage)okButton.getScene().getWindow();
-            modal.close();
+            myController.getControladorAnterior().inicializar();
+            volver();
         }
 
     }
@@ -153,19 +189,23 @@ public class popupGestionarResultadoPuntuacionController implements ControlledSc
     }
 
     public void checkBoxClicked(ActionEvent actionEvent){
-       if(sePresentoVisitanteCheckBox.isSelected() && sePresentoLocalCheckBox.isSelected()) {
-           puntajeVisitanteSpinner.setDisable(false);
-           puntajeLocalSpinner.setDisable(false);
-           spinnerChange();
-       }
-       else{
-           puntajeVisitanteSpinner.setDisable(true);
-           puntajeLocalSpinner.setDisable(true);
-           mensajeEmpate.setVisible(false);
-           ganoLocalRadioButton.setVisible(false);
-           ganoVisitanteRadioButton.setVisible(false);
-           if(desempateToggleGroup.getSelectedToggle() != null) desempateToggleGroup.getSelectedToggle().setSelected(false);
-       }
+        habilitarComponentesCorrespondientes();
+    }
+
+    private void habilitarComponentesCorrespondientes() {
+        if(sePresentoVisitanteCheckBox.isSelected() && sePresentoLocalCheckBox.isSelected()) {
+            puntajeVisitanteSpinner.setDisable(false);
+            puntajeLocalSpinner.setDisable(false);
+            spinnerChange();
+        }
+        else{
+            puntajeVisitanteSpinner.setDisable(true);
+            puntajeLocalSpinner.setDisable(true);
+            mensajeEmpate.setVisible(false);
+            ganoLocalRadioButton.setVisible(false);
+            ganoVisitanteRadioButton.setVisible(false);
+            if(desempateToggleGroup.getSelectedToggle() != null) desempateToggleGroup.getSelectedToggle().setSelected(false);
+        }
     }
 
 }

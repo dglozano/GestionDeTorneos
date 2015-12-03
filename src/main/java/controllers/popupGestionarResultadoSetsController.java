@@ -11,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Partido;
+import models.Resultado;
 import services.GestorCompetencia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by DIego on 21/11/2015..
@@ -68,12 +70,30 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
     }
 
     public void inicializar() {
+        inicializacionBasica();
+        if(!partido.getResultados().isEmpty()){
+            cargarResultadoAnterior();
+        }
+    }
+
+    private void cargarResultadoAnterior() {
+        List<Resultado> resultadosAnteriores = partido.getResultados();
+        sePresentoLocalCheckBox.setSelected(resultadosAnteriores.get(0).isJugoLocal());
+        sePresentoVisitanteCheckBox.setSelected(resultadosAnteriores.get(0).isJugoVisitante());
+        for(int i=0;i<cantSets;i++){
+            setsLocal.get(i).getValueFactory().setValue(resultadosAnteriores.get(i).getTantosEquipoLocal());
+            setsVisitante.get(i).getValueFactory().setValue(resultadosAnteriores.get(i).getTantosEquipoVisitante());
+        }
+        checkBoxClicked();
+    }
+
+    private void inicializacionBasica() {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
         partido = gestorCompetencia.buscarPartidoPorId(idPartidoClickeado);
         sePresentoLocalCheckBox.setText(partido.getLocal().getNombre());
         sePresentoVisitanteCheckBox.setText(partido.getVisitante().getNombre());
         sePresentoLocalCheckBox.setSelected(false);
-        sePresentoLocalCheckBox.setSelected(false);
+        sePresentoVisitanteCheckBox.setSelected(false);
         cantSets= gestorCompetencia.buscarCompetenciaPorId(idCompetencia).getCantidadDeSets();
         cargarListaSpinners();
         prepararSpinners();
@@ -85,6 +105,8 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
             if(i>=cantSets){
                 setsLocal.get(i).setVisible(false);
                 setsVisitante.get(i).setVisible(false);
+                setsLocal.get(i).setDisable(true);
+                setsVisitante.get(i).setDisable(true);
             }
             else{
                 setsLocal.get(i).setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
@@ -130,9 +152,7 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
-        myController.setControladorAnterior(this);
-        Stage modal = (Stage)cancelarButton.getScene().getWindow();
-        modal.close();
+        volver();
     }
 
     public void aceptar(ActionEvent actionEvent){
@@ -144,12 +164,15 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
             ResultadoSetDTO resultadoSetDTO = new ResultadoSetDTO();
             cargarResultadoDTO(resultadoSetDTO);
             gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
-            ControlledScreen anterior = myController.getControladorAnterior();
-            myController.setControladorAnterior(this);
-            anterior.inicializar();
-            Stage modal = (Stage)okButton.getScene().getWindow();
-            modal.close();
+            myController.getControladorAnterior().inicializar();
+            volver();
         }
+    }
+
+    private void volver() {
+        myController.setControladorAnterior(this);
+        Stage modal = (Stage)okButton.getScene().getWindow();
+        modal.close();
     }
 
     private void cargarResultadoDTO(ResultadoSetDTO resultadoSetDTO) {
@@ -189,6 +212,10 @@ public class popupGestionarResultadoSetsController implements ControlledScreen {
     }
 
     public void checkBoxClicked(ActionEvent actionEvent){
+        checkBoxClicked();
+    }
+
+    private void checkBoxClicked() {
         if(sePresentoLocalCheckBox.isSelected() && sePresentoVisitanteCheckBox.isSelected()){
             setsLocal.get(0).setDisable(false);
             setsVisitante.get(0).setDisable(false);

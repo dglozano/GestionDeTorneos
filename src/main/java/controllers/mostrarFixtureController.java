@@ -55,7 +55,6 @@ public class mostrarFixtureController implements ControlledScreen {
         idCompetencia = (Integer) myController.getControladorAnterior().mensajeControladorAnterior();
         competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
         title.setText(competencia.getNombre());
-
         fechaActual = gestorCompetencia.buscarFechaActual(competencia);
         fixture = competencia.getFixture();
         List<Fecha> listaFechas = fixture.getFechas();
@@ -86,21 +85,24 @@ public class mostrarFixtureController implements ControlledScreen {
             tab.setText("Fecha " + fechasComp.get(i).getNumeroFecha());
 
             TableView tabla = new TableView();
-            tabla.setPrefHeight(315.0);
-            tabla.setPrefWidth(779.0);
-            tabla.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            tabla.setPrefHeight(318.0);
+            tabla.setPrefWidth(898.0);
 
             TableColumn localColumn = new TableColumn("Local");
             TableColumn resultadoColumn = new TableColumn("Resultado");
             if(competencia.getSistemaPuntuacion().equals(SistemaPuntuacion.RESULTADO_FINAL)) resultadoColumn.setText("Ganador");
             TableColumn visitanteColumn = new TableColumn("Visitante");
             TableColumn accionesColumn = new TableColumn("Acciones");
+            localColumn.setPrefWidth(259);
+            visitanteColumn.setPrefWidth(259);
+            resultadoColumn.setPrefWidth(259);
+            accionesColumn.setPrefWidth(119);
+
             localColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("participanteLocal"));
             resultadoColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("resultado"));
             visitanteColumn.setCellValueFactory(new PropertyValueFactory<PartidoDTO, String>("participanteVisitante"));
             tabla.getColumns().clear();
             tabla.getColumns().addAll(localColumn, resultadoColumn, visitanteColumn, accionesColumn);
-
             agregarBotonesEnTabla(accionesColumn);
 
             tabla.getItems().clear();
@@ -112,7 +114,6 @@ public class mostrarFixtureController implements ControlledScreen {
                     partDTO.setId(part.getId());
                     partDTO.setParticipanteLocal(part.getLocal().getNombre());
                     partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
-                    // TODO: configurar para sets.
                     if (part.getResultados().isEmpty()){
                         partDTO.setResultado(" - ");
                     }

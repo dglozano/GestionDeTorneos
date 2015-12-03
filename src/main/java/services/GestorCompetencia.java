@@ -69,7 +69,6 @@ public class GestorCompetencia {
         String deporte = comp.getDeporte().getNombre();
         String estado = comp.getEstado().getEstadoString();
         CompetenciaDTO competencia = new CompetenciaDTO(idComp,nombre,deporte,estado,modalidad);
-        /*TODO 01: Agregar proximos encuentros cuando el fixture este funcionando*/
         return competencia;
     }
 
@@ -407,7 +406,6 @@ public class GestorCompetencia {
                 FilaPosicionDTO unaFila = new FilaPosicionDTO();
                 unaFila.setNombreParticipante(participante.getNombre());
                 for(Partido partido: partidos){
-                    //TODO 01: sets
                     if(!partido.getResultados().isEmpty()){
                         Resultado resultado = partido.getResultados().get(0);
                         boolean esGanador= (partido.getGanador() != null) ? partido.getGanador().equals(participante) : false;
