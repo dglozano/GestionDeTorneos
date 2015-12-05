@@ -2,36 +2,24 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import controllers.general.SpinnerCell;
 import dtos.DatosCrearCompetenciaDTO;
 import dtos.DatosCrearCompetenciaPaso2DTO;
 import dtos.DisponibilidadLugar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import models.Modalidad;
 import models.SistemaPuntuacion;
 import services.GestorCompetencia;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class crearCompetencias2Controller extends ControlledScreen {
 
-    private PrincipalController myController;
-    private Stage modal;
-    private Parent parent;
     private GestorCompetencia gestorCompetencia;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDtoAnterior;
 
@@ -52,13 +40,9 @@ public class crearCompetencias2Controller extends ControlledScreen {
     @FXML private ToggleGroup permiteEmpateToggleGroup;
     @FXML private RadioButton siRadioButton;
     @FXML private RadioButton noRadioButton;
-
     @FXML private Label detailsLabel;
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         datosCrearCompetenciaDtoAnterior = (DatosCrearCompetenciaDTO) myController.getControladorAnterior().mensajeControladorAnterior();
@@ -67,7 +51,6 @@ public class crearCompetencias2Controller extends ControlledScreen {
         cargarLugares();
         cargarSpinners();
     }
-    public void inicializar(String mensaje) {inicializar();};
 
     private void cargarSpinners() {
         ptsGanadosSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
@@ -152,43 +135,7 @@ public class crearCompetencias2Controller extends ControlledScreen {
         tablaDisponibilidad.getItems().setAll(filas);
     }
 
-    private void mostrarPopUp(){
-        mostrarPopUp("", "");
-    }
-
-    private void mostrarPopUp(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    @Override
     public Object mensajeControladorAnterior(){
         return datosCrearCompetenciaDtoAnterior;
     };

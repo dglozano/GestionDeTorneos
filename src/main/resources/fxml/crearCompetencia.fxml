@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,14 +7,13 @@
 <?import org.controlsfx.control.CheckComboBox?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-
 <VBox prefHeight="596.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.crearCompetenciasController">
     <children>
         <MenuBar prefHeight="28.0" prefWidth="900.0" VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Registrar" />
+                        <MenuItem onAction="#registrarUsuario" mnemonicParsing="false" text="Registrar" />
                         <MenuItem onAction="#cerrarPrograma" mnemonicParsing="false" text="Salir" />
                     </items>
                 </Menu>

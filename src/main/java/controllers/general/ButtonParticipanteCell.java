@@ -1,9 +1,6 @@
 package controllers.general;
 
-import app.Main;
 import controllers.listarParticipantesController;
-import controllers.misCompetenciasController;
-import dtos.CompetenciaDTO;
 import dtos.ParticipanteDTO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

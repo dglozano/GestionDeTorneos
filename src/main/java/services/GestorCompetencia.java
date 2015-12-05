@@ -1,16 +1,18 @@
 package services;
+
 import dao.CompetenciaDao;
 import dao.ParticipanteDao;
 import dao.PartidoDao;
 import dtos.*;
 import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
-import exceptions.FuncionalidadEnDesarrolloException;
 import exceptions.FixtureException.PocosParticipantesFixtureException;
+import exceptions.FuncionalidadEnDesarrolloException;
 import models.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GestorCompetencia {
@@ -280,9 +282,9 @@ public class GestorCompetencia {
         if(competencia.getFixture()!=null){
             eliminarFixture(competencia);
         }
-        participanteDao.crearParticipante(nuevoParticipante);
         competencia.addParticipante(nuevoParticipante);
         competencia.setEstado(Estado.CREADA);
+        participanteDao.crearParticipante(nuevoParticipante);
         competenciaDao.actualizarCompetencia(competencia);
         participanteDao.eliminarParticipantesSinCompetencia();
     }
@@ -388,15 +390,13 @@ public class GestorCompetencia {
     public ArrayList<FilaPosicionDTO> tablaPosiciones(int idCompetencia){
         ArrayList<FilaPosicionDTO> filasPosicionesDto = new ArrayList<>();
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
-        Modalidad modalidad = competencia.getModalidad();
         SistemaPuntuacion sistemaPuntuacion = competencia.getSistemaPuntuacion();
         int ptsGanado = competencia.getPuntosPartidoGanado();
         int ptsPresentarse = competencia.getPuntosPorPresentarse();
-        int ptsEmpate=0,tantosFavorNoPresentarse=0;
+        int ptsEmpate=0;
         boolean aceptaEmpates = competencia.isAceptaEmpate();
         boolean otorgaTantos = competencia.isOtorgaTantosNoPresentarse();
         if(aceptaEmpates) ptsEmpate=competencia.getPuntosPartidoEmpatado();
-        if(otorgaTantos) tantosFavorNoPresentarse = competencia.getTantosFavorNoPresentarse();
         List<Participante> participantes = competencia.getParticipantes();
         for(Participante participante: participantes){
             if(!participante.isEsLibre()){
@@ -451,11 +451,34 @@ public class GestorCompetencia {
                 filasPosicionesDto.add(unaFila);
             }
         }
+        Collections.sort(filasPosicionesDto, new PosicionComparator<FilaPosicionDTO>());
         return filasPosicionesDto;
     }
-    public void actualizarCompetencia(Competencia competencia){
-        competenciaDao.actualizarCompetencia(competencia);
+
+    class PosicionComparator<T> implements Comparator<T> {
+        @Override
+        public int compare(T a, T b) {
+            Integer puntosA =((Integer)((FilaPosicionDTO)a).getPuntos());
+            Integer puntosB =((Integer)((FilaPosicionDTO)b).getPuntos());
+            Integer diferenciaA =((Integer)((FilaPosicionDTO)a).getDiferencia());
+            Integer diferenciaB =((Integer)((FilaPosicionDTO)b).getDiferencia());
+            Integer favorA =((Integer)((FilaPosicionDTO)b).getFavor());
+            Integer favorB =((Integer)((FilaPosicionDTO)b).getFavor());
+            String nombreA =((String)((FilaPosicionDTO)b).getNombreParticipante());
+            String nombreB =((String)((FilaPosicionDTO)b).getNombreParticipante());
+            if(puntosA.compareTo(puntosB) != 0){
+                return puntosA.compareTo(puntosB)*(-1);
+            }
+            if(diferenciaA.compareTo(diferenciaB) !=0){
+                return diferenciaA.compareTo(diferenciaB)*(-1);
+            }
+            if(favorA.compareTo(favorB) != 0){
+                return favorA.compareTo(favorB)*(-1);
+            }
+            return nombreA.compareTo(nombreB);
+        }
     }
+
     public Partido buscarPartidoPorId(int id){
         return partidoDao.buscarPartidoPorId(id);
     }

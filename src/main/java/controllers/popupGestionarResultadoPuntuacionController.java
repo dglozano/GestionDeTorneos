@@ -1,7 +1,6 @@
 package controllers;
 
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.ResultadoPuntuacionDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,14 +13,13 @@ import models.Partido;
 import models.Resultado;
 import services.GestorCompetencia;
 
+import java.util.List;
+
 public class popupGestionarResultadoPuntuacionController extends ControlledScreen {
 
-    private PrincipalController myController;
-    private Stage modal;
     private int idCompetencia;
     private int idPartidoClickeado;
     private Partido partido;
-    private Parent parent;
     private boolean aceptaEmpates;
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
     private ChangeListener<Integer> listenerSpinner = new ChangeListener<Integer>() {
@@ -44,11 +42,7 @@ public class popupGestionarResultadoPuntuacionController extends ControlledScree
     @FXML private RadioButton ganoLocalRadioButton;
     @FXML private RadioButton ganoVisitanteRadioButton;
 
-
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar() {
         inicializacionBasica();
         if(partido.getResultados().isEmpty()){
@@ -57,6 +51,12 @@ public class popupGestionarResultadoPuntuacionController extends ControlledScree
         else{
             cargarResultadoAnterior();
         }
+    }
+
+    @Override
+    public void inicializar(String mensaje){
+        idPartidoClickeado = Integer.parseInt(mensaje);
+        inicializar();
     }
 
     private void cargarResultadoAnterior() {
@@ -103,11 +103,7 @@ public class popupGestionarResultadoPuntuacionController extends ControlledScree
         puntajeVisitanteSpinner.valueProperty().addListener(listenerSpinner);
     }
 
-    public void inicializar(String mensaje){
-        idPartidoClickeado = Integer.parseInt(mensaje);
-        inicializar();
-    }
-
+    @Override
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
@@ -115,21 +111,46 @@ public class popupGestionarResultadoPuntuacionController extends ControlledScree
     }
 
     private void volver() {
+        ControlledScreen anterior = myController.getControladorAnterior();
         myController.setControladorAnterior(this);
         Stage modal = (Stage)cancelarButton.getScene().getWindow();
         modal.close();
+        anterior.inicializar();
+
     }
 
     public void aceptar(ActionEvent actionEvent){
         if(validar()){
             ResultadoPuntuacionDTO resultadoPuntuacionDTO = new ResultadoPuntuacionDTO();
             cargarResultadoDto(resultadoPuntuacionDTO);
-            gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
-            ControlledScreen anterior = myController.getControladorAnterior();
+            if(huboCambios(resultadoPuntuacionDTO,partido.getResultados())){
+                gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
+            }
             volver();
-            anterior.inicializar();
         }
+    }
 
+    private boolean huboCambios(ResultadoPuntuacionDTO resultadoPuntuacionDTO, List<Resultado> resultados) {
+        if(resultados.isEmpty()){
+            return true;
+        }
+        Resultado resultadoAnterior = resultados.get(0);
+        if(resultadoAnterior.isJugoVisitante() != resultadoPuntuacionDTO.isSePresentoVisitante()){
+            return true;
+        }
+        if(resultadoAnterior.isJugoLocal() != resultadoPuntuacionDTO.isSePresentoLocal()){
+            return true;
+        }
+        if(resultadoAnterior.getTantosEquipoLocal() != (Integer)puntajeLocalSpinner.getValue()){
+            return true;
+        }
+        if(resultadoAnterior.getTantosEquipoVisitante() != (Integer)puntajeVisitanteSpinner.getValue()){
+            return true;
+        }
+        if(resultadoAnterior.isGanoLocalDesempate() != resultadoPuntuacionDTO.isGanoLocalDesempate()){
+            return true;
+        }
+        return false;
     }
 
     private void cargarResultadoDto(ResultadoPuntuacionDTO resultadoPuntuacionDTO) {

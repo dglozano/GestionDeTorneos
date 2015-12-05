@@ -2,7 +2,6 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.CompetenciaDTO;
 import exceptions.FixtureException.DisponibilidadesInsuficientesFixtureException;
 import exceptions.FixtureException.EstadoErrorFixtureException;
@@ -10,31 +9,19 @@ import exceptions.FixtureException.PocosParticipantesFixtureException;
 import exceptions.FuncionalidadEnDesarrolloException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.Competencia;
 import models.Estado;
 import models.Modalidad;
 import models.Partido;
 import services.GestorCompetencia;
 
-import java.io.IOException;
-
 public class verCompetenciaController extends ControlledScreen{
 
-    private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
     private int idCompetencia;
     private CompetenciaDTO competenciaDTO;
-    private Stage modal;
-    private Parent parent;
 
     @FXML private TextField modalidadTextField;
     @FXML private TextField deporteTextField;
@@ -42,12 +29,8 @@ public class verCompetenciaController extends ControlledScreen{
     @FXML private TextField proximoEncuentroTextField;
     @FXML private Text title;
 
-
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
-   public void inicializar() {
+    @Override
+    public void inicializar() {
         idCompetencia= (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
         gestorCompetencia = new GestorCompetencia();
         competenciaDTO = gestorCompetencia.getCompetencia(idCompetencia);
@@ -61,8 +44,8 @@ public class verCompetenciaController extends ControlledScreen{
         boolean habilitado = (estaEnDisputa || estaPlanificada && !estaFinalizada) ? true : false;
         setProximoEncuentro(habilitado);
     }
-    public void inicializar(String mensaje) {inicializar();}
 
+    @Override
     public Object mensajeControladorAnterior(){
         return idCompetencia;
     }
@@ -141,42 +124,4 @@ public class verCompetenciaController extends ControlledScreen{
             proximoEncuentroTextField.setText(" - ");
         }
     }
-
-    private void mostrarPopUp(){
-        mostrarPopUp("","");
-    }
-
-    private void mostrarPopUp(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

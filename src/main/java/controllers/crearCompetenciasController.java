@@ -2,7 +2,6 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.DatosCrearCompetenciaDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +23,6 @@ import java.util.List;
 
 public class crearCompetenciasController extends ControlledScreen {
 
-    private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
     private GestorLugarRealizacion gestorLugarRealizacion;
@@ -48,11 +46,7 @@ public class crearCompetenciasController extends ControlledScreen {
     @FXML private CheckComboBox<String> lugaresComboBox;
     @FXML private TextArea reglamentoTextArea;
 
-
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
@@ -98,8 +92,6 @@ public class crearCompetenciasController extends ControlledScreen {
         nombreCompetenciaTextField.requestFocus();
 
     }
-    public void inicializar(String mensaje) {inicializar();};
-
 
     private void rellenarConDatosCargados() {
         nombreCompetenciaTextField.setText(datosCrearCompetenciaDto.getCompetencia());
@@ -318,6 +310,7 @@ public class crearCompetenciasController extends ControlledScreen {
         }
     }
 
+    @Override
     public Object mensajeControladorAnterior(){
         return this.datosCrearCompetenciaDto;
     }

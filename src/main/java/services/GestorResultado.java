@@ -41,6 +41,7 @@ public class GestorResultado {
         else if (resultadoFinalDTO.isEmpate()) {
             resultado.setTantosEquipoLocal(0);
             resultado.setTantosEquipoVisitante(0);
+            partido.setGanador(null);
         }
         partido.addResultado(resultado);
         partidoDao.actualizarPartido(partido);
@@ -74,6 +75,9 @@ public class GestorResultado {
                     partido.setGanador(partido.getVisitante());
                     resultado.setGanoLocalDesempate(false);
                 }
+            }
+            else{
+                partido.setGanador(null);
             }
         }
         else{
@@ -128,7 +132,6 @@ public class GestorResultado {
             }
             else{
                 partido.setGanador(partido.getVisitante());
-
             }
         }
         else{

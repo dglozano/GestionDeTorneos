@@ -1,7 +1,6 @@
 package controllers;
 
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.ResultadoFinalDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +11,10 @@ import models.Resultado;
 import services.GestorCompetencia;
 import services.GestorResultado;
 
+import java.util.List;
+
 public class popupGestionarResultadoFinalController extends ControlledScreen {
-    private PrincipalController myController;
+
     private int idCompetencia;
     private int idPartidoClickeado;
     private boolean aceptaEmpates;
@@ -32,10 +33,7 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
     @FXML private CheckBox sePresentoVisitanteCheckBox;
     @FXML private Label errorLabel;
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar() {
         inicializacionBasica();
         if(partido.getResultados().isEmpty()){
@@ -44,6 +42,12 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
         else{
             cargarResultadoAnterior();
         }
+    }
+
+    @Override
+    public void inicializar(String mensaje){
+        idPartidoClickeado = Integer.parseInt(mensaje);
+        inicializar();
     }
 
     private void inicializacionBasica() {
@@ -55,6 +59,8 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
         ganoLocalRadioButton.setText(partido.getLocal().getNombre());
         ganoVisitanteRadioButton.setText(partido.getVisitante().getNombre());
         errorLabel.setVisible(false);
+        if(aceptaEmpates) empateRadioButton.setVisible(true);
+        else empateRadioButton.setVisible(false);
     }
 
     private void cargarResultadoAnterior() {
@@ -82,14 +88,9 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
         ganoLocalRadioButton.setDisable(true);
         ganoVisitanteRadioButton.setDisable(true);
         empateRadioButton.setDisable(true);
-        if(aceptaEmpates) empateRadioButton.setVisible(true);
-        else empateRadioButton.setVisible(false);
     }
 
-    public void inicializar(String mensaje){
-        idPartidoClickeado = Integer.parseInt(mensaje);
-        inicializar(); }
-
+    @Override
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
@@ -97,20 +98,48 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
     }
 
     private void volver() {
+        ControlledScreen anterior = myController.getControladorAnterior();
         myController.setControladorAnterior(this);
         Stage modal = (Stage)cancelarButton.getScene().getWindow();
         modal.close();
+        anterior.inicializar();
     }
 
     public void aceptar(ActionEvent actionEvent){
         if(validar()){
             ResultadoFinalDTO resultadoDTO = new ResultadoFinalDTO();
             cargarResultadoDto(resultadoDTO);
-            gestorCompetencia.cargarResultadoFinal(resultadoDTO);
-            ControlledScreen anterior = myController.getControladorAnterior();
+            if(huboCambios(resultadoDTO, partido.getResultados())){
+                gestorCompetencia.cargarResultadoFinal(resultadoDTO);
+            }
             volver();
-            anterior.inicializar();
         }
+    }
+
+    private boolean huboCambios(ResultadoFinalDTO resultadoDTO, List<Resultado> resultados) {
+        if(resultados.isEmpty()){
+            return true;
+        }
+        Resultado resultadoAnterior = resultados.get(0);
+        if(resultadoAnterior.isJugoVisitante() != resultadoDTO.isSePresentoVisitante()){
+            return true;
+        }
+        if(resultadoAnterior.isJugoLocal() != resultadoDTO.isSePresentoLocal()){
+            return true;
+        }
+        boolean eraEmpate = resultadoAnterior.getTantosEquipoLocal() == resultadoAnterior.getTantosEquipoVisitante();
+        if(resultadoDTO.isEmpate() != eraEmpate){
+            return true;
+        }
+        boolean ganoVisitante = resultadoAnterior.getTantosEquipoVisitante() > resultadoAnterior.getTantosEquipoLocal();
+        if(resultadoDTO.isGanoVisitante() != ganoVisitante){
+            return true;
+        }
+        boolean ganoLocal = resultadoAnterior.getTantosEquipoLocal() > resultadoAnterior.getTantosEquipoVisitante();
+        if(resultadoDTO.isGanoLocal() != ganoLocal){
+            return true;
+        }
+        return false;
     }
 
     private void cargarResultadoDto(ResultadoFinalDTO resultadoDTO) {

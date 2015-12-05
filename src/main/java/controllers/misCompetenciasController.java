@@ -2,7 +2,6 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import controllers.general.VerCompetenciaCell;
 import dtos.CompetenciaDTO;
 import dtos.FiltrosCompetenciaDTO;
@@ -25,7 +24,6 @@ import java.util.List;
 
 public class misCompetenciasController extends ControlledScreen {
 
-    private PrincipalController myController;
     private GestorCompetencia gestorCompetencia;
     private GestorDeporte gestorDeporte;
 
@@ -44,10 +42,7 @@ public class misCompetenciasController extends ControlledScreen {
     @FXML private TableColumn<CompetenciaDTO, String> tModalidad;
     @FXML private TableColumn<CompetenciaDTO, Boolean> tAcciones;
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar(){
         gestorCompetencia = new GestorCompetencia();
         gestorDeporte = new GestorDeporte();
@@ -72,8 +67,6 @@ public class misCompetenciasController extends ControlledScreen {
         setearFilas(listaCompetencias);
         nombreCompetenciaTextField.requestFocus();
     }
-    public void inicializar(String mensaje) {inicializar();};
-
 
     private void inicializarDeportes() {
         deportesComboBox.getItems().removeAll(deportesComboBox.getItems());
@@ -203,12 +196,9 @@ public class misCompetenciasController extends ControlledScreen {
         this.idCompetenciaClickeada = id;
     }
 
+    @Override
     public Object mensajeControladorAnterior(){
         return idCompetenciaClickeada;
-    }
-
-    public PrincipalController getMyController(){
-        return myController;
     }
 
     class CompetenciaDTOComparator<T> implements  Comparator<T> {

@@ -1,31 +1,26 @@
 package controllers;
 
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class popupExitoController extends ControlledScreen {
-    private PrincipalController myController;
-    private Stage modal;
-    private Parent parent;
 
     @FXML private Button okButton;
     @FXML private Label detailsLabel;
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar(String exito) {
         detailsLabel.setText(exito);
     }
+
+    @Override
     public void inicializar() {};
 
+    @Override
     public Object mensajeControladorAnterior(){ return null; }
 
     public void close(ActionEvent actionEvent){

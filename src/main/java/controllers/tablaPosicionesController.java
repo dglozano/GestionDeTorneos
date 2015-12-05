@@ -6,34 +6,20 @@ import controllers.general.PrincipalController;
 import dtos.FilaPosicionDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.Competencia;
 import models.SistemaPuntuacion;
 import services.GestorCompetencia;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class tablaPosicionesController extends ControlledScreen {
 
     private GestorCompetencia gestorCompetencia;
-    private PrincipalController myController;
     private Competencia competencia;
-
-    private Stage modal;
-    private Parent parent;
 
     @FXML private Text title;
     @FXML private TableView posicionesTableView;
@@ -47,6 +33,7 @@ public class tablaPosicionesController extends ControlledScreen {
     @FXML private TableColumn contraColumna;
     @FXML private TableColumn diferenciaColumna;
 
+    @Override
     public void inicializar(){
         buscarCompetencia();
         title.setText(competencia.getNombre());
@@ -58,12 +45,9 @@ public class tablaPosicionesController extends ControlledScreen {
     private void cargarFilas() {
         List<FilaPosicionDTO> filasPosicion= gestorCompetencia.tablaPosiciones(competencia.getId());
         posicionesTableView.getItems().clear();
-        Collections.sort(filasPosicion, new PosicionComparator<FilaPosicionDTO>());
         posicionesTableView.getItems().addAll(filasPosicion);
 
     }
-
-    public void inicializar(String mensaje) {inicializar();};
 
     private void buscarCompetencia() {
         gestorCompetencia = new GestorCompetencia();
@@ -118,32 +102,6 @@ public class tablaPosicionesController extends ControlledScreen {
         return competencia.getId();
     }
 
-    class PosicionComparator<T> implements Comparator<T> {
-        @Override
-        public int compare(T a, T b) {
-            Integer puntosA =((Integer)((FilaPosicionDTO)a).getPuntos());
-            Integer puntosB =((Integer)((FilaPosicionDTO)b).getPuntos());
-            Integer diferenciaA =((Integer)((FilaPosicionDTO)a).getDiferencia());
-            Integer diferenciaB =((Integer)((FilaPosicionDTO)b).getDiferencia());
-            Integer favorA =((Integer)((FilaPosicionDTO)b).getFavor());
-            Integer favorB =((Integer)((FilaPosicionDTO)b).getFavor());
-            String nombreA =((String)((FilaPosicionDTO)b).getNombreParticipante());
-            String nombreB =((String)((FilaPosicionDTO)b).getNombreParticipante());
-            if(puntosA.compareTo(puntosB) != 0){
-                return puntosA.compareTo(puntosB)*(-1);
-            }
-            if(diferenciaA.compareTo(diferenciaB) !=0){
-                return diferenciaA.compareTo(diferenciaB)*(-1);
-            }
-            if(favorA.compareTo(favorB) != 0){
-                return favorA.compareTo(favorB)*(-1);
-            }
-            else{
-                return nombreA.compareTo(nombreB)*(-1);
-            }
-        }
-    }
-
     public void irImprimir(ActionEvent actionEvent) {
         mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
     }
@@ -152,41 +110,4 @@ public class tablaPosicionesController extends ControlledScreen {
         mostrarPopUp("Esta funcionalidad esta en desarrollo","desarrollo");
     }
 
-
-    private void mostrarPopUp(){
-        mostrarPopUp("","");
-    }
-
-    private void mostrarPopUp(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

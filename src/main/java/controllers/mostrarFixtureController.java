@@ -2,7 +2,6 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import controllers.general.ResultadoCell;
 import dtos.PartidoDTO;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -34,18 +33,12 @@ public class mostrarFixtureController extends ControlledScreen {
     private int fechaActual;
     private Competencia competencia;
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
-    private PrincipalController myController;
     private Stage modal;
     private Parent parent;
     private Fixture fixture;
 
     @FXML private Text title;
     @FXML private TabPane fechas;
-
-    @Override
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
 
     @Override
     public void inicializar(){
@@ -56,11 +49,6 @@ public class mostrarFixtureController extends ControlledScreen {
         fixture = competencia.getFixture();
         List<Fecha> listaFechas = fixture.getFechas();
         generarTabs(listaFechas);
-    }
-
-    @Override
-    public void inicializar(String string){
-        inicializar();
     }
 
     @Override
@@ -195,10 +183,6 @@ public class mostrarFixtureController extends ControlledScreen {
         return this.competencia.getSistemaPuntuacion().getPuntuacionString();
     }
 
-    public PrincipalController getMyController(){
-        return myController;
-    }
-
     private void agregarBotonesEnTabla(TableColumn accionesColumn){
         // Seteamos una fila con valor booleano cosa que se muestre el botón para filas no vacías
         accionesColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PartidoDTO, Boolean>, ObservableValue<Boolean>>() {
@@ -214,43 +198,6 @@ public class mostrarFixtureController extends ControlledScreen {
                 return new ResultadoCell(controller);
             }
         });
-    }
-
-    private void mostrarPopUp(){
-        mostrarPopUp("", "");
-    }
-
-    private void mostrarPopUp(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void mostrarPopUpResultado(String tipo){

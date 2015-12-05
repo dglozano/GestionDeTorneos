@@ -1,13 +1,11 @@
 package controllers;
 
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.ResultadoSetDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Partido;
@@ -19,9 +17,6 @@ import java.util.List;
 
 public class popupGestionarResultadoSetsController extends ControlledScreen {
 
-    private PrincipalController myController;
-    private Stage modal;
-    private Parent parent;
     private int idCompetencia;
     private int idPartidoClickeado;
     private int cantSets;
@@ -62,15 +57,18 @@ public class popupGestionarResultadoSetsController extends ControlledScreen {
     private ArrayList<Spinner> setsLocal = new ArrayList<>();
     private ArrayList<Spinner> setsVisitante = new ArrayList<>();
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
+    @Override
     public void inicializar() {
         inicializacionBasica();
         if(!partido.getResultados().isEmpty()){
             cargarResultadoAnterior();
         }
+    }
+
+    @Override
+    public void inicializar(String mensaje){
+        idPartidoClickeado = Integer.parseInt(mensaje);
+        inicializar();
     }
 
     private void cargarResultadoAnterior() {
@@ -141,11 +139,7 @@ public class popupGestionarResultadoSetsController extends ControlledScreen {
         setsVisitante.add(visitanteSpinner9);
     }
 
-    public void inicializar(String mensaje){
-        idPartidoClickeado = Integer.parseInt(mensaje);
-        inicializar();
-    }
-
+    @Override
     public Object mensajeControladorAnterior(){ return idCompetencia; }
 
     public void cancelar(ActionEvent actionEvent){
@@ -160,30 +154,65 @@ public class popupGestionarResultadoSetsController extends ControlledScreen {
         else if(!error1.isVisible()){
             ResultadoSetDTO resultadoSetDTO = new ResultadoSetDTO();
             cargarResultadoDTO(resultadoSetDTO);
-            gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
-            ControlledScreen anterior = myController.getControladorAnterior();
+            if(huboCambios(resultadoSetDTO,partido.getResultados())){
+                gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
+            }
             volver();
-            anterior.inicializar();
         }
     }
 
+    private boolean huboCambios(ResultadoSetDTO resultadoSetDTO, List<Resultado> resultados) {
+        if(resultados.isEmpty()){
+            return true;
+        }
+        if(resultados.get(0).isJugoVisitante() != resultadoSetDTO.isSePresentoVisitante()){
+            return true;
+        }
+        if(resultados.get(0).isJugoLocal() != resultadoSetDTO.isSePresentoLocal()){
+            return true;
+        }
+        for(int i=0; i < resultados.size();i++){
+            if(resultados.get(i).getTantosEquipoLocal() != resultadoSetDTO.getTantosLocal()[i]){
+                return true;
+            }
+            if(resultados.get(i).getTantosEquipoVisitante() != resultadoSetDTO.getTantosVisitante()[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void volver() {
+        ControlledScreen anterior = myController.getControladorAnterior();
         myController.setControladorAnterior(this);
         Stage modal = (Stage)okButton.getScene().getWindow();
         modal.close();
+        anterior.inicializar();
     }
 
     private void cargarResultadoDTO(ResultadoSetDTO resultadoSetDTO) {
-        resultadoSetDTO.setSePresentoLocal(sePresentoLocalCheckBox.isSelected());
-        resultadoSetDTO.setSePresentoVisitante(sePresentoVisitanteCheckBox.isSelected());
+        boolean jugoLocal = sePresentoLocalCheckBox.isSelected();
+        boolean jugoVisitante = sePresentoVisitanteCheckBox.isSelected();
+        resultadoSetDTO.setSePresentoLocal(jugoLocal);
+        resultadoSetDTO.setSePresentoVisitante(jugoVisitante);
         resultadoSetDTO.setIdCompetencia(idCompetencia);
         resultadoSetDTO.setIdPartido(idPartidoClickeado);
         int[] tantosLocal = new int[9];
         int[] tantosVisitante = new int[9];
         for(int i=0;i<9;i++){
-            if(setsLocal.get(i).isDisabled() && setsVisitante.get(i).isDisabled()){
-                tantosLocal[i]=0;
-                tantosVisitante[i]=0;
+            if(setsLocal.get(i).isDisabled() && setsVisitante.get(i).isDisabled()) {
+                if (jugoLocal && !jugoVisitante && i < cantSets/2+1) {
+                    tantosLocal[i] = 1;
+                    tantosVisitante[i] = 0;
+                }
+                else if(!jugoLocal && jugoVisitante && i < cantSets/2+1){
+                    tantosLocal[i] = 0;
+                    tantosVisitante[i] = 1;
+                }
+                else{
+                    tantosLocal[i] = 0;
+                    tantosVisitante[i] = 0;
+                }
             }
             else{
                 tantosLocal[i]=(Integer)setsLocal.get(i).getValue();

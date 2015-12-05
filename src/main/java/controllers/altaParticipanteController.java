@@ -2,40 +2,36 @@ package controllers;
 
 import app.Main;
 import controllers.general.ControlledScreen;
-import controllers.general.PrincipalController;
 import dtos.ParticipanteDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.Competencia;
 import services.GestorCompetencia;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 
 public class altaParticipanteController extends ControlledScreen {
 
     private int idCompetencia;
     private Competencia competencia;
     private GestorCompetencia gestorCompetencia = new GestorCompetencia();
-    private PrincipalController myController;
     private Stage modal;
     private Parent parent;
     private static final int MAX_TEXT_FIELD = 255;
@@ -54,13 +50,12 @@ public class altaParticipanteController extends ControlledScreen {
     @FXML private Label errorNombre;
     @FXML private Label errorEmail;
 
+    @Override
     public void inicializar(){
         buscarCompetencia();
         limpiarCampos();
         agregarLengthListener();
     }
-
-    public void inicializar(String mensaje) {inicializar();};
 
     private void limpiarCampos() {
         nombreParticipanteTextField.clear();
@@ -193,53 +188,13 @@ public class altaParticipanteController extends ControlledScreen {
         }
     }
 
-    public void setScreenParent(PrincipalController screenParent){
-        myController = screenParent;
-    }
-
     public void volver(ActionEvent actionEvent){
         myController.setScreen(Main.vistaListarParticipantesId);
     }
 
+    @Override
     public Object mensajeControladorAnterior(){
         return idCompetencia;
-    }
-
-    private void mostrarPopUp(){
-        mostrarPopUp("","");
-    }
-
-    private void mostrarPopUp(String mensaje, String tipo){
-        String recurso;
-        switch(tipo){
-            case "error":
-                recurso = "fxml/popupError.fxml";
-                break;
-            case "exito":
-                recurso = "fxml/popupExito.fxml";
-                break;
-            default:
-                recurso = "fxml/popupEnDesarrollo.fxml";
-                break;
-        }
-        final FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(recurso));
-        try {
-            parent = loader.load();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            ControlledScreen myScreenControler = ((ControlledScreen) loader.getController());
-            myScreenControler.setScreenParent(myController);
-            myScreenControler.inicializar(mensaje);
-            modal = new Stage();
-            modal.initModality(Modality.APPLICATION_MODAL);
-            modal.initStyle(StageStyle.TRANSPARENT);
-            modal.setScene(scene);
-            modal.setResizable(false);
-            modal.sizeToScene();
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void subirImagen(ActionEvent actionEvent){
@@ -264,5 +219,4 @@ public class altaParticipanteController extends ControlledScreen {
             e.printStackTrace();
         }
     }
-
 }

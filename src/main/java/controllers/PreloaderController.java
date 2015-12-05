@@ -14,15 +14,16 @@ import javax.persistence.EntityManager;
 
 public class PreloaderController extends ControlledScreen {
 
-    private PrincipalController myController;
-
+    @Override
     public void setScreenParent(PrincipalController screenParent){
         myController = screenParent;
         levantarEntityManager();
     }
 
+    @Override
     public void inicializar(){};
-    public void inicializar(String mensaje) {inicializar();};
+
+    @Override
     public Object mensajeControladorAnterior(){
         return null;
     };
@@ -152,16 +153,6 @@ public class PreloaderController extends ControlledScreen {
         deporteDao.crearDeporte(futbol);
         deporteDao.crearDeporte(tenis);
 
-        Competencia competencia1= new Competencia();
-        competencia1.setUsuario(usuario1);
-        competencia1.setNombre("TORNEO DOS ORILLAS");
-        competencia1.setModalidad(Modalidad.ELIM_DOBLE);
-        competencia1.setEstado(Estado.EN_DISPUTA);
-        competencia1.setSistemaPuntuacion(SistemaPuntuacion.SET);
-        competencia1.setAceptaEmpate(false);
-        competencia1.setDeporte(rugby);
-        competenciaDAO.crearCompetencia(competencia1);
-
         Competencia competencia2= new Competencia();
         competencia2.addParticipante(p1);
         competencia2.addParticipante(p2);
@@ -177,20 +168,18 @@ public class PreloaderController extends ControlledScreen {
         competencia2.setEstado(Estado.CREADA);
         competencia2.setSistemaPuntuacion(SistemaPuntuacion.SET);
         competencia2.setCantidadDeSets(5);
-        competencia2.setTantosFavorNoPresentarse(3);
         competencia2.setPuntosPartidoGanado(4);
         competencia2.setPuntosPorPresentarse(1);
-        competencia2.setPuntosPartidoEmpatado(2);
         competencia2.setDeporte(futbol);
         competenciaDAO.crearCompetencia(competencia2);
 
         Usuario usuario2 = new Usuario();
         usuarioDao.crearUsuario(usuario2);
         Competencia competencia3= new Competencia();
-        competencia3.setUsuario(usuario1);
+        competencia3.setUsuario(usuario2);
         competencia3.setNombre("TORNEO AFA");
         competencia3.setModalidad(Modalidad.LIGA);
-        competencia3.setSistemaPuntuacion(SistemaPuntuacion.RESULTADO_FINAL);
+        competencia3.setSistemaPuntuacion(SistemaPuntuacion.PUNTUACION);
         competencia3.setAceptaEmpate(true);
         competencia3.setEstado(Estado.FINALIZADA);
         competencia3.setDeporte(futbol);

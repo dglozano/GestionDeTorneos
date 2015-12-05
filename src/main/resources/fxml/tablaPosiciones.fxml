@@ -14,7 +14,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="Archivo">
           <items>
-            <MenuItem mnemonicParsing="false" text="Registrar" />
+              <MenuItem onAction="#registrarUsuario" mnemonicParsing="false" text="Registrar" />
               <MenuItem onAction="#cerrarPrograma" mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
