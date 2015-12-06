@@ -124,10 +124,15 @@ public class mostrarFixtureController extends ControlledScreen {
             fechas.getTabs().add(tab);
         }
         int fechaMostrada = 0;
+        boolean estaFinalizada = gestorCompetencia.getCompetencia(competencia.getId()).getEstado().equals(Estado.FINALIZADA.getEstadoString());
         if (myController.getControladorAnterior().getClass().toString().contains("popup")){
             fechaMostrada = gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado) == -1 ? fechaActual : gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado);
         } else{
-            fechaMostrada = fechaActual;
+            if (!estaFinalizada) {
+                fechaMostrada = fechaActual;
+            } else{
+                fechaMostrada = fechasComp.size()-1;
+            }
         }
         fechas.getSelectionModel().select(fechaMostrada);
     }

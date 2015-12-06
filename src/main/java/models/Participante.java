@@ -19,8 +19,6 @@ public class Participante {
     private int id;
     @Column(name = "nom_partic")
     private String nombre;
-    @Column(name = "puntos")
-    private int puntos;
     @Column(name = "email_partic")
     private String email;
 
@@ -72,10 +70,6 @@ public class Participante {
         return nombre;
     }
 
-    public int getPuntos() {
-        return puntos;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -102,10 +96,6 @@ public class Participante {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
     }
 
     public void setEmail(String email) {

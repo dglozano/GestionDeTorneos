@@ -211,10 +211,16 @@ public class altaParticipanteController extends ControlledScreen {
             fileInputStream.read(imagenBytes);
             fileInputStream.close();
 
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(imagenBytes);
-            BufferedImage bufferedImagen = ImageIO.read(inputStream);
-            Image imagen = SwingFXUtils.toFXImage(bufferedImagen, null);
-            fotoImageView.setImage(imagen);
+            if (imagenBytes.length < 65534){
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(imagenBytes);
+                BufferedImage bufferedImagen = ImageIO.read(inputStream);
+                Image imagen = SwingFXUtils.toFXImage(bufferedImagen, null);
+                fotoImageView.setImage(imagen);
+            }
+            else {
+                mostrarPopUp("La imagen pesa " + imagenBytes.length + " bytes lo cual excede el tamano maximo de 65535 bytes.", "error");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
