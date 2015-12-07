@@ -25,15 +25,6 @@ public class DeporteDao {
         em.close();
     }
 
-    public void actualizarDeporte(Deporte deporte) {
-        EntityManager em = MiEntityManager.get();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.merge(deporte);
-        tx.commit();
-        em.close();
-    }
-
     public List<Deporte> buscarDeportes() {
         EntityManager em = MiEntityManager.get();
         List<Deporte> listaDeportes = em.createQuery("SELECT d FROM Deporte d").getResultList();

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorLugarRealizacion {
+
     private LugarDeRealizacionDao lugarDeRealizacionDao = LugarDeRealizacionDao.getInstance();
-    private UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
 
     public List<String> buscarLugaresDelUsuario(String deporteString){
-        int idUsuario = usuarioLogueado.getUsuarioLogueado().getId();
+        int idUsuario = UsuarioLogueado.getInstance().getUsuarioLogueado().getId();
         GestorDeporte gestorDeporte = new GestorDeporte();
         Deporte deporte = gestorDeporte.buscarDeporte(deporteString);
         List<LugarDeRealizacion> lugaresUsuario = lugarDeRealizacionDao.buscarLugaresDelUsuario(idUsuario, deporte.getId());
@@ -25,7 +25,7 @@ public class GestorLugarRealizacion {
     }
 
     public LugarDeRealizacion buscarLugarPorNombre(String nombreLugar){
-        int idUsuario = usuarioLogueado.getUsuarioLogueado().getId();
+        int idUsuario = UsuarioLogueado.getInstance().getUsuarioLogueado().getId();
         LugarDeRealizacion lugar = lugarDeRealizacionDao.buscarLugarPorNombre(idUsuario,nombreLugar);
         return lugar;
     }

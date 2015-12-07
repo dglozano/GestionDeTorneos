@@ -31,8 +31,6 @@ public class Competencia {
     private int puntosPartidoGanado;
     @Column(name = "eliminada")
     private boolean eliminada;
-    @Column(name = "otorga_tantos")
-    private boolean otorgaTantosNoPresentarse;
     @Column(name = "fecha_elim")
     @Temporal(TemporalType.DATE)
     private Date fechaEliminada;
@@ -229,15 +227,6 @@ public class Competencia {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public boolean isOtorgaTantosNoPresentarse() {
-        return otorgaTantosNoPresentarse;
-    }
-
-    public void setOtorgaTantosNoPresentarse(boolean otorgaTantosNoPresentarse) {
-        this.otorgaTantosNoPresentarse = otorgaTantosNoPresentarse;
-    }
-
 
 }
 

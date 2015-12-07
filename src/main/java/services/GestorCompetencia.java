@@ -16,17 +16,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GestorCompetencia {
+
     private CompetenciaDao competenciaDao = CompetenciaDao.getInstance();
+    private ParticipanteDao participanteDao = ParticipanteDao.getInstance();
+    private PartidoDao partidoDao = PartidoDao.getInstance();
     private UsuarioLogueado usuarioLogueado = UsuarioLogueado.getInstance();
     private GestorLugarRealizacion gestorLugarRealizacion = new GestorLugarRealizacion();
     private GestorDeporte gestorDeporte = new GestorDeporte();
-    private ParticipanteDao participanteDao = ParticipanteDao.getInstance();
-    private PartidoDao partidoDao = PartidoDao.getInstance();
     private GestorResultado gestorResultado = new GestorResultado();
-
-    public void nuevaCompetencia(Competencia c) {
-        competenciaDao.crearCompetencia(c);
-    }
 
     public Competencia buscarCompetenciaPorId(int idCompetencia){
         return competenciaDao.buscarCompetenciaPorId(idCompetencia);
@@ -112,15 +109,14 @@ public class GestorCompetencia {
             }
             if(datosCompDtoPaso2.isOtorgaTantosPorNoPresentarse()){
                 competencia.setTantosFavorNoPresentarse(datosCompDtoPaso2.getTantosEnCasoDeNoPresentarseOponente());
-                competencia.setOtorgaTantosNoPresentarse(true);
-            }
+           }
             else{
-                competencia.setOtorgaTantosNoPresentarse(false);
+                competencia.setTantosFavorNoPresentarse(0);
             }
         }
         else{
             competencia.setAceptaEmpate(false);
-            competencia.setOtorgaTantosNoPresentarse(false);
+            competencia.setTantosFavorNoPresentarse(0);
         }
         competenciaDao.crearCompetencia(competencia);
     }
@@ -395,7 +391,6 @@ public class GestorCompetencia {
         int ptsPresentarse = competencia.getPuntosPorPresentarse();
         int ptsEmpate=0;
         boolean aceptaEmpates = competencia.isAceptaEmpate();
-        boolean otorgaTantos = competencia.isOtorgaTantosNoPresentarse();
         if(aceptaEmpates) ptsEmpate=competencia.getPuntosPartidoEmpatado();
         List<Participante> participantes = competencia.getParticipantes();
         for(Participante participante: participantes){
@@ -479,10 +474,6 @@ public class GestorCompetencia {
         }
     }
 
-    public Partido buscarPartidoPorId(int id){
-        return partidoDao.buscarPartidoPorId(id);
-    }
-
     public int buscarFechaActual(Competencia competencia){
         int nroFecha = 0;
         for (Fecha fecha: competencia.getFixture().getFechas()){
@@ -533,6 +524,11 @@ public class GestorCompetencia {
         }
         return false;
     }
+
+    public Partido buscarPartidoPorId(int id){
+        return partidoDao.buscarPartidoPorId(id);
+    }
+
 }
 
 
