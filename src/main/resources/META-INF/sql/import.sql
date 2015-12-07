@@ -26,13 +26,13 @@ VALUES (1, 1), (1, 2), (2, 1), (2,3), (2,4), (2,5), (2,6), (2,7), (2,8), (3,9), 
 INSERT INTO fixture (id_fixture) values (1);
 
 INSERT INTO competencia (id_competencia, acepta_empates, cant_sets, Estado, modalidad, nom_comp, pts_part_empatado, pts_partido_ganado,
- pts_por_presentarse, sistemaPuntuacion, tantos_a_favor_por_no_presentarse, id_deporte, id_fixture, id_usuario, eliminada, otorga_tantos)
-VALUES (1, 1, 0, 3, 0, "Liga Santafesina", 1, 3, 0, 1, 0, 2, 1, 1, 0, 0),
-(2, 1, 0, 0, 0, "Cuadrangular", 1, 3, 0, 1, 0, 2, NULL, 1, 0, 0),
-(3, 0, 0, 0, 1, "Rugby Elim Simple", 0, 1, 0, 2, 0, 1, NULL, 1, 0, 0),
-(4, 0, 5, 0, 1, "Tenis Elim Simple", 0, 1, 0, 0, 0, 3, NULL, 1, 0, 0),
-(5, 0, 0, 0, 2, "Futbol Elim Doble", 0, 1, 0, 2, 0, 2, NULL, 1, 0, 0),
-(6, 0, 3, 0, 0, "Tenis Liga", 0, 3, 1, 0, 0, 3, NULL, 1, 0, 0);
+ pts_por_presentarse, sistemaPuntuacion, tantos_a_favor_por_no_presentarse, id_deporte, id_fixture, id_usuario, eliminada)
+VALUES (1, 1, 0, 3, 0, "LIGA SANTAFESINA", 1, 3, 0, 1, 0, 2, 1, 1, 0),
+(2, 1, 0, 0, 0, "CUADRANGULAR", 1, 3, 0, 1, 0, 2, NULL, 1, 0),
+(3, 0, 0, 0, 1, "RUGBY ELIM SIMPLE", 0, 1, 0, 2, 0, 1, NULL, 1, 0),
+(4, 0, 5, 0, 1, "TENIS ELIM SIMPLE", 0, 1, 0, 0, 0, 3, NULL, 1, 0),
+(5, 0, 0, 0, 2, "FUTBOL ELIM DOBLE", 0, 1, 0, 2, 0, 2, NULL, 1, 0),
+(6, 0, 3, 0, 0, "TENIS LIGA", 0, 3, 1, 0, 0, 3, NULL, 1, 0);
 
 INSERT INTO disponibilidad (id_disponibilidad, disponibilidad, codigo_lugar, id_competencia)
 VALUES (1, 2, 1, 1), (2, 1, 3, 1), (3, 1, 4, 1), (4, 2, 9, 6);
