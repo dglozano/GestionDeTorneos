@@ -65,11 +65,16 @@
     -fx-pref-height: 55px;
     -fx-tab-color: #4081be;
     -fx-border-width: 1;
+    -fx-focus-color: #4081be;
+    -fx-faint-focus-color: #4081be;
+
 }
-.btn:hover{
+.btn:hover,
+.btn:focused{
     -fx-background-color: #468fd3;
 }
-.btn-alt:hover{
+.btn-alt:hover,
+.btn-alt:focused{
     -fx-background-color: #313233 !important;
     -fx-text-fill: #fff;
 }
@@ -83,12 +88,15 @@
     -fx-background-color: #fff;
     -fx-text-fill: #313233;
     -fx-border-color: #313233;
+    -fx-focus-color: #4081be;
+    -fx-faint-focus-color: #4081be;
 }
 .btn-error{
     -fx-background-color: #F54A4A;
     -fx-border-color: #F54A4A;
 }
-.btn-error:hover{
+.btn-error:hover,
+.btn-error:focused{
     -fx-background-color: #FF6363;
 }
 .filterPane,

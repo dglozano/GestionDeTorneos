@@ -22,6 +22,7 @@ public class ButtonParticipanteCell extends TableCell<ParticipanteDTO, Boolean> 
         participanteTableButton.getStyleClass().add("btn");
         participanteTableButton.getStyleClass().add("btn-small");
         participanteTableButton.getStyleClass().add("btn-alt");
+        participanteTableButton.setFocusTraversable(false);
 
         participanteTableButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent actionEvent) {

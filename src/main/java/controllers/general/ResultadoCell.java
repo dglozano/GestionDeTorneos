@@ -21,6 +21,7 @@ public class ResultadoCell extends TableCell<PartidoDTO, Boolean> {
         verButton.getStyleClass().add("btn");
         verButton.getStyleClass().add("btn-small");
         verButton.getStyleClass().add("btn-alt");
+        verButton.setFocusTraversable(false);
 
         verButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent actionEvent) {

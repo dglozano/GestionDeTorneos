@@ -16,6 +16,7 @@ public class SpinnerCell<DisponibilidadLugar, T> extends TableCell<Disponibilida
 
     public SpinnerCell(int step) {
         this.spinner = new Spinner<T>(1, 100, step);
+        spinner.setFocusTraversable(false);
         spinner.valueProperty().addListener(new ChangeListener<T>() {
             public void changed(ObservableValue<? extends T> observable, T oldValue, T newValue) {
                 ((dtos.DisponibilidadLugar)getTableView().getItems().get(getIndex())).setDisponibilidad((Integer)newValue);
