@@ -110,7 +110,7 @@ public class popupGestionarResultadoFinalController extends ControlledScreen {
             ResultadoFinalDTO resultadoDTO = new ResultadoFinalDTO();
             cargarResultadoDto(resultadoDTO);
             if(huboCambios(resultadoDTO, partido.getResultados())){
-                gestorCompetencia.cargarResultadoFinal(resultadoDTO);
+                gestorCompetencia.cargarResultado(resultadoDTO);
             }
             volver();
         }

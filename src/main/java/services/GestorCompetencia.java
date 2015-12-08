@@ -10,6 +10,7 @@ import exceptions.FixtureException.PocosParticipantesFixtureException;
 import exceptions.FuncionalidadEnDesarrolloException;
 import models.*;
 
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -321,9 +322,9 @@ public class GestorCompetencia {
         return listaParticipantesDtos;
     }
 
-    public void cargarResultadoFinal(ResultadoFinalDTO resultadoFinalDTO){
-        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoFinalDTO.getIdCompetencia());
-        Partido partido = partidoDao.buscarPartidoPorId(resultadoFinalDTO.getIdPartido());
+    public void cargarResultado(ResultadoDTO resultadoDTO){
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoDTO.getIdCompetencia());
+        Partido partido = partidoDao.buscarPartidoPorId(resultadoDTO.getIdPartido());
         if(esPrimerResultado(competencia, partido)) {
             competencia.setEstado(Estado.EN_DISPUTA);
         }
@@ -331,35 +332,17 @@ public class GestorCompetencia {
             competencia.setEstado(Estado.FINALIZADA);
         }
         competenciaDao.actualizarCompetencia(competencia);
-        gestorResultado.cargarResultadoFinal(resultadoFinalDTO, partido);
-        gestorResultado.eliminarResultadosVacios();
-    }
-
-   public void cargarResultadoPuntuacion(ResultadoPuntuacionDTO resultadoPuntuacionDTO){
-        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoPuntuacionDTO.getIdCompetencia());
-        Partido partido = partidoDao.buscarPartidoPorId(resultadoPuntuacionDTO.getIdPartido());
-        if(esPrimerResultado(competencia, partido)) {
-           competencia.setEstado(Estado.EN_DISPUTA);
+        switch(competencia.getSistemaPuntuacion()){
+            case PUNTUACION:
+                gestorResultado.cargarResultadoPuntuacion((ResultadoPuntuacionDTO)resultadoDTO, partido, competencia.getTantosFavorNoPresentarse());
+                break;
+            case RESULTADO_FINAL:
+                gestorResultado.cargarResultadoFinal((ResultadoFinalDTO)resultadoDTO, partido);
+                break;
+            case SET:
+                gestorResultado.cargarResultadoSet((ResultadoSetDTO)resultadoDTO, partido, competencia.getCantidadDeSets());
+                break;
         }
-        if(esUltimoResultado(competencia, partido)) {
-           competencia.setEstado(Estado.FINALIZADA);
-        }
-        competenciaDao.actualizarCompetencia(competencia);
-        gestorResultado.cargarResultadoPuntuacion(resultadoPuntuacionDTO, partido, competencia.getTantosFavorNoPresentarse());
-        gestorResultado.eliminarResultadosVacios();
-    }
-
-    public void cargarResultadoSet(ResultadoSetDTO resultadoSetDTO){
-        Competencia competencia = competenciaDao.buscarCompetenciaPorId(resultadoSetDTO.getIdCompetencia());
-        Partido partido = partidoDao.buscarPartidoPorId(resultadoSetDTO.getIdPartido());
-        if(esPrimerResultado(competencia, partido)) {
-            competencia.setEstado(Estado.EN_DISPUTA);
-        }
-        if(esUltimoResultado(competencia, partido)) {
-            competencia.setEstado(Estado.FINALIZADA);
-        }
-        competenciaDao.actualizarCompetencia(competencia);
-        gestorResultado.cargarResultadoSet(resultadoSetDTO, partido, competencia.getCantidadDeSets());
         gestorResultado.eliminarResultadosVacios();
     }
 

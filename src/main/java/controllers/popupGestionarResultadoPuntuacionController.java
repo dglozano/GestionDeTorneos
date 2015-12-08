@@ -124,7 +124,7 @@ public class popupGestionarResultadoPuntuacionController extends ControlledScree
             ResultadoPuntuacionDTO resultadoPuntuacionDTO = new ResultadoPuntuacionDTO();
             cargarResultadoDto(resultadoPuntuacionDTO);
             if(huboCambios(resultadoPuntuacionDTO,partido.getResultados())){
-                gestorCompetencia.cargarResultadoPuntuacion(resultadoPuntuacionDTO);
+                gestorCompetencia.cargarResultado(resultadoPuntuacionDTO);
             }
             volver();
         }

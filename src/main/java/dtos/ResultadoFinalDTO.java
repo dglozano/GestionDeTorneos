@@ -1,30 +1,12 @@
 package dtos;
 
-public class ResultadoFinalDTO {
+public class ResultadoFinalDTO extends ResultadoDTO{
 
-    private int idCompetencia;
-    private int idPartido;
+
     private boolean ganoLocal;
     private boolean ganoVisitante;
     private boolean empate;
-    private boolean sePresentoLocal;
-    private boolean sePresentoVisitante;
 
-    public int getIdCompetencia() {
-        return idCompetencia;
-    }
-
-    public void setIdCompetencia(int idCompetencia) {
-        this.idCompetencia = idCompetencia;
-    }
-
-    public int getIdPartido() {
-        return idPartido;
-    }
-
-    public void setIdPartido(int idPartido) {
-        this.idPartido = idPartido;
-    }
 
     public boolean isGanoLocal() {
         return ganoLocal;
@@ -50,19 +32,4 @@ public class ResultadoFinalDTO {
         this.empate = empate;
     }
 
-    public boolean isSePresentoLocal() {
-        return sePresentoLocal;
-    }
-
-    public void setSePresentoLocal(boolean sePresentoLocal) {
-        this.sePresentoLocal = sePresentoLocal;
-    }
-
-    public boolean isSePresentoVisitante() {
-        return sePresentoVisitante;
-    }
-
-    public void setSePresentoVisitante(boolean sePresentoVisitante) {
-        this.sePresentoVisitante = sePresentoVisitante;
-    }
 }

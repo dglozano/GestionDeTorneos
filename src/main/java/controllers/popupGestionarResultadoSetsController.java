@@ -155,7 +155,7 @@ public class popupGestionarResultadoSetsController extends ControlledScreen {
             ResultadoSetDTO resultadoSetDTO = new ResultadoSetDTO();
             cargarResultadoDTO(resultadoSetDTO);
             if(huboCambios(resultadoSetDTO,partido.getResultados())){
-                gestorCompetencia.cargarResultadoSet(resultadoSetDTO);
+                gestorCompetencia.cargarResultado(resultadoSetDTO);
             }
             volver();
         }
