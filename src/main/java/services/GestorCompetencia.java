@@ -541,11 +541,13 @@ public class GestorCompetencia {
 
     public List<FechaDTO> mostrarFixture(int idCompetencia) {
         Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
-        List<Fecha> listaFechas = competencia.getFixture().getFechas();
+        Fixture fixture = competencia.getFixture();
+        List<Fecha> listaFechas = fixture.getFechas();
         List<FechaDTO> fechasDTOs = new ArrayList<>();
         for(Fecha fecha: listaFechas){
             List<Partido> partidos = fecha.getPartidos();
             FechaDTO fechaDTO = new FechaDTO();
+            fechaDTO.setNumeroFecha(fecha.getNumeroFecha());
             for (Partido part : partidos) {
                 if (!part.isEsLibre()) {
                     PartidoDTO partDTO = new PartidoDTO();
@@ -570,7 +572,6 @@ public class GestorCompetencia {
                     fechaDTO.addPartidoDto(partDTO);
                 }
             }
-            fechaDTO.setNumeroFecha(fecha.getNumeroFecha());
             fechasDTOs.add(fechaDTO);
         }
         return fechasDTOs;

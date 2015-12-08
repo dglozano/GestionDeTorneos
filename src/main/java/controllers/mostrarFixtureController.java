@@ -102,7 +102,7 @@ public class mostrarFixtureController extends ControlledScreen {
             fechaMostrada = gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado) == -1 ? fechaActual : gestorCompetencia.buscarFechaPartido(competencia, idPartidoClickeado);
         } else{
             if (!estaFinalizada) {
-                fechaMostrada = fechaActual;
+                fechaMostrada = gestorCompetencia.buscarFechaActual(competencia);;
             } else{
                 fechaMostrada = listaFechasDTO.size()-1;
             }
