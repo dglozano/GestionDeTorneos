@@ -61,13 +61,25 @@ public class GestorCompetencia {
         return listaCompetenciasDTO;
     }
 
-    public CompetenciaDTO getCompetencia(int idComp){
+    public CompetenciaDTO getCompetenciaDTO(int idComp){
         Competencia comp = competenciaDao.buscarCompetenciaPorId(idComp);
         String nombre = comp.getNombre();
         String modalidad = comp.getModalidad().getModalidadString();
         String deporte = comp.getDeporte().getNombre();
         String estado = comp.getEstado().getEstadoString();
-        CompetenciaDTO competencia = new CompetenciaDTO(idComp,nombre,deporte,estado,modalidad);
+        String proximoEncuentroString;
+        boolean estaEnDisputa = comp.getEstado().equals(Estado.EN_DISPUTA);
+        boolean estaPlanificada = comp.getEstado().equals(Estado.PLANIFICADA);
+        boolean estaFinalizada = comp.getEstado().equals(Estado.FINALIZADA);
+        if(estaEnDisputa || (estaPlanificada && !estaFinalizada)){
+            int fechaActual = buscarFechaActual(comp);
+            Partido proximoEncuentro = getProxEncuentro(comp, fechaActual);
+            proximoEncuentroString = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
+        }
+        else {
+            proximoEncuentroString = " - ";
+        }
+        CompetenciaDTO competencia = new CompetenciaDTO(idComp,nombre,deporte,estado,modalidad,proximoEncuentroString);
         return competencia;
     }
 

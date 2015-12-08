@@ -11,15 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import models.Competencia;
 import models.Estado;
 import models.Modalidad;
-import models.Partido;
 import services.GestorCompetencia;
 
 public class verCompetenciaController extends ControlledScreen{
 
-    private GestorCompetencia gestorCompetencia;
+    private GestorCompetencia gestorCompetencia=new GestorCompetencia();;
     private int idCompetencia;
     private CompetenciaDTO competenciaDTO;
 
@@ -32,17 +30,16 @@ public class verCompetenciaController extends ControlledScreen{
     @Override
     public void inicializar() {
         idCompetencia= (Integer)myController.getControladorAnterior().mensajeControladorAnterior();
-        gestorCompetencia = new GestorCompetencia();
-        competenciaDTO = gestorCompetencia.getCompetencia(idCompetencia);
+        cargarDatosCompetencia();
+    }
+
+    private void cargarDatosCompetencia() {
+        competenciaDTO = gestorCompetencia.getCompetenciaDTO(idCompetencia);
         title.setText(competenciaDTO.getNombre());
         deporteTextField.setText(competenciaDTO.getDeporte());
         modalidadTextField.setText(competenciaDTO.getModalidad());
         estadoTextField.setText(competenciaDTO.getEstado());
-        boolean estaEnDisputa = competenciaDTO.getEstado().equals(Estado.EN_DISPUTA.getEstadoString());
-        boolean estaPlanificada = competenciaDTO.getEstado().equals(Estado.PLANIFICADA.getEstadoString());
-        boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
-        boolean habilitado = (estaEnDisputa || estaPlanificada && !estaFinalizada) ? true : false;
-        setProximoEncuentro(habilitado);
+        proximoEncuentroTextField.setText(competenciaDTO.getProximoEncuentro());
     }
 
     @Override
@@ -75,7 +72,7 @@ public class verCompetenciaController extends ControlledScreen{
     }
 
     public void irMostrarFixture(ActionEvent actionEvent){
-        competenciaDTO = gestorCompetencia.getCompetencia(idCompetencia);
+        competenciaDTO = gestorCompetencia.getCompetenciaDTO(idCompetencia);
         if(!competenciaDTO.getEstado().equals(Estado.CREADA.getEstadoString())) {
             myController.setScreen(Main.vistaMostrarFixtureId);
         }
@@ -96,8 +93,7 @@ public class verCompetenciaController extends ControlledScreen{
         try{
             gestorCompetencia.generarFixture(idCompetencia);
             mostrarPopUp("El fixture se ha generado exitosamente.", "exito");
-            setProximoEncuentro(true);
-            estadoTextField.setText(Estado.PLANIFICADA.getEstadoString());
+            cargarDatosCompetencia();
         }
         catch(EstadoErrorFixtureException e){
             mostrarPopUp("La competencia ya esta en Disputa o Finalizada.", "error");
@@ -110,18 +106,6 @@ public class verCompetenciaController extends ControlledScreen{
         }
         catch(FuncionalidadEnDesarrolloException e){
             mostrarPopUp("Esta funcionalidad esta en desarrollo.", "desarrollo");
-        }
-    }
-
-    public void setProximoEncuentro(boolean habilitado){
-        if (habilitado) {
-            Competencia competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
-            int fechaActual = gestorCompetencia.buscarFechaActual(competencia);
-            Partido proximoEncuentro = gestorCompetencia.getProxEncuentro(competencia, fechaActual);
-            String proximoEncuentroMensaje = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
-            proximoEncuentroTextField.setText(proximoEncuentroMensaje);
-        } else {
-            proximoEncuentroTextField.setText(" - ");
         }
     }
 }

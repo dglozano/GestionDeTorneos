@@ -6,13 +6,34 @@ public class CompetenciaDTO {
     private String deporte;
     private String estado;
     private String modalidad;
+    private String proximoEncuentro;
 
-    public CompetenciaDTO(int id,String nombre, String deporte, String estado, String modalidad) {
+    public CompetenciaDTO(int id,String nombre, String deporte,
+                          String estado, String modalidad) {
         this.id=id;
         this.nombre = nombre;
         this.deporte = deporte;
         this.estado = estado;
         this.modalidad = modalidad;
+    }
+
+
+    public CompetenciaDTO(int id,String nombre, String deporte,
+                          String estado, String modalidad, String proximoEncuentro) {
+        this.id=id;
+        this.nombre = nombre;
+        this.deporte = deporte;
+        this.estado = estado;
+        this.modalidad = modalidad;
+        this.proximoEncuentro = proximoEncuentro;
+    }
+
+    public String getProximoEncuentro() {
+        return proximoEncuentro;
+    }
+
+    public void setProximoEncuentro(String proximoEncuentro) {
+        this.proximoEncuentro = proximoEncuentro;
     }
 
     public String getNombre() {
