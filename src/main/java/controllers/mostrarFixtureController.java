@@ -3,6 +3,7 @@ package controllers;
 import app.Main;
 import controllers.general.ControlledScreen;
 import controllers.general.ResultadoCell;
+import dtos.FechaDTO;
 import dtos.PartidoDTO;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -46,9 +47,7 @@ public class mostrarFixtureController extends ControlledScreen {
         competencia = gestorCompetencia.buscarCompetenciaPorId(idCompetencia);
         title.setText(competencia.getNombre());
         fechaActual = gestorCompetencia.buscarFechaActual(competencia);
-        fixture = competencia.getFixture();
-        List<Fecha> listaFechas = fixture.getFechas();
-        generarTabs(listaFechas);
+        generarTabs();
     }
 
     @Override
@@ -60,14 +59,14 @@ public class mostrarFixtureController extends ControlledScreen {
         myController.setScreen(Main.vistaVerCompetenciaId, this);
     }
 
-    public void generarTabs(List<Fecha> fechasComp){
-
-        int cantFechas = fechasComp.size();
+    public void generarTabs(){
+        List<FechaDTO> listaFechasDTO = gestorCompetencia.mostrarFixture(idCompetencia);
+        int cantFechas = listaFechasDTO.size();
         fechas.getTabs().clear();
 
         for(int i = 0; i<cantFechas; i++){
             Tab tab = new Tab();
-            tab.setText("Fecha " + fechasComp.get(i).getNumeroFecha());
+            tab.setText("Fecha " + listaFechasDTO.get(i).getNumeroFecha());
 
             TableView tabla = new TableView();
             tabla.setPrefHeight(318.0);
@@ -91,33 +90,7 @@ public class mostrarFixtureController extends ControlledScreen {
             agregarBotonesEnTabla(accionesColumn);
 
             tabla.getItems().clear();
-            List<Partido> partidos = fechasComp.get(i).getPartidos();
-            List<PartidoDTO> partidoDTOs = new ArrayList<PartidoDTO>();
-            for(Partido part : partidos){
-                if(!part.isEsLibre()){
-                    PartidoDTO partDTO = new PartidoDTO();
-                    partDTO.setId(part.getId());
-                    partDTO.setParticipanteLocal(part.getLocal().getNombre());
-                    partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
-                    if (part.getResultados().isEmpty()){
-                        partDTO.setResultado(" - ");
-                    }
-                    else{
-                        switch (competencia.getSistemaPuntuacion()){
-                            case RESULTADO_FINAL:
-                                cargarResultadoCellFinal(part, partDTO);
-                                break;
-                            case SET:
-                                cargarResultadoCellSets(part, partDTO);
-                                break;
-                            case PUNTUACION:
-                                cargarResultadoPuntuacion(part, partDTO);
-                                break;
-                        }
-                    }
-                    partidoDTOs.add(partDTO);
-                }
-            }
+            List<PartidoDTO> partidoDTOs = listaFechasDTO.get(i).getPartidosDTO();
             tabla.getItems().setAll(partidoDTOs);
 
             tab.setContent(tabla);
@@ -131,53 +104,10 @@ public class mostrarFixtureController extends ControlledScreen {
             if (!estaFinalizada) {
                 fechaMostrada = fechaActual;
             } else{
-                fechaMostrada = fechasComp.size()-1;
+                fechaMostrada = listaFechasDTO.size()-1;
             }
         }
         fechas.getSelectionModel().select(fechaMostrada);
-    }
-
-    private void cargarResultadoCellSets(Partido part, PartidoDTO partDTO) {
-        String resultado="";
-        for(int i=0; i<part.getResultados().size();i++){
-            int ptsLocal= part.getResultados().get(i).getTantosEquipoLocal();
-            int ptsVisitante = part.getResultados().get(i).getTantosEquipoVisitante();
-
-            if(ptsLocal != 0 || ptsVisitante !=0){
-                if(i==0){
-                    resultado+=ptsLocal+"-"+ptsVisitante;
-                }
-                else{
-                    resultado+=" | "+ptsLocal+"-"+ptsVisitante;
-                }
-            }
-        }
-        partDTO.setResultado(resultado);
-    }
-
-    private void cargarResultadoPuntuacion(Partido part, PartidoDTO partDTO) {
-        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
-        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
-        if(!competencia.isAceptaEmpate() && ptsLocal == ptsVisit){
-            if( part.getResultados().get(0).isGanoLocalDesempate())
-                partDTO.setResultado("*"+ptsLocal+" - "+ptsVisit);
-            else
-                partDTO.setResultado(ptsLocal+" - "+ptsVisit+"*");
-        }
-        else{
-            partDTO.setResultado(ptsLocal+" - "+ptsVisit);
-        }
-    }
-
-    private void cargarResultadoCellFinal(Partido part, PartidoDTO partDTO) {
-        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
-        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
-        if(ptsLocal > ptsVisit)
-            partDTO.setResultado(part.getLocal().getNombre());
-        else if (ptsVisit > ptsLocal)
-            partDTO.setResultado(part.getVisitante().getNombre());
-        else
-            partDTO.setResultado("Empate");
     }
 
     public void setIdPartidoClickeado(int id){

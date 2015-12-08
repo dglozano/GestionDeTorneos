@@ -70,8 +70,7 @@ public class GestorCompetencia {
         String proximoEncuentroString;
         boolean estaEnDisputa = comp.getEstado().equals(Estado.EN_DISPUTA);
         boolean estaPlanificada = comp.getEstado().equals(Estado.PLANIFICADA);
-        boolean estaFinalizada = comp.getEstado().equals(Estado.FINALIZADA);
-        if(estaEnDisputa || (estaPlanificada && !estaFinalizada)){
+        if(estaEnDisputa || estaPlanificada){
             int fechaActual = buscarFechaActual(comp);
             Partido proximoEncuentro = getProxEncuentro(comp, fechaActual);
             proximoEncuentroString = proximoEncuentro.getLocal().getNombre() + " - " + proximoEncuentro.getVisitante().getNombre();
@@ -538,6 +537,86 @@ public class GestorCompetencia {
 
     public Partido buscarPartidoPorId(int id){
         return partidoDao.buscarPartidoPorId(id);
+    }
+
+    public List<FechaDTO> mostrarFixture(int idCompetencia) {
+        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        List<Fecha> listaFechas = competencia.getFixture().getFechas();
+        List<FechaDTO> fechasDTOs = new ArrayList<>();
+        for(Fecha fecha: listaFechas){
+            List<Partido> partidos = fecha.getPartidos();
+            FechaDTO fechaDTO = new FechaDTO();
+            for (Partido part : partidos) {
+                if (!part.isEsLibre()) {
+                    PartidoDTO partDTO = new PartidoDTO();
+                    partDTO.setId(part.getId());
+                    partDTO.setParticipanteLocal(part.getLocal().getNombre());
+                    partDTO.setParticipanteVisitante(part.getVisitante().getNombre());
+                    if (part.getResultados().isEmpty()) {
+                        partDTO.setResultado(" - ");
+                    } else {
+                        switch (competencia.getSistemaPuntuacion()) {
+                            case RESULTADO_FINAL:
+                                cargarResultadoCellFinal(part, partDTO);
+                                break;
+                            case SET:
+                                cargarResultadoCellSets(part, partDTO);
+                                break;
+                            case PUNTUACION:
+                                cargarResultadoPuntuacion(part, partDTO,competencia.isAceptaEmpate());
+                                break;
+                        }
+                    }
+                    fechaDTO.addPartidoDto(partDTO);
+                }
+            }
+            fechaDTO.setNumeroFecha(fecha.getNumeroFecha());
+            fechasDTOs.add(fechaDTO);
+        }
+        return fechasDTOs;
+    }
+
+    private void cargarResultadoCellSets(Partido part, PartidoDTO partDTO) {
+        String resultado="";
+        for(int i=0; i<part.getResultados().size();i++){
+            int ptsLocal= part.getResultados().get(i).getTantosEquipoLocal();
+            int ptsVisitante = part.getResultados().get(i).getTantosEquipoVisitante();
+
+            if(ptsLocal != 0 || ptsVisitante !=0){
+                if(i==0){
+                    resultado+=ptsLocal+"-"+ptsVisitante;
+                }
+                else{
+                    resultado+=" | "+ptsLocal+"-"+ptsVisitante;
+                }
+            }
+        }
+        partDTO.setResultado(resultado);
+    }
+
+    private void cargarResultadoPuntuacion(Partido part, PartidoDTO partDTO, boolean aceptaEmpates) {
+        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
+        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
+        if(!aceptaEmpates && ptsLocal == ptsVisit){
+            if( part.getResultados().get(0).isGanoLocalDesempate())
+                partDTO.setResultado("*"+ptsLocal+" - "+ptsVisit);
+            else
+                partDTO.setResultado(ptsLocal+" - "+ptsVisit+"*");
+        }
+        else{
+            partDTO.setResultado(ptsLocal+" - "+ptsVisit);
+        }
+    }
+
+    private void cargarResultadoCellFinal(Partido part, PartidoDTO partDTO) {
+        int ptsLocal = part.getResultados().get(0).getTantosEquipoLocal();
+        int ptsVisit = part.getResultados().get(0).getTantosEquipoVisitante();
+        if(ptsLocal > ptsVisit)
+            partDTO.setResultado(part.getLocal().getNombre());
+        else if (ptsVisit > ptsLocal)
+            partDTO.setResultado(part.getVisitante().getNombre());
+        else
+            partDTO.setResultado("Empate");
     }
 
 }

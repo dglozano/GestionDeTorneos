@@ -66,18 +66,20 @@ public class GestorResultado {
             else if(tantosVisitante > tantosLocal){
                 partido.setGanador(partido.getVisitante());
             }
-            if(resultadoPuntuacionDTO.isTieneDesempate()){
-                if(resultadoPuntuacionDTO.isGanoLocalDesempate()){
-                    partido.setGanador(partido.getLocal());
-                    resultado.setGanoLocalDesempate(true);
+            else{
+                if(resultadoPuntuacionDTO.isTieneDesempate()){
+                    if(resultadoPuntuacionDTO.isGanoLocalDesempate()){
+                        partido.setGanador(partido.getLocal());
+                        resultado.setGanoLocalDesempate(true);
+                    }
+                    else{
+                        partido.setGanador(partido.getVisitante());
+                        resultado.setGanoLocalDesempate(false);
+                    }
                 }
                 else{
-                    partido.setGanador(partido.getVisitante());
-                    resultado.setGanoLocalDesempate(false);
+                    partido.setGanador(null);
                 }
-            }
-            else{
-                partido.setGanador(null);
             }
         }
         else{
