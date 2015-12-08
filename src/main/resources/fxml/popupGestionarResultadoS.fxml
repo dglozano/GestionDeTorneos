@@ -22,6 +22,66 @@
         </Label>
       </children>
     </VBox>
+      <GridPane hgap="5.0" prefHeight="98.0" prefWidth="400.0" vgap="10.0" GridPane.rowIndex="1">
+          <columnConstraints>
+              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="146.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="90.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+              <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo1" GridPane.rowIndex="1" />
+              <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo2" GridPane.rowIndex="2" />
+              <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <Label fx:id="error1" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="410.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                  <opaqueInsets>
+                      <Insets />
+                  </opaqueInsets>
+                  <GridPane.margin>
+                      <Insets top="52.0" />
+                  </GridPane.margin>
+              </Label>
+              <Spinner fx:id="localSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+              <Spinner fx:id="localSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+              <Spinner fx:id="visitanteSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+          </children>
+      </GridPane>
     <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" spacing="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
       <children>
             <Button fx:id="cancelarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER">
@@ -48,66 +108,7 @@
             <Insets />
          </GridPane.margin>
     </HBox>
-      <GridPane hgap="5.0" prefHeight="98.0" prefWidth="400.0" vgap="10.0" GridPane.rowIndex="1">
-        <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="146.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="90.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="90.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo1" GridPane.rowIndex="1" />
-            <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo2" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="error1" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="410.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets top="52.0" />
-               </GridPane.margin>
-            </Label>
-            <Spinner fx:id="localSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner2" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner3" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner4" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner5" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner6" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner7" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner8" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Spinner fx:id="localSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-            <Spinner fx:id="visitanteSpinner9" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
+
   </children>
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="+Infinity" minWidth="-Infinity" />

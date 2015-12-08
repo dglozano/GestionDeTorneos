@@ -22,6 +22,55 @@
         </Label>
       </children>
     </VBox>
+      <GridPane hgap="25.0" prefHeight="98.0" prefWidth="400.0" vgap="5.0" GridPane.rowIndex="1">
+          <columnConstraints>
+              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="146.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="166.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="173.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+              <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" />
+              <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 2" GridPane.columnIndex="2" />
+              <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <Label alignment="CENTER" style="&#10;" text="Ganador" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="2">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <RadioButton fx:id="ganoLocalRadioButton" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <toggleGroup>
+                      <ToggleGroup fx:id="ganadorToggleGroup" />
+                  </toggleGroup>
+              </RadioButton>
+              <RadioButton fx:id="ganoVisitanteRadioButton" mnemonicParsing="false" text="Equipo 2" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+              <Label fx:id="errorLabel" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                  <opaqueInsets>
+                      <Insets />
+                  </opaqueInsets>
+                  <GridPane.margin>
+                      <Insets top="52.0" />
+                  </GridPane.margin>
+              </Label>
+              <RadioButton fx:id="empateRadioButton" disable="true" mnemonicParsing="false" text="Empate" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+          </children>
+      </GridPane>
     <HBox alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" spacing="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
       <children>
             <Button fx:id="cancelarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER">
@@ -48,55 +97,7 @@
             <Insets />
          </GridPane.margin>
     </HBox>
-      <GridPane hgap="25.0" prefHeight="98.0" prefWidth="400.0" vgap="5.0" GridPane.rowIndex="1">
-        <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="146.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="166.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="173.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="sePresentoLocalCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" />
-            <CheckBox fx:id="sePresentoVisitanteCheckBox" onAction="#checkBoxClicked" mnemonicParsing="false" text="Equipo 2" GridPane.columnIndex="2" />
-            <Label alignment="CENTER" style="&#10;" text="¿Se presentó?" textAlignment="CENTER" textFill="#222222" wrapText="false">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" style="&#10;" text="Ganador" textAlignment="CENTER" textFill="#222222" wrapText="false" GridPane.rowIndex="2">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <RadioButton fx:id="ganoLocalRadioButton" mnemonicParsing="false" text="Equipo 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <toggleGroup>
-                  <ToggleGroup fx:id="ganadorToggleGroup" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="ganoVisitanteRadioButton" mnemonicParsing="false" text="Equipo 2" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="errorLabel" alignment="TOP_CENTER" contentDisplay="CENTER" minWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="374.0" styleClass="error" text="El resultado ingresado no es válido" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets top="52.0" />
-               </GridPane.margin>
-            </Label>
-            <RadioButton fx:id="empateRadioButton" disable="true" mnemonicParsing="false" text="Empate" toggleGroup="$ganadorToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-         </children>
-      </GridPane>
+
   </children>
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="+Infinity" minWidth="-Infinity" />
