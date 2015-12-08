@@ -47,4 +47,12 @@ public class ParticipanteDao {
         }
         em.close();
     }
+
+    public List<Participante> buscarParticipantes(int idCompetencia){
+        EntityManager em = MiEntityManager.get();
+        List<Participante> listaParticipantes = em.createQuery("SELECT p FROM Participante p WHERE id_competencia ="+idCompetencia).getResultList();
+        em.close();
+        return listaParticipantes;
+    }
+
 }

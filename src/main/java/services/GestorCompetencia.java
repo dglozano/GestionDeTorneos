@@ -45,9 +45,9 @@ public class GestorCompetencia {
         return listaCompetenciasDTO;
     }
 
-    public List<CompetenciaDTO> filtrarMisCompetencias(FiltrosCompetenciaDTO filtros){
+    public List<CompetenciaDTO> listarTodasMisCompetencias(FiltrosCompetenciaDTO filtros){
         int idUsuarioLogueado = usuarioLogueado.getUsuarioLogueado().getId();
-        List<Competencia> competenciasUsuario = competenciaDao.filtrarCompetencias(idUsuarioLogueado, filtros);
+        List<Competencia> competenciasUsuario = competenciaDao.buscarTodasCompetencias(idUsuarioLogueado, filtros);
         List<CompetenciaDTO> listaCompetenciasDTO= new ArrayList<CompetenciaDTO>();
         for(Competencia comp: competenciasUsuario){
             int id = comp.getId();
@@ -87,11 +87,11 @@ public class GestorCompetencia {
         Competencia competencia = new Competencia();
         competencia.setNombre(datosCompDto.getCompetencia().toUpperCase());
         competencia.setUsuario(usuarioLogueado.getUsuarioLogueado());
-        Deporte deporte = gestorDeporte.buscarDeporte(datosCompDto.getDeporte());
-        competencia.setDeporte(deporte);
         competencia.setEstado(Estado.CREADA);
         competencia.setModalidad(datosCompDto.getModalidad());
         competencia.setSistemaPuntuacion(datosCompDto.getPuntuacion());
+        Deporte deporte = gestorDeporte.buscarDeporte(datosCompDto.getDeporte());
+        competencia.setDeporte(deporte);
         if(datosCompDto.getPuntuacion().equals(SistemaPuntuacion.SET))
             competencia.setCantidadDeSets(datosCompDto.getSets());
         if(datosCompDto.isTieneReglamento())
@@ -109,7 +109,7 @@ public class GestorCompetencia {
             }
             if(datosCompDtoPaso2.isOtorgaTantosPorNoPresentarse()){
                 competencia.setTantosFavorNoPresentarse(datosCompDtoPaso2.getTantosEnCasoDeNoPresentarseOponente());
-           }
+            }
             else{
                 competencia.setTantosFavorNoPresentarse(0);
             }
@@ -159,7 +159,7 @@ public class GestorCompetencia {
         if(competencia.getFixture()!=null){
             eliminarFixture(competencia);
         }
-        List<Participante> listaParticipantes = competencia.getParticipantes();
+        List<Participante> listaParticipantes = participanteDao.buscarParticipantes(competencia.getId());
         List<Disponibilidad> listaDisponibilidades = competencia.getDisponibilidades();
         int totalParticipantes = listaParticipantes.size();
         if(totalParticipantes < 2){
@@ -299,12 +299,11 @@ public class GestorCompetencia {
     }
 
     public List<ParticipanteDTO> listarParticipantesDtos(int idCompetencia){
-        Competencia competencia = competenciaDao.buscarCompetenciaPorId(idCompetencia);
+        List<Participante> participantes = participanteDao.buscarParticipantes(idCompetencia);
         List<ParticipanteDTO> listaParticipantesDtos = new ArrayList<>();
-        for(Participante p: competencia.getParticipantes()){
+        for(Participante p: participantes){
             if(!p.isEsLibre()){
                 ParticipanteDTO participanteDTO = new ParticipanteDTO(p.getNombre(),p.getEmail());
-                participanteDTO.setTieneImagen(false);
                 listaParticipantesDtos.add(participanteDTO);
             }
         }
@@ -392,7 +391,7 @@ public class GestorCompetencia {
         int ptsEmpate=0;
         boolean aceptaEmpates = competencia.isAceptaEmpate();
         if(aceptaEmpates) ptsEmpate=competencia.getPuntosPartidoEmpatado();
-        List<Participante> participantes = competencia.getParticipantes();
+        List<Participante> participantes = participanteDao.buscarParticipantes(idCompetencia);
         for(Participante participante: participantes){
             if(!participante.isEsLibre()){
                 List<Partido> partidos = participante.getPartidosLocales();

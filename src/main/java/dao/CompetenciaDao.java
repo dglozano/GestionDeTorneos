@@ -73,7 +73,7 @@ public class CompetenciaDao {
         return listaCompetencias;
     }
 
-    public List<Competencia> filtrarCompetencias(int idUsuario, FiltrosCompetenciaDTO filtros) {
+    public List<Competencia> buscarTodasCompetencias(int idUsuario, FiltrosCompetenciaDTO filtros) {
         EntityManager em = MiEntityManager.get();
         String sentencia = "SELECT c FROM Competencia c";
         if(filtros.isFiltroDeporteActivo())

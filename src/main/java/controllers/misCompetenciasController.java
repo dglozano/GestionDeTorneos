@@ -139,7 +139,7 @@ public class misCompetenciasController extends ControlledScreen {
             filtrosCompetencia.setFiltroModalidadActivo(false);
         }
         if(!filtrosCompetencia.filtrosInactivos()){
-            List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.filtrarMisCompetencias(filtrosCompetencia);
+            List<CompetenciaDTO> listaCompetenciasFiltradas = gestorCompetencia.listarTodasMisCompetencias(filtrosCompetencia);
             setearFilas(listaCompetenciasFiltradas);
         }
     }
