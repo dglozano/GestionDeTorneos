@@ -1,7 +1,7 @@
 create table CambioResultado (id_cambio_resultado integer not null auto_increment, fecha_cambio date, gano_local_desempate bit, jugo_local bit, jugo_visitante bit, equipo_local integer, equipo_visitante integer, id_resultado integer, primary key (id_cambio_resultado));
 create table Competencia (id_competencia integer not null auto_increment, acepta_empates bit, cant_sets integer, eliminada bit, Estado integer, fecha_elim date, modalidad integer, nom_comp varchar(255), pts_part_empatado integer, pts_partido_ganado integer, pts_por_presentarse integer, reglas_comp TEXT, sistemaPuntuacion integer, tantos_a_favor_por_no_presentarse integer, id_deporte integer, id_fixture integer, id_usuario integer, primary key (id_competencia));
 create table Deporte (id_deporte integer not null auto_increment, nom_deporte varchar(255), primary key (id_deporte));
-create table Disponibilidad (id_disponibilidad integer not null auto_increment, disponibilidad integer, codigo_lugar integer, id_competencia integer, primary key (id_disponibilidad));
+create table Disponibilidad (id_disponibilidad integer not null auto_increment, disponibilidad integer, id_lugar integer, id_competencia integer, primary key (id_disponibilidad));
 create table Fecha (id_fecha integer not null auto_increment, numero_fecha integer, ronda integer, id_fixture integer, primary key (id_fecha));
 create table Fixture (id_fixture integer not null auto_increment, primary key (id_fixture));
 create table InicioSesion (id_inicio_sesion integer not null auto_increment, fecha_elim date, ip varchar(255), primary key (id_inicio_sesion));
@@ -10,7 +10,7 @@ create table LugarDeRealizacion (id_lugar integer not null auto_increment, codig
 create table ModificacionParticipante (id_modif_participante integer not null auto_increment, email varchar(255), fecha_modificacion date, Imagen longblob, nombre_participante varchar(255), id_participante integer, primary key (id_modif_participante));
 create table Pais (id_pais integer not null auto_increment, nombre_pais varchar(255), primary key (id_pais));
 create table Participante (id_participante integer not null auto_increment, email_partic varchar(255), esLibre bit not null, Imagen longblob, nom_partic varchar(255), id_competencia integer, primary key (id_participante));
-create table Partido (id_partido integer not null auto_increment, es_libre bit, tipo_ref_partido integer, id_participante integer, codigo_lugar integer, id_fecha integer, primary key (id_partido));
+create table Partido (id_partido integer not null auto_increment, es_libre bit, tipo_ref_partido integer, id_participante integer, id_lugar integer, id_fecha integer, primary key (id_partido));
 create table PartidosLocales (id_participante integer, id_partido integer not null, primary key (id_partido));
 create table PartidosVisitantes (id_participante integer, id_partido integer not null, primary key (id_partido));
 create table Provincia (id_provincia integer not null auto_increment, nombre_provincia varchar(255), id_pais integer, primary key (id_provincia));
@@ -21,7 +21,7 @@ alter table CambioResultado add constraint FK_hsp6ltalc2lkxxulbci23r77l foreign 
 alter table Competencia add constraint FK_68kjojs2gpt8thuf3q2dt3x4o foreign key (id_deporte) references Deporte (id_deporte);
 alter table Competencia add constraint FK_ff6yjqt48v2iqyikb1fy10s3w foreign key (id_fixture) references Fixture (id_fixture);
 alter table Competencia add constraint FK_btnvhe39i58bpyvlyber0da0u foreign key (id_usuario) references Usuario (id_usuario);
-alter table Disponibilidad add constraint FK_7s2o872ftypt4ajh8mxr4o0gw foreign key (codigo_lugar) references LugarDeRealizacion (id_lugar);
+alter table Disponibilidad add constraint FK_3rpob2888xenc3bwdrfq1bh0o foreign key (id_lugar) references LugarDeRealizacion (id_lugar);
 alter table Disponibilidad add constraint FK_2qmqqhac889awdefo1d3h2c0k foreign key (id_competencia) references Competencia (id_competencia);
 alter table Fecha add constraint FK_5hbam6evhu02ae59cw2egs88 foreign key (id_fixture) references Fixture (id_fixture);
 alter table Localidad add constraint FK_2elhvaur3hsux4tkpyya0mekg foreign key (id_provincia) references Provincia (id_provincia);
@@ -29,7 +29,7 @@ alter table LugarDeRealizacion add constraint FK_471gtymhrp4721a86gqkc0wpa forei
 alter table ModificacionParticipante add constraint FK_sr9j4n11m2kd2o54ykbeekiej foreign key (id_participante) references Participante (id_participante);
 alter table Participante add constraint FK_dl235snmpydepdpxas2inwy13 foreign key (id_competencia) references Competencia (id_competencia);
 alter table Partido add constraint FK_9a30bxad569w3x2iqbs3v5ia3 foreign key (id_participante) references Participante (id_participante);
-alter table Partido add constraint FK_26kpipv12gftwxve110buockl foreign key (codigo_lugar) references LugarDeRealizacion (id_lugar);
+alter table Partido add constraint FK_a2evdcts2uwtixpt1qwt54gsr foreign key (id_lugar) references LugarDeRealizacion (id_lugar);
 alter table Partido add constraint FK_9xxwkld5n3vksvkxolhjiycwj foreign key (id_fecha) references Fecha (id_fecha);
 alter table PartidosLocales add constraint FK_94mxeg7yn7n9545nfhlgtirca foreign key (id_participante) references Participante (id_participante);
 alter table PartidosLocales add constraint FK_2esyll1ikisclijn3lfa8ivg8 foreign key (id_partido) references Partido (id_partido);

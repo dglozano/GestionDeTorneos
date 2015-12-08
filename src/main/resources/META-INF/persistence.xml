@@ -24,7 +24,6 @@
             <!--
             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.create-target" value="src/main/resources/META-INF/sql/create.sql" />
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="src/main/resources/META-INF/sql/create.sql" />
             -->
 
             <!-- Logs de Hibernate -->

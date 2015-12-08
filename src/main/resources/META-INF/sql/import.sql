@@ -1,24 +1,24 @@
 INSERT INTO usuario (id_usuario, apellido, email, nombre, num_doc, password, tipo_doc)
- VALUES (1, "Usuario1", "usuario1@hotmail.com", "Augusto", 37708822, "usuario", 0);
+ VALUES (1, "USUARIO1", "USUARIO1@HOTMAIL.COM", "AUGUSTO", 37708822, "USUARIO", 0);
 
 INSERT INTO deporte (id_deporte, nom_deporte) 
 values (1, "Rugby"), (2, "Futbol"), (3, "Tenis"),
  (4, "Basquet"), (5, "Voley"), (6, "Ping Pong"),
  (7, "Futbol 5"), (8, "Handball"), (9, "Seven");
 
-INSERT INTO lugarderealizacion (codigo_lugar, nom_lugar, id_usuario, eliminado)
- VALUES (1, "Campo de Deportes", 1, 0),
- (2, "CRAI", 1, 0),
- (3, "Cantona", 1, 0),
- (4, "Marado", 1, 0),
- (5, "Seven", 1, 0),
- (6, "Il Calcio", 1, 0),
- (7, "El Uniazo", 1, 0),
- (8, "Marangoni", 1, 0),
- (9, "Lawn Tennis Club", 1, 0),
- (10, "Macabi", 1, 0),
- (11, "Las Heras F5", 1, 0),
- (12, "Canchas Ping Pong", 1, 0);
+INSERT INTO lugarderealizacion (id_lugar, codigo_lugar, nom_lugar, id_usuario, eliminado)
+ VALUES (1, "CDP", "CAMPO DE DEPORTES", 1, 0),
+ (2,"CRAI", "CRAI", 1, 0),
+ (3,"CNTNA", "CANTONA", 1, 0),
+ (4,"MRDO", "MARADO", 1, 0),
+ (5, "SVN", "SEVEN", 1, 0),
+ (6, "ILCL" , "IL CALCIO", 1, 0),
+ (7, "UNZO", "EL UNIAZO", 1, 0),
+ (8, "MRGN", "MARANGONI", 1, 0),
+ (9, "LWNTC", "LAWN TENNIS CLUB", 1, 0),
+ (10, "MCB", "MACABI", 1, 0),
+ (11, "LHF5", "LAS HERAS F5", 1, 0),
+ (12, "CPP", "CANCHAS DE PING PONG", 1, 0);
 
 INSERT INTO se_practica_en (id_deporte, id_lugar) 
 VALUES (1, 1), (1, 2), (2, 1), (2,3), (2,4), (2,5), (2,6), (2,7), (2,8), (3,9), (4,10);
@@ -34,7 +34,7 @@ VALUES (1, 1, 0, 3, 0, "LIGA SANTAFESINA", 1, 3, 0, 1, 0, 2, 1, 1, 0),
 (5, 0, 0, 0, 2, "FUTBOL ELIM DOBLE", 0, 1, 0, 2, 0, 2, NULL, 1, 0),
 (6, 0, 3, 0, 0, "TENIS LIGA", 0, 3, 1, 0, 0, 3, NULL, 1, 0);
 
-INSERT INTO disponibilidad (id_disponibilidad, disponibilidad, codigo_lugar, id_competencia)
+INSERT INTO disponibilidad (id_disponibilidad, disponibilidad, id_lugar, id_competencia)
 VALUES (1, 2, 1, 1), (2, 1, 3, 1), (3, 1, 4, 1), (4, 2, 9, 6);
 
 INSERT INTO participante (id_participante, email_partic, esLibre, nom_partic, id_competencia)
@@ -71,14 +71,14 @@ INSERT INTO fecha (id_fecha,numero_fecha,ronda,id_fixture)
 VALUES (1, 1, 1, 1), (2, 2, 2, 1), (3, 3, 3, 1), (4, 4, 4, 1), 
 (5, 5, 5, 1), (6, 6, 6, 1), (7, 7, 7, 1);
 
-INSERT INTO partido (id_partido, codigo_lugar, id_fecha, id_participante, es_libre) 
+INSERT INTO partido (id_partido, id_lugar, id_fecha, id_participante, es_libre)
 VALUES (1, 1, 1, 3, 0), (2, 1, 1, 1, 0), (3, 3, 1, 4, 0), (5, 1, 2, 3, 0),
 (7, 3, 2, 1, 0), (8, 4, 2, 7, 0), (10, 1, 3, 6, 0), (11, 3, 3, 8, 0),
 (12, 4, 3, 1, 0), (14, 1, 4, 4, 0), (15, 3, 4, 2, 0), (16, 4, 4, 1, 0),
 (17, 1, 5, 3, 0), (19, 3, 5, 1, 0), (20, 4, 5, 6, 0), (21, 1, 6, 3, 0),
 (23, 3, 6, 5, 0), (25, 1, 7, 1, 0), (27, 3, 7, 7, 0), (28, 4, 7, 5, 0);
 
-INSERT INTO partido (id_partido, codigo_lugar, id_fecha, es_libre) 
+INSERT INTO partido (id_partido, id_lugar, id_fecha, es_libre)
 VALUES (4, 4, 1, 0), (6, 1, 2, 0), (9, 1, 3, 0), (13, 1, 4, 0),
 (18, 1, 5, 0), (22, 1, 6, 0), (24, 4, 6, 0), (26, 1, 7, 0);
 
