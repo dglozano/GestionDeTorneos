@@ -23,7 +23,7 @@ public class Partido {
     @Fetch(FetchMode.SELECT)
     private List<Resultado> resultados = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="codigo_lugar")
+    @JoinColumn(name="id_lugar")
     private LugarDeRealizacion lugar;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "PartidosLocales",

@@ -13,7 +13,7 @@ public class Disponibilidad {
     @Column(name = "disponibilidad")
     private int disponibilidad;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="codigo_lugar")
+    @JoinColumn(name="id_lugar")
     private LugarDeRealizacion lugarDeRealizacion;
 
 
