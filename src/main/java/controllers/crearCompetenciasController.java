@@ -27,6 +27,7 @@ public class crearCompetenciasController extends ControlledScreen {
     private GestorDeporte gestorDeporte;
     private GestorLugarRealizacion gestorLugarRealizacion;
     private DatosCrearCompetenciaDTO datosCrearCompetenciaDto;
+     private final String regexNombreCompetencia = "^[\\w]+( [\\w]+)*$";
 
     private static final int MAX_TEXT_FIELD = 254;
     private static final int MAX_TEXT_AREA = 65000;
@@ -216,14 +217,14 @@ public class crearCompetenciasController extends ControlledScreen {
 
     private boolean validarNombreCompetencia() {
         String nombreCompetencia = nombreCompetenciaTextField.getText().toUpperCase();
-        boolean caracteresValidos = validarCaracteres(nombreCompetencia);
+        boolean cadenaValida = nombreCompetencia.matches(regexNombreCompetencia);
         if(nombreCompetencia.isEmpty()){
             errorNombreLabel.setText("Este campo es obligatorio.");
             errorNombreLabel.setVisible(true);
             nombreCompetenciaTextField.requestFocus();
             return false;
         }
-        else if(!caracteresValidos){
+        else if(!cadenaValida){
             errorNombreLabel.setText("Solo se permiten letras y numeros.");
             errorNombreLabel.setVisible(true);
             nombreCompetenciaTextField.requestFocus();
