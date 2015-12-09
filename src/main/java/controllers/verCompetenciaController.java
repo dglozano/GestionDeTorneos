@@ -48,7 +48,7 @@ public class verCompetenciaController extends ControlledScreen{
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaMisCompetenciasId);
+        myController.setScreen(Main.vistaMisCompetenciasId,this);
     }
 
     public void verTablaPosiciones(ActionEvent actionEvent){
@@ -57,7 +57,7 @@ public class verCompetenciaController extends ControlledScreen{
         boolean estaFinalizada = competenciaDTO.getEstado().equals(Estado.FINALIZADA.getEstadoString());
         if(esLiga){
             if(estaEnDisputa || estaFinalizada)
-                myController.setScreen(Main.vistaTablaPosicionesId);
+                myController.setScreen(Main.vistaTablaPosicionesId,this);
             else
                 mostrarPopUp("La competencia no esta en Disputa o Finalizada.", "error");
 
@@ -68,13 +68,13 @@ public class verCompetenciaController extends ControlledScreen{
     }
 
     public void irListarParticipantes(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaListarParticipantesId);
+        myController.setScreen(Main.vistaListarParticipantesId,this);
     }
 
     public void irMostrarFixture(ActionEvent actionEvent){
         competenciaDTO = gestorCompetencia.getCompetenciaDTO(idCompetencia);
         if(!competenciaDTO.getEstado().equals(Estado.CREADA.getEstadoString())) {
-            myController.setScreen(Main.vistaMostrarFixtureId);
+            myController.setScreen(Main.vistaMostrarFixtureId,this);
         }
         else{
             mostrarPopUp("El fixture aun no ha sido generado","error");

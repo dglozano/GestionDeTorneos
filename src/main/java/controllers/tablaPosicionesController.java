@@ -91,7 +91,7 @@ public class tablaPosicionesController extends ControlledScreen {
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaVerCompetenciaId);
+        myController.setScreen(Main.vistaVerCompetenciaId,this);
     }
 
     public void setScreenParent(PrincipalController screenParent){

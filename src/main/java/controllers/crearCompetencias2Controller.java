@@ -161,7 +161,7 @@ public class crearCompetencias2Controller extends ControlledScreen {
             DatosCrearCompetenciaPaso2DTO datosPaso2= crearDtoPaso2();
             gestorCompetencia.crearCompetencia(datosCrearCompetenciaDtoAnterior, datosPaso2);
             mostrarPopUp("La competencia ha sido creada exitosamente.", "exito");
-            myController.setScreen(Main.vistaMisCompetenciasId);
+            myController.setScreen(Main.vistaMisCompetenciasId,this);
         }
     }
 

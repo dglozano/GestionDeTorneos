@@ -83,13 +83,13 @@ public class listarParticipantesController extends ControlledScreen {
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaVerCompetenciaId);
+        myController.setScreen(Main.vistaVerCompetenciaId,this);
     }
 
     public void irAltaParticipante(ActionEvent actionEvent){
         Estado estadoCompetencia = competencia.getEstado();
         if(estadoCompetencia.equals(Estado.CREADA) || estadoCompetencia.equals(Estado.PLANIFICADA) ){
-            myController.setScreen(Main.vistaAltaParticipanteId);
+            myController.setScreen(Main.vistaAltaParticipanteId,this);
         }
         else{
             mostrarPopUp("La competencia ya esta en Disputa o Finalizada","error");

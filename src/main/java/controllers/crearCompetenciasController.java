@@ -252,7 +252,7 @@ public class crearCompetenciasController extends ControlledScreen {
     }
 
     public void irMisCompetencias(ActionEvent actionEvent) {
-        myController.setScreen(Main.vistaMisCompetenciasId);
+        myController.setScreen(Main.vistaMisCompetenciasId,this);
     }
 
     public void continuar(ActionEvent actionEvent) {

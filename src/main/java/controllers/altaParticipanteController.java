@@ -101,7 +101,7 @@ public class altaParticipanteController extends ControlledScreen {
             else{
                 mostrarPopUp("El participante se ha agregado exitosamente.","exito");
             }
-            myController.setScreen(Main.vistaListarParticipantesId);
+            myController.setScreen(Main.vistaListarParticipantesId,this);
         }
     }
 
@@ -189,7 +189,7 @@ public class altaParticipanteController extends ControlledScreen {
     }
 
     public void volver(ActionEvent actionEvent){
-        myController.setScreen(Main.vistaListarParticipantesId);
+        myController.setScreen(Main.vistaListarParticipantesId,this);
     }
 
     @Override
