@@ -28,11 +28,11 @@ public class Participante {
     @JoinColumn(name = "id_participante")
     private List<ModificacionParticipante> modificacionesParticipante = new ArrayList<>();
 
-    @OneToMany(mappedBy = "local",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "local",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.SELECT)
     private List<Partido> partidosLocales = new ArrayList<>();
 
-    @OneToMany(mappedBy = "visitante",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "visitante",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.SELECT)
     private List<Partido> partidosVisitantes=new ArrayList<>();
 

@@ -181,6 +181,7 @@ public class GestorCompetencia {
             totalParticipantes++;
             Participante participanteLibre = new Participante(Participante.LIBRE);
             listaParticipantes.add(participanteLibre);
+            competencia.addParticipante(participanteLibre);
             participanteDao.crearParticipante(participanteLibre);
         }
         Collections.shuffle(listaParticipantes);
@@ -299,11 +300,21 @@ public class GestorCompetencia {
 
     public void eliminarFixture(Competencia competencia){
         Fixture fixtureBorrar = competencia.getFixture();
-        competencia.setFixture(null);
         for(Participante part: competencia.getParticipantes()){
+            part.getPartidosLocales().clear();
+            part.getPartidosVisitantes().clear();
             if(part.isEsLibre()){
                 competencia.getParticipantes().remove(part);
                 break;
+            }
+        }
+        competenciaDao.actualizarCompetencia(competencia);
+        competencia.setFixture(null);
+        for(Fecha fecha: fixtureBorrar.getFechas()){
+            for(Partido partido: fecha.getPartidos()){
+                partido.setLocal(null);
+                partido.setVisitante(null);
+                partidoDao.actualizarPartido(partido);
             }
         }
         competenciaDao.actualizarCompetencia(competencia);
